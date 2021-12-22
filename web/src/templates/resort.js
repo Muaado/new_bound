@@ -340,7 +340,7 @@ const ResortTemplate = (props) => {
             <ul>
               {restaurants.nodes
                 .slice(0, restaurantSlice)
-                .map(({ name, alternateName, imageThumb, description }) => (
+                .map(({ name, alternateName, imageThumb, _rawDescription }) => (
                   <li
                     key={name}
                     data-aos="fade-up"
@@ -359,7 +359,9 @@ const ResortTemplate = (props) => {
                       <span className="name">{name}</span>
                       <span className="alternate-name">{alternateName}</span>
 
-                      {description && <p>{description} </p>}
+                      {_rawDescription && (
+                        <PortableText blocks={_rawDescription} />
+                      )}
                     </div>
                   </li>
                 ))}
