@@ -41,6 +41,7 @@ import Placeholder from "../assets/placeholder.svg";
 import Carousel from "nuka-carousel";
 import CarouselButton from "../components/Ui/CarouselButton";
 import Highlights from "../components/Resort/Highlights";
+import Restaurants from "../components/Villa/Restaurants";
 
 export const query = graphql`
   query VillaTemplateQuery($id: String!, $resortId: String!) {
@@ -217,13 +218,13 @@ const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
   // const activities = data && data.activities;
-  const spas = data && data.spas;
+  // const spas = data && data.spas;
   const resorts = data && data.resorts;
   const restaurants = data && data.restaurants;
   const priceList = data && data.priceList;
 
   const [openedFeature, setOpenedFeature] = useState(-1);
-  const [restaurantSlice, setRestaurantSLice] = useState(4);
+  // const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   const {
     name,
@@ -259,6 +260,11 @@ const VilaTemplate = (props) => {
     gallery: galleries,
     highlights,
   } = villa.resort;
+
+  const randomHeaderImage =
+    headerImages?.images[
+      Math.floor(Math.random() * headerImages?.images.length)
+    ];
 
   let numberOfShowers = 0;
 
@@ -320,6 +326,8 @@ const VilaTemplate = (props) => {
             <div className="image-container">
               {heroImage && heroImage.asset ? (
                 <Image {...heroImage} alt={heroImage.alt} />
+              ) : randomHeaderImage && randomHeaderImage.asset ? (
+                <Image {...randomHeaderImage} alt={randomHeaderImage.alt} />
               ) : (
                 <Placeholder style={{ width: "100%", height: "100%" }} />
               )}
@@ -475,64 +483,9 @@ const VilaTemplate = (props) => {
 
           <Highlights highlights={highlights} />
 
-          <div
-            className="villa__restaurants"
-            id="dine"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          >
-            <h2>Dine</h2>
-            <ul>
-              {restaurants.nodes
-                .slice(0, restaurantSlice)
-                .map(
-                  ({
-                    name,
-                    alternateName,
-                    imageThumb,
-                    resort,
-                    description,
-                  }) => (
-                    <li
-                      data-aos="fade-up"
-                      data-aos-delay="50"
-                      data-aos-duration="1000"
-                      data-aos-easing="ease-in-out"
-                      key={name}
-                    >
-                      <div key={name} className="image-container">
-                        {imageThumb && imageThumb.asset ? (
-                          <Image {...imageThumb} alt={imageThumb.alt} />
-                        ) : (
-                          <Placeholder
-                            style={{ width: "100%", height: "100%" }}
-                          />
-                        )}
-                      </div>
-                      <div className="villa__restaurants__text">
-                        <span className="name">{name}</span>
-                        <span className="alternate-name">{alternateName}</span>
-
-                        <p>{description}</p>
-                        {/* <Link
-                        to={getRestaurantUrl({ name, resortName: resort.name })}
-                      >
-                        Read more...
-                      </Link> */}
-                      </div>
-                    </li>
-                  )
-                )}
-            </ul>
-
-            {restaurantSlice === 4 && (
-              <button className="btn" onClick={() => setRestaurantSLice(100)}>
-                View more
-              </button>
-            )}
-          </div>
+          {restaurants?.nodes && (
+            <Restaurants restaurants={restaurants.nodes} />
+          )}
 
           <Activities activities={activities} />
           <Resorts resorts={resorts.nodes} />

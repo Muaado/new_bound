@@ -33,6 +33,7 @@ import Placeholder from "../assets/placeholder.svg";
 
 import { toPlainText } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
+import Restaurants from "../components/Villa/Restaurants";
 // import review from "../../../studio/schemas/documents/review";
 
 export const query = graphql`
@@ -374,6 +375,10 @@ const ResortTemplate = (props) => {
             )}
           </div> */}
           {/* OLD RESTAURANT */}
+
+          {restaurants?.nodes && (
+            <Restaurants restaurants={restaurants.nodes} />
+          )}
 
           {/* {galleries && <Gallery id="gallery" galleries={galleries} />} */}
 
