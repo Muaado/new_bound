@@ -267,7 +267,7 @@ const ResortTemplate = (props) => {
               className="text disappear-on-scroll"
               data-aos="zoom-out-up"
               data-aos-delay="50"
-              data-aos-duration="1000"
+              data-aos-duration="500"
               data-aos-easing="ease-in-out"
             >
               <p>{locationAtoll}</p>
@@ -401,40 +401,45 @@ const ResortTemplate = (props) => {
               //   <CarouselButton onClick={previousSlide} />
               // )}
             >
-              {spas.nodes.map((spa) => (
-                <Spa spa={spa} key={spa._id} />
+              {/* get first spa from spas and use Spa component to print spa information */}
+              {spas.nodes.map(spa => (
+                <Spa spa={spa} key={spa.name} />
               ))}
             </Carousel>
           )}
-          {/* {featuredSpa && <Spa className="resort__spa" spa={featuredSpa} />} */}
 
-          <Activities activities={activities} />
-
-          {/* <Reviews reviews={reviews} /> */}
-          <div
-            className="resort__second-image"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          >
-            {secondImage && secondImage.asset && (
-              <Image {...secondImage} alt={secondImage?.alt} />
-            )}
-          </div>
-          {faq.slice(0, slice ? slice : 1).map((faq) => (
-            <Faq
-              className="resort__faq"
-              key={faq.name}
-              faq={faq}
-              path="/resort"
-              onClick={() => {
-                setSlice(100);
-              }}
-              slice={slice}
+          {activities && (
+            <Activities
+              activities={activities}
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
             />
-          ))}
-          <ContactUs contactUs={site.contactUs} />
+          )}
+
+          {secondImage && (
+            <Image
+              {...secondImage}
+              width={1440}
+              alt={secondImage?.alt}
+              className="resort__image second-image"
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
+            />
+          )}
+
+          {/* {faq && (
+            <FAQ
+              faq={faq}
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
+            />
+          )} */}
         </ResortStyles>
       </Container>
     </Layout>

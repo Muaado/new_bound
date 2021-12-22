@@ -104,19 +104,31 @@ const HighlightsStyles = styled.div`
         position: absolute;
         color: #fff;
         font-size: 2.2rem;
-        padding: 1rem 5rem;
-        
-        bottom: 3rem;
+        padding: 1.3rem 2rem;
+        bottom: -2.9rem;
         left: 50%;
-        transform: translate(-50%, -50%);
-        border: 1px solid #fff;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        /* border: 1px solid #fff; */
         z-index: 100;
-        width: fit-content;
+        width: 100%;
+        width: -moz-fit-content;
+        /* width: fit-content; */
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
+        background: rgb(0 0 0 / 25%);
 
         svg {
-          margin-left: 1rem;
+          margin-left: 1.5rem;
+          height: 0.9rem;
+          width: 0.9rem;
         }
         
 
