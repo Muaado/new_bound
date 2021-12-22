@@ -61,7 +61,7 @@ const Resorts = ({ resorts }) => {
         speed={1000}
         className="carousel"
         slidesToShow={numberOfSlides}
-        // slidesToScroll={1}
+        slidesToScroll={3}
 
         cellSpacing={cellSpacing}
         // renderCenterRightControls={({ nextSlide }) => (

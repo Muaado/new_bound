@@ -452,7 +452,7 @@ const VilaTemplate = (props) => {
             </div>
           </div>
 
-          <Gallery galleries={galleries} id="gallery" />
+          {/* <Gallery galleries={galleries} id="gallery" /> */}
           <div
             className="villa__property-overview"
             data-aos="fade-up"
@@ -536,7 +536,7 @@ const VilaTemplate = (props) => {
 
           <Activities activities={activities} />
           <Resorts resorts={resorts.nodes} />
-          <Reviews reviews={reviews} />
+          {/* <Reviews reviews={reviews} /> */}
         </VillaStyles>
       </Container>
     </Layout>

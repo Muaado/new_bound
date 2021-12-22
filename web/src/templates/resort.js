@@ -15,7 +15,7 @@ import PortableText from "../components/Ui/portableText";
 
 import ChevronRight from "../assets/icons/chevron-right.svg";
 
-import Reviews from "../components/Resort/Reviews";
+// import Reviews from "../components/Resort/Reviews";
 
 import ResortStyles from "../styles/ResortTempleteStyles";
 import Gallery from "../components/Gallery";
@@ -237,7 +237,7 @@ const ResortTemplate = (props) => {
     image,
     // villas,
     // restaurants,
-    reviews,
+    // reviews,
     gallery: galleries,
     activities,
     secondImage,
@@ -320,7 +320,8 @@ const ResortTemplate = (props) => {
           </ul> */}
           <Highlights highlights={highlights} />
 
-          <div
+          {/* Old Restaurant layout START */}
+          {/* <div
             id="dine"
             className="resort__restaurants"
             data-aos="fade-up"
@@ -371,9 +372,10 @@ const ResortTemplate = (props) => {
                 View more
               </button>
             )}
-          </div>
+          </div> */}
+          {/* OLD RESTAURANT */}
 
-          {galleries && <Gallery id="gallery" galleries={galleries} />}
+          {/* {galleries && <Gallery id="gallery" galleries={galleries} />} */}
 
           {spas.nodes && (
             <Carousel
@@ -403,7 +405,7 @@ const ResortTemplate = (props) => {
 
           <Activities activities={activities} />
 
-          <Reviews reviews={reviews} />
+          {/* <Reviews reviews={reviews} /> */}
           <div
             className="resort__second-image"
             data-aos="fade-up"
