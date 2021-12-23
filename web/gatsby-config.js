@@ -13,6 +13,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-styled-components",
+    "lightbox-react",
     {
       resolve: "gatsby-source-sanity",
       options: {
