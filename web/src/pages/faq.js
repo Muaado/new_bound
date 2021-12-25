@@ -37,11 +37,12 @@ import PortableText from "../components/Ui/portableText";
 import { getBlogUrl } from "../lib/helpers";
 import WhyBoundlessSection from "../components/Homepage/WhyBoundlessSection";
 import NewsletterSection from "../components/Homepage/NewsletterSection";
+import { MouseScroll } from "../components/Ui/MouseScroll";
 
 // import HomepageStaticImage from "../assets/homepage-image.png";
 
 export const query = graphql`
-  query FAQPageQuery {
+  query FAQPage {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       faq {
         name
@@ -55,6 +56,11 @@ export const query = graphql`
 
       newsLetterTitle
       newsLetterBackground {
+        ...SanityImage
+        alt
+      }
+
+      promoImageWeb {
         ...SanityImage
         alt
       }
@@ -110,7 +116,6 @@ const FAQPage = (props) => {
   }
 
   const site = (data || {}).site;
-
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
@@ -125,14 +130,19 @@ const FAQPage = (props) => {
         keywords={site.keywords}
       />
       <Container>
-        <HeroStyles>
-          {/* <h1> {site.description}</h1> */}
-          {/* <Video
-            videoSrcURL={
-              "https://res.cloudinary.com/dqh4ewsaz/video/upload/v1634911148/Tes%20images/hero_vdo_for_boundless_2_-_Large_540p_afaw8u.mov"
-            }
-          /> */}
+        <HeroStyles className="height-80vh">
+          {site.promoImageWeb && site.promoImageWeb.asset && (
+            <Image
+              {...site.promoImageWeb}
+              alt={site.promoImageWeb.alt}
+            />
+          )}
+           <h1 className="disappear-on-scroll">
+            Checkout our Frequently Asked Questions
+          </h1>
+          <MouseScroll />
         </HeroStyles>
+
         <FaqStyles className="page-content">
           {site.faq.map((faq) => (
             <Faq path="/faq" key={faq.name} faq={faq} />

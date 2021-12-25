@@ -135,9 +135,9 @@ const Faq = (props) => {
                   {selectedQuestion !== index ? <ChevronDown /> : <ChevronUp />}
                 </p>
 
-                {/* {selectedQuestion === index && (
+                {selectedQuestion === index && (
                 <p className="answer"> {answer}</p>
-              )} */}
+              )}
               </li>
             ))}
         </ul>

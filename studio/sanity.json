@@ -7,7 +7,6 @@
     "projectId": "y7yu20xn",
     "dataset": "master"
   },
-
   "plugins": [
     "@sanity/base",
     "@sanity/components",
@@ -19,7 +18,8 @@
     "dashboard-widget-document-list",
     "dashboard-widget-netlify",
     "mux-input",
-    "media-library"
+    "media-library",
+    "@sanity/vision"
   ],
   "parts": [
     {
