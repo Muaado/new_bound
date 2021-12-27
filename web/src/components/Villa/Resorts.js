@@ -62,6 +62,7 @@ const Resorts = ({ resorts }) => {
         className="carousel"
         slidesToShow={numberOfSlides}
         slidesToScroll={3}
+        autoplay="False"
 
         cellSpacing={cellSpacing}
         // renderCenterRightControls={({ nextSlide }) => (

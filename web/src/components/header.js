@@ -113,15 +113,13 @@ const HeaderStyles = styled.header`
 
   .logo {
     /* align-self: flex-start; */
-    height: 100%;
-    /* width: 65%; */
-    /* margin: 0 15%; */
+    height:100%;
     margin-top: 2rem;
     /* margin-bottom: 2rem; */
     /* border-bottom: 1px solid #fff; */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     z-index: 1000;
 
     @media ${device.tablet} {
@@ -138,6 +136,11 @@ const HeaderStyles = styled.header`
         object-fit: contain;
       }
     }
+  }
+
+  .logo img{
+    width:130px;
+    height:150px;
   }
 
   .icon {
@@ -533,6 +536,7 @@ export const Logo = ({ logo }) => (
   <div className="logo">
     <Link to="/">
       {logo && logo.asset && <Image {...logo} alt={logo.alt} />}
+
     </Link>
   </div>
 );

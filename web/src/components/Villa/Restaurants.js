@@ -61,6 +61,7 @@ const RestaurantsStyles = styled.div`
     /* top: -4rem; */
     align-self: center;
     /* max-width: 25rem; */
+    
 
     display: flex;
     flex-direction: column;
@@ -69,19 +70,16 @@ const RestaurantsStyles = styled.div`
       /* max-height: 25rem; */
     }
 
-    .name {
-      font-size: 2rem;
-      /* font-family: "Playfair Display"; */
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
     }
     .alternate-name {
-      font-size: 1.6rem;
+      display: flex;
+      font-size: 1.5rem;
       font-weight: 100;
       margin-bottom: 2rem;
-      color: var(--grey);
+      color: #a9a7a7;
       text-transform: uppercase;
-      letter-spacing: 0.3rem;
+      letter-spacing: 0.4rem;
+      
     }
 
     a {
@@ -94,6 +92,21 @@ const RestaurantsStyles = styled.div`
     margin-top: 5rem;
     align-self: center;
   }
+
+  .rest-name{
+    letter-spacing:0.2rem;
+    display: flex;
+    text-transform: uppercase;
+    color: var(--darkGreen);
+    font-size: 3rem;
+    padding:10px 0px;
+  }
+
+  .restaurant-description{
+    color: #676767;
+  }
+  
+
 `;
 const Restaurants = ({ restaurants }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
@@ -102,10 +115,6 @@ const Restaurants = ({ restaurants }) => {
     <RestaurantsStyles
       // className="villa__restaurants"
       id="dine"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
     >
       <h2>Dine</h2>
       <ul>
@@ -113,10 +122,10 @@ const Restaurants = ({ restaurants }) => {
           .slice(0, restaurantSlice)
           .map(({ name, alternateName, imageThumb, description }) => (
             <li
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-aos-duration="1000"
-              data-aos-easing="ease-in-out"
+              // data-aos="fade-up"
+              // data-aos-delay="50"
+              // data-aos-duration="1000"
+              // data-aos-easing="ease-in-out"
               key={name}
             >
               <div key={name} className="image-container">
@@ -127,10 +136,10 @@ const Restaurants = ({ restaurants }) => {
                 )}
               </div>
               <div className="villa__restaurants__text">
-                <span className="name">{name}</span>
+                <span className="rest-name">{name}</span>
                 <span className="alternate-name">{alternateName}</span>
 
-                <p>{description}</p>
+                <p className="restaurant-description">{description}</p>
                 {/* <Link
                 to={getRestaurantUrl({ name, resortName: resort.name })}
               >

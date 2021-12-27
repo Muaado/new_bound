@@ -119,7 +119,6 @@ export const GlobalStyle = createGlobalStyle`
   h1,
   h2,
   h3,
-  h4,
   h5,
   h6 {
     /* font-weight: normal; */
@@ -156,7 +155,7 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 3.6rem;
     }
   }
-  h2,h3,h4,h5,h6 {
+  h2,h3 {
     text-transform: uppercase;
     color: var(--darkGreen);
     font-size: 5rem;

@@ -105,6 +105,7 @@ const ResortStyles = styled.div`
       flex-direction: column;
       max-width: 100vw;
 
+
       @media ${device.tablet} {
         margin-top: 0;
         margin-bottom: 8rem;

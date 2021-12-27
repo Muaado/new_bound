@@ -49,7 +49,8 @@ const AccomodationStyles = styled.div`
 
     height: 60rem;
     img {
-      height: 80%;
+      height: 300px;
+      weight:500px;
     }
     p {
       /* font-family: "Playfair Display"; */
@@ -131,7 +132,7 @@ const Accomodation = ({ villas, id }) => {
               <Image
                 style={{
                   width: "100%",
-                  height: "80%",
+                  height: "100%",
                   objectFit: "cover",
                 }}
                 {...imageThumb}
