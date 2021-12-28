@@ -154,7 +154,7 @@ const SpaStyles = styled.div`
   .slider-list {
     height: fit-content !important;
   }
-`;
+// `;
 
 const Spa = ({ spa, className }) => {
   return (
@@ -168,6 +168,7 @@ const Spa = ({ spa, className }) => {
       <div className="container">
         <div className="left-section">
           <div className="image-web">
+            
             {spa.imageWeb && spa.imageWeb.asset && (
               <Image {...spa.imageWeb} alt={spa.imageWeb.alt} />
             )}

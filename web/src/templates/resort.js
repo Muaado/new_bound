@@ -383,7 +383,7 @@ const ResortTemplate = (props) => {
           {/* {galleries && <Gallery id="gallery" galleries={galleries} />} */}
 
           {spas.nodes && (
-            <Carousel
+            <div
               speed={1000}
               data-aos="fade-up"
               data-aos-delay="50"
@@ -405,7 +405,7 @@ const ResortTemplate = (props) => {
               {spas.nodes.map(spa => (
                 <Spa spa={spa} key={spa.name} />
               ))}
-            </Carousel>
+            </div>
           )}
 
           {activities && (
