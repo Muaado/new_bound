@@ -62,16 +62,17 @@ const AccomodationStyles = styled.div`
     display: flex;
     flex-direction: column;
 
-    height: 60rem;
+    height: 614px;
     img {
-      height: 300px;
-      weight:500px;
+      height: 570px !important;
+      width:100%;
+      background-size: cover;
     }
     p {
       /* font-family: "Playfair Display"; */
       font-size: 3rem;
       padding: 2rem 0;
-      text-align: right;
+      text-align: left;
 
       @media ${device.tablet} {
         /* text-align: left; */
@@ -99,7 +100,7 @@ const Accomodation = ({ villas, id }) => {
     const slides = () => {
       if (isMobileOnly) return 1;
       if (isTablet) return 2;
-      if (isSreenSM) return 2.4;
+      if (isSreenSM) return 2;
       if (isSreenLG) return 3;
       if (screenXL) return 3;
       if (screenXXL) return 3;
@@ -145,20 +146,17 @@ const Accomodation = ({ villas, id }) => {
           >
             {imageThumb && imageThumb.asset ? (
               <Image
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
+                className="image"
                 {...imageThumb}
                 alt={imageThumb.alt}
               />
             ) : (
               <Placeholder />
             )}
-
             <p>{name}</p>
           </Link>
+          
+          
           // </li>
         ))}
       </Carousel>
