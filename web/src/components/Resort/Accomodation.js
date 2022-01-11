@@ -62,9 +62,9 @@ const AccomodationStyles = styled.div`
     display: flex;
     flex-direction: column;
 
-    height: 614px;
+    min-height: 614px;
     img {
-      height: 570px !important;
+      min-height: 570px !important;
       width:100%;
       background-size: cover;
     }
@@ -73,6 +73,7 @@ const AccomodationStyles = styled.div`
       font-size: 3rem;
       padding: 2rem 0;
       text-align: left;
+      line-height: 4rem;
 
       @media ${device.tablet} {
         /* text-align: left; */
