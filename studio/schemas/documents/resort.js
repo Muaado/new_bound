@@ -139,6 +139,20 @@ export default {
     },
 
     {
+      title: "Villas",
+      name: "villa",
+      type: "array",
+      of: [
+        {
+          // type: "reference",
+          type: "villa",
+          // to: {  },
+        },
+      ],
+    },
+
+
+    {
       title: "Reviews",
       name: "reviews",
       type: "array",
