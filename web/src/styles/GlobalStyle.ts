@@ -84,7 +84,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: "Roboto", sans-serif;
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
   }
 
   .btn {

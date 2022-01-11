@@ -138,8 +138,9 @@ const ActivitiesStyles = styled.div`
     } */
 
     .slider-control-bottomcenter {
-      bottom: -5rem !important;
+      // bottom: -5rem !important;
       /* height: 110% !important; */
+      display: none !important;
     }
   }
 `;
@@ -155,11 +156,11 @@ const Activities = ({ activities }) => {
     // data-aos-easing="ease-in-out"
     >
       <h2>Activities</h2>
-      <p>
+      {/* <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation.
-      </p>
+      </p> */}
       <ul>
         {activities?.length
           ? activities?.map(({ name, imageThumb, resort }) => (

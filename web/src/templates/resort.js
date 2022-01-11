@@ -113,10 +113,7 @@ export const query = graphql`
         }
       }
     }
-    villas: allSanityVilla(
-      limit: 3
-      filter: { resort: { _id: { eq: $id } }, active: { eq: true } }
-    ) {
+    villas: allSanityVilla(filter: { resort: { _id: { eq: $id } } }) {
       nodes {
         name
         imageThumb {
@@ -417,7 +414,7 @@ const ResortTemplate = (props) => {
               data-aos-easing="ease-in-out"
             />
           )}
-
+{/* 
           {secondImage && (
             <Image
               {...secondImage}
@@ -429,7 +426,7 @@ const ResortTemplate = (props) => {
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
             />
-          )}
+          )} */}
 
           {/* {faq && (
             <FAQ

@@ -19,6 +19,21 @@ const AccomodationStyles = styled.div`
   @media ${device.tablet} {
     padding: 0;
   }
+  // .slider-control-bottomcenter button
+  // {
+  //   background: black !important;
+  //   border-radius: 100%; 
+  //   width: 10px !important; 
+  //   height: 10px !important;
+  // }
+  
+  .slider-control-bottomcenter svg{
+    display: none !important;
+   
+  }
+  .slider-control-bottomcenter li{
+    margin-right: 5px;
+  }
   h2 {
     text-align: center;
     /* padding: 5rem; */
