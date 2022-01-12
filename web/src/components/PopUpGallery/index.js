@@ -53,7 +53,7 @@ const GalleryComponent = ({ images }) => {
       if (screenXL) return 1;
       if (screenXXL) return 1;
       if (screenXXXL) return 1;
-      return 5;
+      return 1;
     };
     const spacing = () => {
       // if (isMobileOnly) return 50;

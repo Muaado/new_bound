@@ -1,3 +1,4 @@
+import { Placeholder } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { device } from "../styles/deviceSizes";
 const VillaStyles = styled.div`
@@ -433,7 +434,13 @@ const VillaStyles = styled.div`
 
       .image-container {
         height: 80vh;
+        width: 100%;
+      
       }
+
+ 
+
+      
 
       .content {
         padding: 4rem 3rem;
@@ -450,7 +457,7 @@ const VillaStyles = styled.div`
 
         background: rgba(0, 0, 0, 0.3);
         /* box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.5); */
-        box-shadow: 5px 33px 42px rgb(0 0 0 / 60%);
+        // box-shadow: 5px 33px 42px rgb(0 0 0 / 60%);
 
         height: 100%;
 
@@ -816,6 +823,7 @@ const VillaStyles = styled.div`
         }
         .image-container {
           height: 85%;
+          background: #e3e3e3;
         }
         position: relative;
         &__button {

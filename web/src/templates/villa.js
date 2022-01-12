@@ -37,7 +37,7 @@ import { MouseScroll } from "../components/Ui/MouseScroll";
 import Resorts from "../components/Villa/Resorts";
 // import styled from "styled-components";
 
-import Placeholder from "../assets/placeholder.svg";
+import Placeholder from "../assets/pattern-randomized.svg";
 import Carousel from "nuka-carousel";
 import CarouselButton from "../components/Ui/CarouselButton";
 import Highlights from "../components/Resort/Highlights";
@@ -329,7 +329,8 @@ const VilaTemplate = (props) => {
               ) : randomHeaderImage && randomHeaderImage.asset ? (
                 <Image {...randomHeaderImage} alt={randomHeaderImage.alt} />
               ) : (
-                <Placeholder style={{ width: "100%", height: "100%" }} />
+                <div></div>
+                // <Placeholder style={{ width: "100%", height: "100%" }} />
               )}
             </div>
             <h1 className="villa__image-title" id="header-text">
@@ -382,7 +383,7 @@ const VilaTemplate = (props) => {
           >
             <div className="container">
               {/* <p className="alternate-name">{alternateName}</p> */}
-              <h2>{name}</h2>
+              <h2>{name} yeah2</h2>
               {/* <h3 className="tagline">{tagline}</h3> */}
               <PortableText blocks={_rawDescriptionVilla} />
               <ul className="villa__header-icons">
@@ -420,10 +421,10 @@ const VilaTemplate = (props) => {
           <div
             className="villa__room-features"
             id="room-features"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
           >
             <div className="image-container">
               {roomFeatures?.backgroundImage &&
@@ -433,9 +434,16 @@ const VilaTemplate = (props) => {
                   alt={roomFeatures.backgroundImage.alt}
                 />
               ) : (
-                <Placeholder style={{ width: "100%", height: "100%" }} />
+                <Placeholder
+                  style={{
+                    width: "100%",
+                    maxHeight: "80vh",
+                    overflow: "hidden",
+                  }}
+                />
               )}
             </div>
+
             <div className="content">
               <h2>Room features</h2>
               <ul>
