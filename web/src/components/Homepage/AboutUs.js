@@ -53,11 +53,11 @@ const AboutUsSectionStyles = styled.div`
 const AboutUs = ({ aboutUs }) => {
   return (
     <AboutUsSectionStyles
-      className="about-us"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
+      // className="about-us"
+      // data-aos="fade-up"
+      // data-aos-delay="50"
+      // data-aos-duration="1000"
+      // data-aos-easing="ease-in-out"
     >
       <div className="about-us__image-container">
         {aboutUs.image && aboutUs.image.asset && (

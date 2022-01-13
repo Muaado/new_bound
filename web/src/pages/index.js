@@ -324,10 +324,10 @@ const IndexPage = (props) => {
           <Journey collections={collections} />
 
           <HandCraftedJourneysStyles
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
           >
             <p className="subtitle">only the best</p>
             <h2>hand-crafted journeys</h2>
@@ -361,10 +361,10 @@ const IndexPage = (props) => {
           <AboutUs aboutUs={site.aboutUs} />
           <WhyBoundlessSection whyBoundlessImage={site.whyBoundlessImage} />
           <MagazineStyles
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
           >
             <h2>Magazine</h2>
             <p className="subtitle">Inspiration</p>
@@ -392,11 +392,11 @@ const IndexPage = (props) => {
           </MagazineStyles>
           <TailorMade />
           <div
-            className="second-image"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // className="second-image"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
           >
             {site.secondImage && site.secondImage.asset && (
               <Image
