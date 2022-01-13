@@ -128,16 +128,18 @@ export const query = graphql`
             alt
           }
         }
-
+    
         activities {
+          # sanityResortHighlightname
+  
           name
-
           imageThumb {
             ...SanityImage
             alt
           }
         }
 
+     
         reviews {
           name
           description
@@ -164,6 +166,8 @@ export const query = graphql`
         }
       }
     }
+
+
     # activities: allSanityActivity(
     #   filter: { resort: { _id: { eq: $resortId } } }
     # ) {
@@ -204,6 +208,11 @@ export const query = graphql`
         }
       }
     }
+
+
+    
+
+
 
     priceList: allSanityPriceList(filter: { villa: { _id: { eq: $id } } }) {
       nodes {
@@ -383,7 +392,7 @@ const VilaTemplate = (props) => {
           >
             <div className="container">
               {/* <p className="alternate-name">{alternateName}</p> */}
-              <h2>{name} yeah2</h2>
+              <h2>{name}</h2>
               {/* <h3 className="tagline">{tagline}</h3> */}
               <PortableText blocks={_rawDescriptionVilla} />
               <ul className="villa__header-icons">
@@ -495,8 +504,8 @@ const VilaTemplate = (props) => {
             <Restaurants restaurants={restaurants.nodes} />
           )}
 
-          <Activities activities={activities} />
-          <Resorts resorts={resorts.nodes} />
+          {/* <Activities activities={activities} /> */}
+          {/* <Resorts resorts={resorts.nodes} /> */}
           {/* <Reviews reviews={reviews} /> */}
         </VillaStyles>
       </Container>

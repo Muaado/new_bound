@@ -22,16 +22,15 @@ const AccomodationStyles = styled.div`
   // .slider-control-bottomcenter button
   // {
   //   background: black !important;
-  //   border-radius: 100%; 
-  //   width: 10px !important; 
+  //   border-radius: 100%;
+  //   width: 10px !important;
   //   height: 10px !important;
   // }
-  
-  .slider-control-bottomcenter svg{
+
+  .slider-control-bottomcenter svg {
     display: none !important;
-   
   }
-  .slider-control-bottomcenter li{
+  .slider-control-bottomcenter li {
     margin-right: 5px;
   }
   h2 {
@@ -65,7 +64,7 @@ const AccomodationStyles = styled.div`
     min-height: 614px;
     img {
       min-height: 570px !important;
-      width:100%;
+      width: 100%;
       background-size: cover;
     }
     p {
@@ -146,18 +145,13 @@ const Accomodation = ({ villas, id }) => {
             className="image-container"
           >
             {imageThumb && imageThumb.asset ? (
-              <Image
-                className="image"
-                {...imageThumb}
-                alt={imageThumb.alt}
-              />
+              <Image className="image" {...imageThumb} alt={imageThumb.alt} />
             ) : (
               <Placeholder />
             )}
             <p>{name}</p>
           </Link>
-          
-          
+
           // </li>
         ))}
       </Carousel>
