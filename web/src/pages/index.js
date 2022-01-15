@@ -332,10 +332,8 @@ const IndexPage = (props) => {
             <p className="subtitle">only the best</p>
             <h2>hand-crafted journeys</h2>
             <p className="description">
-              Our collection of Resorts and Villas are hand-picked for their
-              style, individuality, service, comfort and uniqueness. Lorem ipsum
-              dolor sit amet, consectetur adipiscing elit. Donec dictum non eros
-              sed.
+            {/* Unparalleled luxury and privacy for discerning travelers. Indulge in the absolute best of everything with our hand-crafted services - exquisite private events, luxurious private island holidays and exclusive private jet travel. From the moment you arrive, you'll experience the Boundless Maldives difference. */}
+            Looking for an unforgettable luxury holiday experience? Look no further than the experts at Boundless Maldives. Their team of experts will curate a unique and personalized holiday experience tailored specifically to your needs. Whether you're looking for a private island escape or a luxury travel experience on a private jet, Boundless Maldives will exceed your expectations. So why wait? Contact them today and start planning your dream holiday!
             </p>
             <ul>
               {site.handCraftedJourneys.map(({ title, image, description }) => (
@@ -344,6 +342,7 @@ const IndexPage = (props) => {
                   <div className="image-container">
                     {image && image.asset && (
                       <Image {...image} alt={image.alt} />
+
                     )}
                   </div>
                   <h3>{title}</h3>
