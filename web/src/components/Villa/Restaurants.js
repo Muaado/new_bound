@@ -20,7 +20,7 @@ const RestaurantsStyles = styled.div`
   @media ${device.tablet} {
     margin-top: 5rem;
     padding: 0 1.5rem;
-    margin-bottom: 0;
+    margin-bottom: 5rem;
   }
   h2 {
     margin-bottom: 7rem;

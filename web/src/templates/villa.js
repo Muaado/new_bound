@@ -230,7 +230,7 @@ const VilaTemplate = (props) => {
   // const spas = data && data.spas;
   const resorts = data && data.resorts;
   const restaurants = data && data.restaurants;
-  const priceList = data && data.priceList;
+  // const priceList = data && data.priceList;
 
   const [openedFeature, setOpenedFeature] = useState(-1);
   // const [restaurantSlice, setRestaurantSLice] = useState(4);
@@ -304,17 +304,17 @@ const VilaTemplate = (props) => {
     { title: "DEC", value: "11" },
   ];
 
-  const sortedPriceList = priceList.nodes.sort((a, b) =>
-    parseInt(b.month) > parseInt(a.month) ? -1 : 1
-  );
+  // const sortedPriceList = priceList.nodes.sort((a, b) =>
+  //   parseInt(b.month) > parseInt(a.month) ? -1 : 1
+  // );
 
-  let medianPrice = 0;
+  // let medianPrice = 0;
 
-  sortedPriceList.forEach((price) => {
-    medianPrice += price.price;
-  });
+  // sortedPriceList.forEach((price) => {
+  //   medianPrice += price.price;
+  // });
 
-  medianPrice = medianPrice / sortedPriceList.length;
+  // medianPrice = medianPrice / sortedPriceList.length;
   return (
     <Layout>
       {villa && (
@@ -346,38 +346,7 @@ const VilaTemplate = (props) => {
               {resortName}
             </h1>
             <MouseScroll />
-            <div className="villa__calendar">
-              <div
-                className="icon"
-                onClick={() => setCalendarOpen(!calendarOpen)}
-              >
-                <CalendarIcon />
-                {!calendarOpen ? (
-                  <ChevronDown className="chevron" />
-                ) : (
-                  <ChevronUp className="chevron" />
-                )}
-              </div>
-              {/* {calendarOpen && ( */}
-              <ul className={calendarOpen ? "open" : ""}>
-                {months.map(({ title, value }) => {
-                  const price = sortedPriceList?.find(
-                    (item) => item.month === value
-                  );
-
-                  return (
-                    <li key={title}>
-                      <span>
-                        <span>{title}</span> $
-                        {price?.price.toFixed(2) || medianPrice.toFixed(2)}
-                      </span>
-                      <span className="per-night">per night</span>
-                    </li>
-                  );
-                })}
-              </ul>
-              {/* )} */}
-            </div>
+            
           </div>
 
           {/* )} */}
@@ -480,10 +449,10 @@ const VilaTemplate = (props) => {
           {/* <Gallery galleries={galleries} id="gallery" /> */}
           <div
             className="villa__property-overview"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
           >
             <h2>Property Overview</h2>
 

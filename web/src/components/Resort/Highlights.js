@@ -9,7 +9,7 @@ import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
    margin-top: 10rem;
-      margin-bottom: 10rem;
+    margin-bottom: 10rem;
       text-align: center;
       padding: 0 15%;
       display: flex;
@@ -24,8 +24,12 @@ const HighlightsStyles = styled.div`
 
       .carousel {
         display: none !important;
-        @media ${device.tablet} {
+        @media ${device.mobileXL} {
           display: unset !important;
+
+          .slider-slide slide-visible slide-current{
+            height: 100vh;
+          }
         }
         .slider-slide {
           /* height: 100% !important; */

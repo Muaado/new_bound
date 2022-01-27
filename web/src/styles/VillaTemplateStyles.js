@@ -459,7 +459,7 @@ const VillaStyles = styled.div`
         /* box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.5); */
         // box-shadow: 5px 33px 42px rgb(0 0 0 / 60%);
 
-        height: 100%;
+        // height: 100%;
 
         h3 {
           padding: 1rem 0;
