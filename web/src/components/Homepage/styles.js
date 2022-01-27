@@ -92,6 +92,18 @@ export const HandCraftedJourneysStyles = styled.div`
   flex-direction: column;
   align-items: center;
 
+  .text-container {
+    
+  }
+
+  .text-container h3{
+    text-align: left;
+  }
+
+  .text-container p{
+    text-align: justify;
+  }
+
   @media ${device.laptopL} {
     padding: 0 15%;
   }
@@ -163,7 +175,7 @@ export const HandCraftedJourneysStyles = styled.div`
       text-transform: unset;
     }
     p {
-      max-width: 25rem;
+      max-width: 55rem;
       text-align: center;
       color: var(--grey1);
       line-height: 3rem;
