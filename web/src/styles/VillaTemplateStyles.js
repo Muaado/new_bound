@@ -52,7 +52,7 @@ const VillaStyles = styled.div`
         font-family: "Roboto";
         font-weight: normal;
         text-transform: uppercase;
-        font-size: 4rem;
+        font-size: 3rem;
         color: #fff;
         left: 10%;
         bottom: 3%;
@@ -63,6 +63,10 @@ const VillaStyles = styled.div`
           bottom: 1rem;
           /* letter-spacing: 0.8rem; */
         }
+      }
+
+      &-title:hover {
+        text-decoration: underline;
       }
 
       .mouse_scroll {

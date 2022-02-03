@@ -42,6 +42,9 @@ import Carousel from "nuka-carousel";
 import CarouselButton from "../components/Ui/CarouselButton";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
+//import ChevronLeft from "../assets/icons/chevron-left.svg";
+
+import BackToResort from "../components/backToResort";
 
 export const query = graphql`
   query VillaTemplateQuery($id: String!, $resortId: String!) {
@@ -128,10 +131,10 @@ export const query = graphql`
             alt
           }
         }
-    
+
         activities {
           # sanityResortHighlightname
-  
+
           name
           imageThumb {
             ...SanityImage
@@ -139,7 +142,6 @@ export const query = graphql`
           }
         }
 
-     
         reviews {
           name
           description
@@ -166,7 +168,6 @@ export const query = graphql`
         }
       }
     }
-
 
     # activities: allSanityActivity(
     #   filter: { resort: { _id: { eq: $resortId } } }
@@ -208,11 +209,6 @@ export const query = graphql`
         }
       }
     }
-
-
-    
-
-
 
     priceList: allSanityPriceList(filter: { villa: { _id: { eq: $id } } }) {
       nodes {
@@ -343,10 +339,11 @@ const VilaTemplate = (props) => {
               )}
             </div>
             <h1 className="villa__image-title" id="header-text">
-              {resortName}
+              <Link to={`/${resortName.toLowerCase().split(" ").join("-")}`}>
+                {resortName}{" "}
+              </Link>
             </h1>
             <MouseScroll />
-            
           </div>
 
           {/* )} */}
@@ -360,6 +357,8 @@ const VilaTemplate = (props) => {
             data-aos-easing="ease-in-out"
           >
             <div className="container">
+            <BackToResort>
+            </BackToResort>
               {/* <p className="alternate-name">{alternateName}</p> */}
               <h2>{name}</h2>
               {/* <h3 className="tagline">{tagline}</h3> */}

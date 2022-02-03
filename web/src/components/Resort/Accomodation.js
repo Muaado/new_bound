@@ -11,6 +11,7 @@ import CarouselButton from "../Ui/CarouselButton";
 import { getVillaUrl } from "../../lib/helpers";
 import { Link } from "gatsby";
 import Placeholder from "../../assets/placeholder.svg";
+import BackToResort from "../backToResort";
 const AccomodationStyles = styled.div`
   padding: 0 15%;
   @media ${device.laptopL} {
@@ -124,6 +125,7 @@ const Accomodation = ({ villas, id }) => {
       // data-aos-duration="1000"
       // data-aos-easing="ease-in-out"
     >
+      
       <h2>Accomodation</h2>
 
       <Carousel
