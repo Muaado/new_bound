@@ -13,10 +13,7 @@ import { Link } from "gatsby";
 import Placeholder from "../../assets/placeholder.svg";
 import BackToResort from "../backToResort";
 const AccomodationStyles = styled.div`
-  padding: 0 15%;
-  @media ${device.laptopL} {
-    padding: 0 10%;
-  }
+ 
 
  
 
@@ -59,13 +56,15 @@ const AccomodationStyles = styled.div`
 
     .slider-frame {
 
-      @media ${device.notMobile} {
-        overflow: unset !important;
-      }
+      // @media ${device.notMobile} {
+      //   overflow: unset !important;
+      // }
 
-      @media ${device.mobileL} {
-        overflow: hidden !important;
-      }
+      // @media ${device.mobileL} {
+      //   overflow: hidden !important;
+      // }
+
+      
       align-self: center;
       width: 100% !important;
     }
@@ -84,8 +83,8 @@ const AccomodationStyles = styled.div`
     }
     p {
       /* font-family: "Playfair Display"; */
-      font-size: 3rem;
-      padding: 2rem 0;
+      font-size: 2rem;
+      padding: 2rem;
       text-align: left;
       line-height: 4rem;
 
@@ -95,6 +94,17 @@ const AccomodationStyles = styled.div`
         margin-right: 1rem;
       }
     }
+
+    p .priceLbl {
+      float: right;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #f33;
+      letter-spacing: 0.2rem;
+    }
+
+    p .perNight {
+      font-size: 0.9rem;
 
   
   }
@@ -117,12 +127,12 @@ const Accomodation = ({ villas, id }) => {
 
     const slides = () => {
       if (isMobileOnly) return 1;
-      if (isTablet) return 2;
-      if (isSreenSM) return 2;
+      if (isTablet) return 1;
+      if (isSreenSM) return 1;
       if (isSreenLG) return 2;
-      if (screenXL) return 2;
-      if (screenXXL) return 2;
-      return 1;
+      if (screenXL) return 3;
+      if (screenXXL) return 3;
+      return 2.9;
     };
     const spacing = () => {
       // if (isMobileOnly) return 50;
@@ -168,7 +178,7 @@ const Accomodation = ({ villas, id }) => {
             ) : (
               <Placeholder />
             )}
-            <p>{name}</p>
+            <p>{name} <span class="priceLbl">from $5,950<span className="perNight"> per night</span></span></p>
           </Link>
 
           // </li>
