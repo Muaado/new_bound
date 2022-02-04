@@ -11,6 +11,7 @@ import { Logo } from "./header";
 const FooterStyles = styled.footer`
   background: var(--lightOrange);
   padding: 10rem 15%;
+  overflow: hidden !important;
 
   display: flex;
   justify-content: space-between;

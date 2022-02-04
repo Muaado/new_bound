@@ -10,6 +10,7 @@ import { Logo } from "./header";
 
 const FooterStyles = styled.footer`
   width: 100%;
+  overflow: hidden !important;
   display: inline-block;
   // background: var(--lightOrange);
   text-align: center;

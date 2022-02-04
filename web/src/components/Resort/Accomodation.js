@@ -46,6 +46,7 @@ const AccomodationStyles = styled.div`
   .carousel {
     display: flex !important;
 
+    
     width: 100%;
 
     .slider-slide {
@@ -96,6 +97,13 @@ const AccomodationStyles = styled.div`
     }
 
     p .priceLbl {
+      display:flex;
+      @media ${device.tablet} {
+        float: none;
+        display:flex;
+        width:100%;
+      }
+      
       float: right;
       font-size: 2rem;
       font-weight: bold;
