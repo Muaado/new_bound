@@ -17,6 +17,12 @@ const AccomodationStyles = styled.div`
   @media ${device.laptopL} {
     padding: 0 10%;
   }
+
+ 
+
+  
+  
+
   @media ${device.tablet} {
     padding: 0;
   }
@@ -52,6 +58,14 @@ const AccomodationStyles = styled.div`
     }
 
     .slider-frame {
+
+      @media ${device.notMobile} {
+        overflow: unset !important;
+      }
+
+      @media ${device.mobileL} {
+        overflow: hidden !important;
+      }
       align-self: center;
       width: 100% !important;
     }
@@ -81,6 +95,8 @@ const AccomodationStyles = styled.div`
         margin-right: 1rem;
       }
     }
+
+  
   }
 `;
 
@@ -97,15 +113,16 @@ const Accomodation = ({ villas, id }) => {
     const isSreenLG = width > 1200 && width < 1440;
     const screenXL = width > 1440 && width < 1600;
     const screenXXL = width > 1600;
+    const notMobile = width > 576;
 
     const slides = () => {
       if (isMobileOnly) return 1;
       if (isTablet) return 2;
       if (isSreenSM) return 2;
-      if (isSreenLG) return 3;
-      if (screenXL) return 3;
-      if (screenXXL) return 3;
-      return 2.9;
+      if (isSreenLG) return 2;
+      if (screenXL) return 2;
+      if (screenXXL) return 2;
+      return 1;
     };
     const spacing = () => {
       // if (isMobileOnly) return 50;

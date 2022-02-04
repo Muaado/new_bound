@@ -33,7 +33,6 @@ const FooterStyles = styled.footer`
   }
 
   .logo {
-    width: 14rem;
     height: 17rem;
     a {
       width: 14rem;

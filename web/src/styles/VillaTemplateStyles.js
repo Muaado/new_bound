@@ -49,6 +49,9 @@ const VillaStyles = styled.div`
       &-title {
         position: absolute;
 
+        width: 650px;
+        text-wrap: pre-wrap;
+
         font-family: "Roboto";
         font-weight: normal;
         text-transform: uppercase;
@@ -59,14 +62,20 @@ const VillaStyles = styled.div`
         z-index: 100;
 
         @media ${device.tabletL} {
-          /* font-size: 2rem; */
+          font-size: 2rem;
           bottom: 1rem;
           /* letter-spacing: 0.8rem; */
         }
       }
 
+      @media ${device.mobileXL} {
+        &-title {
+          width: 300px !important;
+        }
+      }
+
       &-title:hover {
-        text-decoration: underline;
+        font-weight: bold;
       }
 
       .mouse_scroll {
@@ -439,12 +448,7 @@ const VillaStyles = styled.div`
       .image-container {
         height: 80vh;
         width: 100%;
-      
       }
-
- 
-
-      
 
       .content {
         padding: 4rem 3rem;

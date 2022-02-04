@@ -139,7 +139,7 @@ const HeaderStyles = styled.header`
   }
 
   .logo img{
-    width:130px;
+    // width:130px;
     height:150px;
   }
 
@@ -364,10 +364,10 @@ const HeaderStyles = styled.header`
 
 const DropdownListStyles = styled.div`
   position: absolute;
-  top: 15rem;
+  top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 10rem);
+  // height: calc(100vh - 10rem);
   background: #fff;
   color: #000;
   /* box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); */
@@ -393,7 +393,7 @@ const DropdownListStyles = styled.div`
   &.show {
     /* opacity: 1; */
     /* transform: translateY(0); */
-    height: 90vh;
+    height: 102vh;
     z-index: 200000;
 
     @media ${device.tablet} {
@@ -401,7 +401,7 @@ const DropdownListStyles = styled.div`
       overflow-x: hidden !important;
       /* width: 50vw; */
       /* overflow-y: scroll; */
-      height: 90vh;
+      height: 102vh;
     }
 
     .route {
@@ -414,8 +414,10 @@ const DropdownListStyles = styled.div`
     }
   }
 
-  .route {
-    /* .image-container { */
+  .image-container img { 
+    transition: all 4s;
+    min-height: 100vh;
+  }
     /* opacity: 0; */
   }
 
@@ -463,7 +465,7 @@ const DropdownListStyles = styled.div`
 
   .second-column {
     background: var(--lightGrey);
-    padding: 4rem;
+    padding: 4rem 4rem 10rem 4rem;
     display: flex;
     flex-direction: column;
     /* gap: 2rem; */

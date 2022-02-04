@@ -268,7 +268,7 @@ const ResortTemplate = (props) => {
               data-aos-easing="ease-in-out"
             >
               <p>{locationAtoll}</p>
-              <h1>{name}</h1>
+              <h1 className="title_res">{name}</h1>
             </div>
             <MouseScroll />
           </div>

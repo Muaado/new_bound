@@ -23,19 +23,9 @@ const ResortStyles = styled.div`
       margin: 5rem 0;
     }
   }
-  .title {
-    text-align: center;
-    color: var(--primary);
-    font-weight: bold;
-    /* font-size: 7.2rem; */
-    /* padding-bottom: 7rem; */
-    letter-spacing: 1rem;
+ 
 
-    @media ${device.tablet} {
-      /* font-size: 4rem; */
-      /* padding-bottom: 2rem; */
-      padding: 1.5rem;
-    }
+   
   }
 
   /* .left-nav {
@@ -73,15 +63,32 @@ const ResortStyles = styled.div`
         @media ${device.tablet} {
           bottom: 0;
         }
-        h1,
-        p {
-          color: #fff;
-        }
-        h1 {
+        
+        .title_res {
+         
+          @media ${device.mobileXL} {
+            width:400px;
+            font-size: 2rem;
+            left:0;
+            padding-bottom:10px;
+          }
+          width: 502px;
+          text-wrap: pre-wrap;
+          
           font-family: "Roboto";
-          text-transform: uppercase;
           font-weight: normal;
+          text-transform: uppercase;
+          font-size: 4rem;
+          color: #fff;
+         
+          @media ${device.tablet} {
+            font-size: 2rem;
+            bottom: 1rem;
+            /* letter-spacing: 0.8rem; */
+          }
         }
+  
+        
       }
     }
 

@@ -357,8 +357,7 @@ const VilaTemplate = (props) => {
             data-aos-easing="ease-in-out"
           >
             <div className="container">
-            <BackToResort>
-            </BackToResort>
+          
               {/* <p className="alternate-name">{alternateName}</p> */}
               <h2>{name}</h2>
               {/* <h3 className="tagline">{tagline}</h3> */}

@@ -274,10 +274,9 @@ const HeaderStyles = styled.header`
 
 const DropdownListStyles = styled.div`
   position: absolute;
-  top: 10rem;
+  top: 0;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 10rem);
   background: #fff;
   color: #000;
   /* box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25); */
@@ -361,11 +360,11 @@ const DropdownListStyles = styled.div`
 
   .second-column {
     background: var(--lightGrey);
-    padding: 4rem;
+    padding: 4rem 4rem 10rem 4rem;
     display: flex;
     flex-direction: column;
     /* gap: 2rem; */
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     position: relative;
 
     &::-webkit-scrollbar {
