@@ -124,20 +124,27 @@ const ActivitiesStyles = styled.div`
 
   .carousel {
     display: none !important;
-    min-height: 100vh !important;
-
-    @media ${device.mobileL} {
+    @media ${device.mobileXL} {
       display: unset !important;
+
+      a{
+        bottom: 0;
+        padding:5px;
+        
+      }
+
+      img{
+        max-height:240px;
+        min-height:240px;
+      }
     }
 
-   
-
     .slider-control-bottomcenter {
-      // bottom: -5rem !important;
-      /* height: 110% !important; */
       display: none !important;
     }
   }
+
+  
 `;
 
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
