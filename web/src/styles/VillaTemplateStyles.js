@@ -16,6 +16,28 @@ const VillaStyles = styled.div`
       letter-spacing: unset;
     }
   }
+  .backtoresorticon{
+    width: 24px;
+    height: 24px;
+    color: #939393;
+    position: relative;
+    top: -2px;
+    left: -4px;
+   
+  }
+
+  .backtoreswrapper{
+    float: left;
+    width: 100%;
+    position: relative;
+    bottom: 30px;
+  }
+
+  .backtoresort{
+    color: #939393;
+  }
+
+
 
   h2 {
     /* letter-spacing: 1rem; */

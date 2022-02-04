@@ -42,7 +42,7 @@ import Carousel from "nuka-carousel";
 import CarouselButton from "../components/Ui/CarouselButton";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
-//import ChevronLeft from "../assets/icons/chevron-left.svg";
+import ChevronLeft from "../assets/icons/chevrons-left.svg";
 
 import BackToResort from "../components/backToResort";
 
@@ -357,7 +357,12 @@ const VilaTemplate = (props) => {
             data-aos-easing="ease-in-out"
           >
             <div className="container">
-          
+              <div className="backtoreswrapper">
+              <ChevronLeft className='backtoresorticon'></ChevronLeft><Link className="backtoresort" to={`/${resortName.toLowerCase().split(" ").join("-")}`}>
+                Resort page
+              </Link>
+              </div>
+              
               {/* <p className="alternate-name">{alternateName}</p> */}
               <h2>{name}</h2>
               {/* <h3 className="tagline">{tagline}</h3> */}
@@ -387,6 +392,7 @@ const VilaTemplate = (props) => {
                   </li>
                 )}
               </ul>
+              <p className="pricelbl">from $ 1200 PP</p>
               <Link to={`/enquire?id=${resortName}`} className="btn">
                 ENQUIRE
               </Link>

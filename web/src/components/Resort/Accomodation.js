@@ -12,13 +12,7 @@ import { getVillaUrl } from "../../lib/helpers";
 import { Link } from "gatsby";
 import Placeholder from "../../assets/placeholder.svg";
 import BackToResort from "../backToResort";
-const AccomodationStyles = styled.div`
- 
-
- 
-
-  
-  
+const AccomodationStyles = styled.div`  
 
   @media ${device.tablet} {
     padding: 0;
@@ -82,12 +76,17 @@ const AccomodationStyles = styled.div`
       width: 100%;
       background-size: cover;
     }
-    p {
-      /* font-family: "Playfair Display"; */
-      font-size: 2rem;
+
+    .roomFooter{
       padding: 2rem;
+    }
+    .roomname {
+      font-size: 25px;
       text-align: left;
+      font-weight: bold;
       line-height: 4rem;
+      padding-bottom:10px;
+  
 
       @media ${device.tablet} {
         /* text-align: left; */
@@ -96,26 +95,33 @@ const AccomodationStyles = styled.div`
       }
     }
 
-    p .priceLbl {
-      display:flex;
-      @media ${device.tablet} {
-        float: none;
-        display:flex;
-        width:100%;
-      }
-      
-      float: right;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #f33;
-      letter-spacing: 0.2rem;
+    .viewroom {
+      width: 215.98px;
+      border: 1.5px solid #b39a6a;
+      padding: 5px;
+          padding-top: 5px;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+      color: #b39a6a;
+      font-size: 16px;
+      height: 52.36px;
+      text-align: center;
+      padding-top: 12px;
     }
 
-    p .perNight {
-      font-size: 0.9rem;
+    .viewroom:hover {
+      background: #91715c;
+      color: #fff;
+    }
+
+    .pricelbl {
+      font-size: 20px;
+      color: #595959;
 
   
-  }
+   }
+   
 `;
 
 const Accomodation = ({ villas, id }) => {
@@ -160,7 +166,6 @@ const Accomodation = ({ villas, id }) => {
       // data-aos-duration="1000"
       // data-aos-easing="ease-in-out"
     >
-      
       <h2>Accomodation</h2>
 
       <Carousel
@@ -186,7 +191,11 @@ const Accomodation = ({ villas, id }) => {
             ) : (
               <Placeholder />
             )}
-            <p>{name} <span class="priceLbl">from $5,950<span className="perNight"> per night</span></span></p>
+            <div className="roomFooter">
+              <p className="roomname">{name}</p>
+              <span className="pricelbl">from $5,950 PP</span>
+              <a className="viewroom">VIEW ROOM</a>
+            </div>
           </Link>
 
           // </li>

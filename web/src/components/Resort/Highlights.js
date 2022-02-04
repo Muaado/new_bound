@@ -104,7 +104,7 @@ const HighlightsStyles = styled.div`
       }
     }
     a {
-      position: relative;
+      position: absolute;
       color: #fff;
       font-size: 1.8rem;
       padding:8px;
@@ -119,6 +119,8 @@ const HighlightsStyles = styled.div`
       -ms-flex-align: center;
       align-items: center;
       background: rgb(0 0 0 / 25%);
+      width:100%;
+      bottom:0;
 
       svg {
         margin-left: 1.5rem;
