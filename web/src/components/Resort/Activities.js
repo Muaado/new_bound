@@ -124,18 +124,13 @@ const ActivitiesStyles = styled.div`
 
   .carousel {
     display: none !important;
-    min-height: 100% !important;
+    min-height: 100vh !important;
 
-    @media ${device.tablet} {
+    @media ${device.mobileL} {
       display: unset !important;
     }
 
-    /* .slider-slide {
-      height: 100% !important;
-      li {
-        height: inherit;
-      }
-    } */
+   
 
     .slider-control-bottomcenter {
       // bottom: -5rem !important;
