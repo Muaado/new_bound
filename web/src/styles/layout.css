@@ -1,4 +1,4 @@
-html {
+/* html {
   font-family: var(--font-family-sans);
   font-size: var(--font-base-size);
   line-height: var(--font-base-line-height);
@@ -16,4 +16,29 @@ body,
 body > div,
 body > div > div {
   height: 100%;
+} */
+
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: "Glacial Indifference",sans-serif;
+  background: var(--color-white);
+  color: var(--color-black);
+  margin: 0;
+}
+
+h4,h5,h6{
+  font-family: "rivera_bold_regular", sans-serif;
+  font-weight: 100 !important;
+  letter-spacing: unset !important;
+}
+
+h1,h2,h3{
+  font-family: 'rivera_ultra_light_regular', sans-serif;
+  letter-spacing: unset;
+}
+
+h1,h2,h3,h4,h5{
+  letter-spacing: unset;
 }

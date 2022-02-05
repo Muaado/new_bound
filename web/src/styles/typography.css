@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "rivera_light_italics";
+    src: url("../fonts/RivieraNights-LightItalic.otf");
+}
+
+@font-face {
+    font-family: "rivera_light_regular";
+    src: url("../fonts/RivieraNights-Light.otf");
+}
+
+
+@font-face {
+    font-family: "rivera_bold_regular";
+    src: url("../fonts/RivieraNights-Bold.otf");
+}
+
+@font-face {
+    font-family: "rivera_ultra_light_regular";
+    src: url("../fonts/RivieraNights-Ultralight.otf");
+}
+
+

@@ -107,7 +107,7 @@ const AccomodationStyles = styled.div`
       font-size: 16px;
       height: 52.36px;
       text-align: center;
-      padding-top: 12px;
+      padding-top: 14px;
     }
 
     .viewroom:hover {
@@ -166,7 +166,7 @@ const Accomodation = ({ villas, id }) => {
       // data-aos-duration="1000"
       // data-aos-easing="ease-in-out"
     >
-      <h2>Accomodation</h2>
+      <h2>Accommodation</h2>
 
       <Carousel
         speed={1000}

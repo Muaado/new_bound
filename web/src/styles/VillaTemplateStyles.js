@@ -19,11 +19,11 @@ const VillaStyles = styled.div`
   .backtoresorticon{
     width: 24px;
     height: 24px;
-    color: #939393;
+    color: #76622e8a;
     position: relative;
     top: -2px;
     left: -4px;
-   
+   #76622e8a
   }
 
   .backtoreswrapper{
@@ -34,8 +34,13 @@ const VillaStyles = styled.div`
   }
 
   .backtoresort{
-    color: #939393;
+    color: #76622e8a;
   }
+
+  .backtoresort:hover{
+    color: #76622e;
+  }
+  
 
 
 
@@ -74,7 +79,6 @@ const VillaStyles = styled.div`
         width: 650px;
         text-wrap: pre-wrap;
 
-        font-family: "Roboto";
         font-weight: normal;
         text-transform: uppercase;
         font-size: 3rem;
@@ -193,6 +197,7 @@ const VillaStyles = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: #76622e;
 
       /* padding: 0 10%; */
       position: relative;
@@ -339,8 +344,10 @@ const VillaStyles = styled.div`
           /* font-size: 2.2rem; */
           text-align: center;
           color: var(--grey1);
-          @media ${device.tablet} {
+          width: 70%;
+          @media ${device.mobileXL} {
             text-align: left;
+            width: 100%;
           }
         }
       }

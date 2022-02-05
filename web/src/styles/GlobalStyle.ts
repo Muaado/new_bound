@@ -4,6 +4,7 @@ import { device } from "./deviceSizes";
 export const GlobalStyle = createGlobalStyle`
 
   :root {
+    
     --darkRed: #5D0012;
     --lightOrange: #B39A6A;
     --darkGreen: #004743;
@@ -82,9 +83,13 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-size: 1.6rem;
-    font-family: "Roboto", sans-serif;
+    // font-family: "Roboto", sans-serif;
     box-sizing: border-box;
     overflow-x: hidden !important;
+    font-weight: normal;
+    word-wrap: break-word;
+    font-kerning: normal;
+    }
   }
 
   .btn {
@@ -122,8 +127,7 @@ export const GlobalStyle = createGlobalStyle`
   h5,
   h6 {
     /* font-weight: normal; */
-    font-family: "Roboto";
-    font-size: 5rem;
+    // font-size: 5rem;
     
     
   }

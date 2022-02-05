@@ -75,7 +75,7 @@ const ResortStyles = styled.div`
           width: 502px;
           text-wrap: pre-wrap;
           
-          font-family: "Roboto";
+          
           font-weight: normal;
           text-transform: uppercase;
           font-size: 4rem;

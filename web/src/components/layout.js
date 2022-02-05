@@ -4,13 +4,18 @@ import Header from "./header";
 import AOS from "aos";
 
 import { GlobalStyle } from "../styles/GlobalStyle";
+import "../styles/typography.css";
+
 import "aos/dist/aos.css";
 import Footer from "./Footer";
+import "../styles/layout.css";
+
+
 import { Helmet } from "react-helmet";
+
 const windowGlobal = typeof window !== "undefined";
 if (windowGlobal) AOS.init();
 
-// import "../styles/layout.css";
 
 const Layout = ({
   children,

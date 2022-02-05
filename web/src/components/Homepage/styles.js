@@ -52,7 +52,6 @@ export const HeroStyles = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 
-    font-family: "Roboto";
     font-size: 5rem;
     color: #fff;
 
@@ -234,9 +233,25 @@ export const MagazineStyles = styled.div`
       flex-direction: column;
     }
 
+
     .image-container {
       width: 100%;
+      height: 360px;
+      overflow: hidden;
+      background: #ccc;
+      margin: 10px;
+      text-align: center;
+      line-height: 150px;
+      padding: 0;
+      margin: 0;
     }
+    .image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: middle;
+    }
+
+
     h3 {
       margin-top: 3rem;
       margin-bottom: 1.5rem;
