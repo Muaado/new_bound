@@ -376,7 +376,7 @@ const DropdownListStyles = styled.div`
   transition-timing-function: ease-in-out;
   /* opacity: 0; */
   /* transform: translateY(-100vh); */
-  overflow: hidden;
+  overflow-x: hidden !important;
 
   display: flex;
   z-index: -100;
@@ -646,7 +646,7 @@ const Header = ({
     if (showDropdown) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "s";
     }
   }, [showDropdown, showNav]);
   return (

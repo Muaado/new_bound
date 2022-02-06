@@ -25,6 +25,7 @@ const FooterStyles = styled.footer`
     text-align: left;
     // font: bold 16px sans-serif;
     padding: 65px 50px;
+
   }
 
   .footer-distributed .footer-left,
@@ -46,7 +47,7 @@ const FooterStyles = styled.footer`
     color: #ffffff;
     // font: normal 36px "Open Sans", cursive;
     margin: 0;
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .footer-distributed h3 span {

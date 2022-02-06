@@ -4,6 +4,7 @@ import { device } from "../styles/deviceSizes";
 const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
   h1 {
     /* text-align: center; */
     /* color: var(--primary); */

@@ -6,7 +6,7 @@ const ResortStyles = styled.div`
   /* overflow-y: auto;
   overscroll-behavior-y: contain;
   scroll-snap-type: y proximity; */
-
+  overflow-x:hidden;
   h2 {
     letter-spacing: 1rem;
     text-align: center;
