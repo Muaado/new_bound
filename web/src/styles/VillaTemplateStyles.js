@@ -1,6 +1,8 @@
 import { Placeholder } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { device } from "../styles/deviceSizes";
+import "../styles/typography.css";
+
 const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,6 +43,7 @@ const VillaStyles = styled.div`
   .backtoresort:hover{
     color: #76622e;
   }
+
   
 
 
@@ -116,8 +119,9 @@ const VillaStyles = styled.div`
       z-index: 1000;
       position: absolute;
       bottom: 20%;
-      right: 15%;
 
+      
+      
       .icon {
         display: flex;
         align-items: center;
@@ -345,12 +349,22 @@ const VillaStyles = styled.div`
           /* font-size: 2.2rem; */
           text-align: center;
           color: var(--grey1);
-          width: 70%;
+          width: 100%;
           @media ${device.mobileXL} {
             text-align: left;
             width: 100%;
           }
+          padding-top:10px;
+
+          
+          
         }
+
+        .pricelbl{
+          color:#76622e;
+          font-weight: 700;
+        }
+
       }
 
       .alternate-name {
@@ -374,6 +388,8 @@ const VillaStyles = styled.div`
         margin-bottom: 2.5rem;
 
         font-weight: normal;
+        font-size:35px;
+        font-family: "Playfair Display";
         color: #76622e;
 
         @media ${device.tablet} {
@@ -389,9 +405,10 @@ const VillaStyles = styled.div`
       }
 
       .tagline {
-        /* fo */
+        font-family: "autography",cursive;
         font-style: italic;
-        font-size: 2.4rem;
+        font-size: 3rem;
+        
       }
 
       &-icons {
@@ -410,7 +427,6 @@ const VillaStyles = styled.div`
         }
 
         li {
-          height: 8rem;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -436,7 +452,7 @@ const VillaStyles = styled.div`
           }
 
           &:not(:last-of-type) {
-            margin-right: 4rem;
+            margin-right: 15px;
           }
         }
       }
