@@ -73,6 +73,7 @@ const AccomodationStyles = styled.div`
     min-height: 614px;
     img {
       min-height: 570px !important;
+      max-height: 570px;
       width: 100%;
       background-size: cover;
     }
@@ -86,6 +87,7 @@ const AccomodationStyles = styled.div`
       font-weight: bold;
       line-height: 4rem;
       padding-bottom:10px;
+      min-height: 90px;
   
 
       @media ${device.tablet} {
@@ -181,6 +183,8 @@ const Accomodation = ({ villas, id }) => {
       >
         {villas.map(({ name, imageThumb, resort }) => (
           // <li key={name}>
+          // check if name contains word 'demo'
+        
           <Link
             to={getVillaUrl({ name, resortName: resort.name })}
             key={name}

@@ -147,20 +147,20 @@ const Search = ({
         type: "resort",
       };
     }),
-    ...villas.map(({ name, resort }) => {
-      // console.log(resort);
-      return {
-        value: name,
-        label: (
-          <p className="input__label">
-            {name}
-            <span className="input__type">Villa</span>
-          </p>
-        ),
-        type: "villa",
-        resortName: resort?.name,
-      };
-    }),
+    // ...villas.map(({ name, resort }) => {
+    //   // console.log(resort);
+    //   return {
+    //     value: name,
+    //     label: (
+    //       <p className="input__label">
+    //         {name}
+    //         <span className="input__type">Villa</span>
+    //       </p>
+    //     ),
+    //     type: "villa",
+    //     resortName: resort?.name,
+    //   };
+    // }),
   ];
 
   useEffect(() => {

@@ -184,6 +184,26 @@ export const HandCraftedJourneysStyles = styled.div`
   .btn {
     text-transform: capitalize;
   }
+
+  .image-container {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    background: #ccc;
+    margin: 10px;
+    text-align: center;
+    line-height: 150px;
+    padding: 0;
+    margin: 0;
+  }
+  .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      vertical-align: middle;
+  }
+
+
+  
 `;
 
 export const MagazineStyles = styled.div`

@@ -64,11 +64,11 @@ export default {
       title: "Price",
     },
 
-    {
-      name: "priceList",
-      type: "priceList",
-      title: "Price list",
-    },
+    // {
+    //   name: "priceList",
+    //   type: "priceList",
+    //   title: "Price list",
+    // },
 
     {
       name: "tagline",
