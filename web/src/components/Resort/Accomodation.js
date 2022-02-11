@@ -114,10 +114,10 @@ const AccomodationStyles = styled.div`
       display: block;
       margin-top: 20px;
       color: #b39a6a;
-      font-size: 16px;
-      height: 52.36px;
+      font-size: 12px;
+      height: 53px;
       text-align: center;
-      padding-top: 14px;
+      padding-top: 16px;
     }
 
     .viewroom:hover {

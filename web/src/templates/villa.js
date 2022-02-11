@@ -1,5 +1,8 @@
 import { graphql, Link } from "gatsby";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import useWindowSize from "../lib/useWindowSize";
+
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -227,6 +230,20 @@ const VilaTemplate = (props) => {
   const resorts = data && data.resorts;
   const restaurants = data && data.restaurants;
   // const priceList = data && data.priceList;
+  const [numberOfSlides, setNumberOfSlides] = useState(3);
+  const [cellSpacing, setCellSpacing] = useState(10);
+  const size = useWindowSize();
+
+  useEffect(() => {
+    const { width } = size;
+    const isMobileOnly = width <= 576;
+    const isTablet = width > 576 && width < 992;
+    const isSreenSM = width > 992 && width < 1200;
+    const isSreenLG = width > 1200 && width < 1440;
+    const screenXL = width > 1440 && width < 1600;
+    const screenXXL = width > 1600;
+    const notMobile = width > 990;
+  }, [size]);
 
   const [openedFeature, setOpenedFeature] = useState(-1);
   // const [restaurantSlice, setRestaurantSLice] = useState(4);
@@ -398,7 +415,11 @@ const VilaTemplate = (props) => {
                 ENQUIRE
               </Link>
             </div>
+            
+    
             <PopUpGallery className="carousel" images={headerImages} />
+        
+          
           </div>
 
           <div

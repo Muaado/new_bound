@@ -150,7 +150,11 @@ const SpaStyles = styled.div`
     justify-self: flex-end;
     display: flex;
     z-index: 100;
-    height: 300px;
+    min-height: 300px;
+
+    @media ${device.mobileXL} {
+      display: none;
+    }
   }
 
   @media ${device.laptop} {

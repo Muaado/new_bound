@@ -4,6 +4,8 @@ import { device } from "../styles/deviceSizes";
 import "../styles/typography.css";
 
 const VillaStyles = styled.div`
+
+  
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -533,7 +535,8 @@ const VillaStyles = styled.div`
       }
 
       .content {
-        padding: 4rem 3rem;
+        width:100%;
+        padding: 15%;
         z-index: 100;
         display: flex;
         flex-direction: column;
@@ -572,8 +575,9 @@ const VillaStyles = styled.div`
         }
 
         ul {
+          width:100%;
           li {
-            width: 70rem;
+            // width: 70rem;
 
             @media ${device.tabletL} {
               width: 80vw;

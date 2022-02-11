@@ -36,6 +36,7 @@ const RestaurantsStyles = styled.div`
     }
 
     .image-container {
+      padding-top:30px;
       height: 50rem;
       @media ${device.tablet} {
         height: 28rem;
@@ -79,6 +80,7 @@ const RestaurantsStyles = styled.div`
       color: #a9a7a7;
       text-transform: uppercase;
       letter-spacing: 0.4rem;
+      margin-top:-20px;
       
     }
 
@@ -99,7 +101,7 @@ const RestaurantsStyles = styled.div`
     text-transform: uppercase;
     color: var(--darkGreen);
     font-size: 3rem;
-    padding:10px 0px;
+    padding:20px 0px;
   }
 
   .restaurant-description{

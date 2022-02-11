@@ -13,21 +13,7 @@ const GalleryComponent = ({ images }) => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // console.log(props);
-  const handleOpen = (i) => (e) => {
-    setShowLightbox(true);
-    setSelectedImage(i);
-  };
-  const handleClose = () => {
-    setShowLightbox(false);
-    setSelectedImage(null);
-  };
-  const handlePrevRequest = (i, length) => (e) => {
-    setSelectedImage((i - 1 + length) % length);
-  };
-  const handleNextRequest = (i, length) => (e) => {
-    setSelectedImage((i + 1) % length);
-  };
+  
 
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
@@ -43,7 +29,10 @@ const GalleryComponent = ({ images }) => {
     const screenXL = width > 1440 && width < 1600;
     const screenXXL = width > 1600 && width < 1700;
     const screenXXXL = width > 1700;
+    const notMobile = width > 900;
+    const laptop = width > 999;
 
+    
     const slides = () => {
       if (isMobileOnly) return 1;
       if (isTablet) return 1;
@@ -66,10 +55,30 @@ const GalleryComponent = ({ images }) => {
       return 0;
     };
 
+    
+
     setNumberOfSlides(slides);
     setCellSpacing(spacing);
   }, [size]);
 
+  const handleOpen = (i) => (e) => {
+
+      setShowLightbox(true);
+      setSelectedImage(i);    
+  };
+
+  const handleClose = () => {
+    setShowLightbox(false);
+    setSelectedImage(null);
+  };
+  const handlePrevRequest = (i, length) => (e) => {
+    setSelectedImage((i - 1 + length) % length);
+  };
+  const handleNextRequest = (i, length) => (e) => {
+    setSelectedImage((i + 1) % length);
+  };
+
+  
   return (
     <GalleryImage className="gallery carousel">
       <div className="image-container">
@@ -89,8 +98,12 @@ const GalleryComponent = ({ images }) => {
             ? images.images.map((image) => (
                 <div key={image.alt} className="carousel__image-container">
                   {image && image.asset && (
+ 
+
                     <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
                   )}
+
+                
                 </div>
               ))
             : [1, 2, 3].map((item) => (
@@ -112,7 +125,7 @@ const GalleryComponent = ({ images }) => {
           />
         )} */}
       </div>
-
+     
       {showLightbox && selectedImage !== null && (
         <LightBox
           showLightbox={showLightbox}
