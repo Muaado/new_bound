@@ -146,12 +146,11 @@ const SpaStyles = styled.div`
   }
 
   .image-thumb {
-    max-width: 35rem;
+    width: 300px;
     justify-self: flex-end;
     display: flex;
     z-index: 100;
-    min-height: 390px;
-    max-height: 390px;
+    height: 300px;
   }
 
   @media ${device.laptop} {

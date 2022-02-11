@@ -99,6 +99,7 @@ const HighlightsStyles = styled.div`
         width: 100%;
         height: 100%;
         min-height:230px;
+        min-width:230px;
         max-height:230px;
         object-fit: cover;
       }

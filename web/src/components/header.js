@@ -139,7 +139,7 @@ const HeaderStyles = styled.header`
   }
 
   .logo img{
-    // width:130px;
+    width:100%;
     height:150px;
   }
 

@@ -356,15 +356,15 @@ const VilaTemplate = (props) => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            <div className="container">
-              <div className="backtoreswrapper">
+            <div className="backtoreswrapper">
               <ChevronLeft className='backtoresorticon'></ChevronLeft><Link className="backtoresort" to={`/${resortName.toLowerCase().split(" ").join("-")}`}>
                 Resort page
               </Link>
               </div>
+            <div className="container">
               
               {/* <p className="alternate-name">{alternateName}</p> */}
-              <h2>{name}</h2>
+              <h2 className="villa_name_title">{name}</h2>
               {tagline && <p className="tagline">{tagline}</p>}
               {/* <h3 className="tagline">{tagline}</h3> */}
               <PortableText blocks={_rawDescriptionVilla} />

@@ -136,7 +136,7 @@ const Restaurants = ({ restaurants }) => {
                 )}
               </div>
               <div className="villa__restaurants__text">
-                <span className="rest-name">{name}</span>
+                <h3 className="rest-name">{name}</h3>
                 <span className="alternate-name">{alternateName}</span>
 
                 <p className="restaurant-description">{description}</p>

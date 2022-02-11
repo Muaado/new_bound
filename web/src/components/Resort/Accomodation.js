@@ -72,10 +72,18 @@ const AccomodationStyles = styled.div`
 
     min-height: 614px;
     img {
-      min-height: 570px !important;
+      min-height: 570px;
+      @media ${device.mobileXL} {
+        max-height: 350px;
+        min-height: 350px;
+        width:100%;
+      }
+
+      
       max-height: 570px;
       width: 100%;
       background-size: cover;
+      
     }
 
     .roomFooter{
@@ -84,10 +92,10 @@ const AccomodationStyles = styled.div`
     .roomname {
       font-size: 25px;
       text-align: left;
-      font-weight: bold;
       line-height: 4rem;
       padding-bottom:10px;
-      min-height: 90px;
+      // min-height: 90px;
+      font-family: "rivera_light_regular", sans-serif;
   
 
       @media ${device.tablet} {
@@ -101,7 +109,7 @@ const AccomodationStyles = styled.div`
       width: 215.98px;
       border: 1.5px solid #b39a6a;
       padding: 5px;
-          padding-top: 5px;
+      padding-top: 5px;
       text-align: center;
       display: block;
       margin-top: 20px;

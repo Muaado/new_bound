@@ -65,27 +65,32 @@ const ResortStyles = styled.div`
         }
         
         .title_res {
-         
           @media ${device.mobileXL} {
-            width:400px;
-            font-size: 2rem;
-            left:0;
-            padding-bottom:10px;
+              width:380px;
+              font-size: 2rem;
+              left:0;
+              padding-bottom:10px;
           }
-          width: 502px;
+
+          @media ${device.tablet}{
+            width:100%;
+          }
+          width: 900px;
           text-wrap: pre-wrap;
-          
-          
+            
+            
           font-weight: normal;
           text-transform: uppercase;
-          font-size: 4rem;
           color: #fff;
+          font-size: 4.6rem;
+
          
-          @media ${device.tablet} {
-            font-size: 2rem;
-            bottom: 1rem;
-            /* letter-spacing: 0.8rem; */
-          }
+        }
+
+        .atoll_title{
+          color : #e7e7e7;
+          font-size: 1.5rem;
+          letter-spacing: 0.1rem;
         }
   
         

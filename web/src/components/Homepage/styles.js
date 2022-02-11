@@ -100,7 +100,7 @@ export const HandCraftedJourneysStyles = styled.div`
   }
 
   .text-container p{
-    text-align: justify;
+    text-align: left;
   }
 
   @media ${device.laptopL} {
