@@ -31,12 +31,12 @@ export default {
       type: "number",
     },
 
-    {
-      title: "Villa",
-      name: "villa",
-      type: "reference",
-      to: [{ type: "villa" }],
-    },
+    // {
+    //   title: "Villa",
+    //   name: "villa",
+    //   type: "reference",
+    //   to: [{ type: "villa" }],
+    // },
   ],
   preview: {
     select: {

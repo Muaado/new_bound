@@ -80,7 +80,7 @@ const RestaurantsStyles = styled.div`
       color: #a9a7a7;
       text-transform: uppercase;
       letter-spacing: 0.4rem;
-      margin-top:-20px;
+      // margin-top:-20px;
       
     }
 

@@ -113,7 +113,7 @@ const HeaderStyles = styled.header`
 
   .logo {
     /* align-self: flex-start; */
-    height:100%;
+    height: 100%;
     margin-top: 2rem;
     /* margin-bottom: 2rem; */
     /* border-bottom: 1px solid #fff; */
@@ -138,9 +138,10 @@ const HeaderStyles = styled.header`
     }
   }
 
-  .logo img{
-    width:100%;
-    height:150px;
+  .logo img {
+    max-width: 150px;
+    height: 150px;
+    position: relative;
   }
 
   .icon {
@@ -499,21 +500,28 @@ const DropdownListStyles = styled.div`
     min-width: max-content;
   } */
   a {
-    /* opacity: 0; */
-    color: var(--darkGrey);
-    padding: 1.5rem 0;
-    /* border-bottom: 1px solid var(--grey); */
-    word-break: keep-all;
-    width: 100%;
-    display: inline-block;
 
+    /* opacity: 0; */
+    // color: var(--darkGrey);
+    // padding: 1.5rem 0;
+    // /* border-bottom: 1px solid var(--grey); */
+    // word-break: keep-all;
+    // width: 100%;
+    // display: inline-block;
+
+    // font-size: 1.6rem;
+
+    font-family: "rivera_ultra_light_regular",sans-serif;
     font-size: 1.6rem;
+    padding-top: 20px;
+
 
     @media ${device.tablet} {
       border-bottom: 1px solid var(--lightGrey3);
     }
     /* width: 100%; */
   }
+
 
   .dropdown-close-icon {
     position: absolute;
@@ -533,12 +541,25 @@ const DropdownListStyles = styled.div`
       fill: #000;
     }
   }
+
+  a:hover, a:focus, a:active {
+    outline: none !important;
+    text-decoration: none !important;
+    background: #fff;
+  }
+
+  li:hover li:focus, li:active {
+    outline: none !important;
+    text-decoration: none !important;
+    background: #fff;
+  }
+
+
 `;
 export const Logo = ({ logo }) => (
   <div className="logo">
     <Link to="/">
       {logo && logo.asset && <Image {...logo} alt={logo.alt} />}
-
     </Link>
   </div>
 );
@@ -563,6 +584,20 @@ const DropDown = ({
     >
       <ul className="first-column">
         <li
+          
+            to="/"
+            className="clickable"
+            onClick={() => {
+              // handleOpenDropDown([], false);
+              document.body.style.overflow = "unset";
+              setSelectedList("");
+              setShowDropdown(false);
+            }}
+          >
+            Home
+          
+        </li>
+        <li
           className={`${selectedList === "resorts" ? "selected" : ""} clickable
           ${className}
           route 
@@ -581,6 +616,19 @@ const DropDown = ({
         >
           Holiday stays
         </li>
+        <li
+            className="clickable"
+            to="/magazine"
+            onClick={() => {
+              // handleOpenDropDown([], false);
+              document.body.style.overflow = "unset";
+              setSelectedList("");
+              setShowDropdown(false);
+            }}
+          >
+            Magazine
+        
+        </li>
       </ul>
       <ul className="second-column">
         {lists?.map(
@@ -593,6 +641,7 @@ const DropDown = ({
                 to={item.url}
                 onClick={() => {
                   document.body.style.overflow = "unset";
+                  setShowDropdown(false);
                   // handleOpenDropDown([], false);
                 }}
               >
@@ -612,6 +661,7 @@ const DropDown = ({
         className="dropdown-close-icon"
         onClick={() => {
           // handleOpenDropDown([], false);
+          document.body.style.overflow = "unset";
           setSelectedList("");
           setShowDropdown(false);
         }}
@@ -774,7 +824,6 @@ const Header = ({
               // }}
             >
               Magazine
-              {showDropdown === 4 && <DropDown list={list} />}
             </Link>
           </li>
         </ul>
@@ -800,6 +849,16 @@ const Header = ({
           }}
         />
         <ul>
+          <a href="/"><li
+              className="clickable"
+              onClick={() => {
+                // handleOpenDropDown([], false);
+                document.body.style.overflow = "unset";
+                setSelectedList("");
+                setShowDropdown(false);
+              }}
+            >Home
+          </li></a>
           <li
             className={` ${
               selectedList === "resorts" ? "selected" : ""

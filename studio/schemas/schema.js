@@ -94,7 +94,7 @@ export default createSchema({
     spa,
     collection,
     collectionType,
-    priceList,
+    // priceList,
     // SHARED DOCS
     resortTransferType,
     galleryType,

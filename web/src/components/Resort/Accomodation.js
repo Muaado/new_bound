@@ -106,7 +106,7 @@ const AccomodationStyles = styled.div`
     }
 
     .viewroom {
-      width: 215.98px;
+      width: 150px;
       border: 1.5px solid #b39a6a;
       padding: 5px;
       padding-top: 5px;
