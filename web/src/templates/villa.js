@@ -458,6 +458,7 @@ const VilaTemplate = (props) => {
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (
                     <li key={title} className="accordion-item">
+                      {/* <div className="plus"></div> */}
                       <input id={index} className="hide" type="checkbox" />
                       <label htmlFor={index} className="accordion-label">
                         {title}

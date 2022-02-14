@@ -562,24 +562,36 @@ const VillaStyles = styled.div`
         font-size: 18px;
         position: relative;
         cursor: pointer;
+        background:#76622eb3;
+        margin-top:-1px;
       }
       .accordion-label:hover {
         cursor: pointer;
       }
-      .accordion-label:before {
-        content: "";
-        position: absolute;
-        height: 5px;
-        width: 5px;
-        top: 22px;
-        left: 12px;
-        display: inline-block;
-        border-left: 5px solid #999;
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
+      
+
+      .accordion-label:after {
+        content: ">";
+       
+        // width: 13em;
+        height: 1em;
+        text-align: center;
+        transition: all 0.8s ease;
+        display: flex;
+        justify-content: space-between;
+        // padding: 1em;
+        font-weight: bolder;
+        float: right;
+        margin-top: -10px;
+        padding: 10px;
+        color: #9b9b9b;
+
+        
       }
-      input[type=checkbox]:checked ~ .accordion-label:before {
+      input[type=checkbox]:checked ~ .accordion-label:after {
         transform: rotate(90deg);
+        margin-top:10px;
+        
       }
       
       .accordion-child {
@@ -593,26 +605,34 @@ const VillaStyles = styled.div`
         transform-origin: center top;
       }
       input[type=checkbox]:checked ~ .accordion-child {
-        border: 1px solid #e0e0e0;
-        margin: 0 -20px 15px -20px;
-        color: var(--grey1);
+        color: #000;
         background: #fff;
         box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
         padding: 20px;
         height: auto;
-        opacity: 1;
+        opacity: 0.8;
         transform: scale(1, 1);
         max-height:240px;
         overflow-y:scroll;
         overflow-x:hidden;
+        font-family: "glacial_indifference_regular", sans-serif;
       }
-
+      .feattitle{
+        font-family: "rivera_light_regular",sans-serif;
+        margin: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        opacity: 0;
+        height: 0;
+        transform: scale(1, 0);
+        transform-origin: center top;
+      }
       .accordion-child ul {
         /* padding-left: 4rem; */
         
         width:100%;
         overflow-y: hidden;
-        max-height: 200px; /* approximate max height */
+        min-height: 200px; /* approximate max height */
       
         transition-property: all;
         transition-duration: 20s;
