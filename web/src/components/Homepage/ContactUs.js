@@ -6,9 +6,6 @@ import Image from "gatsby-plugin-sanity-image";
 import PhoneIcon from "../../assets/icons/phone.svg";
 import EmailIcon from "../../assets/icons/email.svg";
 
-
-
-
 const ContactUsSection = styled.div`
   margin-bottom: 10rem;
   display: grid;
@@ -133,15 +130,51 @@ const ContactUsSection = styled.div`
   }
 `;
 
-
 export const ContactUs = ({ contactUs }) => {
   const { email, phoneOne, contactPeople, hours, businessHoursDescription } =
     contactUs;
   return (
-    
+    <ContactUsSection
+      // data-aos="fade-up"
+      // data-aos-delay="50"
+      // data-aos-duration="1000"
+      // data-aos-easing="ease-in-out"
+      // id="contact-us"
+    >
+      <a className="anchor" id="contact-us"></a>
       <div>
-        <h1>Headline Text</h1>
+        <p>Need a little help?</p>
+        <p>Our luxury hotel specialists are only a call or click away.</p>
+        <div className="links">
+          <a href={`tel:${phoneOne}`}>
+            <PhoneIcon />
+            {phoneOne}
+          </a>
+          <a href={`mailto:${email}`}>
+            <EmailIcon />
+            Send us an email
+          </a>
+        </div>
+        <ul className="contact-people">
+          {contactPeople.map(({ image }) => (
+            <li key={image._id}>
+              {image && image.asset && <Image {...image} alt={image.alt} />}
+            </li>
+          ))}
+        </ul>
+        <p>Our experience curators are only a call or click away.</p>
       </div>
-    
+      <div className="hours">
+        <ul>
+          {hours.map(({ days, hours }) => (
+            <li key={days}>
+              <span>{days}</span>
+              <span>{hours}</span>
+            </li>
+          ))}
+        </ul>
+        <p>{businessHoursDescription}</p>
+      </div>
+    </ContactUsSection>
   );
 };
