@@ -80,6 +80,8 @@ const MagazinePageStyles = styled.div`
   }
 `;
 
+
+
 const MagazinePage = (props) => {
   const { data, errors } = props;
 

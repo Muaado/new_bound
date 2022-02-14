@@ -17,13 +17,22 @@ import { device } from "../../styles/deviceSizes";
 const BlogPostStyles = styled.article`
   display: flex;
   flex-direction: column;
-  /* padding: 0 15%; */
   padding: 0 15%;
-  width: 80%;
 
-  margin-top: 25rem;
+  margin-top: 4rem;
   /* padding: 0 15%; */
   display: flex;
+
+  figure{
+    margin:0;
+
+    img{
+      width:100%;
+    }
+  }
+
+ 
+
   h1 {
     font-size: 4rem;
 
@@ -33,9 +42,7 @@ const BlogPostStyles = styled.article`
     }
   }
   /* grid-template-columns: 1fr 25rem; */
-  gap: 2rem;
   @media ${device.laptopM} {
-    padding: 0 10%;
     h1 {
       font-size: 4rem;
     }
@@ -55,8 +62,7 @@ const BlogPostStyles = styled.article`
   }
 
   .image {
-    width: 70rem;
-    height: 50rem;
+    margin:0;
 
     @media ${device.tablet} {
       width: 100%;
@@ -69,14 +75,12 @@ const BlogPostStyles = styled.article`
       height: 90%;
       object-position: bottom;
     }
-  }
-  .title {
-    margin-bottom: 5rem;
+
+    .gatsby-image-wrapper{
+      width:100%;
+    }
   }
 
-  img {
-    width: 100%;
-  }
   p {
     margin: 2rem 0;
     color: #000;
@@ -141,7 +145,7 @@ function BlogPost(props) {
     <BlogPostStyles>
       {/* <Container> */}
 
-      <div className="image">
+      {/* <div className="image">
         {mainImage && mainImage.asset && (
           // <div className="image-container">
           <Image {...mainImage} alt={mainImage.alt} />
@@ -156,9 +160,9 @@ function BlogPost(props) {
             {categories?.[0]?.title}
           </span>
         </div>
-      </div>
+      </div> */}
       <div className="content__text">
-        <h1 className="title">{title}</h1>
+        {/* <h1 className="title">{title}</h1> */}
         {_rawBody && <PortableText blocks={_rawBody} />}
       </div>
 
