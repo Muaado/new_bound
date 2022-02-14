@@ -176,7 +176,7 @@ const JourneyStyles = styled.div`
       }
       img {
         object-position: center;
-        width:10%;
+        // width:10%;
       }
     }
   }

@@ -292,6 +292,10 @@ const VilaTemplate = (props) => {
 
   showers.forEach(({ number }) => (numberOfShowers += number));
 
+
+
+
+
   const handleOpenFeature = (index) => {
     if (openedFeature !== index) {
       setOpenedFeature(index);
@@ -374,12 +378,15 @@ const VilaTemplate = (props) => {
             data-aos-easing="ease-in-out"
           >
             <div className="backtoreswrapper">
-              <ChevronLeft className='backtoresorticon'></ChevronLeft><Link className="backtoresort" to={`/${resortName.toLowerCase().split(" ").join("-")}`}>
+              <ChevronLeft className="backtoresorticon"></ChevronLeft>
+              <Link
+                className="backtoresort"
+                to={`/${resortName.toLowerCase().split(" ").join("-")}`}
+              >
                 Resort page
               </Link>
-              </div>
+            </div>
             <div className="container">
-              
               {/* <p className="alternate-name">{alternateName}</p> */}
               <h2 className="villa_name_title">{name}</h2>
               {tagline && <p className="tagline">{tagline}</p>}
@@ -415,13 +422,11 @@ const VilaTemplate = (props) => {
                 ENQUIRE
               </Link>
             </div>
-            
-    
+
             <PopUpGallery className="carousel" images={headerImages} />
-        
-          
           </div>
 
+          {/* {Begin Features section div} */}
           <div
             className="villa__room-features"
             id="room-features"
@@ -430,47 +435,81 @@ const VilaTemplate = (props) => {
             // data-aos-duration="1000"
             // data-aos-easing="ease-in-out"
           >
-            <div className="image-container">
-              {roomFeatures?.backgroundImage &&
-              roomFeatures?.backgroundImage.asset ? (
-                <Image
-                  {...roomFeatures.backgroundImage}
-                  alt={roomFeatures.backgroundImage.alt}
-                />
-              ) : (
-                <Placeholder
-                  style={{
-                    width: "100%",
-                    maxHeight: "80vh",
-                    overflow: "hidden",
-                  }}
-                />
-              )}
-            </div>
+            <h2 className="roomfeaturetitle">Room features</h2>
+            {/* <div className="image-container"> */}
+            {roomFeatures?.backgroundImage &&
+            roomFeatures?.backgroundImage.asset ? (
+              <Image
+                {...roomFeatures.backgroundImage}
+                alt={roomFeatures.backgroundImage.alt}
+              />
+            ) : (
+              <Placeholder
+                style={{
+                  width: "100%",
+                  maxHeight: "80vh",
+                  overflow: "hidden",
+                }}
+              />
+            )}
 
             <div className="content">
-              <h2>Room features</h2>
-              <ul>
+              <ul className="accordion">
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (
-                    <li
-                      key={title}
-                      className="clickable"
-                      onClick={() => handleOpenFeature(index)}
-                    >
-                      <h3>
+                    <li key={title} className="accordion-item">
+                      <input id={index} className="hide" type="checkbox" />
+                      <label htmlFor={index} className="accordion-label">
                         {title}
-                        {openedFeature !== index ? <PlusIcon /> : <MinusIcon />}
-                      </h3>
-                      {openedFeature === index && (
-                        <PortableText blocks={_rawDescription} />
-                      )}
+                      </label>
+
+                      <ul className="accordion-child">
+                        <PortableText blocks={_rawDescription }  />
+                      
+                      </ul>
                     </li>
                   )
                 )}
               </ul>
             </div>
           </div>
+          {/* end features section div */}
+
+          {/* <div className="content">
+              <ul className="accordion">
+                
+                <li className="accordion-item">
+                  <input id="s1" className="hide" type="checkbox" />
+                  <label htmlFor="s1" className="accordion-label">
+                    First
+                  </label>
+                  <ul className="accordion-child">
+                    <li>
+                      <label>Item 1</label>
+                    </li>
+                    <li>
+                      <label>Item 2</label>
+                    </li>
+                  </ul>
+                </li>
+                <li className="accordion-item">
+                  <input id="s2" className="hide" type="checkbox" />
+                  <label htmlFor="s2" className="accordion-label">
+                    Second
+                  </label>
+                  <ul className="accordion-child">
+                    <li>
+                      <label>Item 3</label>
+                    </li>
+                    <li>
+                      <label>Item 4</label>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          end features section div */}
 
           {/* <Gallery galleries={galleries} id="gallery" /> */}
           <div

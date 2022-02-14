@@ -22,7 +22,6 @@
     "@sanity/default-login": "^2.21.10",
     "@sanity/desk-tool": "^2.21.10",
     "@sanity/studio-hints": "^2.21.10",
-    "@sanity/vision": "^2.23.2",
     "algoliasearch": "^4.11.0",
     "axios": "^0.24.0",
     "date-fns": "^2.19.0",

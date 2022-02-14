@@ -18,8 +18,7 @@
     "dashboard-widget-document-list",
     "dashboard-widget-netlify",
     "mux-input",
-    "media-library",
-    "@sanity/vision"
+    "media-library"
   ],
   "parts": [
     {

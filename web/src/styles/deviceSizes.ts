@@ -27,5 +27,6 @@ export const device = {
   desktopS: `(max-width: ${size.desktopS})`,
   desktopL: `(max-width: ${size.desktopL})`,
   onlyMobile: `(max-width: 1024px)`,
+  onlyMobileS: `(max-width: 800px)`,
   mobileAndTablet: `(min-width: 320px) and (max-wdith:1024px)`
 };

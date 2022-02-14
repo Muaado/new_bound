@@ -511,113 +511,143 @@ const VillaStyles = styled.div`
     }
 
     &__room-features {
-      margin-bottom: 10rem;
+      .roomfeaturetitle{
+        margin-bottom: 7rem;
+      }
+      max-height:520px !important;
       position: relative;
-      overflow-y: hidden;
-
-      h2,
-      h3 {
-        color: #fff;
-        text-transform: capitalize;
+      top:0;
+      .content{
+        padding:20px;
       }
-      h2 {
-        margin-bottom: 8rem;
-
-        @media ${device.laptopM} {
-          margin-bottom: 1rem;
-          font-size: 3rem;
-        }
-      }
-
-      .image-container {
-        height: 80vh;
-        width: 100%;
-      }
-
-      .content {
-        width:100%;
-        padding: 15%;
-        z-index: 100;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        /* align-items: center; */
+     
+      
+      .hide {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        padding: 0;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #fff;
+        width: 1px;
+      }
+      
+      .accordion {
+        font-family: "rivera_light_regular", sans-serif;
+        color:#fff;
+        min-height:350px;
+        margin-top:3rem;       
+        
+        // border: 1px solid #e0e0e0;
+      }
 
-        background: rgba(0, 0, 0, 0.3);
-        /* box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.5); */
-        // box-shadow: 5px 33px 42px rgb(0 0 0 / 60%);
+      label{
+        background: rgba(0,0,0,0.5);
+        width:100%;
+      }
+      
+      .accordion-item {
+        padding-left:15%;
+        padding-right:15%;
+        width: 100%;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .accordion-item:last-child {
+        border-bottom: none;
+      }
+      
+      .accordion-label {
+        padding: 10px 0 10px 30px;
+        width: 100%;
+        display: block;
+        font-size: 18px;
+        position: relative;
+        cursor: pointer;
+      }
+      .accordion-label:hover {
+        cursor: pointer;
+      }
+      .accordion-label:before {
+        content: "";
+        position: absolute;
+        height: 5px;
+        width: 5px;
+        top: 22px;
+        left: 12px;
+        display: inline-block;
+        border-left: 5px solid #999;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+      }
+      input[type=checkbox]:checked ~ .accordion-label:before {
+        transform: rotate(90deg);
+      }
+      
+      .accordion-child {
+        font-family: "Glacial Indifference",sans-serif;
+        margin: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        opacity: 0;
+        height: 0;
+        transform: scale(1, 0);
+        transform-origin: center top;
+      }
+      input[type=checkbox]:checked ~ .accordion-child {
+        border: 1px solid #e0e0e0;
+        margin: 0 -20px 15px -20px;
+        color: var(--grey1);
+        background: #fff;
+        box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
+        padding: 20px;
+        height: auto;
+        opacity: 1;
+        transform: scale(1, 1);
+        max-height:240px;
+        overflow-y:scroll;
+        overflow-x:hidden;
+      }
 
-        // height: 100%;
+      .accordion-child ul {
+        /* padding-left: 4rem; */
+        
+        width:100%;
+        overflow-y: hidden;
+        max-height: 200px; /* approximate max height */
+      
+        transition-property: all;
+        transition-duration: 20s;
+        transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
 
-        h3 {
-          padding: 1rem 0;
-
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          font-size: 2.2rem;
-          border-bottom: 1px solid var(--primary);
-
-          @media ${device.laptopM} {
-            margin-top: 0.5rem !important;
-            font-size: 1.6rem !important;
-          }
-
-          svg {
-            margin-right: 4rem;
-          }
+        @media ${device.onlyMobileS} {
+          display: unset !important;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          height: 200px;
         }
+    
 
-        ul {
-          width:100%;
-          li {
-            // width: 70rem;
-
-            @media ${device.tabletL} {
-              width: 80vw;
-            }
-            p {
-              color: #fff;
-              @media ${device.laptopM} {
-                /* margin-bottom: 1rem; */
-                font-size: 1.6rem !important;
-              }
-            }
-            & > * {
-              margin-top: 2rem;
-              font-size: 2.2rem;
-
-              @media ${device.laptopM} {
-                margin-top: 1rem;
-                font-size: 1.6rem !important;
-              }
-            }
-            /* h3 {
-              padding-left: 0 !important;
-            } */
-            ul {
-              /* padding-left: 4rem; */
-              max-height: 14rem;
-              overflow-y: hidden;
-              list-style: disc;
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              li {
-                margin-bottom: 0.5rem;
-                margin-left: 1rem;
-                width: fit-content;
-              }
-            }
-          }
+        li {
+          margin-bottom: 0.5rem;
+          margin-left: 1rem;
+          width: fit-content;
         }
       }
+
+      img{     
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          object-position: top;
+          position: absolute;
+      }
+      
     }
+
+
+
+
 
     &__highlights {
       margin-top: 7rem;
@@ -768,34 +798,12 @@ const VillaStyles = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 5rem;
+      margin-top: 20rem;
       @media ${device.mobileXL} {
         padding: 0 1.5rem;
         width: 100vw;
       }
-      h2 {
-        text-transform: capitalize;
-        color: var(--primary);
-        position: relative;
-        &:before,
-        &:after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: -8rem;
-          background: var(--primary);
-          width: 4rem;
-          height: 2px;
-          @media ${device.tablet} {
-            content: unset;
-            display: none;
-          }
-        }
-        &:after {
-          left: unset;
-          right: -8rem;
-        }
-      }
+     
     }
 
     &__restaurants {
