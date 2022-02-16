@@ -195,7 +195,8 @@ const MagazineArticlePageStyles = styled.div`
   
   }
 
-  h4{
+  h4,h3{
+    color:#656565;
     font-family: "rivera_light_regular", sans-serif;
     font-size:3rem;
     display:flex;

@@ -592,7 +592,7 @@ const VillaStyles = styled.div`
       input[type=checkbox]:checked ~ .accordion-label:after {
         // transform: rotate(45deg);
         content: "x";
-        transition: all 0.9s ease;
+        transition: all 2s ease;
 
         
       }
