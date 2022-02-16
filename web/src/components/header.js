@@ -514,6 +514,7 @@ const DropdownListStyles = styled.div`
     font-family: "rivera_ultra_light_regular",sans-serif;
     font-size: 1.6rem;
     padding-top: 20px;
+    font-weight:bolder;
 
 
     @media ${device.tablet} {
@@ -583,7 +584,7 @@ const DropDown = ({
       }`}
     >
       <ul className="first-column">
-        <li
+        <li><Link
           
             to="/"
             className="clickable"
@@ -596,7 +597,7 @@ const DropDown = ({
           >
             Home
           
-        </li>
+        </Link></li>
         <li
           className={`${selectedList === "resorts" ? "selected" : ""} clickable
           ${className}
@@ -616,7 +617,7 @@ const DropDown = ({
         >
           Holiday stays
         </li>
-        <li
+        <li><Link
             className="clickable"
             to="/magazine"
             onClick={() => {
@@ -628,7 +629,7 @@ const DropDown = ({
           >
             Magazine
         
-        </li>
+        </Link></li>
       </ul>
       <ul className="second-column">
         {lists?.map(
