@@ -15,6 +15,7 @@ export const HeroStyles = styled.div`
   text-align: center;
   overflow: hidden;
   color: #fff;
+  
 
   /* position: absolute; */
   z-index: -1;
@@ -81,6 +82,8 @@ export const HeroStyles = styled.div`
       left: -10%;
     }
   }
+
+ 
 `;
 
 export const HandCraftedJourneysStyles = styled.div`

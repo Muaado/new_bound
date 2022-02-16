@@ -17,7 +17,7 @@ import { device } from "../../styles/deviceSizes";
 const BlogPostStyles = styled.article`
   display: flex;
   flex-direction: column;
-  padding: 0 15%;
+  // padding: 0 15%;
 
   margin-top: 4rem;
   /* padding: 0 15%; */
@@ -25,12 +25,9 @@ const BlogPostStyles = styled.article`
 
   figure{
     margin:0;
-
-    img{
-      width:100%;
-    }
   }
 
+  
  
 
   h1 {
@@ -58,26 +55,8 @@ const BlogPostStyles = styled.article`
     width: 100%;
     .content__text {
       border: none;
-    }
-  }
 
-  .image {
-    margin:0;
-
-    @media ${device.tablet} {
-      width: 100%;
-    }
-    @media ${device.mobileL} {
-      margin-bottom: 5rem;
-    }
-    /* overflow: hidden; */
-    img {
-      height: 90%;
-      object-position: bottom;
-    }
-
-    .gatsby-image-wrapper{
-      width:100%;
+     
     }
   }
 
@@ -103,29 +82,7 @@ const BlogPostStyles = styled.article`
       flex-direction: column;
     }
 
-    span {
-      margin-right: 5rem;
-      min-width: max-content;
-      font-style: italic;
-      font-weight: bold;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-
-      @media ${device.mobileL} {
-        margin: 1rem 0;
-      }
-
-      svg {
-        height: 2rem;
-        width: 2rem;
-        margin-right: 1rem;
-
-        path {
-          fill: var(--darkGreen);
-        }
-      }
-    }
+  
     aside {
       h2 {
         font-size: 2.4rem;
@@ -135,6 +92,10 @@ const BlogPostStyles = styled.article`
         font-size: 1.8rem;
       }
     }
+
+    
+
+    
   }
 `;
 
@@ -143,7 +104,7 @@ function BlogPost(props) {
     props;
   return (
     <BlogPostStyles>
-      {/* <Container> */}
+      <Container>
 
       {/* <div className="image">
         {mainImage && mainImage.asset && (
@@ -162,6 +123,7 @@ function BlogPost(props) {
         </div>
       </div> */}
       <div className="content__text">
+      
         {/* <h1 className="title">{title}</h1> */}
         {_rawBody && <PortableText blocks={_rawBody} />}
       </div>
@@ -189,7 +151,7 @@ function BlogPost(props) {
           )}
         </aside> */}
 
-      {/* </Container> */}
+      </Container>
     </BlogPostStyles>
   );
 }

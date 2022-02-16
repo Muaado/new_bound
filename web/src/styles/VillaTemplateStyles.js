@@ -549,7 +549,6 @@ const VillaStyles = styled.div`
         padding-left:15%;
         padding-right:15%;
         width: 100%;
-        border-bottom: 1px solid #e0e0e0;
       }
       .accordion-item:last-child {
         border-bottom: none;
@@ -571,7 +570,7 @@ const VillaStyles = styled.div`
       
 
       .accordion-label:after {
-        content: ">";
+        content: "+";
        
         // width: 13em;
         height: 1em;
@@ -582,15 +581,19 @@ const VillaStyles = styled.div`
         // padding: 1em;
         font-weight: bolder;
         float: right;
-        margin-top: -10px;
         padding: 10px;
         color: #9b9b9b;
+        font-size:20px;
+        margin-top:-12px;
+        margin-right:10px;
 
         
       }
       input[type=checkbox]:checked ~ .accordion-label:after {
-        transform: rotate(90deg);
-        margin-top:10px;
+        // transform: rotate(45deg);
+        content: "x";
+        transition: all 0.9s ease;
+
         
       }
       
@@ -601,7 +604,7 @@ const VillaStyles = styled.div`
         transition: all 0.3s ease;
         opacity: 0;
         height: 0;
-        transform: scale(1, 0);
+        // transform: scale(1, 0);
         transform-origin: center top;
       }
       input[type=checkbox]:checked ~ .accordion-child {
@@ -611,7 +614,7 @@ const VillaStyles = styled.div`
         padding: 20px;
         height: auto;
         opacity: 0.8;
-        transform: scale(1, 1);
+        // transform: scale(1, 1);
         max-height:240px;
         overflow-y:scroll;
         overflow-x:hidden;
@@ -656,10 +659,10 @@ const VillaStyles = styled.div`
       }
 
       img{     
-          height: 100%;
+          // min-height: 520px;
           width: 100%;
           object-fit: cover;
-          object-position: top;
+          // object-position: top;
           position: absolute;
       }
       

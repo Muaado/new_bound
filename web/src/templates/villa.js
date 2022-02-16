@@ -446,9 +446,8 @@ const VilaTemplate = (props) => {
             ) : (
               <Placeholder
                 style={{
-                  width: "100%",
-                  maxHeight: "80vh",
-                  overflow: "hidden",
+                  maxHeight: "520px",
+                  position: "absolute",
                 }}
               />
             )}
