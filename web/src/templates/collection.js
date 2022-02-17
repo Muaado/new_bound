@@ -37,6 +37,11 @@ export const query = graphql`
         villas {
           name
           alternateName
+          short_desc
+          showers {
+            option
+            number
+          }
           imageThumb {
             ...SanityImage
             alt
@@ -137,6 +142,7 @@ const CollectionTemplate = (props) => {
                         locationAtoll,
                         imageWeb,
                         imageThumb,
+                        short_desc,
                         alternateName,
                         resort,
                       }) => (
@@ -163,7 +169,8 @@ const CollectionTemplate = (props) => {
                                 resortName: resort?.name,
                               })}
                             >
-                              <a>Read more...</a>
+                              
+                              <p>{short_desc ? short_desc.split(" ").slice(0,10).join("-") : ""}</p><a>Read more...</a>
                             </Link>
                           </div>
                         </li>

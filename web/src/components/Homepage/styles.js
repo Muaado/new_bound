@@ -52,7 +52,7 @@ export const HeroStyles = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
+    letter-spacing: 2rem;
     font-size: 5rem;
     color: #fff;
 

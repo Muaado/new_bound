@@ -281,6 +281,7 @@ const HeaderStyles = styled.header`
     .nav-top-list {
       display: flex;
       gap: 6rem;
+      letter-spacing:1px;
 
       @media ${device.tablet} {
         /* font-size: 2.6rem; */
@@ -465,7 +466,7 @@ const DropdownListStyles = styled.div`
   }
 
   .second-column {
-    background: var(--lightGrey);
+    background:#f8f8f8;
     padding: 4rem 4rem 10rem 4rem;
     display: flex;
     flex-direction: column;
