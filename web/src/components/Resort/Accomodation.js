@@ -115,10 +115,21 @@ const AccomodationStyles = styled.div`
       margin-top: 20px;
       color: #b39a6a;
       font-size: 12px;
-      height: 53px;
+      height: 52px;
       text-align: center;
       padding-top: 16px;
+
+      @media ${device.tablet} {
+        /* text-align: left; */
+        // font-size: 1.6rem;
+        // margin-right: 1rem;
+        width: 100%;
+      }
+
+      
     }
+
+    
 
     .viewroom:hover {
       background: #91715c;
@@ -126,11 +137,13 @@ const AccomodationStyles = styled.div`
     }
 
     .pricelbl {
-      font-size: 20px;
+      font-size: 18px;
       color: #595959;
 
   
    }
+
+   
    
 `;
 

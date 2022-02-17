@@ -30,7 +30,7 @@ const FaqStyles = styled.div`
     width: 40rem;
     margin-bottom: 5rem;
     font-size: 1.8rem;
-    color: var(--grey);
+    color: #505050;
 
     @media ${device.tablet} {
       width: unset;

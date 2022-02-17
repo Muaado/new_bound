@@ -6,8 +6,8 @@ export const GalleryImage = styled.div`
   @media ${device.laptopL} {
     padding-right: 0 !important;
   }
-  width: 100%;
-  height: max-content;
+  width: 65%;
+  // height: max-content;
   /* height: 100%; */
   &.open {
     /* width: 70%;

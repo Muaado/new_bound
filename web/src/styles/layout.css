@@ -24,8 +24,10 @@ body {
   -webkit-font-smoothing: antialiased;
   font-family: "Glacial Indifference",sans-serif;
   background: var(--color-white);
-  color: var(--color-black);
+  /* color: var(--color-black); */
+  color: #505050 !important;
   margin: 0;
+  font-weight:100 !important;
 }
 
 h4,h5,h6{
@@ -37,6 +39,7 @@ h4,h5,h6{
 h1,h2,h3{
   font-family: 'rivera_ultra_light_regular', sans-serif;
   letter-spacing: unset;
+  font-size:45px;
 }
 
 h1,h2,h3,h4,h5{

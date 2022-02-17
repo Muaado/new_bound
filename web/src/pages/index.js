@@ -294,7 +294,7 @@ const IndexPage = (props) => {
             }
           /> */}
           <h1 className="disappear-on-scroll">
-            A WORLD WHERE ANYTHING IS POSSIBLE
+          Luxury experience curators
           </h1>
           <MouseScroll />
         </HeroStyles>

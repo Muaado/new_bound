@@ -78,7 +78,7 @@ const RestaurantsStyles = styled.div`
       font-weight: 100;
       margin-bottom: 2rem;
       color: #a9a7a7;
-      text-transform: uppercase;
+      text-transform: capitalize;
       letter-spacing: 0.4rem;
       // margin-top:-20px;
       
@@ -86,7 +86,7 @@ const RestaurantsStyles = styled.div`
 
     a {
       margin-top: 2.5rem;
-      color: var(--grey);
+      color: #505050;
     }
   }
 
@@ -96,12 +96,13 @@ const RestaurantsStyles = styled.div`
   }
 
   .rest-name{
-    letter-spacing:0.2rem;
+    // letter-spacing:0.2rem;
     display: flex;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
     color: var(--darkGreen);
-    font-size: 3rem;
-    padding:20px 0px;
+    font-size: 25px;
+    padding: 20px 0px;
+    letter-spacing: 1.75px;
   }
 
   .restaurant-description{
@@ -138,7 +139,7 @@ const Restaurants = ({ restaurants }) => {
                 )}
               </div>
               <div className="villa__restaurants__text">
-                <h3 className="rest-name">{name}</h3>
+                <p className="rest-name">{name}</p>
                 <span className="alternate-name">{alternateName}</span>
 
                 <p className="restaurant-description">{description}</p>

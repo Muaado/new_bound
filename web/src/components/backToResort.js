@@ -32,7 +32,7 @@ const BackToResortStyles = styled.div`
     display: none;
     @media ${device.tablet} {
     }
-    color: var(--grey);
+    color: #505050;
     margin-bottom: 2rem;
     a {
       text-transform: capitalize;

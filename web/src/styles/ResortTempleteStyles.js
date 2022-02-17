@@ -283,7 +283,7 @@ const ResortStyles = styled.div`
           font-size: 1.6rem;
           font-weight: 100;
           margin-bottom: 2rem;
-          color: var(--grey);
+          color: #505050;
           text-transform: capitalize;
           letter-spacing: 0.3rem;
         }

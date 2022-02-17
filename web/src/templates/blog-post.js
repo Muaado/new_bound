@@ -198,6 +198,7 @@ const MagazineArticlePageStyles = styled.div`
   h4,h3{
     color:#656565;
     font-family: "rivera_light_regular", sans-serif;
+    // color:red;
     font-size:3rem;
     display:flex;
     width:100%;
@@ -207,7 +208,7 @@ const MagazineArticlePageStyles = styled.div`
 
   .articlecontent p{
     font-size:1.6rem;
-    color:var(--grey1);
+    color:#505050;
     line-height:1.8;
   }
 

@@ -226,7 +226,7 @@ const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
   // const activities = data && data.activities;
-  // const spas = data && data.spas;
+  const spas = data && data.spas;
   const resorts = data && data.resorts;
   const restaurants = data && data.restaurants;
   // const priceList = data && data.priceList;
@@ -261,7 +261,6 @@ const VilaTemplate = (props) => {
     showers,
     villaPoolTypes,
     heroImage,
-    activities,
     headerImages,
 
     // gallery,
@@ -278,6 +277,7 @@ const VilaTemplate = (props) => {
     timeToAirport,
     _rawDescription,
     reviews,
+    activities,
 
     gallery: galleries,
     highlights,
@@ -291,10 +291,6 @@ const VilaTemplate = (props) => {
   let numberOfShowers = 0;
 
   showers.forEach(({ number }) => (numberOfShowers += number));
-
-
-
-
 
   const handleOpenFeature = (index) => {
     if (openedFeature !== index) {
@@ -464,8 +460,7 @@ const VilaTemplate = (props) => {
                       </label>
 
                       <ul className="accordion-child">
-                        <PortableText blocks={_rawDescription }  />
-                      
+                        <PortableText blocks={_rawDescription} />
                       </ul>
                     </li>
                   )
@@ -538,9 +533,35 @@ const VilaTemplate = (props) => {
             <Restaurants restaurants={restaurants.nodes} />
           )}
 
-          {/* <Activities activities={activities} /> */}
           {/* <Resorts resorts={resorts.nodes} /> */}
           {/* <Reviews reviews={reviews} /> */}
+          {spas.nodes && (
+            <div
+              className="villa__spa-overview"
+              // heightMode="max"
+              // renderCenterRightControls={({ nextSlide }) => (
+              //   <CarouselButton onClick={nextSlide} chevronRight={true} />
+              // )}
+              // renderCenterLeftControls={({ previousSlide }) => (
+              //   <CarouselButton onClick={previousSlide} />
+              // )}
+            >
+              {/* get first spa from spas and use Spa component to print spa information */}
+              {spas.nodes.map((spa) => (
+                <Spa spa={spa} key={spa.name} />
+              ))}
+            </div>
+          )}
+
+          {activities && (
+            <Activities
+              activities={activities}
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
+            />
+          )}
         </VillaStyles>
       </Container>
     </Layout>

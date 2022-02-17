@@ -635,7 +635,7 @@ const VillaStyles = styled.div`
         
         width:100%;
         overflow-y: hidden;
-        min-height: 200px; /* approximate max height */
+        // min-height: 200px; /* approximate max height */
       
         transition-property: all;
         transition-duration: 20s;

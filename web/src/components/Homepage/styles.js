@@ -142,7 +142,7 @@ export const HandCraftedJourneysStyles = styled.div`
     margin-bottom: 10rem;
     font-size: 1.6rem;
     max-width: 55rem;
-    color: var(--grey);
+    color: #505050;
     line-height: 3rem;
   }
 
@@ -179,7 +179,7 @@ export const HandCraftedJourneysStyles = styled.div`
     p {
       max-width: 55rem;
       text-align: center;
-      color: var(--grey1);
+      color: #505050;
       line-height: 3rem;
     }
   }

@@ -186,16 +186,16 @@ export default {
     //   ],
     // },
 
-    // {
-    //   name: "imageMobile",
-    //   type: "mainImage",
-    //   title: "Villa image mobile",
-    // },
-    // {
-    //   name: "imageWeb",
-    //   type: "mainImage",
-    //   title: "Villa image web",
-    // },
+    {
+      name: "imageMobile",
+      type: "mainImage",
+      title: "Villa image mobile",
+    },
+    {
+      name: "imageWeb",
+      type: "mainImage",
+      title: "Villa image web",
+    },
   ],
   preview: {
     select: {

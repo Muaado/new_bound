@@ -170,7 +170,7 @@ export const GlobalStyle = createGlobalStyle`
   p {
     font-size: 1.6rem;
     line-height: 2.8rem;
-    color: var(--grey1);
+    color: #505050;
       @media ${device.tablet} {
       font-size: 1.4rem;
       line-height: 2.2rem;

@@ -112,7 +112,7 @@ const ContactUsSection = styled.div`
       }
     }
     p {
-      color: var(--grey1);
+      color:#505050;
       font-style: italic;
     }
   }

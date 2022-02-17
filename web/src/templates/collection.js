@@ -37,14 +37,15 @@ export const query = graphql`
         villas {
           name
           alternateName
+          imageThumb {
+            ...SanityImage
+            alt
+          }
 
           resort {
             name
           }
-          # imageWeb {
-          #   ...SanityImage
-          #   alt
-          # }
+         
         }
       }
     }
@@ -135,6 +136,7 @@ const CollectionTemplate = (props) => {
                         image,
                         locationAtoll,
                         imageWeb,
+                        imageThumb,
                         alternateName,
                         resort,
                       }) => (
@@ -142,9 +144,9 @@ const CollectionTemplate = (props) => {
                           {image && image.asset ? (
                             <Image {...image} alt={image.alt} />
                           ) : (
-                            imageWeb &&
-                            imageWeb.asset && (
-                              <Image {...imageWeb} alt={imageWeb.alt} />
+                            imageThumb &&
+                            imageThumb.asset && (
+                              <Image {...imageThumb} alt={imageThumb.alt} />
                             )
                           )}
                           <div className="text">
@@ -175,7 +177,6 @@ const CollectionTemplate = (props) => {
             )}
           </ul>
         </div>
-
         <ContactUs contactUs={site.contactUs} />
       </CollectionStyles>
     </Layout>
