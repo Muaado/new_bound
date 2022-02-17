@@ -116,7 +116,7 @@ export default {
     select: {
       title: "name",
       // subtitle: "slug.current",
-      media: "image",
+      media: "imageWeb",
     },
   },
 };

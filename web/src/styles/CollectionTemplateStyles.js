@@ -44,7 +44,7 @@ export const CollectionStyles = styled.div`
       .records {
         /* width: 100%; */
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 5rem;
 
         @media ${device.laptop} {
@@ -57,7 +57,7 @@ export const CollectionStyles = styled.div`
 
         li {
           height: 70rem;
-          background: var(--lightGrey1);
+          background: #f6f5f3;
 
           @media ${device.laptop} {
             height: 60rem;
