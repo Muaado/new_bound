@@ -44,6 +44,13 @@ const VillaStyles = styled.div`
     color: #76622e;
   }
 
+  .roomfeatwrap{
+    overflow: hidden;
+  }
+
+  .roomfeat svg{
+    width: 100%;
+  }
   
 
 
@@ -511,17 +518,25 @@ const VillaStyles = styled.div`
     }
 
     &__room-features {
+
+
       .roomfeaturetitle{
         margin-bottom: 7rem;
       }
       max-height:520px !important;
-      position: relative;
-      top:0;
+      // top:0;
+
+
       .content{
-        padding:20px;
+        background:rgb(0,0,0,0.3);
+        max-height:520px;
+        min-height:520px;
       }
      
-      
+  
+
+
+
       .hide {
         clip: rect(0 0 0 0);
         height: 1px;
@@ -541,7 +556,7 @@ const VillaStyles = styled.div`
       }
 
       label{
-        background: rgba(0,0,0,0.5);
+        // background: rgba(0,0,0,0.5);
         width:100%;
       }
       
@@ -561,8 +576,9 @@ const VillaStyles = styled.div`
         font-size: 18px;
         position: relative;
         cursor: pointer;
-        background:#76622eb3;
+        // background:#76622eb3;
         margin-top:-1px;
+        border-bottom:0.5px solid #0000000d;
       }
       .accordion-label:hover {
         cursor: pointer;
@@ -608,15 +624,15 @@ const VillaStyles = styled.div`
         transform-origin: center top;
       }
       input[type=checkbox]:checked ~ .accordion-child {
-        color: #000;
-        background: #fff;
-        box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
+        color: #fff;
+        background: rgb(0,0,0,0.3);
+        // box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
         padding: 20px;
         height: auto;
         opacity: 0.8;
         // transform: scale(1, 1);
         max-height:240px;
-        overflow-y:scroll;
+        // overflow-y:scroll;
         overflow-x:hidden;
         font-family: "glacial_indifference_regular", sans-serif;
       }
@@ -659,12 +675,16 @@ const VillaStyles = styled.div`
       }
 
       img{     
-          // min-height: 520px;
+          height: 520px;
           width: 100%;
+          position:absolute;
+          z-index: -1;
           object-fit: cover;
-          // object-position: top;
-          position: absolute;
+        
       }
+
+   
+
       
     }
 

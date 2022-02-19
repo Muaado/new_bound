@@ -37,11 +37,12 @@ const ResortStyles = styled.div`
       position: relative;
       /* scroll-snap-align: center; */
       height: 100vh;
-      width: 100vw;
       overflow-y: hidden;
       /* position: relative;
       top: -18rem; */
       z-index: -1;
+
+      
 
       transition: 1s all;
       opacity: 1;

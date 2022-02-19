@@ -52,13 +52,15 @@ export const HeroStyles = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    letter-spacing: 2rem;
+    letter-spacing: 1rem;
     font-size: 5rem;
     color: #fff;
 
     @media ${device.laptop} {
       font-size: 3rem;
       padding: 0 2rem;
+      letter-spacing: 0.1rem;
+      bottom:10%;
     }
   }
   p {

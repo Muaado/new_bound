@@ -358,7 +358,23 @@ const ResortTemplate = (props) => {
                       <span className="name">{name}</span>
                       <span className="alternate-name">{alternateName}</span>
 
-                      {_rawDescription && (
+              <div className="resort__image">
+            {image && image.asset && (
+              <Image {...image} width={1440} alt={image?.alt} />
+            )}
+            <div
+              // id="header-text"
+              className="text disappear-on-scroll"
+              data-aos="zoom-out-up"
+              data-aos-delay="50"
+              data-aos-duration="500"
+              data-aos-easing="ease-in-out"
+            >
+              <p className="atoll_title">{locationAtoll}</p>
+              <h1 className="title_res resort_heading_title">{name}</h1>
+            </div>
+            <MouseScroll />
+          </div>        {_rawDescription && (
                         <PortableText blocks={_rawDescription} />
                       )}
                     </div>

@@ -432,6 +432,10 @@ const VilaTemplate = (props) => {
             // data-aos-easing="ease-in-out"
           >
             <h2 className="roomfeaturetitle">Room features</h2>
+            
+
+            <div className="content">
+            <div className="roomfeatwrap">
             {/* <div className="image-container"> */}
             {roomFeatures?.backgroundImage &&
             roomFeatures?.backgroundImage.asset ? (
@@ -440,15 +444,10 @@ const VilaTemplate = (props) => {
                 alt={roomFeatures.backgroundImage.alt}
               />
             ) : (
-              <Placeholder
-                style={{
-                  maxHeight: "520px",
-                  position: "absolute",
-                }}
-              />
+              <div></div>
             )}
-
-            <div className="content">
+            </div>
+            
               <ul className="accordion">
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (

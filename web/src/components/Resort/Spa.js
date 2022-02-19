@@ -26,6 +26,15 @@ const SpaStyles = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 
+  .spaname{
+    width:100%;
+    color: var(--darkGreen);
+    font-size: 25px;
+    padding: 20px 0px;
+    display: flex;
+    text-transform: capitalize !important;
+  }
+
   @media ${device.tablet} {
     min-height: unset;
     padding: 6rem 1.5rem 10rem 1.5rem;
@@ -222,7 +231,7 @@ const Spa = ({ spa, className }) => {
           <p>{spa.description}</p>
         </div>
         <div className="right-section">
-          <h2>{spa.name}</h2>
+          <h2 className="spaname">{spa.name}</h2>
           <div className="image-thumb">
             {spa.imageThumb && spa.imageThumb.asset && (
               <Image {...spa.imageThumb} alt={spa.imageThumb.alt} />
