@@ -45,6 +45,15 @@ const query = graphql`
         }
       }
     }
+
+    collectiontypes: allSanityCollectionType {
+      nodes {
+        type
+        
+      }
+    }
+
+
   }
 `;
 
@@ -90,6 +99,8 @@ function LayoutContainer(props) {
         url: getCollectionUrl({ name, type }),
       };
   });
+
+  console.log(collections);
 
   const windowGlobal = typeof window !== "undefined";
   if (windowGlobal) {

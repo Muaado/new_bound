@@ -163,6 +163,8 @@ async function createCollectionPages(graphql, actions) {
       });
   });
 
+  
+
   types
     // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
     .forEach(({ type, _type }) => {
@@ -177,22 +179,19 @@ async function createCollectionPages(graphql, actions) {
       if (path)
         createPage({
           path,
-          component: require.resolve("./src/templates/beachvilla.js"),
+          component: require.resolve("./src/templates/collection.js"),
           context: { type, _type },
         });
     });
+
+  // console.log(types);
 }
-
-
-
-
 
 exports.createPages = async ({ graphql, actions }) => {
   await createResortPages(graphql, actions);
   await createVillaPages(graphql, actions);
   await createCollectionPages(graphql, actions);
   await createBlogPostPages(graphql, actions);
-  
   // await createRestaurantPages(graphql, actions);
   // await createActivityPages(graphql, actions);
   // await createHighlightPage(graphql, actions);

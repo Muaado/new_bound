@@ -239,7 +239,7 @@ const IndexPage = (props) => {
   const site = (data || {}).site;
   const resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
-  // console.log(site);
+  console.log(collections);
   const magazinePosts = (data || {}).magazinePosts;
   // const postNodes = (data || {}).posts
   //   ? mapEdgesToNodes(data.posts)

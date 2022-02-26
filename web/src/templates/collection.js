@@ -46,7 +46,7 @@ export const query = graphql`
             ...SanityImage
             alt
           }
-
+          
           resort {
             name
           }
@@ -85,106 +85,30 @@ const CollectionTemplate = (props) => {
   const collectionData = {};
   let items = [];
 
-  switch (pageContext.type) {
-    case "resort":
-      collections.nodes?.forEach(({ resorts }) =>
-        items.push({ name: "", records: resorts })
-      );
+  // switch (pageContext.type) {
+  //   case "resort":
+  //     collections.nodes?.forEach(({ resorts }) =>
+  //       items.push({ name: "", records: resorts })
+  //     );
 
-      collectionData.getUrl = (data) => getResortUrl(data);
-      break;
-    case "villa":
-      collections.nodes?.forEach(({ name, villas }) =>
-        items.push({ name, records: villas })
-      );
-      collectionData.getUrl = (data) => getVillaUrl(data);
-      break;
-  }
-  items = items.flat();
+  //     collectionData.getUrl = (data) => getResortUrl(data);
+  //     break;
+  //   case "villa":
+  //     collections.nodes?.forEach(({ name, villas }) =>
+  //       items.push({ name, records: villas })
+  //     );
+  //     collectionData.getUrl = (data) => getVillaUrl(data);
+  //     break;
+  // }
+  // items = items.flat();
 
   return (
     <Layout>
       <LeftSidebar />
       <CollectionStyles>
-        {collections.nodes[0]?.imageWeb && (
-          <div className="collection__image">
-            {collections.nodes[0].imageWeb &&
-              collections.nodes[0].imageWeb.asset && (
-                <Image
-                  {...collections.nodes[0].imageWeb}
-                  alt={collections.nodes[0].imageWeb.alt}
-                />
-              )}
-          </div>
-        )}
+       
 
-        {pageContext.type === "resort" && (
-          <h1 className="collection__title">Our resorts collection</h1>
-        )}
-        <div className="collection__list">
-          <ul>
-            {items.map(({ name, records }) =>
-              records.length ? (
-                <li
-                  data-aos="fade-in"
-                  data-aos-delay="50"
-                  data-aos-duration="1000"
-                  data-aos-easing="ease-in-out"
-                  key={name}
-                  id={name ? name.toLowerCase().split(" ").join("-") : ""}
-                >
-                  <h2 className="collection__list__title">{name}</h2>
-                  <ul className="records">
-                    {records.map(
-                      ({
-                        name,
-                        image,
-                        locationAtoll,
-                        imageWeb,
-                        imageThumb,
-                        short_desc,
-                        alternateName,
-                        resort,
-                      }) => (
-                        <li key={name}>
-                          {image && image.asset ? (
-                            <Image {...image} alt={image.alt} />
-                          ) : (
-                            imageThumb &&
-                            imageThumb.asset && (
-                              <Image {...imageThumb} alt={imageThumb.alt} />
-                            )
-                          )}
-                          <div className="text">
-                            <h3>{name}</h3>
-                            {locationAtoll ? (
-                              <p>{locationAtoll}</p>
-                            ) : (
-                              <p>{alternateName}</p>
-                            )}
-
-                            <Link
-                              to={collectionData.getUrl({
-                                name,
-                                resortName: resort?.name,
-                              })}
-                            >
-                              
-                              <p>{short_desc ? short_desc.split(" ").slice(0,10).join("-") : ""}</p><a>Read more...</a>
-                            </Link>
-                          </div>
-                        </li>
-                      )
-                    )}
-                  </ul>
-                </li>
-              ) : (
-                ""
-              )
-            )}
-          </ul>
-        </div>
-        <ContactUs contactUs={site.contactUs} />
+       <h1>Hello</h1>
       </CollectionStyles>
     </Layout>
   );

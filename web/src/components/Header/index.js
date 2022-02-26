@@ -508,7 +508,7 @@ const Header = ({
   const [list, setList] = useState([]);
 
   const [selectedList, setSelectedList] = useState("");
-  let lists = { resorts: navData?.resorts, collections: navData?.collections };
+  let lists = { resorts: navData?.resorts, collections: navData?.collection };
   const dropdownLists =
     selectedList === "resorts" ? lists.resorts : lists.collections;
 
