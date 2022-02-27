@@ -6,10 +6,12 @@ export default {
     {
       name: "type",
       type: "string",
+      title: "Collection Type",
     },
     {
       name: "name",
       type: "string",
+      title: "Collection Type Name",
     },
     {
       name: "imageThumb",

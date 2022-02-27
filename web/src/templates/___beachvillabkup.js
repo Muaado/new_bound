@@ -18,7 +18,7 @@ import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 
 export const query = graphql`
-  query CollectionTemplateQuerysssss($type: String!) {
+  query CollectionTemplateQueryss($type: String!) {
     collections: allSanityCollection(
       filter: { type: { type: { eq: $type } } }
     ) {
@@ -30,6 +30,11 @@ export const query = graphql`
         }
         type {
           type
+          name
+          imageThumb {
+            ...SanityImage
+            alt
+          }
         }
         resorts {
           name
@@ -67,6 +72,7 @@ export const query = graphql`
         }
       }
     }
+
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       contactUs {
         address
@@ -93,6 +99,7 @@ const BeachVillaTemplate = (props) => {
   const { data, errors, pageContext } = props;
 
   const collections = data && data.collections;
+  const collectiontype = data && data.collections.nodes[0].type;
   const site = data && data.site;
 
   const collectionData = {};
@@ -103,22 +110,9 @@ const BeachVillaTemplate = (props) => {
 
   let numberOfShowers = 0;
 
-  switch (pageContext.type) {
-    case "resort":
-      collections.nodes?.forEach(({ resorts }) =>
-        items.push({ name: "", records: resorts })
-      );
-
-      collectionData.getUrl = (data) => getResortUrl(data);
-      break;
-    case "villa":
-      collections.nodes?.forEach(({ name, villas }) =>
-        items.push({ name, records: villas })
-      );
-      collectionData.getUrl = (data) => getVillaUrl(data);
-      break;
-  }
   items = items.flat();
+
+  console.log(collectiontype);
 
   // const beachvillas =
   //   collections.nodes[0].type === "Villas with Pool"
@@ -127,8 +121,7 @@ const BeachVillaTemplate = (props) => {
 
   // let villaPoolTypes = [];
   // let maxOccupancy = [];
-  console.log(collections);
-
+  // console.log(collections.nodes);
 
   // beachvillas.villas?.forEach((villa) => {
   //   //console.log(villa.villaPoolTypes);
@@ -165,78 +158,59 @@ const BeachVillaTemplate = (props) => {
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        {collections.nodes[0]?.imageWeb && (
+        <h1 className="collectionpage_title">{collectiontype.name}</h1>
+        {collectiontype.imageThumb && (
           <div className="collection__image">
-            <h1>{collections.nodes[0].name}</h1>
-            {collections.nodes[0].imageWeb &&
-              collections.nodes[0].imageWeb.asset && (
-                <Image
-                  {...collections.nodes[0].imageWeb}
-                  alt={collections.nodes[0].imageWeb.alt}
-                />
-              )}
+            {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
+              <Image
+                {...collectiontype.imageThumb}
+                alt={collectiontype.imageThumb.alt}
+              />
+            )}
           </div>
         )}
 
+
+
+
+
         <div className="collection__list">
           <ul className="collection_card_container">
-            {villas.map((villa) => (
+            {collections.nodes?.map((col) => (
               // eslint-disable-next-line react/jsx-key
-              <li className="collection_card_item">
-                {villa.villa.imageThumb && (
+              <ul className="mastercol">
+                {col.imageThumb && (
                   <div className="collection__image">
-                    {villa.villa.imageThumb && villa.villa.imageThumb.asset && (
-                      <Image
-                        {...villa.villa.imageThumb}
-                        alt={villa.villa.imageThumb.alt}
-                      />
+                    {col.imageThumb && col.imageThumb.asset && (
+                      <Image {...col.imageThumb} alt={col.imageThumb.alt} />
                     )}
                   </div>
                 )}
 
-                <h4>{villa.villa.name}</h4>
+                <h4>{col.name}</h4>
 
                 <div className="collection__footer">
-                  <ul className="villa__header-icons">
-                    <li>
-                      {villa.villa.sizeSqm && (
-                        <li>
-                          <Measure />
-                          {villa.villa.sizeSqm}m2
-                        </li>
+                  {col.villas?.map((villa) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <li className="collection_card_item">
+                      {villa.imageThumb && (
+                        <div className="collection__image">
+                          {villa.imageThumb && villa.imageThumb.asset && (
+                            <Image
+                              {...villa.imageThumb}
+                              alt={villa.imageThumb.alt}
+                            />
+                          )}
+                        </div>
                       )}
-                    </li>
-                    <li>
-                      <TwoPeople />
-                      {villa.villa.maxOccupancy.map(
-                        ({ number }, index) =>
-                          `${number}${
-                            index + 1 !== villa.villa.maxOccupancy.length
-                              ? ","
-                              : ""
-                          } `
-                      )}
-                    </li>
-                    <li>
-                      <Shower />
-                      {villa.villa.numberOfShowers}
-                    </li>
-                    {villaPoolTypes && (
-                      <li>
-                        <SwimmingPool />
-                        {villaPoolTypes[0].poolType}
-                      </li>
-                    )}
 
-                    {villaPoolTypes[1] && (
-                      <li>
-                        <SwimmingPool />
-                        {villaPoolTypes[1].poolType}
-                      </li>
-                    )}
-                  </ul>
+                      <h4>{villa.name}</h4>
+
+                      <div className="collection__footer"></div>
+                    </li>
+                  ))}
                 </div>
-              </li>
+              </ul>
             ))}
           </ul>
         </div>

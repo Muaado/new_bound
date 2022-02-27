@@ -213,12 +213,7 @@ export const query = graphql`
       }
     }
 
-    priceList: allSanityPriceList(filter: { villa: { _id: { eq: $id } } }) {
-      nodes {
-        month
-        price
-      }
-    }
+    
   }
 `;
 

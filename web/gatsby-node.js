@@ -139,7 +139,6 @@ async function createCollectionPages(graphql, actions) {
         nodes {
           name
           _id
-          _type
           type {
             type
           }
@@ -147,6 +146,8 @@ async function createCollectionPages(graphql, actions) {
       }
     }
   `);
+
+  // console.log(result.data.allSanityCollection.nodes);
 
   if (result.errors) throw result.errors;
 
@@ -168,11 +169,13 @@ async function createCollectionPages(graphql, actions) {
     .forEach(({ type, _type }) => {
       // const { _id, name } = node;
       // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
+      if (result.errors) throw result.errors;
 
       let path;
       // if (type == "string") {
-      path = `collection/${type}`;
+      // path = `collection/${type}`;
       // }
+      path = `collection/${type.toLowerCase().split(" ").join("-")}`;
 
       if (path)
         createPage({
@@ -183,16 +186,68 @@ async function createCollectionPages(graphql, actions) {
     });
 }
 
+async function createCollectionTypePages(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allSanityCollectionType {
+        nodes {
+          name
+          type
+        }
+      }
+    }
+  `);
 
+  if (result.errors) throw result.errors;
 
+  const collectionNodes =
+    (result.data.allSanityCollectionType || {}).nodes || [];
 
+  const types = [];
+  collectionNodes.forEach((collection) => {
+    const typeAdded = types.find((value) => value === collection.type);
+    if (!typeAdded)
+      types.push({
+        type: collection.type,
+        name: collection.name,
+      });
+  });
+
+  console.log(collectionNodes);
+
+  types
+    // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
+    .forEach(({ type, name }) => {
+      // const { _id, name } = node;
+      // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
+      if (result.errors) throw result.errors;
+
+      let path;
+      // if (type == "string") {
+      path = `collection/${name.toLowerCase().split(" ").join("-")}`;
+      // }
+
+      if (path)
+        createPage({
+          path,
+          component: require.resolve("./src/templates/beachvilla.js"),
+          context: { type, name },
+        });
+    });
+
+  // const collectionNodes = (result.data.allSanityCollectionType || {}).nodes || [];
+
+  // console.log(result.data.allSanityCollectionType);
+}
 
 exports.createPages = async ({ graphql, actions }) => {
   await createResortPages(graphql, actions);
   await createVillaPages(graphql, actions);
-  await createCollectionPages(graphql, actions);
+  // await createCollectionPages(graphql, actions);
   await createBlogPostPages(graphql, actions);
-  
+  await createCollectionTypePages(graphql, actions);
+
   // await createRestaurantPages(graphql, actions);
   // await createActivityPages(graphql, actions);
   // await createHighlightPage(graphql, actions);

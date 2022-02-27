@@ -152,17 +152,10 @@ export const query = graphql`
       }
     }
 
-    collections: allSanityCollection(
-      filter: { type: { type: { eq: "villa" } } }
-      limit: 5
-    ) {
+    collections: allSanityCollectionType{
       edges {
         node {
-          name
-          rank
-          type {
-            type
-          }
+          name          
 
           imageThumb {
             ...SanityImage
@@ -239,7 +232,7 @@ const IndexPage = (props) => {
   const site = (data || {}).site;
   const resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
-  console.log(collections);
+  // console.log(collections);
   const magazinePosts = (data || {}).magazinePosts;
   // const postNodes = (data || {}).posts
   //   ? mapEdgesToNodes(data.posts)

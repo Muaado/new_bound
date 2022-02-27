@@ -37,18 +37,17 @@ const query = graphql`
     #     }
     #   }
     # }
-    collections: allSanityCollection {
+    collections: allSanityCollectionType {
       nodes {
         name
-        type {
-          type
-        }
+        type
       }
     }
 
     collectiontypes: allSanityCollectionType {
       nodes {
         type
+        
         
       }
     }

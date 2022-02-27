@@ -30,6 +30,11 @@ export const query = graphql`
         }
         type {
           type
+          name
+          imageThumb {
+            ...SanityImage
+            alt
+          }
         }
         resorts {
           name
@@ -68,9 +73,6 @@ export const query = graphql`
       }
     }
 
-    
-
-
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       contactUs {
         address
@@ -97,6 +99,7 @@ const BeachVillaTemplate = (props) => {
   const { data, errors, pageContext } = props;
 
   const collections = data && data.collections;
+  const collectiontype = data && data.collections.nodes[0].type;
   const site = data && data.site;
 
   const collectionData = {};
@@ -109,6 +112,8 @@ const BeachVillaTemplate = (props) => {
 
   items = items.flat();
 
+  console.log(collectiontype);
+
   // const beachvillas =
   //   collections.nodes[0].type === "Villas with Pool"
   //     ? collections.nodes[0]
@@ -116,7 +121,7 @@ const BeachVillaTemplate = (props) => {
 
   // let villaPoolTypes = [];
   // let maxOccupancy = [];
-  console.log(collections);
+  // console.log(collections.nodes);
 
   // beachvillas.villas?.forEach((villa) => {
   //   //console.log(villa.villaPoolTypes);
@@ -153,54 +158,51 @@ const BeachVillaTemplate = (props) => {
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        {collections.imageWeb && (
+        <h1 className="collectionpage_title">{collectiontype.name}</h1>
+        {collectiontype.imageThumb && (
           <div className="collection__image">
-            <h1>{collections.name}</h1>
-            {collections.imageWeb && collections.imageWeb.asset && (
-              <Image {...collections.imageWeb} alt={collections.imageWeb.alt} />
+            {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
+              <Image
+                {...collectiontype.imageThumb}
+                alt={collectiontype.imageThumb.alt}
+              />
             )}
           </div>
         )}
 
-        <div className="collection__list">
-          <ul className="collection_card_container">
-            {collections.nodes?.map((col) => (
-              // eslint-disable-next-line react/jsx-key
-              <li className="collection_card_item">
-                {col.imageThumb && (
-                  <div className="collection__image">
-                    {col.imageThumb && col.imageThumb.asset && (
-                      <Image {...col.imageThumb} alt={col.imageThumb.alt} />
+        <div className="collection_container">
+          {collections.nodes?.map((col) => (
+            // eslint-disable-next-line react/jsx-key
+            <div className="mastercol">
+              <h2 className="col_name">{col.name}</h2>
+              <ul className="collection_wrap">
+               
+                {col.villas?.map((villa) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <li className="collection_wrap_item">
+                    {villa.imageThumb && (
+                      <div className="collection__image">
+                        {villa.imageThumb && villa.imageThumb.asset && (
+                          <Image
+                            {...villa.imageThumb}
+                            alt={villa.imageThumb.alt}
+                          />
+                        )}
+                      </div>
+
+                  
+
                     )}
-                  </div>
-                )}
 
-                <h4>{col.name}</h4>
-
-                <div className="collection__footer">
-                  {col.villas?.map((villa) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <li className="collection_card_item">
-                      {villa.imageThumb && (
-                        <div className="collection__image">
-                          {villa.imageThumb && villa.imageThumb.asset && (
-                            <Image
-                              {...villa.imageThumb}
-                              alt={villa.imageThumb.alt}
-                            />
-                          )}
-                        </div>
-                      )}
-
-                      <h4>{villa.name}</h4>
-
-                      <div className="collection__footer"></div>
-                    </li>
-                  ))}
-                </div>
-              </li>
-            ))}
-          </ul>
+<div className="collection__details">
+                        <h4 className="villaname">{villa.name}</h4>
+                      </div>
+                      
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         <ContactUs contactUs={site.contactUs} />

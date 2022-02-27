@@ -218,7 +218,7 @@ const ResortTemplate = (props) => {
   const [slice, setSlice] = useState(Number);
   const [restaurantSlice, setRestaurentSlice] = useState(4);
 
-  console.log(restaurants); // const highlights = data && data.highlights;
+  // console.log(restaurants); // const highlights = data && data.highlights;
 
   const windowGlobal = typeof window !== "undefined";
   const {
