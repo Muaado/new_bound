@@ -176,7 +176,6 @@ const BeachVillaTemplate = (props) => {
             <div className="mastercol">
               <h2 className="col_name">{col.name}</h2>
               <ul className="collection_wrap">
-               
                 {col.villas?.map((villa) => (
                   // eslint-disable-next-line react/jsx-key
                   <li className="collection_wrap_item">
@@ -189,15 +188,12 @@ const BeachVillaTemplate = (props) => {
                           />
                         )}
                       </div>
-
-                  
-
                     )}
 
-<div className="collection__details">
-                        <h4 className="villaname">{villa.name}</h4>
-                      </div>
-                      
+                    <div className="collection__details">
+                      <h4 className="villaname">{villa.name}</h4>
+                    </div>
+                    
                   </li>
                 ))}
               </ul>

@@ -171,6 +171,12 @@ export default {
     },
 
     {
+      name: "resortBrandLogo",
+      type: "mainImage",
+      title: "Resort Brand Logo",
+    },
+
+    {
       title: "FAQ",
       name: "faq",
       type: "array",
@@ -250,7 +256,7 @@ export default {
     select: {
       title: "name",
       // subtitle: "slug.current",
-      media: "image",
+      media: "resortBrandLogo",
     },
   },
 };
