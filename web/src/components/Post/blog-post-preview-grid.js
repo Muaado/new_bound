@@ -13,7 +13,7 @@ const BlogPostPreviewGridStyles = styled.div`
 `;
 
 function BlogPostPreviewGrid(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <BlogPostPreviewGridStyles>
       {props.title && <h2>{props.title}</h2>}

@@ -79,13 +79,9 @@ export const getHighlightUrl = ({ name, resortName }) => {
 };
 
 export const getCollectionUrl = ({ name, type }) => {
-  // return `/collection/${type}#${
-  //   type ? name.toLowerCase().split(" ").join("-") : ""
-  // }`;
-
-
-
-  return `/collection/${name.toLowerCase().split(" ").join("-")}`;
-
-
+  return `/collection/${
+    name.toLowerCase().split(" ").join("-")
+      ? name.toLowerCase().split(" ").join("-")
+      : ""
+  }`;
 };

@@ -166,13 +166,13 @@ const Search = ({
   useEffect(() => {
     if (!search && selectedRecord) {
       const selected = options.find((item) => {
-        console.log(item);
-        console.log(selectedRecord);
+        // console.log(item);
+        // console.log(selectedRecord);
         return (
           item.value === selectedRecord?.split("=")[1]?.split("%20").join(" ")
         );
       });
-      console.log(selected);
+      // console.log(selected);
       setSearch(selected);
     }
   }, [selectedRecord]);

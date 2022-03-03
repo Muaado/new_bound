@@ -131,60 +131,59 @@ async function createVillaPages(graphql, actions) {
   });
 }
 
-async function createCollectionPages(graphql, actions) {
-  const { createPage } = actions;
-  const result = await graphql(`
-    {
-      allSanityCollection {
-        nodes {
-          name
-          _id
-          type {
-            type
-          }
-        }
-      }
-    }
-  `);
+// async function createCollectionPages(graphql, actions) {
+//   const { createPage } = actions;
+//   const result = await graphql(`
+//     {
+//       allSanityCollection {
+//         nodes {
+//           name
+//           _id
+//           type {
+//             type
+//           }
+//         }
+//       }
+//     }
+//   `);
 
-  // console.log(result.data.allSanityCollection.nodes);
+//   // console.log(result.data.allSanityCollection.nodes);
 
-  if (result.errors) throw result.errors;
+//   if (result.errors) throw result.errors;
 
-  const collectionNodes = (result.data.allSanityCollection || {}).nodes || [];
+//   const collectionNodes = (result.data.allSanityCollection || {}).nodes || [];
 
-  const types = [];
-  collectionNodes.forEach((collection) => {
-    const typeAdded = types.find((value) => value === collection.type.type);
-    if (!typeAdded)
-      types.push({
-        type: collection.type.type,
-        _type: collection._type,
-        name: collection.name,
-      });
-  });
+//   const types = [];
+//   collectionNodes.forEach((collection) => {
+//     const typeAdded = types.find((value) => value === collection.type.type);
+//     if (!typeAdded)
+//       types.push({
+//         type: collection.type.type,
+//         _type: collection._type,
+//         name: collection.name,
+//       });
+//   });
 
-  types
-    // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
-    .forEach(({ type, _type }) => {
-      // const { _id, name } = node;
-      // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
-      if (result.errors) throw result.errors;
+//   types
+//     // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
+//     .forEach(({ type, _type }) => {
+//       // const { _id, name } = node;
+//       // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
+//       if (result.errors) throw result.errors;
 
-      let path;
-      // if (type == "string") {
-      // path = `collection/${type}`;
-      // }
-      path = `collection/${type.toLowerCase().split(" ").join("-")}`;
+//       let path;
+//       if (type == "string") {
+//         path = `collection/${type.toLowerCase().split(" ").join("-")}`;
+//       }
 
-      if (path)
-        createPage({
-          path,
-          component: require.resolve("./src/templates/beachvilla.js"),
-          context: { type, _type },
-        });
-    });
-}
+//       if (path)
+//         createPage({
+//           path,
+//           component: require.resolve("./src/templates/beachvilla.js"),
+//           context: { type, _type },
+//         });
+//     });
+// }
 
 async function createCollectionTypePages(graphql, actions) {
   const { createPage } = actions;

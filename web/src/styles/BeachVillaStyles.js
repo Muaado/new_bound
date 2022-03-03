@@ -5,10 +5,10 @@ export const BeachVillaStyles = styled.div`
   flex-direction: column;
   overflow-x: hidden;
   .collection_container {
-    padding: 0 15%;
+    padding: 0 3%;
 
     @media ${device.laptopL} {
-      padding: 0 5%;
+      padding: 0;
     }
   }
 
@@ -28,9 +28,9 @@ export const BeachVillaStyles = styled.div`
   }
   .collection_wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    // grid-template-columns: 35rem 1fr;
-    gap: 4rem;
+    grid-template-columns: repeat(auto-fill, minmax(537px, 1fr));
+    gap: 1.3rem;
+
     
     @media ${device.onlyMobile} {
       grid-template-columns: 1fr 1fr;
@@ -44,13 +44,13 @@ export const BeachVillaStyles = styled.div`
  
 
 
-    li {
+    li.collection_wrap_item {
       list-style: none;
-      height: 500px;
+      height: 600px;
       background-color: #f1f1f1;
       width: 100%;
       img {
-        height: 300px;
+        height: 390px;
 
         @media ${device.onlyMobile} {
           height:unset !important;
@@ -108,5 +108,52 @@ export const BeachVillaStyles = styled.div`
       color: #b49466;
       font-weight: bold;
     }
+
+    .villa_resort_name{
+      float: right;
+      z-index: 9999;
+      margin-top: 66px;
+      font-size: 2rem;
+      color: #e9e9e9;
+    }
   }
+
+  .villa_icons{
+    margin-top: 20px;
+    display: grid;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 0rem;
+
+    text-align: center;
+    coor:#fff;
+
+    svg:not(.measureicon) {
+      width: 25px;
+      height: 25px;
+    }
+
+    li{
+      width: 80px;
+
+      
+      
+
+      .villa_icon_label{
+        display:inline-block;
+        width:60px;
+        font-size:11px;
+        font-weight: bold;
+        color: #787878;
+        margin-top:10px;
+      }
+    }
+
+  }
+
+  
+
+
+
+
 `;

@@ -104,20 +104,12 @@ const BeachVillaTemplate = (props) => {
 
   const collectionData = {};
   let items = [];
-  // let beachvillas = [];
-
-  let villas = [];
 
   let numberOfShowers = 0;
 
   items = items.flat();
 
-  console.log(collectiontype);
-
-  // const beachvillas =
-  //   collections.nodes[0].type === "Villas with Pool"
-  //     ? collections.nodes[0]
-  //     : [];
+  let ello = "hello";
 
   // let villaPoolTypes = [];
   // let maxOccupancy = [];
@@ -126,10 +118,6 @@ const BeachVillaTemplate = (props) => {
   // beachvillas.villas?.forEach((villa) => {
   //   //console.log(villa.villaPoolTypes);
   //   // numberOfShowers = villa.showers.length;
-
-  //   let numberOfShowers = 0;
-
-  //   villa.showers.forEach(({ number }) => (numberOfShowers += number));
 
   //   villaPoolTypes = villa.villaPoolTypes;
   //   maxOccupancy = villa.maxOccupancy;
@@ -142,17 +130,29 @@ const BeachVillaTemplate = (props) => {
   //   });
   // });
 
-  // beachvilla.nodes?.forEach(({ name, villas }) =>
-  //   beachvillas.push({ name, records: villas })
-  //   );
-  //     collectionData.getUrl = (data) => getVillaUrl(data);
-
   // loop through iems in beachvilla
-  // for (let i = 0; i < beachvilla.nodes.length; i++) {
-  //   beachvillas.push({records : collections.nodes[0].villas})
-  // }
 
-  // console.log(beachvillas);
+  let col = [];
+  let villas = [];
+
+  // collections.nodes.forEach((collection) => {
+  //   let numshowers = 0;
+
+  //   collection.villas.forEach((villa, numshowers) => {
+  //     villa.showers.forEach((shower) => {
+  //       numshowers += shower.number;
+  //     });
+
+  //     villas.push({...villa, numberofshowers: numshowers});
+
+  //     //console.log(villa.villaPoolTypes);
+  //     // numberOfShowers = villa.showers.length;
+  //   });
+  // });
+
+  // console.log(villas);
+
+  // collectionData.getUrl = (data) => getVillaUrl(data);
 
   return (
     <Layout>
@@ -192,8 +192,49 @@ const BeachVillaTemplate = (props) => {
 
                     <div className="collection__details">
                       <h4 className="villaname">{villa.name}</h4>
+                      <ul className="villa_icons">
+                        <li>
+                          <Measure className="villa_icon measureicon" />
+                          <span className="villa_icon_label">
+                            {villa.sizeSqm} sqm
+                          </span>
+                        </li>
+
+                       
+                          <li>
+                            <Shower />
+                            <span className="villa_icon_label">
+                              2
+                            </span>
+                          </li>
+                        
+
+                        {villa.maxOccupancy.length == 2 && (
+                          <li>
+                            <TwoPeople />
+                            <span className="villa_icon_label">
+                              {villa.maxOccupancy[0].number} {","}{" "}
+                              {villa.maxOccupancy[1].number}
+                            </span>
+                          </li>
+                        )}
+
+                        {villa.villaPoolTypes[0] && (
+                          <li>
+                            <SwimmingPool />
+                            <span className="villa_icon_label">
+                              {villa.villaPoolTypes[0].poolType}
+                            </span>
+                          </li>
+                        )}
+                      </ul>
+
+                      {/* {villa.resort.name && (
+                        <h4 className="villa_resort_name">
+                          {villa.resort.name}
+                        </h4>
+                      )} */}
                     </div>
-                    
                   </li>
                 ))}
               </ul>

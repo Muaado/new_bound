@@ -10,7 +10,7 @@ import Carousel from "nuka-carousel";
 
 // import { Placeholder } from "gatsby-plugin-image";
 import Placeholder from "../../assets/placeholder.svg";
-console.log(Placeholder);
+// console.log(Placeholder);
 
 const ActivitiesStyles = styled.div`
   margin: 10rem 0;
