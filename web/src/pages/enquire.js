@@ -194,7 +194,7 @@ const Enquire = (props) => {
     countryCode: "",
   });
 
-  console.log(values);
+  // console.log(values);
   return (
     <Layout {...props}>
       <SEO

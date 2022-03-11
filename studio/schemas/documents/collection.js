@@ -49,19 +49,19 @@ export default {
         },
       ],
     },
-    {
-      name: "spas",
-      title: "Spas",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: {
-            type: "spa",
-          },
-        },
-      ],
-    },
+    // {
+    //   name: "spas",
+    //   title: "Spas",
+    //   type: "array",
+    //   of: [
+    //     {
+    //       type: "reference",
+    //       to: {
+    //         type: "spa",
+    //       },
+    //     },
+    //   ],
+    // },
 
     {
       name: "imageMobile",

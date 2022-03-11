@@ -8,7 +8,7 @@ const Video = ({ videoSrcURL, className }) => (
     muted
     autoPlay
   >
-    {console.log(videoSrcURL)}
+    {/* {console.log(videoSrcURL)} */}
     <source src={videoSrcURL} type="video/mp4" />
   </video>
   // <div className="video">

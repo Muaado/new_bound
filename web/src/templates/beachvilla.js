@@ -99,7 +99,6 @@ const BeachVillaTemplate = (props) => {
   const { data, errors, pageContext } = props;
 
   const collections = data && data.collections;
-  const collectiontype = data && data.collections.nodes[0].type;
   const site = data && data.site;
 
   const collectionData = {};
@@ -158,7 +157,7 @@ const BeachVillaTemplate = (props) => {
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        <h1 className="collectionpage_title">{collectiontype.name}</h1>
+        {/* <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
           <div className="collection__image">
             {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
@@ -168,79 +167,7 @@ const BeachVillaTemplate = (props) => {
               />
             )}
           </div>
-        )}
-
-        <div className="collection_container">
-          {collections.nodes?.map((col) => (
-            // eslint-disable-next-line react/jsx-key
-            <div className="mastercol">
-              <h2 className="col_name">{col.name}</h2>
-              <ul className="collection_wrap">
-                {col.villas?.map((villa) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <li className="collection_wrap_item">
-                    {villa.imageThumb && (
-                      <div className="collection__image">
-                        {villa.imageThumb && villa.imageThumb.asset && (
-                          <Image
-                            {...villa.imageThumb}
-                            alt={villa.imageThumb.alt}
-                          />
-                        )}
-                      </div>
-                    )}
-
-                    <div className="collection__details">
-                      <h4 className="villaname">{villa.name}</h4>
-                      <ul className="villa_icons">
-                        <li>
-                          <Measure className="villa_icon measureicon" />
-                          <span className="villa_icon_label">
-                            {villa.sizeSqm} sqm
-                          </span>
-                        </li>
-
-                       
-                          <li>
-                            <Shower />
-                            <span className="villa_icon_label">
-                              2
-                            </span>
-                          </li>
-                        
-
-                        {villa.maxOccupancy.length == 2 && (
-                          <li>
-                            <TwoPeople />
-                            <span className="villa_icon_label">
-                              {villa.maxOccupancy[0].number} {","}{" "}
-                              {villa.maxOccupancy[1].number}
-                            </span>
-                          </li>
-                        )}
-
-                        {villa.villaPoolTypes[0] && (
-                          <li>
-                            <SwimmingPool />
-                            <span className="villa_icon_label">
-                              {villa.villaPoolTypes[0].poolType}
-                            </span>
-                          </li>
-                        )}
-                      </ul>
-
-                      {/* {villa.resort.name && (
-                        <h4 className="villa_resort_name">
-                          {villa.resort.name}
-                        </h4>
-                      )} */}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        )} */}
 
         <ContactUs contactUs={site.contactUs} />
       </BeachVillaStyles>

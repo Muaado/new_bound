@@ -99,7 +99,7 @@ function LayoutContainer(props) {
       };
   });
 
-  console.log(collections);
+  // console.log(collections);
 
   const windowGlobal = typeof window !== "undefined";
   if (windowGlobal) {
