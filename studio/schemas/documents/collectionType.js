@@ -4,14 +4,14 @@ export default {
   title: "Collection type",
   fields: [
     {
-      name: "type",
-      type: "string",
-      title: "Collection Type",
-    },
-    {
       name: "name",
       type: "string",
       title: "Collection Type Name",
+    },
+    {
+      name: "type",
+      type: "string",
+      title: "Collection Type",
     },
     {
       name: "imageThumb",
@@ -21,7 +21,7 @@ export default {
   ],
   preview: {
     select: {
-      title: "type",
+      title: "name",
       // subtitle: "slug.current",
       media: "imageThumb",
     },

@@ -159,7 +159,6 @@ async function createCollectionTypePages(graphql, actions) {
       });
   });
 
-
   types
     // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
     .forEach(({ type, name }) => {
@@ -168,20 +167,24 @@ async function createCollectionTypePages(graphql, actions) {
       if (result.errors) throw result.errors;
 
       let path;
-      // if (type == "string") {
       path = `collection/${name.toLowerCase().split(" ").join("-")}`;
-      // }
 
-      if (path)
+      if (type == "villa") {
         createPage({
           path,
           component: require.resolve("./src/templates/beachvilla.js"),
           context: { type, name },
         });
+      } else if (type == "resort") {
+        createPage({
+          path,
+          component: require.resolve("./src/templates/resortcollection.js"),
+          context: { type, name },
+        });
+      }
     });
 
   // const collectionNodes = (result.data.allSanityCollectionType || {}).nodes || [];
-
 }
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -189,8 +192,6 @@ exports.createPages = async ({ graphql, actions }) => {
   await createVillaPages(graphql, actions);
   await createBlogPostPages(graphql, actions);
   await createCollectionTypePages(graphql, actions);
-
-
 
   // await createRestaurantPages(graphql, actions);
   // await createActivityPages(graphql, actions);

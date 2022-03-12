@@ -44,13 +44,7 @@ const query = graphql`
       }
     }
 
-    collectiontypes: allSanityCollectionType {
-      nodes {
-        type
-        
-        
-      }
-    }
+    
 
 
   }

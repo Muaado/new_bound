@@ -49,7 +49,7 @@ export const BeachVillaStyles = styled.div`
       height: 600px;
       background-color: #f1f1f1;
       width: 100%;
-      img {
+      .collection__image {
         height: 390px;
 
         @media ${device.onlyMobile} {
@@ -115,6 +115,18 @@ export const BeachVillaStyles = styled.div`
       margin-top: 66px;
       font-size: 2rem;
       color: #e9e9e9;
+    }
+    .collection_brand_logo {
+      width: 100%;
+      position: relative;
+    }
+
+    .collection_brand_logo img{
+      height: 140px;
+      width: 200px;
+      position: absolute;
+      right: 0;
+      top: -5rem;
     }
   }
 

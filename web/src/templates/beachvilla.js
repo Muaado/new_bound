@@ -18,9 +18,9 @@ import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 
 export const query = graphql`
-  query CollectionTemplateQuerys($type: String!) {
+  query CollectionTemplateQuerys($name: String!) {
     collections: allSanityCollection(
-      filter: { type: { type: { eq: $type } } }
+      filter: { type: { name: { eq: $name } } }
     ) {
       nodes {
         name
@@ -68,6 +68,10 @@ export const query = graphql`
 
           resort {
             name
+            resortBrandLogo {
+              ...SanityImage
+              alt
+            }
           }
         }
       }
@@ -108,11 +112,47 @@ const BeachVillaTemplate = (props) => {
 
   items = items.flat();
 
-  let ello = "hello";
+  let villaPoolTypes = [];
+  let maxOccupancy = [];
+  // console.log(collections);
 
-  // let villaPoolTypes = [];
-  // let maxOccupancy = [];
-  // console.log(collections.nodes);
+  let collectiontype = collections.nodes[0].type;
+
+  let beachvillas = [];
+  let cols = [];
+
+  collections.nodes.forEach((collection) => {
+    let collectioname = collection.name;
+    cols.push(collection);
+  });
+
+  cols.forEach((col) => {
+    col.villas.forEach((villa) => {
+      let villaShowers = villa.showers;
+      let maxOccupancy = villa.maxOccupancy;
+      // console.log(villa);
+
+      let max_occupancy = "-";
+      let villa_showers = "-";
+      let pool_type = "";
+
+      if (maxOccupancy.length == 2) {
+        max_occupancy = maxOccupancy[0].number + " , " + maxOccupancy[1].number;
+      } else if (maxOccupancy.length == 1) {
+        max_occupancy = maxOccupancy[0].number;
+      }
+
+      villa["max_occupancy"] = max_occupancy;
+
+      if (villaShowers.length == 2) {
+        villa_showers = villaShowers[0].number + " , " + villaShowers[1].number;
+      } else if (villaShowers.length == 1) {
+        villa_showers = villaShowers[0].number;
+      }
+
+      villa["villa_showers"] = villa_showers;
+    });
+  });
 
   // beachvillas.villas?.forEach((villa) => {
   //   //console.log(villa.villaPoolTypes);
@@ -149,15 +189,13 @@ const BeachVillaTemplate = (props) => {
   //   });
   // });
 
-  // console.log(villas);
-
   // collectionData.getUrl = (data) => getVillaUrl(data);
 
   return (
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        {/* <h1 className="collectionpage_title">{collectiontype.name}</h1>
+        <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
           <div className="collection__image">
             {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
@@ -167,7 +205,80 @@ const BeachVillaTemplate = (props) => {
               />
             )}
           </div>
-        )} */}
+        )}
+
+        <div className="collection_container">
+          {cols?.map((col) => (
+            // eslint-disable-next-line react/jsx-key
+            <div className="mastercol">
+              <h2 className="col_name">{col.name}</h2>
+              <ul className="collection_wrap">
+                {col.villas?.map((villa) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <li className="collection_wrap_item">
+                    {villa.imageThumb && (
+                      <div className="collection__image">
+                        {villa.imageThumb && villa.imageThumb.asset && (
+                          <Image
+                            {...villa.imageThumb}
+                            alt={villa.imageThumb.alt}
+                          />
+                        )}
+                      </div>
+                    )}
+
+                    <div className="collection__details">
+                      <h4 className="villaname">{villa.name}</h4>
+                      <ul className="villa_icons">
+                        <li>
+                          <Measure className="villa_icon measureicon" />
+                          <span className="villa_icon_label">
+                            {villa.sizeSqm} sqm
+                          </span>
+                        </li>
+
+                        <li>
+                          <Shower />
+                          <span className="villa_icon_label">
+                            {villa.villa_showers}
+                          </span>
+                        </li>
+
+                        <li>
+                          <TwoPeople />
+                          <span className="villa_icon_label">
+                            {villa.max_occupancy}
+                          </span>
+                        </li>
+
+                        {villa.villaPoolTypes[0] && (
+                          <li>
+                            <SwimmingPool />
+                            <span className="villa_icon_label">
+                              {villa.villaPoolTypes[0].poolType}
+                            </span>
+                          </li>
+                        )}
+                      </ul>
+
+                      {villa.resort.resortBrandLogo && (
+                        <div className="collection_brand_logo">
+                          {villa.resort.resortBrandLogo &&
+                            villa.resort.resortBrandLogo.asset && (
+                              <Image
+                                {...villa.resort.resortBrandLogo}
+                                alt={villa.resort.resortBrandLogo.alt}
+                              />
+                            )}
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
         <ContactUs contactUs={site.contactUs} />
       </BeachVillaStyles>
