@@ -122,12 +122,21 @@ export const BeachVillaStyles = styled.div`
     }
 
     .collection_brand_logo img{
-      height: 140px;
+      height: 130px;
       width: 200px;
       position: absolute;
       right: 0;
-      top: -5rem;
+      top: -7rem;
     }
+
+  .villa_price{
+    font-size: 2rem;
+    font-weight: 500;
+    -webkit-letter-spacing: 0.3rem;
+    -moz-letter-spacing: 0.3rem;
+    -ms-letter-spacing: 0.3rem;
+    letter-spacing: 0.3rem;
+    color: #7b7b7b;
   }
 
   .villa_icons{

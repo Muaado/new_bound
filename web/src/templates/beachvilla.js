@@ -65,6 +65,7 @@ export const query = graphql`
             ...SanityImage
             alt
           }
+          price
 
           resort {
             name
@@ -110,6 +111,16 @@ const BeachVillaTemplate = (props) => {
 
   let numberOfShowers = 0;
 
+  // Create our number formatter.
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
+
   items = items.flat();
 
   let villaPoolTypes = [];
@@ -150,9 +161,23 @@ const BeachVillaTemplate = (props) => {
         villa_showers = villaShowers[0].number;
       }
 
+      if (villa.price != "null") {
+        villa["price_new"] = formatter.format(villa.price) + "  PP";
+      } else if (villa.price) {
+        villa["price_new"] = "-";
+      }
+
+      let url = `/${villa.resort.name
+        .toLowerCase()
+        .split(" ")
+        .join("-")}/${villa.name.toLowerCase().split(" ").join("-")}`;
+
+      villa["url"] = url;
       villa["villa_showers"] = villa_showers;
     });
   });
+
+  console.log(cols);
 
   // beachvillas.villas?.forEach((villa) => {
   //   //console.log(villa.villaPoolTypes);
@@ -212,6 +237,7 @@ const BeachVillaTemplate = (props) => {
             // eslint-disable-next-line react/jsx-key
             <div className="mastercol">
               <h2 className="col_name">{col.name}</h2>
+
               <ul className="collection_wrap">
                 {col.villas?.map((villa) => (
                   // eslint-disable-next-line react/jsx-key
@@ -228,7 +254,9 @@ const BeachVillaTemplate = (props) => {
                     )}
 
                     <div className="collection__details">
+                    <Link to={villa.url}>
                       <h4 className="villaname">{villa.name}</h4>
+                    </Link>
                       <ul className="villa_icons">
                         <li>
                           <Measure className="villa_icon measureicon" />
@@ -260,6 +288,8 @@ const BeachVillaTemplate = (props) => {
                           </li>
                         )}
                       </ul>
+
+                      <div className="villa_price">{villa.price_new}</div>
 
                       {villa.resort.resortBrandLogo && (
                         <div className="collection_brand_logo">
