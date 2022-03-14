@@ -18,9 +18,9 @@ import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 
 export const query = graphql`
-  query ResortCollectionTemplateQuerys($type: String!) {
+  query ResortCollectionTemplateQuery($name: String!) {
     collections: allSanityCollection(
-      filter: { type: { type: { eq: $type } } }
+      filter: { type: { name: { eq: $name } } }
     ) {
       nodes {
         name
@@ -44,30 +44,9 @@ export const query = graphql`
             ...SanityImage
             alt
           }
-        }
-        villas {
-          name
-          alternateName
-          short_desc
-          showers {
-            option
-            number
-          }
-          maxOccupancy {
-            option
-            number
-          }
-          villaPoolTypes {
-            poolType
-          }
-          sizeSqm
-          imageThumb {
+          resortBrandLogo {
             ...SanityImage
             alt
-          }
-
-          resort {
-            name
           }
         }
       }
@@ -95,70 +74,48 @@ export const query = graphql`
   }
 `;
 
-const ResortCollectionTemlate = (props) => {
+const ResortCollectionTemplate = (props) => {
   const { data, errors, pageContext } = props;
 
   const collections = data && data.collections;
   const site = data && data.site;
-
-  const collectionData = {};
-  let items = [];
-
   let numberOfShowers = 0;
 
-  items = items.flat();
+  // Create our number formatter.
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
 
-  let villaPoolTypes = [];
-  let maxOccupancy = [];
-  console.log(collections.nodes[0].type.type);
+  let collectiontype = collections.nodes[0].type;
 
- 
+  let resortscol = [];
+  let cols = [];
 
-  // beachvillas.villas?.forEach((villa) => {
-  //   //console.log(villa.villaPoolTypes);
-  //   // numberOfShowers = villa.showers.length;
+  collections.nodes.forEach((collection) => {
+    let collectioname = collection.name;
+    cols.push(collection);
+  });
 
-  //   villaPoolTypes = villa.villaPoolTypes;
-  //   maxOccupancy = villa.maxOccupancy;
+  cols.forEach((col) => {
+    col.resorts.forEach((resort) => {
+      resortscol.push(resort);
+    });
+  });
 
-  //   villas.push({
-  //     villa,
-  //     numberOfShowers: numberOfShowers,
-  //     villaPoolTypes: villaPoolTypes,
-  //     maxOccupancy: maxOccupancy,
-  //   });
-  // });
-
-  // loop through iems in beachvilla
-
-  let col = [];
-  let villas = [];
-
-  // collections.nodes.forEach((collection) => {
-  //   let numshowers = 0;
-
-  //   collection.villas.forEach((villa, numshowers) => {
-  //     villa.showers.forEach((shower) => {
-  //       numshowers += shower.number;
-  //     });
-
-  //     villas.push({...villa, numberofshowers: numshowers});
-
-  //     //console.log(villa.villaPoolTypes);
-  //     // numberOfShowers = villa.showers.length;
-  //   });
-  // });
-
-
-  // collectionData.getUrl = (data) => getVillaUrl(data);
+  console.log(resortscol);
 
   return (
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        {/* <h1 className="collectionpage_title">{collectiontype.name}</h1>
+        <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
-          <div className="collection__image">
+          <div className="collection__image_hero">
             {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
               <Image
                 {...collectiontype.imageThumb}
@@ -166,9 +123,49 @@ const ResortCollectionTemlate = (props) => {
               />
             )}
           </div>
-        )} */}
+        )}
 
-        <h1>HELLO FROM RESORT TEMPLATE</h1>
+        <div className="collection_container">
+          {cols?.map((col) => (
+            // eslint-disable-next-line react/jsx-key
+            <div className="mastercol">
+              <h2 className="col_name">{col.name}</h2>
+
+              <ul className="collection_wrap">
+                {col.resorts?.map((resort) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <li className="collection_wrap_item">
+                    {resort.image && (
+                      <div className="collection__image">
+                        {resort.image && resort.image.asset && (
+                          <Image {...resort.image} alt={resort.image.alt} />
+                        )}
+                      </div>
+                    )}
+
+                    <div className="collection__details">
+                      <Link to={resort.url}>
+                        <h4 className="villaname">{resort.name}</h4>
+                      </Link>
+
+                      {resort.resortBrandLogo && (
+                        <div className="collection_brand_logo">
+                          {resort.resortBrandLogo &&
+                            resort.resortBrandLogo.asset && (
+                              <Image
+                                {...resort.resortBrandLogo}
+                                alt={resort.resortBrandLogo.alt}
+                              />
+                            )}
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
         <ContactUs contactUs={site.contactUs} />
       </BeachVillaStyles>
@@ -176,4 +173,4 @@ const ResortCollectionTemlate = (props) => {
   );
 };
 
-export default ResortCollectionTemlate;
+export default ResortCollectionTemplate;
