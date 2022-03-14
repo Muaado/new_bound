@@ -8,7 +8,15 @@ export const BeachVillaStyles = styled.div`
     padding: 0 3%;
 
     @media ${device.laptopL} {
-      padding: 0;
+      padding: 0 3%;
+    }
+  }
+
+  .collection__image_hero img{
+    height:560px;
+
+    @media ${device.onlyMobile} {
+      height : 400px;
     }
   }
 
@@ -21,6 +29,12 @@ export const BeachVillaStyles = styled.div`
     font-family: ui-monospace;
     font-weight: bold;
     margin-bottom: 25px;
+
+    @media ${device.onlyMobile} {
+      font-size: 3rem;
+      letetr-spacing: 0.2rem;
+      text-align: center;
+    }
   }
 
   .collection_wrap {
@@ -28,17 +42,22 @@ export const BeachVillaStyles = styled.div`
   }
   .collection_wrap {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(537px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1.3rem;
 
     
-    @media ${device.onlyMobile} {
+    @media ${device.iphonePortLandscape} {
       grid-template-columns: 1fr 1fr;
+      gap : 1 rem;
 
-      display: flex;
-      flex-direction: column;
+  
       align-items: center;
       max-width: 100vw;
+    }
+
+    @media ${device.mobileSmall} {
+      grid-template-columns: 1fr;
+      gap : 1 rem;
     }
 
  
@@ -46,11 +65,10 @@ export const BeachVillaStyles = styled.div`
 
     li.collection_wrap_item {
       list-style: none;
-      height: 600px;
       background-color: #f1f1f1;
       width: 100%;
       .collection__image {
-        height: 390px;
+        
 
         @media ${device.onlyMobile} {
           height:unset !important;
@@ -68,7 +86,7 @@ export const BeachVillaStyles = styled.div`
 
   .collection__image img {
     width: 100%;
-    height: 60vh;
+    min-height:390px;
     object-fit: cover;
   }
 
@@ -87,8 +105,8 @@ export const BeachVillaStyles = styled.div`
     z-index: 9999;
 
     @media ${device.onlyMobile} {
-      font-size: 4rem;
-      top:40vh;
+      font-size: 3rem;
+      top:30vh;
       padding: 0 2%;
       letter-spacing: 0.5rem;
       
@@ -126,7 +144,7 @@ export const BeachVillaStyles = styled.div`
       width: 200px;
       position: absolute;
       right: 0;
-      top: -7rem;
+      top: -10rem;
     }
 
   .villa_price{

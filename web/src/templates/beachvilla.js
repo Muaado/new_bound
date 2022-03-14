@@ -156,7 +156,7 @@ const BeachVillaTemplate = (props) => {
       villa["max_occupancy"] = max_occupancy;
 
       if (villaShowers.length == 2) {
-        villa_showers = villaShowers[0].number + " , " + villaShowers[1].number;
+        villa_showers = villaShowers[0].number + villaShowers[1].number;
       } else if (villaShowers.length == 1) {
         villa_showers = villaShowers[0].number;
       }
@@ -222,7 +222,7 @@ const BeachVillaTemplate = (props) => {
       <BeachVillaStyles>
         <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
-          <div className="collection__image">
+          <div className="collection__image_hero">
             {collectiontype.imageThumb && collectiontype.imageThumb.asset && (
               <Image
                 {...collectiontype.imageThumb}
@@ -239,72 +239,72 @@ const BeachVillaTemplate = (props) => {
               <h2 className="col_name">{col.name}</h2>
 
               <ul className="collection_wrap">
-                {col.villas?.map((villa) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <li className="collection_wrap_item">
-                    {villa.imageThumb && (
-                      <div className="collection__image">
-                        {villa.imageThumb && villa.imageThumb.asset && (
-                          <Image
-                            {...villa.imageThumb}
-                            alt={villa.imageThumb.alt}
-                          />
-                        )}
-                      </div>
-                    )}
-
-                    <div className="collection__details">
-                    <Link to={villa.url}>
-                      <h4 className="villaname">{villa.name}</h4>
-                    </Link>
-                      <ul className="villa_icons">
-                        <li>
-                          <Measure className="villa_icon measureicon" />
-                          <span className="villa_icon_label">
-                            {villa.sizeSqm} sqm
-                          </span>
-                        </li>
-
-                        <li>
-                          <Shower />
-                          <span className="villa_icon_label">
-                            {villa.villa_showers}
-                          </span>
-                        </li>
-
-                        <li>
-                          <TwoPeople />
-                          <span className="villa_icon_label">
-                            {villa.max_occupancy}
-                          </span>
-                        </li>
-
-                        {villa.villaPoolTypes[0] && (
-                          <li>
-                            <SwimmingPool />
-                            <span className="villa_icon_label">
-                              {villa.villaPoolTypes[0].poolType}
-                            </span>
-                          </li>
-                        )}
-                      </ul>
-
-                      <div className="villa_price">{villa.price_new}</div>
-
-                      {villa.resort.resortBrandLogo && (
-                        <div className="collection_brand_logo">
-                          {villa.resort.resortBrandLogo &&
-                            villa.resort.resortBrandLogo.asset && (
-                              <Image
-                                {...villa.resort.resortBrandLogo}
-                                alt={villa.resort.resortBrandLogo.alt}
-                              />
-                            )}
+                {col.villas?.map((villa) => {
+                  return (
+                    // eslint-disable-next-line react/jsx-key
+                    <li className="collection_wrap_item">
+                      {villa.imageThumb && (
+                        <div className="collection__image">
+                          {villa.imageThumb && villa.imageThumb.asset && (
+                            <Image
+                              {...villa.imageThumb}
+                              alt={villa.imageThumb.alt} />
+                          )}
                         </div>
                       )}
-                    </div>
-                  </li>
-                ))}
+
+                      <div className="collection__details">
+                        <Link to={villa.url}>
+                          <h4 className="villaname">{villa.name}</h4>
+                        </Link>
+                        <ul className="villa_icons">
+                          <li>
+                            <Measure className="villa_icon measureicon" />
+                            <span className="villa_icon_label">
+                              {villa.sizeSqm} sqm
+                            </span>
+                          </li>
+
+                          <li>
+                            <Shower />
+                            <span className="villa_icon_label">
+                              {villa.villa_showers}
+                            </span>
+                          </li>
+
+                          <li>
+                            <TwoPeople />
+                            <span className="villa_icon_label">
+                              {villa.max_occupancy}
+                            </span>
+                          </li>
+
+                          {villa.villaPoolTypes[0] && (
+                            <li>
+                              <SwimmingPool />
+                              <span className="villa_icon_label">
+                                {villa.villaPoolTypes[0].poolType}
+                              </span>
+                            </li>
+                          )}
+                        </ul>
+
+                        <div className="villa_price">{villa.price_new}</div>
+
+                        {villa.resort.resortBrandLogo && (
+                          <div className="collection_brand_logo">
+                            {villa.resort.resortBrandLogo &&
+                              villa.resort.resortBrandLogo.asset && (
+                                <Image
+                                  {...villa.resort.resortBrandLogo}
+                                  alt={villa.resort.resortBrandLogo.alt} />
+                              )}
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
