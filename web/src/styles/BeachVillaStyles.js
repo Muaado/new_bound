@@ -47,18 +47,16 @@ export const BeachVillaStyles = styled.div`
 
     
     @media ${device.iphonePortLandscape} {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap : 1 rem;
-
-  
       align-items: center;
       max-width: 100vw;
     }
 
-    @media ${device.mobileSmall} {
-      grid-template-columns: 1fr;
-      gap : 1 rem;
-    }
+    // @media ${device.mobileSmall} {
+    //   grid-template-columns: 1fr;
+    //   gap : 1 rem;
+    // }
 
  
 
@@ -87,6 +85,7 @@ export const BeachVillaStyles = styled.div`
   .collection__image img {
     width: 100%;
     min-height:390px;
+    max-height:390px;
     object-fit: cover;
   }
 
@@ -143,8 +142,15 @@ export const BeachVillaStyles = styled.div`
       height: 130px;
       width: 200px;
       position: absolute;
-      right: 0;
       top: -10rem;
+      right:0rem;
+
+      @media ${device.iphonePortLandscape} {
+        height: 130px;
+        width: 130px;
+        top: -9rem;
+        right:-2rem;
+      }
     }
 
   .villa_price{
