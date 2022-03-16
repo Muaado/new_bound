@@ -8,22 +8,27 @@ export default {
       type: "string",
       title: "Premium Collection Name",
     },
+    {
+      name: "description",
+      type: "string",
+      title: "Page Description",
+    },
 
     {
       name: "image",
-      type: "notmainImage",
+      type: "mainImage",
       title: "Hero Image",
     },
 
     {
-      name: "featuredvillas",
-      title: "Featured Villa Sections",
+      name: "premiumsections",
+      title: "Page Sections",
       type: "array",
       of: [
         {
           type: "reference",
           to: {
-            type: "featuredVilla",
+            type: "premiumSection",
           },
         },
       ],

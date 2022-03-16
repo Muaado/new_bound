@@ -22,7 +22,7 @@ export default {
     },
     {
       name: "imageThumb",
-      type: "notmainImage",
+      type: "mainImage",
       title: "Section Hero Image",
     },
   ],

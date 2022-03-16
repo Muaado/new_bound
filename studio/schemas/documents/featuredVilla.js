@@ -4,14 +4,14 @@ export default {
   title: "Featured Villas",
   fields: [
     {
-      name: "featuredvillaname",
+      name: "title",
       type: "string",
-      title: "Featured Villas Name",
+      title: "title",
     },
     {
       name: "description",
       type: "string",
-      title: "Featured Villas Description",
+      title: "Description",
     },
     {
       title: "Villa One / Optional",
@@ -19,6 +19,11 @@ export default {
       type: "reference",
       weak: true,
       to: [{ type: "villa" }],
+    },
+    {
+      name: "VillaoneBackground",
+      type: "mainImage",
+      title: "Background Image Villa One",
     },
     {
       title: "Villa Two / Optional",
@@ -29,29 +34,16 @@ export default {
       hidden: ({ document }) => !document?.villaone,
     },
     {
-      name: "featuredmagazinepost",
-      title: "Featured Magazine Posts",
-      type: "array",
-      of: [
-        {
-          type: "reference",
-          to: {
-            type: "featuredMagazinePost",
-          },
-        },
-      ],
-    },
-    {
-      name: "imageThumb",
-      type: "notmainImage",
-      title: "Villa Hero Image",
+      name: "VillatwoBackground",
+      type: "mainImage",
+      title: "Background Image Villa Two",
     },
   ],
   preview: {
     select: {
-      title: "featuredvillaname",
+      title: "title",
       // subtitle: "slug.current",
-      media: "imageThumb",
+      media: "VillaoneBackground",
     },
   },
 };

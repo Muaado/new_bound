@@ -70,6 +70,7 @@ import faq from "./objects/faq";
 import featuredVilla from "./documents/featuredVilla";
 import featuredMagazinePost from "./documents/featuredMagazinePost";
 import premiumCollection from "./documents/premiumCollection";
+import premiumSection from "./documents/premiumSection";
 // import priceList from "./objects/villa/priceList";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -128,6 +129,7 @@ export default createSchema({
     excerptPortableText,
     featuredVilla,
     featuredMagazinePost,
+    premiumSection,
     premiumCollection,
     
     // resortFaq,
