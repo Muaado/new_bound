@@ -1,7 +1,7 @@
 export default {
   name: "collectionType",
   type: "document",
-  title: "Collection type",
+  title: "Collection type - DISC",
   fields: [
     {
       name: "name",

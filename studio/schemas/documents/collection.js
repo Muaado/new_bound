@@ -2,7 +2,7 @@ export default {
   // type of rooms(villa)
   name: "collection",
   type: "document",
-  title: "Collection",
+  title: "Collection-DISC",
   fields: [
     {
       name: "name",

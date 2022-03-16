@@ -1,7 +1,7 @@
 export default {
   name: "premiumCollection",
   type: "document",
-  title: "Premium Collection",
+  title: "Collection Pages",
   fields: [
     {
       name: "premiumcollectionname",
@@ -36,7 +36,7 @@ export default {
   ],
   preview: {
     select: {
-      title: "name",
+      title: "premiumcollectionname",
       // subtitle: "slug.current",
       media: "resortBrandLogo",
     },

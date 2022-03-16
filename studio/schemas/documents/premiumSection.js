@@ -1,7 +1,7 @@
 export default {
   name: "premiumSection",
   type: "document",
-  title: "Premium Section",
+  title: "Collection Page Section",
   fields: [
     {
       name: "premiumSectionName",
