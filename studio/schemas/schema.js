@@ -14,6 +14,7 @@ import siteSettings from "./documents/siteSettings";
 import bodyPortableText from "./objects/bodyPortableText";
 import bioPortableText from "./objects/bioPortableText";
 import excerptPortableText from "./objects/excerptPortableText";
+import notmainImage from "./objects/notmainImage";
 import mainImage from "./objects/mainImage";
 import authorReference from "./objects/authorReference";
 import resort from "./documents/resort";
@@ -66,6 +67,9 @@ import shower from "./objects/villa/shower";
 import collection from "./documents/collection";
 import collectionType from "./documents/collectionType";
 import faq from "./objects/faq";
+import featuredVilla from "./documents/featuredVilla";
+import featuredMagazinePost from "./documents/featuredMagazinePost";
+import premiumCollection from "./documents/premiumCollection";
 // import priceList from "./objects/villa/priceList";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -113,6 +117,7 @@ export default createSchema({
     review,
     roomFeatures,
     feature,
+    notmainImage,
     mainImage,
     activity,
     resortHighlight,
@@ -121,6 +126,9 @@ export default createSchema({
     bodyPortableText,
     bioPortableText,
     excerptPortableText,
+    featuredVilla,
+    featuredMagazinePost,
+    premiumCollection,
     
     // resortFaq,
     // restaurantCusinesServed,
