@@ -1,4 +1,5 @@
 /dist
 /node_modules
-
+/migrate
 yarn.lock
+migrate.py

@@ -1,12 +1,12 @@
 export default {
-  name: "premiumSection",
+  name: "waterVillaCollection",
   type: "document",
-  title: "Collection Page Section",
+  title: "Water Villa Collections",
   fields: [
     {
-      name: "premiumSectionName",
+      name: "CollectionName",
       type: "string",
-      title: "Section Name",
+      title: "Collection Name",
     },
     {
       name: "description",
@@ -65,7 +65,7 @@ export default {
   ],
   preview: {
     select: {
-      title: "premiumSectionName",
+      title: "CollectionName",
       // subtitle: "slug.current",
       media: "sectionHeroImage",
     },
