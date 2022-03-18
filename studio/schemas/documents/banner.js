@@ -1,5 +1,5 @@
 export default {
-  name: "bannerCollection",
+  name: "banner",
   type: "document",
   title: "Banners and Ads",
   fields: [

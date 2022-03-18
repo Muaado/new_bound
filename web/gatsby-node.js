@@ -187,11 +187,47 @@ async function createCollectionTypePages(graphql, actions) {
   // const collectionNodes = (result.data.allSanityCollectionType || {}).nodes || [];
 }
 
+async function createBeachVillaPages(graphql, actions) {
+  const { createPage } = actions;
+  const result = await graphql(`
+    {
+      allSanityCollectionPage(filter: { slug: { current: { ne: null } } }) {
+        edges {
+          node {
+            id
+            _type
+            CollectionPageName
+            slug {
+              current
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (result.errors) throw result.errors;
+
+  const postEdges = (result.data.allSanityCollectionPage || {}).edges || [];
+
+  postEdges.forEach((edge) => {
+    const { id, slug = {}, _type } = edge.node;
+    const path = `/hello/${slug.current}/`;
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/beach.js"),
+      context: { id, _type },
+    });
+  });
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   await createResortPages(graphql, actions);
   await createVillaPages(graphql, actions);
   await createBlogPostPages(graphql, actions);
   await createCollectionTypePages(graphql, actions);
+  await createBeachVillaPages(graphql, actions);
 
   // await createRestaurantPages(graphql, actions);
   // await createActivityPages(graphql, actions);
