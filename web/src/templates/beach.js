@@ -59,6 +59,31 @@ export const query = graphql`
             }
           }
         }
+        featuredvillas {
+          title
+          villaone {
+            name
+            price
+            short_desc
+            tagline
+            imageThumb {
+              ...SanityImage
+              alt
+            }
+            headerImages {
+              images {
+                ...SanityImage
+                alt
+              }
+            }
+            resort {
+              resortBrandLogo {
+                ...SanityImage
+                alt
+              }
+            }
+          }
+        }
       }
     }
 
@@ -81,7 +106,6 @@ export const query = graphql`
         businessHoursDescription
       }
     }
-
   }
 `;
 
@@ -89,7 +113,6 @@ const BeachTemplate = (props) => {
   const { data, errors, pageContext } = props;
   const collections = data && data.pagesdata;
   const site = data && data.site;
-
 
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -165,7 +188,6 @@ const BeachTemplate = (props) => {
             )}
           </div>
         )}
-        
 
         <div className="collection_container">
           {cols?.map((col) => (
@@ -183,7 +205,8 @@ const BeachTemplate = (props) => {
                           {villa.imageThumb && villa.imageThumb.asset && (
                             <Image
                               {...villa.imageThumb}
-                              alt={villa.imageThumb.alt} />
+                              alt={villa.imageThumb.alt}
+                            />
                           )}
                         </div>
                       )}
@@ -232,7 +255,8 @@ const BeachTemplate = (props) => {
                               villa.resort.resortBrandLogo.asset && (
                                 <Image
                                   {...villa.resort.resortBrandLogo}
-                                  alt={villa.resort.resortBrandLogo.alt} />
+                                  alt={villa.resort.resortBrandLogo.alt}
+                                />
                               )}
                           </div>
                         )}
@@ -241,12 +265,70 @@ const BeachTemplate = (props) => {
                   );
                 })}
               </ul>
+
+              {/* Begin Featured Villa Section */}
+              {col.featuredvillas[0] && (
+                <div className="featured_villa_section">
+                  {/* BEGIN LEFT SECTION */}
+                  <div className="photofeatured">
+                    <Image
+                      className="featuredreslogo"
+                      {...col.featuredvillas[0].villaone.resort.resortBrandLogo}
+                      alt={
+                        col.featuredvillas[0].villaone.resort.resortBrandLogo
+                          .alt
+                      }
+                    />
+                    <Image
+                      className="featured_villa_image"
+                      {...col.featuredvillas[0].villaone.imageThumb}
+                    />
+
+                    <div className="featuredVillaFooter">
+                      <Link to={col.featuredvillas[0].villaone.url}>
+                        <h3 className="featuredVillaName">
+                          {col.featuredvillas[0].villaone.name}
+                        </h3>
+                      </Link>
+                      <h4 className="featuredVillaPrice">
+                        {col.featuredvillas[0].villaone.price}
+                      </h4>
+                      <Link to={col.featuredvillas[0].villaone.url}>
+                        <h4 className="featuredVillaView">View Room</h4>
+                      </Link>
+                    </div>
+                  </div>
+                  {/*  END LEFT SECTION */}
+
+                  {/* BEGIN RIGHT SECTION */}
+                  <div className="rightfeatured">
+                    {col.featuredvillas[0].villaone.headerImages.images[1] && (
+                      <Image
+                        {...col.featuredvillas[0].villaone.headerImages
+                          .images[1]}
+                        alt={
+                          col.featuredvillas[0].villaone.headerImages.images[1]
+                            .alt
+                        }
+                      />
+                    )}
+                    <div className="txtwrap">
+                      <h3>{col.featuredvillas[0].title}</h3>
+                      <h2 className="tagline">
+                        {col.featuredvillas[0].villaone.tagline}
+                      </h2>
+                      <p className="description">
+                        {col.featuredvillas[0].villaone.short_desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
 
         <ContactUs contactUs={site.contactUs} />
-
       </BeachVillaStyles>
     </Layout>
   );

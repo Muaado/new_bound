@@ -58,7 +58,6 @@ export const BeachVillaStyles = styled.div`
     //   gap : 1 rem;
     // }
 
- 
 
 
     li.collection_wrap_item {
@@ -101,7 +100,7 @@ export const BeachVillaStyles = styled.div`
     letter-spacing: 2rem;
     font-family: ui-monospace;
     font-weight: bold;
-    z-index: 9999;
+    z-index: 20;
 
     @media ${device.onlyMobile} {
       font-size: 3rem;
@@ -115,6 +114,127 @@ export const BeachVillaStyles = styled.div`
   .mastercol {
     margin-bottom: 8rem;
     margin-top: 5rem;
+  }
+
+
+  .featured_villa_section{
+    margin-top: 9rem;
+    display: grid;
+    grid-template-columns: minmax(auto, 2fr) 1fr;
+    // grid-template-columns: repeat(auto-fill, minmax(840px, 1fr));
+    gap: 1.3rem;
+
+    
+    @media ${device.iphonePortLandscape} {
+      grid-template-columns: 1fr;
+      gap : 1 rem;
+      align-items: center;
+      max-width: 100vw;
+    }
+
+    width:100%;
+    position: relative;
+    
+    .photofeatured{
+      // padding:8px;
+      text-transform: uppercase;
+
+      img{
+      }
+      
+      .featuredVillaName{
+        font-size: 30px;
+        color: #fff;
+        border-bottom: 2px solid #afafaf;
+        margin-bottom:5px;
+      }
+      h4{
+        font-size: 20px;
+      }
+
+      
+     
+      
+      .featuredreslogo{
+        width:200px;
+        height:200px;
+        position:absolute;
+        top:0;
+        left:0;
+        border: 1px solid white;
+      }
+
+      .featuredVillaPrice{
+        font-size: 20px;
+      }
+
+      .featuredVillaFooter{
+        font-family: 'rivera_ultra_light_regular' sans-serif;
+        padding:10px;
+        position: absolute;
+        bottom: 0;
+
+        .featuredVillaPrice{
+          width:200px;
+          float:left;
+        }
+
+        .featuredVillaView{
+          float:right;
+        }
+
+        h4{
+          color: #fff;
+        }
+
+      }
+
+
+
+
+    }
+    // end left section styling 
+    .rightfeatured{
+      width:100%;
+      background: blue;
+      position: relative;
+
+      img{
+        background-size: contain;
+      }
+
+      .txtwrap{
+        text-transform: uppercase;
+        position: absolute;
+        top:10%;
+        text-align: center;
+        width:100%;
+        
+        h3{
+          font-size: 30px;
+          color: #fff;
+          border-bottom: 2px solid #afafaf;
+          margin-bottom:5px;
+          width: unset !important;
+          display: inline-block;
+        }
+
+        .tagline{
+          font-size: 20px;
+          font-size: 20px;
+          margin-top: 40px;
+          color: #fff;
+        }
+
+        .description{
+          padding:10%;
+          text-transform: none;
+          color: #fff;
+        }
+
+      }
+    }
+
   }
 
   .collection__details {

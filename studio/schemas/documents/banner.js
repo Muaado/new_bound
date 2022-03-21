@@ -23,15 +23,17 @@ export default {
       type: "mainImage",
       title: "Section Hero Image",
     },
+    {
+      name: "sectionIconBadge",
+      type: "mainImage",
+      title: "Section Icon Badge",
+    },
   ],
   preview: {
     select: {
-      title: "CollectionName",
+      title: "BannerTitle",
       // subtitle: "slug.current",
       media: "sectionHeroImage",
     },
   },
 };
-
-
-
