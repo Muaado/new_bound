@@ -161,6 +161,7 @@ export const BeachVillaStyles = styled.div`
         position:absolute;
         top:0;
         left:0;
+        border: 1px solid white;
       }
 
       .featuredVillaPrice{
@@ -255,19 +256,18 @@ export const BeachVillaStyles = styled.div`
     .collection_brand_logo {
       width: 100%;
       position: relative;
-      height: 130px;
-      width: 202px;
-      position: absolute;
-      top: -8rem;
-      right: -1rem;
+      
     }
 
     .collection_brand_logo img{
       height: 130px;
       width: 200px;
       position: absolute;
-      top: -10rem;
+      top: -8rem;
       right:0rem;
+    
+      
+      
 
       @media ${device.iphonePortLandscape} {
         height: 130px;
