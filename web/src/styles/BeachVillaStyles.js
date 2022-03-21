@@ -62,7 +62,7 @@ export const BeachVillaStyles = styled.div`
 
     li.collection_wrap_item {
       list-style: none;
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
       width: 100%;
       .collection__image {
         
@@ -161,7 +161,6 @@ export const BeachVillaStyles = styled.div`
         position:absolute;
         top:0;
         left:0;
-        border: 1px solid white;
       }
 
       .featuredVillaPrice{
@@ -238,11 +237,11 @@ export const BeachVillaStyles = styled.div`
   }
 
   .collection__details {
-    padding: 15px;
+    padding: 20px 20px 33px 20px;
     h4 {
       font-size: 2rem;
       text-transform: uppercase;
-      color: #b49466;
+      color: #76622e;
       font-weight: bold;
     }
 
@@ -256,6 +255,11 @@ export const BeachVillaStyles = styled.div`
     .collection_brand_logo {
       width: 100%;
       position: relative;
+      height: 130px;
+      width: 202px;
+      position: absolute;
+      top: -8rem;
+      right: -1rem;
     }
 
     .collection_brand_logo img{
@@ -280,7 +284,8 @@ export const BeachVillaStyles = styled.div`
     -moz-letter-spacing: 0.3rem;
     -ms-letter-spacing: 0.3rem;
     letter-spacing: 0.3rem;
-    color: #7b7b7b;
+    color: #7d7d7d;
+    // margin-left: 20px;
   }
 
   .villa_icons{
@@ -292,6 +297,7 @@ export const BeachVillaStyles = styled.div`
 
     text-align: center;
     coor:#fff;
+    padding-bottom:25px;
 
     svg:not(.measureicon) {
       width: 25px;
