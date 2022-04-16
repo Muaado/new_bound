@@ -200,16 +200,17 @@ const BeachTemplate = (props) => {
                   return (
                     // eslint-disable-next-line react/jsx-key
                     <li className="collection_wrap_item">
-                      {villa.imageThumb && (
-                        <div className="collection__image">
+                      <div className="collection__image">
+                     
+                        
                           {villa.imageThumb && villa.imageThumb.asset && (
                             <Image
                               {...villa.imageThumb}
                               alt={villa.imageThumb.alt}
                             />
                           )}
-                        </div>
-                      )}
+               
+                      </div>
 
                       <div className="collection__details">
                         <Link to={villa.url}>

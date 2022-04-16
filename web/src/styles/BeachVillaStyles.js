@@ -79,6 +79,7 @@ export const BeachVillaStyles = styled.div`
     -webkit-transition: 1s all;
     transition: 1s all;
     opacity: 1;
+    min-height:390px;
   }
 
   .collection__image img {
@@ -306,9 +307,6 @@ export const BeachVillaStyles = styled.div`
 
     li{
       width: 80px;
-
-      
-      
 
       .villa_icon_label{
         display:inline-block;

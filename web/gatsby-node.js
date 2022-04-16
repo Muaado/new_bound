@@ -212,7 +212,7 @@ async function createBeachVillaPages(graphql, actions) {
 
   postEdges.forEach((edge) => {
     const { id, slug = {}, _type } = edge.node;
-    const path = `/hello/${slug.current}/`;
+    const path = `/collections/${slug.current}/`;
 
     createPage({
       path,

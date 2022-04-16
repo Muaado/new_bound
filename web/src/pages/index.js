@@ -152,14 +152,17 @@ export const query = graphql`
       }
     }
 
-    collections: allSanityCollectionType{
+    collections: allSanityCollectionPage(limit: 5) {
       edges {
         node {
-          name          
+          CollectionPageName
 
-          imageThumb {
+          image {
             ...SanityImage
             alt
+          }
+          slug {
+            current
           }
         }
       }
@@ -286,9 +289,7 @@ const IndexPage = (props) => {
               site.videoURL
             }
           /> */}
-          <h1 className="disappear-on-scroll">
-          Luxury experience curators
-          </h1>
+          <h1 className="disappear-on-scroll">Luxury experience curators</h1>
           <MouseScroll />
         </HeroStyles>
         <div className="page-content">
@@ -317,16 +318,22 @@ const IndexPage = (props) => {
           <Journey collections={collections} />
 
           <HandCraftedJourneysStyles
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
+          // data-aos="fade-up"
+          // data-aos-delay="50"
+          // data-aos-duration="1000"
+          // data-aos-easing="ease-in-out"
           >
             <p className="subtitle">only the best</p>
             <h2>hand-crafted journeys</h2>
             <p className="description">
-            {/* Unparalleled luxury and privacy for discerning travelers. Indulge in the absolute best of everything with our hand-crafted services - exquisite private events, luxurious private island holidays and exclusive private jet travel. From the moment you arrive, you'll experience the Boundless Maldives difference. */}
-            Looking for an unforgettable luxury holiday experience? Look no further than our experts at Boundless Maldives, to curate a unique and personalized holiday experience tailored specifically to your needs. Whether you're looking for a private island escape or a luxury travel experience on a private jet, Boundless Maldives will exceed your expectations.Call us today to kick off your next adventure.
+              {/* Unparalleled luxury and privacy for discerning travelers. Indulge in the absolute best of everything with our hand-crafted services - exquisite private events, luxurious private island holidays and exclusive private jet travel. From the moment you arrive, you'll experience the Boundless Maldives difference. */}
+              Looking for an unforgettable luxury holiday experience? Look no
+              further than our experts at Boundless Maldives, to curate a unique
+              and personalized holiday experience tailored specifically to your
+              needs. Whether you're looking for a private island escape or a
+              luxury travel experience on a private jet, Boundless Maldives will
+              exceed your expectations.Call us today to kick off your next
+              adventure.
             </p>
             <ul>
               {site.handCraftedJourneys.map(({ title, image, description }) => (
@@ -335,7 +342,6 @@ const IndexPage = (props) => {
                   <div className="image-container">
                     {image && image.asset && (
                       <Image {...image} alt={image.alt} />
-
                     )}
                   </div>
                   <div className="text-container">
@@ -355,10 +361,10 @@ const IndexPage = (props) => {
           <AboutUs aboutUs={site.aboutUs} />
           <WhyBoundlessSection whyBoundlessImage={site.whyBoundlessImage} />
           <MagazineStyles
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
+          // data-aos="fade-up"
+          // data-aos-delay="50"
+          // data-aos-duration="1000"
+          // data-aos-easing="ease-in-out"
           >
             <h2>Magazine</h2>
             <p className="subtitle">Inspiration</p>
@@ -386,11 +392,11 @@ const IndexPage = (props) => {
           </MagazineStyles>
           <TailorMade />
           <div
-            // className="second-image"
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
+          // className="second-image"
+          // data-aos="fade-up"
+          // data-aos-delay="50"
+          // data-aos-duration="1000"
+          // data-aos-easing="ease-in-out"
           >
             {site.secondImage && site.secondImage.asset && (
               <Image

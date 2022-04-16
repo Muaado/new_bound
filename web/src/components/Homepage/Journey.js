@@ -212,14 +212,17 @@ const Journey = ({ collections }) => {
             .sort((a, b) => a.node.rank - b.node.rank)
             .map(({ node }) => (
               <Link
-                to={getCollectionUrl({ name: node.name, type: node.type })}
+                to={getCollectionUrl({
+                  name: node.CollectionPageName,
+                  slug: node.slug.current,
+                })}
                 className="clickable"
                 key={node.name}
               >
                 <p>{node.name}</p>
 
-                {node.imageThumb && node.imageThumb.asset && (
-                  <Image {...node.imageThumb} alt={node.imageThumb.alt} />
+                {node.image && node.image.asset && (
+                  <Image {...node.image} alt={node.image.alt} />
                 )}
               </Link>
             ))}

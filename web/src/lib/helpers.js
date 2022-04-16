@@ -78,10 +78,7 @@ export const getHighlightUrl = ({ name, resortName }) => {
     .join("-")}`;
 };
 
-export const getCollectionUrl = ({ name, type }) => {
-  return `/collection/${
-    name.toLowerCase().split(" ").join("-")
-      ? name.toLowerCase().split(" ").join("-")
-      : ""
-  }`;
+
+export const getCollectionUrl = ({ name, slug }) => {
+  return `/collections/${slug}/`;
 };
