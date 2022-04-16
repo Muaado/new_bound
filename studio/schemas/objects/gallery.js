@@ -33,4 +33,11 @@ export default {
     //   title: "Description",
     // },
   ],
+  preview: {
+    select: {
+      title: "images",
+      // subtitle: "slug.current",
+      media: "images",
+    },
+  },
 };

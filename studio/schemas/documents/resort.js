@@ -275,6 +275,46 @@ export default {
     //     },
     //   ],
     // },
+    {
+      name: "villa1",
+      title: "Villas : Linked",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: {
+            type: "villa",
+          },
+        },
+      ],
+    },
+    {
+      name: "restaurant1",
+      title: "Restaurant : Linked",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: {
+            type: "restaurant",
+          },
+        },
+      ],
+    },
+    {
+      name: "spa1",
+      title: "Spa : Linked",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: {
+            type: "spa",
+          },
+        },
+      ],
+    },
+
   ],
   preview: {
     select: {

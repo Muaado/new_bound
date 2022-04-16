@@ -85,6 +85,8 @@ export default {
   preview: {
     select: {
       title: "name",
+      // subtitle: "slug.current",
+      media: "imageThumb",
     },
   },
 };
