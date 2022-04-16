@@ -196,6 +196,13 @@ export default {
       type: "mainImage",
       title: "Villa image web",
     },
+
+    {
+      title: "rateModel",
+      name: "rateModel",
+      type: "reference",
+      to: [{ type: "rateModel" }],
+    },
   ],
   preview: {
     select: {

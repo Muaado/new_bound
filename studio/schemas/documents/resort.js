@@ -150,7 +150,31 @@ export default {
         },
       ],
     },
+    {
+      title: "restaurant",
+      name: "restaurant",
+      type: "array",
+      of: [
+        {
+          // type: "reference",
+          type: "restaurant",
+          // to: {  },
+        },
+      ],
+    },
 
+    {
+      title: "spa",
+      name: "spa",
+      type: "array",
+      of: [
+        {
+          // type: "reference",
+          type: "spa",
+          // to: {  },
+        },
+      ],
+    },
 
     {
       title: "Reviews",
