@@ -219,7 +219,7 @@ const Journey = ({ collections }) => {
                 className="clickable"
                 key={node.name}
               >
-                <p>{node.name}</p>
+                <p>{node.CollectionPageName}</p>
 
                 {node.image && node.image.asset && (
                   <Image {...node.image} alt={node.image.alt} />

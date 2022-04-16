@@ -1,0 +1,90 @@
+export default {
+  name: "rateModel",
+  type: "document",
+  title: "Monthly Rate Model",
+  fields: [
+    {
+      name: "desc",
+      type: "string",
+      title: "Description",
+    },
+    {
+      title: "Villa",
+      name: "villa",
+      type: "reference",
+      to: [{ type: "villa" }],
+    },
+    {
+      name: "January",
+      type: "number",
+      title: "January",
+      description: "Monthly room rate",
+    },
+    {
+      name: "February",
+      type: "number",
+      title: "February",
+      description: "Monthly room rate",
+    },
+    {
+      name: "March",
+      type: "number",
+      title: "March",
+      description: "Monthly room rate",
+    },
+    {
+      name: "April",
+      type: "number",
+      title: "April",
+      description: "Monthly room rate",
+    },
+    {
+      name: "May",
+      type: "number",
+      title: "May",
+      description: "Monthly room rate",
+    },
+    {
+      name: "June",
+      type: "number",
+      title: "June",
+      description: "Monthly room rate",
+    },
+    {
+      name: "July",
+      type: "number",
+      title: "July",
+      description: "Monthly room rate",
+    },
+    {
+      name: "August",
+      type: "number",
+      title: "August",
+      description: "Monthly room rate",
+    },
+    {
+      name: "September",
+      type: "number",
+      title: "September",
+      description: "Monthly room rate",
+    },
+    {
+      name: "October",
+      type: "number",
+      title: "October",
+      description: "Monthly room rate",
+    },
+    {
+      name: "November",
+      type: "number",
+      title: "November",
+      description: "Monthly room rate",
+    },
+    {
+      name: "December",
+      type: "number",
+      title: "December",
+      description: "Monthly room rate",
+    },
+  ],
+};

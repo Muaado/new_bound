@@ -74,6 +74,10 @@ import faq from "./objects/faq";
 import CollectionPage from "./documents/CollectionPage";
 import beachVillaCollection from "./documents/beachVillaCollection";
 import waterVillaCollection from "./documents/waterVillaCollection";
+import largeVillaCollection from "./documents/largeVillaCollection";
+import honeymoonCollection from "./documents/honeymoonCollection";
+import mostPopularCollection from "./documents/mostPopularCollection";
+import rateModel from "./documents/rateModel";
 // import priceList from "./objects/villa/priceList";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -135,7 +139,11 @@ export default createSchema({
     CollectionPage,
     beachVillaCollection,
     waterVillaCollection,
-    
+    largeVillaCollection,
+    mostPopularCollection,
+    honeymoonCollection,
+    rateModel,
+
     // resortFaq,
     // restaurantCusinesServed,
     // spaServicesOffered,

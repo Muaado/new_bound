@@ -452,7 +452,7 @@ const DropDown = ({
           } clickable
           route
             ${className}`}
-          onClick={() => setSelectedList("collections")}
+          onClick={() => setSelectedList("collectionPages")}
         >
           Holiday stays
         </li>
