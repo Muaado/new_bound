@@ -44,9 +44,19 @@ const query = graphql`
       }
     }
 
-    
+    collectionsone: allSanityCollectionPage(limit: 5) {
+      nodes {
+        CollectionPageName
 
-
+        image {
+          ...SanityImage
+          alt
+        }
+        slug {
+          current
+        }
+      }
+    }
   }
 `;
 
@@ -85,14 +95,19 @@ function LayoutContainer(props) {
     })
     .filter((item) => item !== undefined);
 
-  const collections = navData.collections.nodes.map(({ name, type }) => {
-    if (typeof name === "string")
-      return {
-        name: name,
-        url: getCollectionUrl({ name, type }),
-      };
-  });
+  const collections = navData.collectionsone.nodes.map(
+    ({ CollectionPageName, slug }) => {
+      if (typeof CollectionPageName === "string")
+        return {
+          name: CollectionPageName,
+          url: getCollectionUrl({ CollectionPageName, slug }),
+        };
+    }
+  );
 
+  const collectionsone = navData.collectionsone.nodes;
+
+  console.log(collectionsone);
   // console.log(collections);
 
   const windowGlobal = typeof window !== "undefined";

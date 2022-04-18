@@ -78,7 +78,6 @@ export const getHighlightUrl = ({ name, resortName }) => {
     .join("-")}`;
 };
 
-
 export const getCollectionUrl = ({ name, slug }) => {
-  return `/collections/${slug}/`;
+  return `/collections/${slug.current}/`;
 };
