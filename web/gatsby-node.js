@@ -52,7 +52,7 @@ async function createResortPages(graphql, actions) {
   const { createPage } = actions;
   const result = await graphql(`
     {
-      allSanityResort {
+      allSanityResort(sort: { fields: [name], order: ASC }) {
         nodes {
           name
           _id

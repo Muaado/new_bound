@@ -78,6 +78,6 @@ export const getHighlightUrl = ({ name, resortName }) => {
     .join("-")}`;
 };
 
-export const getCollectionUrl = ({ name, slug }) => {
+export const getCollectionUrl = ({ slug }) => {
   return `/collections/${slug.current}/`;
 };

@@ -50,6 +50,7 @@ export const query = graphql`
             alt
           }
           price
+          numberOfRooms
 
           resort {
             name
@@ -66,6 +67,7 @@ export const query = graphql`
             price
             short_desc
             tagline
+            numberOfRooms
             imageThumb {
               ...SanityImage
               alt
@@ -201,15 +203,12 @@ const BeachTemplate = (props) => {
                     // eslint-disable-next-line react/jsx-key
                     <li className="collection_wrap_item">
                       <div className="collection__image">
-                     
-                        
-                          {villa.imageThumb && villa.imageThumb.asset && (
-                            <Image
-                              {...villa.imageThumb}
-                              alt={villa.imageThumb.alt}
-                            />
-                          )}
-               
+                        {villa.imageThumb && villa.imageThumb.asset && (
+                          <Image
+                            {...villa.imageThumb}
+                            alt={villa.imageThumb.alt}
+                          />
+                        )}
                       </div>
 
                       <div className="collection__details">
@@ -228,6 +227,13 @@ const BeachTemplate = (props) => {
                             <Shower />
                             <span className="villa_icon_label">
                               {villa.villa_showers}
+                            </span>
+                          </li>
+
+                          <li>
+                            <Bed />
+                            <span className="villa_icon_label">
+                              {villa.numberOfRooms}
                             </span>
                           </li>
 

@@ -4,8 +4,6 @@ import { device } from "../styles/deviceSizes";
 import "../styles/typography.css";
 
 const VillaStyles = styled.div`
-
-  
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -20,40 +18,36 @@ const VillaStyles = styled.div`
       letter-spacing: unset;
     }
   }
-  .backtoresorticon{
+  .backtoresorticon {
     width: 24px;
     height: 24px;
     color: #76622e8a;
     position: relative;
     top: -2px;
     left: -4px;
-  
   }
 
-  .backtoreswrapper{
+  .backtoreswrapper {
     position: absolute;
     top: 10px;
-    left:10%;
+    left: 10%;
   }
 
-  .backtoresort{
+  .backtoresort {
     color: #76622e8a;
   }
 
-  .backtoresort:hover{
+  .backtoresort:hover {
     color: #76622e;
   }
 
-  .roomfeatwrap{
+  .roomfeatwrap {
     overflow: hidden;
   }
 
-  .roomfeat svg{
+  .roomfeat svg {
     width: 100%;
   }
-  
-
-
 
   h2 {
     /* letter-spacing: 1rem; */
@@ -100,20 +94,18 @@ const VillaStyles = styled.div`
         z-index: 100;
 
         @media ${device.mobileXL} {
-          width:380px;
+          width: 380px;
           font-size: 2rem;
-          left:0;
-          padding-bottom:10px;
+          left: 0;
+          padding-bottom: 10px;
         }
-      
       }
 
       @media ${device.tablet} {
         &-title {
-          width:80%;
+          width: 80%;
           left: 10%;
         }
-        
       }
 
       &-title:hover {
@@ -125,36 +117,6 @@ const VillaStyles = styled.div`
       }
     }
 
-    // &-title {
-    //   @media ${device.mobileXL} {
-    //     width:380px;
-    //     font-size: 2rem;
-    //     left:0;
-    //     padding-bottom:10px;
-    //   }
-
-    //   @media ${device.tablet}{
-    //     width:100%;
-    //   }
-    //   width: 900px;
-    //   text-wrap: pre-wrap;
-        
-        
-    //   font-weight: normal;
-    //   text-transform: uppercase;
-    //   color: #fff;
-    //   font-size: 4.6rem;
-
-     
-    //   }
-    //   &-title:hover {
-    //     font-weight: bold;
-    //   }
-
-    // }
-
-   
-
     &__calendar {
       /* z-index: 100000; */
 
@@ -162,8 +124,6 @@ const VillaStyles = styled.div`
       position: absolute;
       bottom: 20%;
 
-      
-      
       .icon {
         display: flex;
         align-items: center;
@@ -363,7 +323,7 @@ const VillaStyles = styled.div`
         justify-content: center;
         /* border: 1px solid var(--primary); */
 
-        .villa_name_title{
+        .villa_name_title {
           font-family: "river_bold_regular", sans-serif;
         }
         @media ${device.laptop} {
@@ -399,17 +359,13 @@ const VillaStyles = styled.div`
             text-align: left;
             width: 100%;
           }
-          padding-top:10px;
-
-          
-          
+          padding-top: 10px;
         }
 
-        .pricelbl{
-          color:#76622e;
+        .pricelbl {
+          color: #76622e;
           font-weight: 700;
         }
-
       }
 
       .alternate-name {
@@ -433,7 +389,7 @@ const VillaStyles = styled.div`
         margin-bottom: 2.5rem;
 
         font-weight: normal;
-        font-size:35px;
+        font-size: 35px;
         font-family: "Playfair Display";
         color: #76622e;
 
@@ -450,10 +406,32 @@ const VillaStyles = styled.div`
       }
 
       .tagline {
-        font-family: "autography",cursive;
+        font-family: "autography", cursive;
         font-style: italic;
         font-size: 3rem;
-        
+        margin-bottom: 2rem;
+      }
+
+      .unique_code_wrap {
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+        margin-bottom: 20px;
+        position: absolute;
+
+        @media ${device.desktopL} {
+          
+        }
+
+        .unique_code {
+          font-size: 2rem;
+          font-family: "rivera_bold_regular", "sans-serif";
+          color: #737070;
+          display: inline-block;
+          position: relative;
+          top: -25rem;
+          text-orientation: use-glyph-orientation;
+        }
       }
 
       &-icons {
@@ -518,24 +496,17 @@ const VillaStyles = styled.div`
     }
 
     &__room-features {
-
-
-      .roomfeaturetitle{
+      .roomfeaturetitle {
         margin-bottom: 7rem;
       }
-      max-height:520px !important;
+      max-height: 520px !important;
       // top:0;
 
-
-      .content{
-        background:rgb(0,0,0,0.3);
-        max-height:520px;
-        min-height:520px;
+      .content {
+        background: rgb(0, 0, 0, 0.3);
+        max-height: 520px;
+        min-height: 520px;
       }
-     
-  
-
-
 
       .hide {
         clip: rect(0 0 0 0);
@@ -545,30 +516,30 @@ const VillaStyles = styled.div`
         position: absolute;
         width: 1px;
       }
-      
+
       .accordion {
         font-family: "rivera_light_regular", sans-serif;
-        color:#fff;
-        min-height:350px;
-        margin-top:3rem;       
-        
+        color: #fff;
+        min-height: 350px;
+        margin-top: 3rem;
+
         // border: 1px solid #e0e0e0;
       }
 
-      label{
+      label {
         // background: rgba(0,0,0,0.5);
-        width:100%;
+        width: 100%;
       }
-      
+
       .accordion-item {
-        padding-left:15%;
-        padding-right:15%;
+        padding-left: 15%;
+        padding-right: 15%;
         width: 100%;
       }
       .accordion-item:last-child {
         border-bottom: none;
       }
-      
+
       .accordion-label {
         padding: 10px 0 10px 30px;
         width: 100%;
@@ -577,17 +548,16 @@ const VillaStyles = styled.div`
         position: relative;
         cursor: pointer;
         // background:#76622eb3;
-        margin-top:-1px;
-        border-bottom:0.5px solid #0000000d;
+        margin-top: -1px;
+        border-bottom: 0.5px solid #0000000d;
       }
       .accordion-label:hover {
         cursor: pointer;
       }
-      
 
       .accordion-label:after {
         content: "+";
-       
+
         // width: 13em;
         height: 1em;
         text-align: center;
@@ -599,22 +569,18 @@ const VillaStyles = styled.div`
         float: right;
         padding: 10px;
         color: #9b9b9b;
-        font-size:20px;
-        margin-top:-12px;
-        margin-right:10px;
-
-        
+        font-size: 20px;
+        margin-top: -12px;
+        margin-right: 10px;
       }
-      input[type=checkbox]:checked ~ .accordion-label:after {
+      input[type="checkbox"]:checked ~ .accordion-label:after {
         // transform: rotate(45deg);
         content: "x";
         transition: all 2s ease;
-
-        
       }
-      
+
       .accordion-child {
-        font-family: "Glacial Indifference",sans-serif;
+        font-family: "Glacial Indifference", sans-serif;
         margin: 0;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -623,21 +589,21 @@ const VillaStyles = styled.div`
         // transform: scale(1, 0);
         transform-origin: center top;
       }
-      input[type=checkbox]:checked ~ .accordion-child {
+      input[type="checkbox"]:checked ~ .accordion-child {
         color: #fff;
-        background: rgb(0,0,0,0.3);
+        background: rgb(0, 0, 0, 0.3);
         // box-shadow: 0 3px 6px 1px rgba(0, 0, 0, 0.16);
         padding: 20px;
         height: auto;
         opacity: 0.8;
         // transform: scale(1, 1);
-        max-height:240px;
+        max-height: 240px;
         // overflow-y:scroll;
-        overflow-x:hidden;
+        overflow-x: hidden;
         font-family: "glacial_indifference_regular", sans-serif;
       }
-      .feattitle{
-        font-family: "rivera_light_regular",sans-serif;
+      .feattitle {
+        font-family: "rivera_light_regular", sans-serif;
         margin: 0;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -648,11 +614,11 @@ const VillaStyles = styled.div`
       }
       .accordion-child ul {
         /* padding-left: 4rem; */
-        
-        width:100%;
+
+        width: 100%;
         overflow-y: hidden;
         // min-height: 200px; /* approximate max height */
-      
+
         transition-property: all;
         transition-duration: 20s;
         transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
@@ -665,7 +631,6 @@ const VillaStyles = styled.div`
           grid-template-columns: 1fr 1fr;
           height: 200px;
         }
-    
 
         li {
           margin-bottom: 0.5rem;
@@ -674,23 +639,14 @@ const VillaStyles = styled.div`
         }
       }
 
-      img{     
-          height: 520px;
-          width: 100%;
-          position:absolute;
-          z-index: -1;
-          object-fit: cover;
-        
+      img {
+        height: 520px;
+        width: 100%;
+        position: absolute;
+        z-index: -1;
+        object-fit: cover;
       }
-
-   
-
-      
     }
-
-
-
-
 
     &__highlights {
       margin-top: 7rem;
@@ -846,7 +802,6 @@ const VillaStyles = styled.div`
         padding: 0 1.5rem;
         width: 100vw;
       }
-     
     }
 
     &__restaurants {

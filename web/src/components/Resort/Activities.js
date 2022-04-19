@@ -65,7 +65,7 @@ const ActivitiesStyles = styled.div`
     /* width: 10rem; */
 
     transition: all 2s;
-    max-height: 35rem;
+    height: 322px;
 
     &__carousel {
       max-height: unset;

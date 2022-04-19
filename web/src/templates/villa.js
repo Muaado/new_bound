@@ -55,6 +55,7 @@ export const query = graphql`
       name
       alternateName
       tagline
+      uniqueCode
 
       headerImages {
         images {
@@ -212,8 +213,6 @@ export const query = graphql`
         }
       }
     }
-
-    
   }
 `;
 
@@ -378,6 +377,14 @@ const VilaTemplate = (props) => {
               </Link>
             </div>
             <div className="container">
+              {villa.uniqueCode && (
+                <div className="unique_code_wrap">
+                  <div className="unique_code">
+                    <strong>#</strong>
+                    {villa.uniqueCode}
+                  </div>
+                </div>
+              )}
               {/* <p className="alternate-name">{alternateName}</p> */}
               <h2 className="villa_name_title">{name}</h2>
               {tagline && <p className="tagline">{tagline}</p>}
@@ -427,22 +434,21 @@ const VilaTemplate = (props) => {
             // data-aos-easing="ease-in-out"
           >
             <h2 className="roomfeaturetitle">Room features</h2>
-            
 
             <div className="content">
-            <div className="roomfeatwrap">
-            {/* <div className="image-container"> */}
-            {roomFeatures?.backgroundImage &&
-            roomFeatures?.backgroundImage.asset ? (
-              <Image
-                {...roomFeatures.backgroundImage}
-                alt={roomFeatures.backgroundImage.alt}
-              />
-            ) : (
-              <div></div>
-            )}
-            </div>
-            
+              <div className="roomfeatwrap">
+                {/* <div className="image-container"> */}
+                {roomFeatures?.backgroundImage &&
+                roomFeatures?.backgroundImage.asset ? (
+                  <Image
+                    {...roomFeatures.backgroundImage}
+                    alt={roomFeatures.backgroundImage.alt}
+                  />
+                ) : (
+                  <div></div>
+                )}
+              </div>
+
               <ul className="accordion">
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (

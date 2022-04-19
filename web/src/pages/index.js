@@ -182,7 +182,7 @@ export const query = graphql`
       }
     }
 
-    resorts: allSanityResort {
+    resorts: allSanityResort(sort: { fields: [name], order: DESC }) {
       nodes {
         name
       }
@@ -233,8 +233,14 @@ const IndexPage = (props) => {
   // }
 
   const site = (data || {}).site;
-  const resorts = (data || {}).resorts;
+  let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
+
+  
+
+
+
+
   // console.log(collections);
   const magazinePosts = (data || {}).magazinePosts;
   // const postNodes = (data || {}).posts

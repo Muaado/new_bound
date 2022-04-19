@@ -98,9 +98,9 @@ const HighlightsStyles = styled.div`
       img {
         width: 100%;
         height: 100%;
-        min-height:230px;
+        min-height:322px;
         min-width:230px;
-        max-height:230px;
+        max-height:260px;
         object-fit: cover;
       }
     }

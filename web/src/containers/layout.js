@@ -23,7 +23,7 @@ const query = graphql`
       }
     }
 
-    resorts: allSanityResort {
+    resorts: allSanityResort(sort: { fields: [name], order: ASC }) {
       nodes {
         name
       }
@@ -105,9 +105,8 @@ function LayoutContainer(props) {
     }
   );
 
-  const collectionsone = navData.collectionsone.nodes;
+  // const collectionsone = navData.collectionsone.nodes;
 
-  console.log(collectionsone);
   // console.log(collections);
 
   const windowGlobal = typeof window !== "undefined";
