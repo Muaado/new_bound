@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import SanityMuxPlayer from "sanity-mux-player";
+
 // import {
 //   filterOutDocsPublishedInTheFuture,
 //   filterOutDocsWithoutSlugs,
@@ -235,11 +236,6 @@ const IndexPage = (props) => {
   const site = (data || {}).site;
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
-
-  
-
-
-
 
   // console.log(collections);
   const magazinePosts = (data || {}).magazinePosts;

@@ -50,7 +50,7 @@ export const query = graphql`
             alt
           }
           price
-          numberOfRooms
+          numrooms
 
           resort {
             name
@@ -67,7 +67,7 @@ export const query = graphql`
             price
             short_desc
             tagline
-            numberOfRooms
+            numrooms
             imageThumb {
               ...SanityImage
               alt
@@ -233,7 +233,7 @@ const BeachTemplate = (props) => {
                           <li>
                             <Bed />
                             <span className="villa_icon_label">
-                              {villa.numberOfRooms}
+                              {villa.numrooms}
                             </span>
                           </li>
 

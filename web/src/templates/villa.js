@@ -56,7 +56,8 @@ export const query = graphql`
       alternateName
       tagline
       uniqueCode
-
+      price
+      numrooms
       headerImages {
         images {
           ...SanityImage
@@ -248,7 +249,7 @@ const VilaTemplate = (props) => {
     tagline,
     _rawDescription: _rawDescriptionVilla,
     short_desc,
-    // imageWeb,
+    // imageWebW
     roomFeatures,
     maxOccupancy,
     sizeSqm,
@@ -256,7 +257,8 @@ const VilaTemplate = (props) => {
     villaPoolTypes,
     heroImage,
     headerImages,
-
+    price,
+    numrooms,
     // gallery,
   } = villa;
 
@@ -277,6 +279,15 @@ const VilaTemplate = (props) => {
     highlights,
   } = villa.resort;
 
+  let formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
+
   const randomHeaderImage =
     headerImages?.images[
       Math.floor(Math.random() * headerImages?.images.length)
@@ -285,6 +296,13 @@ const VilaTemplate = (props) => {
   let numberOfShowers = 0;
 
   showers.forEach(({ number }) => (numberOfShowers += number));
+
+  let new_price = "";
+  if (villa.price != "null") {
+    villa["price_new"] = formatter.format(villa.price) + "  PP";
+  } else if (villa.price) {
+    villa["price_new"] = "-";
+  }
 
   const handleOpenFeature = (index) => {
     if (openedFeature !== index) {
@@ -310,6 +328,8 @@ const VilaTemplate = (props) => {
     { title: "NOV", value: "10" },
     { title: "DEC", value: "11" },
   ];
+
+  console.log(villa)
 
   // const sortedPriceList = priceList.nodes.sort((a, b) =>
   //   parseInt(b.month) > parseInt(a.month) ? -1 : 1
@@ -405,6 +425,10 @@ const VilaTemplate = (props) => {
                   )}
                 </li>
                 <li>
+                  <Bed />
+                  {numrooms}
+                </li>
+                <li>
                   <Shower />
                   {numberOfShowers}
                 </li>
@@ -415,7 +439,7 @@ const VilaTemplate = (props) => {
                   </li>
                 )}
               </ul>
-              <p className="pricelbl">from $ 1200 PP</p>
+              <p className="pricelbl">{villa.price_new}</p>
               <Link to={`/enquire?id=${resortName}`} className="btn">
                 ENQUIRE
               </Link>
@@ -433,7 +457,7 @@ const VilaTemplate = (props) => {
             // data-aos-duration="1000"
             // data-aos-easing="ease-in-out"
           >
-            <h2 className="roomfeaturetitle">Room features</h2>
+            
 
             <div className="content">
               <div className="roomfeatwrap">
@@ -450,6 +474,7 @@ const VilaTemplate = (props) => {
               </div>
 
               <ul className="accordion">
+              <h2 className="roomfeaturetitle">Room features</h2>
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (
                     <li key={title} className="accordion-item">

@@ -112,7 +112,7 @@ export default {
     },
 
     {
-      name: "numberOfRooms",
+      name: "numrooms",
       type: "number",
       title: "Number of rooms",
     },

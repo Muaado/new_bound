@@ -499,7 +499,7 @@ const VillaStyles = styled.div`
       .roomfeaturetitle {
         margin-bottom: 7rem;
       }
-      max-height: 520px !important;
+      max-height: 550px !important;
       // top:0;
 
       .content {
