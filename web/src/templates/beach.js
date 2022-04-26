@@ -117,29 +117,11 @@ const BeachTemplate = (props) => {
   const site = data && data.site;
 
   // on page load execute handleScroll function
-  React.useEffect(() => {
-    handleScroll();
-  });
+  React.useEffect(() => {});
 
   let scroll_pos = 0;
 
   // log scroll position on scroll
-  function handleScroll() {
-    window.addEventListener("scroll", () => {
-      scroll_pos = window.scrollY;
-      console.log(scroll_pos);
-    });
-
-    // find the element that is mid way of half the scroll height
-   
-  
-
-    // scroll to position of mid point
-    window.scrollTo({
-      top: scroll_pos+5,
-      behavior: "smooth",
-    });
-  }
 
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -157,9 +139,12 @@ const BeachTemplate = (props) => {
     let collectioname = collection.name;
     cols.push(collection);
   });
-
+  let indexvillas = 0;
   cols.forEach((col) => {
+    beachvillas = [];
     col.villas.forEach((villa) => {
+      beachvillas.push(villa);
+
       let villaShowers = villa.showers;
       let maxOccupancy = villa.maxOccupancy;
       // console.log(villa);
@@ -167,6 +152,16 @@ const BeachTemplate = (props) => {
       let max_occupancy = "-";
       let villa_showers = "-";
       let pool_type = "";
+      let villa_odd_even = true;
+
+
+
+      // for every 3rd villa, add villa_odd class as True
+      indexvillas = beachvillas.length;
+
+   
+
+      villa["villa_odd_even"] = indexvillas;
 
       if (maxOccupancy.length == 2) {
         max_occupancy = maxOccupancy[0].number + " , " + maxOccupancy[1].number;
@@ -205,8 +200,6 @@ const BeachTemplate = (props) => {
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
-        <div ref={(el) => (window.onscroll = handleScroll)}>HOLAL ALOMI</div>
-
         <h1 className="collectionpage_title">
           {collections.CollectionPageName}
         </h1>
@@ -226,6 +219,7 @@ const BeachTemplate = (props) => {
 
               <ul className="collection_wrap">
                 {col.villas?.map((villa) => {
+                  //  for every second villa index add a new row
                   return (
                     // eslint-disable-next-line react/jsx-key
                     <li className="collection_wrap_item">

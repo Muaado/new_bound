@@ -4,6 +4,16 @@ export const BeachVillaStyles = styled.div`
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+
+  .toggleBanner{
+    height: 500px;
+    width: 100%;
+    position:relative;
+    background:red;
+
+  
+  }
+
   .collection_container {
     padding: 0 3%;
 
