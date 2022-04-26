@@ -52,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     --selected-box-shadow:  0px 4px 6px var(--primary);
 
     /* Types */
-    --bodyFont: "Glacial Indifference", sans-serif;
+    --bodyFont: "rivera_light_regular", sans-serif;
     --baseFontSize: 16px;
     --h1: 3rem;
     --h2: 2.5rem;

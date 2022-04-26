@@ -116,6 +116,31 @@ const BeachTemplate = (props) => {
   const collections = data && data.pagesdata;
   const site = data && data.site;
 
+  // on page load execute handleScroll function
+  React.useEffect(() => {
+    handleScroll();
+  });
+
+  let scroll_pos = 0;
+
+  // log scroll position on scroll
+  function handleScroll() {
+    window.addEventListener("scroll", () => {
+      scroll_pos = window.scrollY;
+      console.log(scroll_pos);
+    });
+
+    // find the element that is mid way of half the scroll height
+   
+  
+
+    // scroll to position of mid point
+    window.scrollTo({
+      top: scroll_pos+5,
+      behavior: "smooth",
+    });
+  }
+
   let formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -180,6 +205,8 @@ const BeachTemplate = (props) => {
     <Layout>
       <LeftSidebar />
       <BeachVillaStyles>
+        <div ref={(el) => (window.onscroll = handleScroll)}>HOLAL ALOMI</div>
+
         <h1 className="collectionpage_title">
           {collections.CollectionPageName}
         </h1>

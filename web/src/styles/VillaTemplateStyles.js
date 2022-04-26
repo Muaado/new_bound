@@ -580,7 +580,7 @@ const VillaStyles = styled.div`
       }
 
       .accordion-child {
-        font-family: "Glacial Indifference", sans-serif;
+        font-family: "rivera_light_regular", sans-serif;
         margin: 0;
         overflow: hidden;
         transition: all 0.3s ease;
@@ -600,7 +600,7 @@ const VillaStyles = styled.div`
         max-height: 240px;
         // overflow-y:scroll;
         overflow-x: hidden;
-        font-family: "glacial_indifference_regular", sans-serif;
+        font-family: "rivera_light_regular", sans-serif;
       }
       .feattitle {
         font-family: "rivera_light_regular", sans-serif;
