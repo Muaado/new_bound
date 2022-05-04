@@ -116,11 +116,6 @@ const BeachTemplate = (props) => {
   const collections = data && data.pagesdata;
   const site = data && data.site;
 
-  // on page load execute handleScroll function
-  React.useEffect(() => {});
-
-  let scroll_pos = 0;
-
   // log scroll position on scroll
 
   let formatter = new Intl.NumberFormat("en-US", {
@@ -134,12 +129,13 @@ const BeachTemplate = (props) => {
 
   let beachvillas = [];
   let cols = [];
+  let featuredvillas = [];
 
   collections.beachVillaCollection.forEach((collection) => {
     let collectioname = collection.name;
     cols.push(collection);
   });
-  let indexvillas = 0;
+
   cols.forEach((col) => {
     beachvillas = [];
     col.villas.forEach((villa) => {
@@ -152,16 +148,8 @@ const BeachTemplate = (props) => {
       let max_occupancy = "-";
       let villa_showers = "-";
       let pool_type = "";
-      let villa_odd_even = true;
-
-
 
       // for every 3rd villa, add villa_odd class as True
-      indexvillas = beachvillas.length;
-
-   
-
-      villa["villa_odd_even"] = indexvillas;
 
       if (maxOccupancy.length == 2) {
         max_occupancy = maxOccupancy[0].number + " , " + maxOccupancy[1].number;
