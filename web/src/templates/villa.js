@@ -240,7 +240,7 @@ const VilaTemplate = (props) => {
     const notMobile = width > 990;
   }, [size]);
 
-  const [activeFeature, setActiveFeature] = useState(-1);
+  const [openedFeature, setOpenedFeature] = useState(-1);
   // const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   const {
@@ -304,11 +304,11 @@ const VilaTemplate = (props) => {
     villa["price_new"] = "-";
   }
 
-  const handleActiveFeature = (index) => {
-    if (activeFeature !== index) {
-      setActiveFeature(index);
+  const handleOpenFeature = (index) => {
+    if (openedFeature !== index) {
+      setOpenedFeature(index);
     } else {
-      setActiveFeature(-1);
+      setOpenedFeature(-1);
     }
   };
 
@@ -329,7 +329,7 @@ const VilaTemplate = (props) => {
     { title: "DEC", value: "11" },
   ];
 
-  console.log(villa);
+  console.log(villa)
 
   // const sortedPriceList = priceList.nodes.sort((a, b) =>
   //   parseInt(b.month) > parseInt(a.month) ? -1 : 1
@@ -440,7 +440,7 @@ const VilaTemplate = (props) => {
                 )}
               </ul>
               <p className="pricelbl">{villa.price_new}</p>
-              <Link to={`/enquire?id=${resortName}`} className="btn enquire">
+              <Link to={`/enquire?id=${resortName}`} className="btn">
                 ENQUIRE
               </Link>
             </div>
@@ -457,6 +457,8 @@ const VilaTemplate = (props) => {
             // data-aos-duration="1000"
             // data-aos-easing="ease-in-out"
           >
+            
+
             <div className="content">
               <div className="roomfeatwrap">
                 {/* <div className="image-container"> */}
@@ -472,21 +474,13 @@ const VilaTemplate = (props) => {
               </div>
 
               <ul className="accordion">
-                <h2 className="roomfeaturetitle">Room features</h2>
+              <h2 className="roomfeaturetitle">Room features</h2>
                 {roomFeatures?.features?.map(
                   ({ title, _rawDescription }, index) => (
                     <li key={title} className="accordion-item">
-                      <input
-                        id={index}
-                        className="hide"
-                        type="checkbox"
-                        checked={activeFeature === index}
-                      />
-                      <label
-                        htmlFor={index}
-                        className="accordion-label"
-                        onClick={() => handleActiveFeature(index)}
-                      >
+                      {/* <div className="plus"></div> */}
+                      <input id={index} className="hide" type="checkbox" />
+                      <label htmlFor={index} className="accordion-label">
                         {title}
                       </label>
 
@@ -503,7 +497,7 @@ const VilaTemplate = (props) => {
 
           {/* <div className="content">
               <ul className="accordion">
-
+                
                 <li className="accordion-item">
                   <input id="s1" className="hide" type="checkbox" />
                   <label htmlFor="s1" className="accordion-label">
