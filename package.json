@@ -6,8 +6,8 @@
     "build": "lerna run build --parallel",
     "dev": "HOST=0.0.0.0 lerna run dev --parallel",
     "format": "lerna run format",
-    "build-studio": "lerna bootstrap && cd studio && npm run build",
-    "build-web": "lerna bootstrap && (cd web && npm run build)",
+    "build-studio": "lerna bootstrap && cd studio && yarn build",
+    "build-web": "lerna bootstrap && (cd web && yarn build)",
     "graphql-deploy": "lerna run graphql-deploy",
     "lint": "lerna run lint",
     "postinstall": "lerna bootstrap",
@@ -24,16 +24,7 @@
     "lerna": "^4.0.0",
     "prettier": "^2.2.1"
   },
-  "dependencies": {
-    "@formspree/react": "^2.2.4",
-    "aos": "^3.0.0-beta.6",
-    "babel-plugin-styled-components": "^1.13.2",
-    "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-plugin-react-svg": "^3.0.1",
-    "gatsby-plugin-sanity-image": "^0.8.0",
-    "gatsby-plugin-styled-components": "^2.0.4",
-    "gatsby-remark-embed-video": "^3.1.1",
-    "gatsby-transformer-remark": "^4.11.0",
-    "styled-components": "^5.3.1"
+  "resolutions": {
+    "react": "^16.0.0"
   }
 }
