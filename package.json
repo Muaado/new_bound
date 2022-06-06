@@ -6,8 +6,8 @@
     "build": "lerna run build --parallel",
     "dev": "HOST=0.0.0.0 lerna run dev --parallel",
     "format": "lerna run format",
-    "build-studio": "lerna bootstrap && cd studio && npm run build",
-    "build-web": "lerna bootstrap && (cd web && npm run build)",
+    "build-studio": "lerna bootstrap && cd studio && yarn build",
+    "build-web": "lerna bootstrap && (cd web && yarn build)",
     "graphql-deploy": "lerna run graphql-deploy",
     "lint": "lerna run lint",
     "postinstall": "lerna bootstrap",
@@ -23,5 +23,8 @@
     "eslint-plugin-react": "^7.22.0",
     "lerna": "^4.0.0",
     "prettier": "^2.2.1"
+  },
+  "resolutions": {
+    "react": "^16.0.0"
   }
 }
