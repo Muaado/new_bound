@@ -4,7 +4,6 @@ import { device } from "./deviceSizes";
 export const GlobalStyle = createGlobalStyle`
 
   :root {
-    
     --darkRed: #5D0012;
     --lightOrange: #B39A6A;
     --darkGreen: #004743;
@@ -90,8 +89,6 @@ export const GlobalStyle = createGlobalStyle`
     word-wrap: break-word;
     font-kerning: normal;
     }
-  }
-
   .btn {
     background: var(--secondary);
     color: var(--pureWhite);
@@ -359,4 +356,10 @@ export const GlobalStyle = createGlobalStyle`
       page-break-after: avoid;
     }
   }
+    .ril__navButtonNext ,    .ril__navButtonPrev {
+      background-size: 14px !important;
+    }
+    .villa__header{
+      margin-top: 0px !important;
+    }
 `;

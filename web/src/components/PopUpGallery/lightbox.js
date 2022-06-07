@@ -17,7 +17,10 @@ const Lightbox = ({
   const array = [];
   images.forEach((image) =>
     array.push(
-      <GalleryImage className={`gallery ${showLightbox ? "open" : ""}`}>
+      <GalleryImage
+        imageWidth={showLightbox ? "50%" : undefined}
+        className={`gallery ${showLightbox ? "open" : ""}`}
+      >
         {image && image.asset && <Image {...image} alt={image.alt} />}
       </GalleryImage>
     )

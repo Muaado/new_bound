@@ -1,6 +1,7 @@
 import { graphql, Link } from "gatsby";
 import BlogPost from "../components/Post/blog-post";
 import React from "react";
+import { GatsbyImage } from "gatsby-plugin-image";
 import GraphQLErrorList from "../components/graphql-error-list";
 import Layout from "../containers/layout";
 import Container from "../components/container";
@@ -87,6 +88,12 @@ export const query = graphql`
           }
         }
       }
+      banner {
+        sectionHeroImage {
+          ...SanityImage
+          alt
+        }
+      }
     }
 
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -113,9 +120,10 @@ export const query = graphql`
 
 const BeachTemplate = (props) => {
   const { data, errors, pageContext } = props;
+  console.log("DATA", data);
   const collections = data && data.pagesdata;
   const site = data && data.site;
-
+  const banners = data?.pagesdata?.banner;
   // log scroll position on scroll
 
   let formatter = new Intl.NumberFormat("en-US", {
@@ -181,7 +189,7 @@ const BeachTemplate = (props) => {
     });
   });
 
-  console.log(cols);
+  console.log("BANNERS", banners);
   // collectionData.getUrl = (data) => getVillaUrl(data);
 
   return (
@@ -200,148 +208,173 @@ const BeachTemplate = (props) => {
         )}
 
         <div className="collection_container">
-          {cols?.map((col) => (
-            // eslint-disable-next-line react/jsx-key
-            <div className="mastercol">
-              <h2 className="col_name">{col.CollectionName}</h2>
+          {cols?.map((col, key) => {
+            return (
+              // eslint-disable-next-line react/jsx-key
+              <div className="mastercol">
+                <h3 className="col_name">{col.CollectionName}</h3>
 
-              <ul className="collection_wrap">
-                {col.villas?.map((villa) => {
-                  //  for every second villa index add a new row
-                  return (
-                    // eslint-disable-next-line react/jsx-key
-                    <li className="collection_wrap_item">
-                      <div className="collection__image">
-                        {villa.imageThumb && villa.imageThumb.asset && (
-                          <Image
-                            {...villa.imageThumb}
-                            alt={villa.imageThumb.alt}
-                          />
-                        )}
-                      </div>
-
-                      <div className="collection__details">
-                        <Link to={villa.url}>
-                          <h4 className="villaname">{villa.name}</h4>
-                        </Link>
-                        <ul className="villa_icons">
-                          <li>
-                            <Measure className="villa_icon measureicon" />
-                            <span className="villa_icon_label">
-                              {villa.sizeSqm} sqm
-                            </span>
-                          </li>
-
-                          <li>
-                            <Shower />
-                            <span className="villa_icon_label">
-                              {villa.villa_showers}
-                            </span>
-                          </li>
-
-                          <li>
-                            <Bed />
-                            <span className="villa_icon_label">
-                              {villa.numrooms}
-                            </span>
-                          </li>
-
-                          <li>
-                            <TwoPeople />
-                            <span className="villa_icon_label">
-                              {villa.max_occupancy}
-                            </span>
-                          </li>
-
-                          {villa.villaPoolTypes[0] && (
-                            <li>
-                              <SwimmingPool />
-                              <span className="villa_icon_label">
-                                {villa.villaPoolTypes[0].poolType}
-                              </span>
-                            </li>
-                          )}
-                        </ul>
-
-                        <div className="villa_price">{villa.price_new}</div>
-
-                        {villa.resort.resortBrandLogo && (
-                          <div className="collection_brand_logo">
-                            {villa.resort.resortBrandLogo &&
-                              villa.resort.resortBrandLogo.asset && (
-                                <Image
-                                  {...villa.resort.resortBrandLogo}
-                                  alt={villa.resort.resortBrandLogo.alt}
-                                />
-                              )}
+                <ul className="collection_wrap">
+                  {col.villas?.map((villa, key) => {
+                    //  for every second villa index add a new row
+                    return (
+                      // eslint-disable-next-line react/jsx-key
+                      <Link to={villa.url}>
+                        <li className="collection_wrap_item">
+                          <div className="collection__image">
+                            {villa.imageThumb && villa.imageThumb.asset && (
+                              <Image
+                                {...villa.imageThumb}
+                                alt={villa.imageThumb.alt}
+                              />
+                            )}
                           </div>
-                        )}
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+                          <div className="collection__details">
+                            <h4 className="villaname">{villa.name}</h4>
+                            <ul className="villa_icons">
+                              <li>
+                                <Measure className="villa_icon measureicon" />
+                                <span className="villa_icon_label">
+                                  {villa.sizeSqm} sqm
+                                </span>
+                              </li>
 
-              {/* Begin Featured Villa Section */}
-              {col.featuredvillas[0] && (
-                <div className="featured_villa_section">
-                  {/* BEGIN LEFT SECTION */}
-                  <div className="photofeatured">
+                              <li>
+                                <Shower />
+                                <span className="villa_icon_label">
+                                  {villa.villa_showers}
+                                </span>
+                              </li>
+
+                              <li>
+                                <Bed />
+                                <span className="villa_icon_label">
+                                  {villa.numrooms}
+                                </span>
+                              </li>
+
+                              <li>
+                                <TwoPeople />
+                                <span className="villa_icon_label">
+                                  {villa.max_occupancy}
+                                </span>
+                              </li>
+
+                              {villa.villaPoolTypes[0] && (
+                                <li>
+                                  <SwimmingPool />
+                                  <span className="villa_icon_label">
+                                    {villa.villaPoolTypes[0].poolType}
+                                  </span>
+                                </li>
+                              )}
+                            </ul>
+
+                            <div className="villa_price-logo-wrapper">
+                              <div className="villa_price">
+                                {villa.price_new}
+                              </div>
+                              {villa.resort.resortBrandLogo && (
+                                <div className="collection_brand_logo">
+                                  {villa.resort.resortBrandLogo &&
+                                    villa.resort.resortBrandLogo.asset && (
+                                      <Image
+                                        {...villa.resort.resortBrandLogo}
+                                        alt={villa.resort.resortBrandLogo.alt}
+                                      />
+                                    )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </li>
+                      </Link>
+                    );
+                  })}
+                </ul>
+                {key === 0 && banners[0]?.sectionHeroImage?.asset && (
+                  <div className="villa_banners">
                     <Image
                       className="featuredreslogo"
-                      {...col.featuredvillas[0].villaone.resort.resortBrandLogo}
-                      alt={
-                        col.featuredvillas[0].villaone.resort.resortBrandLogo
-                          .alt
-                      }
+                      {...banners[0]?.sectionHeroImage}
                     />
-                    <Image
-                      className="featured_villa_image"
-                      {...col.featuredvillas[0].villaone.imageThumb}
-                    />
-
-                    <div className="featuredVillaFooter">
-                      <Link to={col.featuredvillas[0].villaone.url}>
-                        <h3 className="featuredVillaName">
-                          {col.featuredvillas[0].villaone.name}
-                        </h3>
-                      </Link>
-                      <h4 className="featuredVillaPrice">
-                        {col.featuredvillas[0].villaone.price}
-                      </h4>
-                      <Link to={col.featuredvillas[0].villaone.url}>
-                        <h4 className="featuredVillaView">View Room</h4>
-                      </Link>
-                    </div>
                   </div>
-                  {/*  END LEFT SECTION */}
-
-                  {/* BEGIN RIGHT SECTION */}
-                  <div className="rightfeatured">
-                    {col.featuredvillas[0].villaone.headerImages.images[1] && (
+                )}
+                {/* Begin Featured Villa Section */}
+                {col.featuredvillas[0] && (
+                  <div className="featured_villa_section">
+                    {/* BEGIN LEFT SECTION */}
+                    <div className="photofeatured">
+                      {console.log(
+                        "TEST",
+                        col.featuredvillas[0].villaone.resort.resortBrandLogo
+                      )}
                       <Image
-                        {...col.featuredvillas[0].villaone.headerImages
-                          .images[1]}
+                        className="featuredreslogo"
+                        {...col.featuredvillas[0].villaone.resort
+                          .resortBrandLogo}
                         alt={
-                          col.featuredvillas[0].villaone.headerImages.images[1]
+                          col.featuredvillas[0].villaone.resort.resortBrandLogo
                             .alt
                         }
                       />
-                    )}
-                    <div className="txtwrap">
-                      <h3>{col.featuredvillas[0].title}</h3>
-                      <h2 className="tagline">
-                        {col.featuredvillas[0].villaone.tagline}
-                      </h2>
-                      <p className="description">
-                        {col.featuredvillas[0].villaone.short_desc}
-                      </p>
+                      <Image
+                        className="featured_villa_image"
+                        {...col.featuredvillas[0].villaone.imageThumb}
+                      />
+
+                      <div className="featuredVillaFooter">
+                        <Link to={col.featuredvillas[0].villaone.url}>
+                          <h3 className="featuredVillaName">
+                            {col.featuredvillas[0].villaone.name}
+                          </h3>
+                        </Link>
+                        <h4 className="featuredVillaPrice">
+                          {col.featuredvillas[0].villaone.price}
+                        </h4>
+                        <Link to={col.featuredvillas[0].villaone.url}>
+                          <h4 className="featuredVillaView">View Room</h4>
+                        </Link>
+                      </div>
+                    </div>
+                    {/*  END LEFT SECTION */}
+
+                    {/* BEGIN RIGHT SECTION */}
+                    <div className="rightfeatured">
+                      {col.featuredvillas[0].villaone.headerImages
+                        .images[1] && (
+                        <Image
+                          {...col.featuredvillas[0].villaone.headerImages
+                            .images[1]}
+                          alt={
+                            col.featuredvillas[0].villaone.headerImages
+                              .images[1].alt
+                          }
+                        />
+                      )}
+                      <div className="txtwrap">
+                        <h3>{col.featuredvillas[0].title}</h3>
+                        <h2 className="tagline">
+                          {col.featuredvillas[0].villaone.tagline}
+                        </h2>
+                        <p className="description">
+                          {col.featuredvillas[0].villaone.short_desc}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+                {key === 1 && banners[1]?.sectionHeroImage?.asset && (
+                  <div className="villa_banners">
+                    <Image
+                      className="featuredreslogo"
+                      {...banners[1]?.sectionHeroImage}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         <ContactUs contactUs={site.contactUs} />

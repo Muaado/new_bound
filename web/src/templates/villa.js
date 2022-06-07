@@ -378,7 +378,26 @@ const VilaTemplate = (props) => {
           </div>
 
           {/* )} */}
-
+          <div className="backtoreswrapper">
+            <div className="breadcrumb">
+              <ul>
+                <li>
+                  <Link className="backtoresort" to={`/`}>
+                    Home
+                  </Link>
+                </li>
+                <li>&gt;</li>
+                <li>
+                  <Link
+                    className="backtoresort"
+                    to={`/${resortName.toLowerCase().split(" ").join("-")}`}
+                  >
+                    {resortName}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div
             className="villa__header"
             id="overview"
@@ -387,22 +406,11 @@ const VilaTemplate = (props) => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
-            <div className="backtoreswrapper">
-              <ChevronLeft className="backtoresorticon"></ChevronLeft>
-              <Link
-                className="backtoresort"
-                to={`/${resortName.toLowerCase().split(" ").join("-")}`}
-              >
-                Resort page
-              </Link>
-            </div>
             <div className="container">
               {villa.uniqueCode && (
                 <div className="unique_code_wrap">
-                  <div className="unique_code">
-                    <strong>#</strong>
-                    {villa.uniqueCode}
-                  </div>
+                  <strong>#</strong>
+                  {villa.uniqueCode}
                 </div>
               )}
               {/* <p className="alternate-name">{alternateName}</p> */}

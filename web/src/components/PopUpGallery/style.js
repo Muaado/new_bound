@@ -2,22 +2,16 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 export const GalleryImage = styled.div`
-  /* height: 100rem; */
   @media ${device.laptopL} {
     padding-right: 0 !important;
   }
-  width: 65%;
-  // height: max-content;
-  /* height: 100%; */
+  width: ${({ imageWidth }) => (imageWidth ? imageWidth : "65%")};
   &.open {
-    /* width: 70%;
-    height: 70%; */
-
     position: absolute;
     top: 50%;
     left: 50%;
+    cursor: pointer;
     transform: translate(-50%, -50%);
-    /* padding: 10%; */
     & > div {
       display: flex;
       align-items: center;
