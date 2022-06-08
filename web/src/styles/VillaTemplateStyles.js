@@ -18,19 +18,30 @@ const VillaStyles = styled.div`
       letter-spacing: unset;
     }
   }
-  .backtoresorticon {
-    width: 24px;
-    height: 24px;
-    color: #76622e8a;
-    position: relative;
-    top: -2px;
-    left: -4px;
-  }
 
   .backtoreswrapper {
-    position: absolute;
-    top: 10px;
-    left: 10%;
+    margin-top: 20px;
+    margin-left: 30px;
+  }
+
+  .breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    border-radius: 4px;
+    ul {
+      float: left;
+      padding: 0;
+      margin: 0;
+      li {
+        cursor: pointer;
+        float: left;
+        font-size: 10px;
+        color: #11103b;
+        margin-right: 6px;
+        list-style: none;
+      }
+    }
   }
 
   .backtoresort {
@@ -52,6 +63,7 @@ const VillaStyles = styled.div`
   h2 {
     /* letter-spacing: 1rem; */
     text-align: center;
+    font-size: 35px;
   }
 
   .villa {
@@ -413,24 +425,13 @@ const VillaStyles = styled.div`
       }
 
       .unique_code_wrap {
-        display: inline-block;
         width: 100%;
-        text-align: left;
         margin-bottom: 20px;
-        position: absolute;
-
-        @media ${device.desktopL} {
-        }
-
-        .unique_code {
-          font-size: 2rem;
-          font-family: "rivera_bold_regular", "sans-serif";
-          color: #737070;
-          display: inline-block;
-          position: relative;
-          top: -25rem;
-          text-orientation: use-glyph-orientation;
-        }
+        font-size: 16px;
+        font-family: "rivera_bold_regular", "sans-serif";
+        color: #737070;
+        text-orientation: use-glyph-orientation;
+        text-align: left;
       }
 
       &-icons {
@@ -502,14 +503,18 @@ const VillaStyles = styled.div`
       .roomfeaturetitle {
         margin-bottom: 7rem;
         color: #fff;
+        font-size: 35px;
       }
-      max-height: 550px !important;
+      max-height: 660px !important;
       // top:0;
 
       .content {
         background: rgb(0, 0, 0, 0.3);
-        max-height: 520px;
-        min-height: 520px;
+        max-height: 660px;
+        min-height: 660px;
+        img {
+          height: 660px;
+        }
       }
 
       .hide {
@@ -553,10 +558,11 @@ const VillaStyles = styled.div`
         cursor: pointer;
         // background:#76622eb3;
         margin-top: -1px;
-        border-bottom: 0.5px solid #fff;
+        border-bottom: 0.5px solid rgb(255, 255, 255, 0.5);
       }
       .accordion-label:hover {
         cursor: pointer;
+        font-weight: 600;
       }
 
       .accordion-label:after {

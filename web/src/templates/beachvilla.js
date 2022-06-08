@@ -248,7 +248,8 @@ const BeachVillaTemplate = (props) => {
                           {villa.imageThumb && villa.imageThumb.asset && (
                             <Image
                               {...villa.imageThumb}
-                              alt={villa.imageThumb.alt} />
+                              alt={villa.imageThumb.alt}
+                            />
                           )}
                         </div>
                       )}
@@ -297,7 +298,8 @@ const BeachVillaTemplate = (props) => {
                               villa.resort.resortBrandLogo.asset && (
                                 <Image
                                   {...villa.resort.resortBrandLogo}
-                                  alt={villa.resort.resortBrandLogo.alt} />
+                                  alt={villa.resort.resortBrandLogo.alt}
+                                />
                               )}
                           </div>
                         )}
