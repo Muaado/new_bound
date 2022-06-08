@@ -293,11 +293,18 @@ const BeachTemplate = (props) => {
                   })}
                 </ul>
                 {key === 0 && banners[0]?.sectionHeroImage?.asset && (
-                  <div className="villa_banners">
+                  <div className="villa_banners villa_nuatilus_banner">
                     <Image
                       className="featuredreslogo"
                       {...banners[0]?.sectionHeroImage}
                     />
+                    <div className="nuatilus_texts">
+                      <div className="nuatilus_text">
+                        <div className="top-border" />
+                        <h2>PARK HYYAT</h2>
+                        <div className="bottom-border" />
+                      </div>
+                    </div>
                   </div>
                 )}
                 {/* Begin Featured Villa Section */}
@@ -305,10 +312,6 @@ const BeachTemplate = (props) => {
                   <div className="featured_villa_section">
                     {/* BEGIN LEFT SECTION */}
                     <div className="photofeatured">
-                      {console.log(
-                        "TEST",
-                        col.featuredvillas[0].villaone.resort.resortBrandLogo
-                      )}
                       <Image
                         className="featuredreslogo"
                         {...col.featuredvillas[0].villaone.resort
@@ -365,11 +368,19 @@ const BeachTemplate = (props) => {
                   </div>
                 )}
                 {key === 1 && banners[1]?.sectionHeroImage?.asset && (
-                  <div className="villa_banners">
+                  <div className="villa_banners villa_banner_boundless">
                     <Image
-                      className="featuredreslogo"
+                      className="villaBoundlessBanner"
                       {...banners[1]?.sectionHeroImage}
                     />
+                    <div className="boundless_texts">
+                      <div className="boundless_text">
+                        <h3> BOUNDLESS</h3>
+                      </div>
+                      <div className="boundless_sub_text">
+                        ONLY THE BEST IN THE WORLD
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

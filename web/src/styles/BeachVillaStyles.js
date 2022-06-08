@@ -126,9 +126,80 @@ export const BeachVillaStyles = styled.div`
     margin-top: 38px;
     margin-bottom: 27px;
     width: 100%;
-    height: 619px;
+    .villa_nuatilus_banner {
+      height: 619px;
+    }
+    .villa_banner_boundless {
+      height: 378px;
+    }
   }
 
+  .villa_banner_boundless,
+  .villa_nuatilus_banner {
+    position: relative;
+    .boundless_texts,
+    .nuatilus_texts {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+      color: #fff;
+      top: 50%;
+      left: 50%;
+      font-family: vendor !important;
+      font-weight: 400;
+      transform: translate(-50%, -50%);
+      h3 {
+        font-family: vendor !important;
+        letter-spacing: 42px;
+        margin-left: 25px;
+        color: #fff;
+        z-index: 20 Im !important;
+        @media ${device.onlyMobileS} {
+          font-size: 20px;
+          letter-spacing: 10px;
+        }
+      }
+      h2 {
+        font-family: vendor !important;
+        letter-spacing: 30px;
+        color: #fff;
+        width: 100%;
+        z-index: 20 !important;
+        @media ${device.onlyMobileS} {
+          font-size: 16px;
+          letter-spacing: 1px;
+        }
+      }
+      .top-border {
+        margin-bottom: 40px;
+      }
+      .bottom-border {
+        margin-top: 40px;
+      }
+
+      .top-border,
+      .bottom-border {
+        border-bottom: 2.5px solid;
+        max-width: 100%;
+        margin-left: 20%;
+        margin-right: 20%;
+      }
+    }
+    .boundless_text {
+      border-bottom: 1px solid white;
+    }
+  }
+
+  .boundless_sub_text {
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 20px;
+    @media ${device.onlyMobileS} {
+      font-size: 12px;
+      letter-spacing: 0px;
+    }
+  }
   .featured_villa_section {
     margin-top: 9rem;
     display: grid;
