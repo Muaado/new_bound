@@ -161,7 +161,7 @@ const JourneyStyles = styled.div`
       @media ${device.mobileXL} {
         height: 25rem !important;
       }
-      
+
       p {
         position: absolute;
         /* top: 90%; */

@@ -12,6 +12,7 @@ import useForm from "../hooks/useForm";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import { device } from "../styles/deviceSizes";
 import countries from "../lib/countries";
+import { Button } from "../components/Button";
 
 export const query = graphql`
   query EnquirePageQuery {
@@ -402,7 +403,9 @@ const Enquire = (props) => {
                 </div>
               </div>
 
-              <button className="btn">Enquire now</button>
+              <Button style={{ background: "var(--secondary)", color: "#fff" }}>
+                Enquire now
+              </Button>
             </div>
           </form>
 

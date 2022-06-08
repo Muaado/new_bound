@@ -59,7 +59,7 @@ export const NewsLetterStyles = styled.div`
       padding: 1rem;
     }
     .btn {
-      background: var(--primary);
+      /* background: var(--primary); */
       @media ${device.laptopM} {
         padding: 1.2rem 2rem;
       }

@@ -328,7 +328,7 @@ const ResortTemplate = (props) => {
             data-aos-easing="ease-in-out"
           >
             <div className="resort__restaurants__header">
-              <h2>DINE</h2>
+              <h2>DINE123</h2>
               <p>
                 Great conversation, a perfectly mixed drink, delicious tapas
                 plates served under the sparkle of the Maldivian sky. Our
@@ -415,7 +415,7 @@ const ResortTemplate = (props) => {
               // )}
             >
               {/* get first spa from spas and use Spa component to print spa information */}
-              {spas.nodes.map(spa => (
+              {spas.nodes.map((spa) => (
                 <Spa spa={spa} key={spa.name} />
               ))}
             </div>
@@ -430,7 +430,7 @@ const ResortTemplate = (props) => {
               data-aos-easing="ease-in-out"
             />
           )}
-{/* 
+          {/* 
           {secondImage && (
             <Image
               {...secondImage}

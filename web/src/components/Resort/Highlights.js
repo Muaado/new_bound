@@ -47,6 +47,7 @@ const HighlightsStyles = styled.div`
     }
     h2 {
       margin-bottom: 7rem;
+      font-size: 35px;
       /* letter-spacing: 1rem; */
     }
 
@@ -180,7 +181,7 @@ const Highlights = ({ highlights }) => {
         className="carousel"
         slidesToShow={1}
         cellSpacing={0}
-        
+
         // renderCenterRightControls={({ nextSlide }) => (
         //   <CarouselButton onClick={nextSlide} chevronRight={true} />
         // )}

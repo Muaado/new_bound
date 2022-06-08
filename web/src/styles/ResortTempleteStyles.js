@@ -10,7 +10,7 @@ const ResortStyles = styled.div`
   h2 {
     letter-spacing: 1rem;
     text-align: center;
-
+    font-size: 35px;
     @media ${device.tablet} {
       letter-spacing: normal;
     }

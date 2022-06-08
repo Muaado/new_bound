@@ -4,6 +4,7 @@ import Image from "gatsby-plugin-sanity-image";
 import Placeholder from "../../assets/placeholder.svg";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
+import { Button } from "../Button";
 
 const RestaurantsStyles = styled.div`
   margin-top: 10rem;
@@ -36,7 +37,7 @@ const RestaurantsStyles = styled.div`
     }
 
     .image-container {
-      padding-top:30px;
+      padding-top: 30px;
       height: 50rem;
       @media ${device.tablet} {
         height: 28rem;
@@ -62,7 +63,6 @@ const RestaurantsStyles = styled.div`
     /* top: -4rem; */
     align-self: center;
     /* max-width: 25rem; */
-    
 
     display: flex;
     flex-direction: column;
@@ -70,46 +70,42 @@ const RestaurantsStyles = styled.div`
     @media ${device.laptop} {
       /* max-height: 25rem; */
     }
-
-    }
-    .alternate-name {
-      display: flex;
-      font-size: 1.5rem;
-      font-weight: 100;
-      margin-bottom: 2rem;
-      color: #a9a7a7;
-      text-transform: capitalize;
-      letter-spacing: 0.4rem;
-      // margin-top:-20px;
-      
-    }
-
-    a {
-      margin-top: 2.5rem;
-      color: #505050;
-    }
+  }
+  .alternate-name {
+    display: flex;
+    font-size: 1.7rem;
+    font-weight: 100;
+    margin-bottom: 2rem;
+    color: #a9a7a7;
+    text-transform: capitalize;
+    letter-spacing: 0.4rem;
+    // margin-top:-20px;
   }
 
-  .btn {
+  a {
+    margin-top: 2.5rem;
+    color: #505050;
+  }
+
+  .view-more-btn {
     margin-top: 5rem;
     align-self: center;
   }
 
-  .rest-name{
+  .rest-name {
     // letter-spacing:0.2rem;
     display: flex;
     text-transform: capitalize !important;
     color: var(--darkGreen);
-    font-size: 25px;
+    font-size: 20px;
     padding: 20px 0px;
     letter-spacing: 1.75px;
   }
 
-  .restaurant-description{
+  .restaurant-description {
+    font-size: 14px;
     color: #676767;
   }
-  
-
 `;
 const Restaurants = ({ restaurants }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
@@ -154,9 +150,12 @@ const Restaurants = ({ restaurants }) => {
       </ul>
 
       {restaurantSlice === 4 && (
-        <button className="btn" onClick={() => setRestaurantSLice(100)}>
+        <Button
+          className="view-more-btn"
+          onClick={() => setRestaurantSLice(100)}
+        >
           View more
-        </button>
+        </Button>
       )}
     </RestaurantsStyles>
   );
