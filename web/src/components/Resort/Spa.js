@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
 import PortableText from "../Ui/portableText";
@@ -7,7 +6,6 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 // import { device } from "../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
-
 
 const SpaStyles = styled.div`
   /* margin-top: 14rem; */
@@ -26,9 +24,9 @@ const SpaStyles = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 
-  .spaname{
-    width:100%;
-    color: var(--darkGreen);
+  .spaname {
+    width: 100%;
+    color: var(--primary);
     font-size: 25px;
     padding: 20px 0px;
     display: flex;
@@ -120,7 +118,6 @@ const SpaStyles = styled.div`
       @media ${device.tablet} {
         padding: 0;
       }
-      
     }
   }
 
@@ -167,8 +164,7 @@ const SpaStyles = styled.div`
   }
 
   @media ${device.laptop} {
-
-    .right-section{
+    .right-section {
       display: none;
     }
 
@@ -176,25 +172,19 @@ const SpaStyles = styled.div`
       min-height: unset;
     }
 
-    .right-section img{
+    .right-section img {
       display: none;
     }
   }
-
-  
-
 
   .slider-list {
     height: fit-content !important;
   }
 
-  
-
-
-// `;
+  //
+`;
 
 const Spa = ({ spa, className }) => {
-
   const size = useWindowSize();
 
   useEffect(() => {
@@ -206,12 +196,8 @@ const Spa = ({ spa, className }) => {
     const screenXL = width > 1440 && width < 1600;
     const screenXXL = width > 1600;
     const notMobile = width > 576;
-
-
-
-  
   }, [size]);
-  
+
   return (
     <SpaStyles
       className={className}
@@ -223,7 +209,6 @@ const Spa = ({ spa, className }) => {
       <div className="container">
         <div className="left-section">
           <div className="image-web">
-            
             {spa.imageWeb && spa.imageWeb.asset && (
               <Image {...spa.imageWeb} alt={spa.imageWeb.alt} />
             )}

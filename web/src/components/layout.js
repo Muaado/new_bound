@@ -10,12 +10,10 @@ import "aos/dist/aos.css";
 import Footer from "./Footer";
 import "../styles/layout.css";
 
-
 import { Helmet } from "react-helmet";
 
 const windowGlobal = typeof window !== "undefined";
 if (windowGlobal) AOS.init();
-
 
 const Layout = ({
   children,
@@ -51,6 +49,7 @@ const Layout = ({
     />
 
     <div
+
     // onClick={() => onHideNav()}
     >
       {children}

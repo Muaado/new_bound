@@ -96,7 +96,7 @@ const RestaurantsStyles = styled.div`
     // letter-spacing:0.2rem;
     display: flex;
     text-transform: capitalize !important;
-    color: var(--darkGreen);
+    color: var(--primary);
     font-size: 20px;
     padding: 20px 0px;
     letter-spacing: 1.75px;
@@ -114,6 +114,10 @@ const Restaurants = ({ restaurants }) => {
     <RestaurantsStyles
       // className="villa__restaurants"
       id="dine"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
     >
       <h2>Dine</h2>
       <ul>

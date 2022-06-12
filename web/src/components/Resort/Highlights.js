@@ -1,6 +1,6 @@
 import Carousel from "nuka-carousel";
 import React from "react";
-import PortableText from "../Ui/portableText";
+import { Overlay } from "../Overlay";
 import ChevronRight from "../../assets/icons/chevron-right.svg";
 import Image from "gatsby-plugin-sanity-image";
 import Placeholder from "../../assets/placeholder.svg";
@@ -44,7 +44,6 @@ const HighlightsStyles = styled.div`
   h2 {
     margin-bottom: 7rem;
     font-size: 35px;
-    /* letter-spacing: 1rem; */
   }
 
   ul {
@@ -61,53 +60,18 @@ const HighlightsStyles = styled.div`
       display: none;
     }
 
-    /* .overlay {
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      right: 0;
-      opacity: 1;
-      background-color: #000;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      transition: 10s ease;
-    } */
-
     li {
       position: relative;
-      transition: all 5s ease-in;
-
+      transition: all 10s ease-in;
       @media ${device.tablet} {
         height: 230px;
       }
-
-      &:hover {
-        transition: 10s ease;
-        p,
-        a {
-          transition: all 0.3s;
-          opacity: 1;
-          z-index: 999;
-        }
-
-        &:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 100%;
-          width: 100%;
-          opacity: 0.4;
-          visibility: none;
-          transition: 10s ease;
-          background: #000;
-          z-index: 50;
-        }
-      }
     }
+
+    li:hover .overlay {
+      opacity: 0.5;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -178,10 +142,10 @@ const Highlights = ({ highlights }) => {
     <HighlightsStyles
       id="highlights"
       className="resort__highlights"
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
     >
       <h2>Highlights</h2>
 
@@ -219,6 +183,7 @@ const Highlights = ({ highlights }) => {
         {highlights.length
           ? highlights.map(({ name, imageThumb, description }) => (
               <li key={imageThumb?.alt}>
+                <Overlay className="overlay" />
                 <a>
                   {name} <ChevronRight />
                 </a>

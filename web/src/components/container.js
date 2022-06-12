@@ -35,7 +35,7 @@ const ContainerStyles = styled.main`
   } */
 
   .height-80vh {
-    height: 80vh;
+    height: 750px;
     &:before {
       height: inherit;
     }

@@ -3,9 +3,7 @@ import React from "react";
 import Image from "gatsby-plugin-sanity-image";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-import { Link } from "gatsby";
-import { getActivityUrl } from "../../lib/helpers";
-import CarouselButton from "../Ui/CarouselButton";
+import { Overlay } from "../Overlay";
 import Carousel from "nuka-carousel";
 
 // import { Placeholder } from "gatsby-plugin-image";
@@ -64,7 +62,7 @@ const ActivitiesStyles = styled.div`
     position: relative;
     /* width: 10rem; */
 
-    transition: all 2s;
+    transition: all 10s ease-in;
     height: 322px;
 
     &__carousel {
@@ -88,18 +86,12 @@ const ActivitiesStyles = styled.div`
     }
 
     &:hover {
-      &:before {
-        /* transform: translate(-50%, -50%); */
-        content: "";
-        position: absolute;
-        opacity: 0.3;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
+      .overlay {
+        opacity: 0.5;
       }
-
       p {
         opacity: 1;
+        z-index: 20;
       }
     }
     p {
@@ -127,15 +119,14 @@ const ActivitiesStyles = styled.div`
     @media ${device.mobileXL} {
       display: unset !important;
 
-      a{
+      a {
         bottom: 0;
-        padding:5px;
-        
+        padding: 5px;
       }
 
-      img{
-        max-height:240px;
-        min-height:240px;
+      img {
+        max-height: 240px;
+        min-height: 240px;
       }
     }
 
@@ -143,8 +134,6 @@ const ActivitiesStyles = styled.div`
       display: none !important;
     }
   }
-
-  
 `;
 
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
@@ -152,10 +141,11 @@ const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
 const Activities = ({ activities }) => {
   return (
     <ActivitiesStyles
-    // data-aos="fade-up"
-    // data-aos-delay="50"
-    // data-aos-duration="1000"
-    // data-aos-easing="ease-in-out"
+      id="activities"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
     >
       <h2>Activities</h2>
       {/* <p>
@@ -167,6 +157,7 @@ const Activities = ({ activities }) => {
         {activities?.length
           ? activities?.map(({ name, imageThumb, resort }) => (
               <li className="item" key={imageThumb.alt}>
+                <Overlay className="overlay" />
                 {/* <Link to={getActivityUrl({ name, resortName: resort.name })}> */}
                 {imageThumb && imageThumb.asset && (
                   <Image {...imageThumb} alt={imageThumb.alt} />

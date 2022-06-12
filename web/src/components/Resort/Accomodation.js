@@ -83,6 +83,27 @@ const AccomodationStyles = styled.div`
 
     .roomFooter {
       padding: 2rem;
+      .room_price {
+        font-size: 1.6rem;
+        -webkit-letter-spacing: 0.3rem;
+        -moz-letter-spacing: 0.3rem;
+        -ms-letter-spacing: 0.3rem;
+        letter-spacing: 0.3rem;
+        color: #7d7d7d;
+        .price-from {
+          text-transform: uppercase;
+          font-weight: 800 !important;
+          font-size: 10px;
+        }
+        .font-bold {
+          font-family: "rivera_bold_regular", "sans-serif";
+        }
+        .price-category {
+          font-size: 11px;
+          margin-left: 5px;
+        }
+        // margin-left: 20px;
+      }
     }
     .roomname {
       font-size: 25px;
@@ -142,10 +163,10 @@ const Accomodation = ({ villas, id }) => {
     <AccomodationStyles
       id={id}
       className="resort__accomodation"
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
     >
       <h2>Accommodation</h2>
 
@@ -176,7 +197,12 @@ const Accomodation = ({ villas, id }) => {
             )}
             <div className="roomFooter">
               <p className="roomname">{name}</p>
-              <span className="pricelbl">from $5,950 PP</span>
+              {/* <span className="pricelbl">from $5,950 PP</span> */}
+              <div className="room_price">
+                <span className="price-from font-bold">From</span>{" "}
+                <span className="font-bold">$5,950</span>
+                <span className="price-category">per person</span>
+              </div>
               <Button>View Room</Button>
             </div>
           </Link>

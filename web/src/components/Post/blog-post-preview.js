@@ -72,7 +72,7 @@ const BlogPostPreviewStyles = styled.div`
   .content {
     height: inherit;
     display: flex;
-
+    margin-bottom: 2rem;
     flex-direction: column;
     justify-content: space-between;
 
@@ -88,11 +88,11 @@ const BlogPostPreviewStyles = styled.div`
       justify-self: flex-start;
     }
     h2 {
-      font-size: 2.4rem;
+      font-size: 2rem;
       margin-bottom: 2rem;
     }
     a {
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: bold;
       color: var(--primary);
     }
