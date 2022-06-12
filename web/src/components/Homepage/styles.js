@@ -15,20 +15,20 @@ export const HeroStyles = styled.div`
   text-align: center;
   overflow: hidden;
   color: #fff;
-  
 
   /* position: absolute; */
   z-index: -1;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 750px;
 
   @media ${device.laptop} {
-    height: 80vh;
+    height: 550px;
   }
+
   @media ${device.tablet} {
-    height: 65vh !important;
+    height: 450px;
   }
 
   &:before {
@@ -60,7 +60,7 @@ export const HeroStyles = styled.div`
       font-size: 3rem;
       padding: 0 2rem;
       letter-spacing: 0.1rem;
-      bottom:10%;
+      bottom: 10%;
     }
   }
   p {
@@ -84,8 +84,6 @@ export const HeroStyles = styled.div`
       left: -10%;
     }
   }
-
- 
 `;
 
 export const HandCraftedJourneysStyles = styled.div`
@@ -97,14 +95,13 @@ export const HandCraftedJourneysStyles = styled.div`
   align-items: center;
 
   .text-container {
-    
   }
 
-  .text-container h3{
+  .text-container h3 {
     text-align: left;
   }
 
-  .text-container p{
+  .text-container p {
     text-align: left;
   }
 
@@ -202,13 +199,10 @@ export const HandCraftedJourneysStyles = styled.div`
     margin: 0;
   }
   .image-container img {
-      max-width: 100%;
-      max-height: 100%;
-      vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
   }
-
-
-  
 `;
 
 export const MagazineStyles = styled.div`
@@ -258,7 +252,6 @@ export const MagazineStyles = styled.div`
       flex-direction: column;
     }
 
-
     .image-container {
       width: 100%;
       height: 360px;
@@ -271,11 +264,10 @@ export const MagazineStyles = styled.div`
       margin: 0;
     }
     .image-container img {
-        max-width: 100%;
-        max-height: 100%;
-        vertical-align: middle;
+      max-width: 100%;
+      max-height: 100%;
+      vertical-align: middle;
     }
-
 
     h3 {
       margin-top: 3rem;

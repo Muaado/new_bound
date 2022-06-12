@@ -2,14 +2,26 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 export const GalleryImage = styled.div`
+  .image-container {
+    height: 100% !important;
+    .slider-list,
+    .slider-slide {
+      height: 100% !important;
+      .carousel__image-container {
+        height: 100% !important;
+      }
+    }
+  }
+
   @media ${device.laptopL} {
     padding-right: 0 !important;
   }
-  width: ${({ imageWidth }) => (imageWidth ? imageWidth : "65%")};
+  width: ${({ imageWidth }) => (imageWidth ? imageWidth : "100%")};
   &.open {
     position: absolute;
     top: 50%;
     left: 50%;
+    height: 550px;
     cursor: pointer;
     transform: translate(-50%, -50%);
     & > div {

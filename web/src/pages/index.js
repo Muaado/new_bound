@@ -2,24 +2,10 @@ import React from "react";
 import { graphql, Link } from "gatsby";
 import SanityMuxPlayer from "sanity-mux-player";
 
-// import {
-//   filterOutDocsPublishedInTheFuture,
-//   filterOutDocsWithoutSlugs,
-//   mapEdgesToNodes,
-// } from "../lib/helpers";
-
 import Container from "../components/container";
-import GraphQLErrorList from "../components/graphql-error-list";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
-
 import { navigate } from "gatsby";
-import styled from "styled-components";
-
-import Video from "../components/Video";
-
-import VideoBg from "../assets/videobg.mp4";
-
 import PromoSection from "../components/Homepage/PromoSection";
 import AboutUs from "../components/Homepage/AboutUs";
 import Journey from "../components/Homepage/Journey";
@@ -33,7 +19,6 @@ import {
   HandCraftedJourneysStyles,
   HeroStyles,
   MagazineStyles,
-  SearchBar,
 } from "../components/Homepage/styles";
 import PortableText from "../components/Ui/portableText";
 import { getBlogUrl, getResortUrl, getVillaUrl } from "../lib/helpers";
@@ -42,6 +27,7 @@ import NewsletterSection from "../components/Homepage/NewsletterSection";
 import LeftSidebar from "../components/LeftSidebar";
 import { MouseScroll } from "../components/Ui/MouseScroll";
 import Search from "../components/Search";
+import { Button } from "../components/Button";
 
 // import HomepageStaticImage from "../assets/homepage-image.png";
 
@@ -355,8 +341,8 @@ const IndexPage = (props) => {
                 </li>
               ))}
             </ul>
-            <Link to="/enquire" className="btn white">
-              Enquire
+            <Link to="/enquire" className="white">
+              <Button>Enquire</Button>
             </Link>
           </HandCraftedJourneysStyles>
           <PromoSection image={site.promoImageWeb} />
@@ -389,7 +375,7 @@ const IndexPage = (props) => {
             </ul>
 
             <Link to="/archive">
-              <button className="btn">View More...</button>
+              <Button>View More...</Button>
             </Link>
           </MagazineStyles>
           <TailorMade />

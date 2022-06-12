@@ -394,6 +394,7 @@ const DropdownListStyles = styled.div`
     word-break: keep-all;
     width: 100%;
     display: inline-block;
+    border-bottom: 1px solid inherit;
     /* width: 100%; */
   }
 
@@ -454,7 +455,7 @@ const DropDown = ({
             ${className}`}
           onClick={() => setSelectedList("collectionPages")}
         >
-          Holiday stays
+          Holiday stays123
         </li>
       </ul>
       <ul className="second-column">

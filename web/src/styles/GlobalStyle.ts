@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
     --darkRed: #5D0012;
+    --lightDarkRed:#4d000f;
     --lightOrange: #B39A6A;
     --darkGreen: #004743;
     --brown: #76622E;
@@ -90,16 +91,20 @@ export const GlobalStyle = createGlobalStyle`
     font-kerning: normal;
     }
   .btn {
-    background: var(--secondary);
+   background: var(--secondary);
     color: var(--pureWhite);
     border: none;
     padding: 1.5rem 6rem;
     outline: none;
     cursor: pointer;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    
+    font-size: 1.2rem;
+    text-transform: uppercase; 
   }
+  
+ .btn:hover{
+      color:white;
+      background:  var(--lightDarkRed);
+ }
 
   *, *:before, *:after {
     box-sizing: border-box;
@@ -136,7 +141,6 @@ export const GlobalStyle = createGlobalStyle`
 
   .carousel {
     outline: none;
-
     .slider-control-centerright,
     .slider-control-centerleft {
      @media ${device.tablet} {
@@ -362,4 +366,5 @@ export const GlobalStyle = createGlobalStyle`
     .villa__header{
       margin-top: 0px !important;
     }
+
 `;

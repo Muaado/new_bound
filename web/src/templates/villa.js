@@ -48,6 +48,7 @@ import Restaurants from "../components/Villa/Restaurants";
 import ChevronLeft from "../assets/icons/chevrons-left.svg";
 
 import BackToResort from "../components/backToResort";
+import { Button } from "../components/Button";
 
 export const query = graphql`
   query VillaTemplateQuery($id: String!, $resortId: String!) {
@@ -395,6 +396,8 @@ const VilaTemplate = (props) => {
                     {resortName}
                   </Link>
                 </li>
+                <li>&gt;</li>
+                <li className="backtoresort room-name">{name}</li>
               </ul>
             </div>
           </div>
@@ -413,10 +416,8 @@ const VilaTemplate = (props) => {
                   {villa.uniqueCode}
                 </div>
               )}
-              {/* <p className="alternate-name">{alternateName}</p> */}
               <h2 className="villa_name_title">{name}</h2>
               {tagline && <p className="tagline">{tagline}</p>}
-              {/* <h3 className="tagline">{tagline}</h3> */}
               <PortableText blocks={_rawDescriptionVilla} />
               <ul className="villa__header-icons">
                 <li>
@@ -448,12 +449,17 @@ const VilaTemplate = (props) => {
                 )}
               </ul>
               <p className="pricelbl">{villa.price_new}</p>
-              <Link to={`/enquire?id=${resortName}`} className="btn enquire">
-                ENQUIRE
+              <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
+                <Button style={{ paddingLeft: "100px", paddingRight: "100px" }}>
+                  ENQUIRE
+                </Button>
               </Link>
             </div>
-
-            <PopUpGallery className="carousel" images={headerImages} />
+            <PopUpGallery
+              styles={{ marginRight: "15px" }}
+              className="carousel"
+              images={headerImages}
+            />
           </div>
 
           {/* {Begin Features section div} */}
@@ -508,43 +514,6 @@ const VilaTemplate = (props) => {
             </div>
           </div>
           {/* end features section div */}
-
-          {/* <div className="content">
-              <ul className="accordion">
-
-                <li className="accordion-item">
-                  <input id="s1" className="hide" type="checkbox" />
-                  <label htmlFor="s1" className="accordion-label">
-                    First
-                  </label>
-                  <ul className="accordion-child">
-                    <li>
-                      <label>Item 1</label>
-                    </li>
-                    <li>
-                      <label>Item 2</label>
-                    </li>
-                  </ul>
-                </li>
-                <li className="accordion-item">
-                  <input id="s2" className="hide" type="checkbox" />
-                  <label htmlFor="s2" className="accordion-label">
-                    Second
-                  </label>
-                  <ul className="accordion-child">
-                    <li>
-                      <label>Item 3</label>
-                    </li>
-                    <li>
-                      <label>Item 4</label>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          end features section div */}
-
           {/* <Gallery galleries={galleries} id="gallery" /> */}
           <div
             className="villa__property-overview"

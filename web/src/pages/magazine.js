@@ -68,19 +68,21 @@ const MagazinePageStyles = styled.div`
 
   h1 {
     text-align: center;
+    font-size: 35px;
     padding: 5rem 0;
   }
-
+  h2 {
+    letter-spacing: normal;
+    font-size: 2rem;
+  }
   .post-list {
     max-width: 80%;
-
+    height: 100% !important;
     @media ${device.laptopM} {
       max-width: 100%;
     }
   }
 `;
-
-
 
 const MagazinePage = (props) => {
   const { data, errors } = props;

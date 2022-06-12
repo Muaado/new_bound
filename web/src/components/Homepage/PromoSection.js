@@ -9,7 +9,7 @@ export const PromoSectionStyles = styled.div`
   /* margin: 0 -14%; */
   position: relative;
   height: 60rem;
-  color: #fff;
+  color: #fff !important;
 
   @media ${device.laptopL} {
     margin: 0;
@@ -89,11 +89,11 @@ export const PromoSectionStyles = styled.div`
 const PromoSection = ({ image }) => {
   return (
     <PromoSectionStyles
-      // className="parallax"
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
+    // className="parallax"
+    // data-aos="fade-up"
+    // data-aos-delay="50"
+    // data-aos-duration="1000"
+    // data-aos-easing="ease-in-out"
     >
       <h2 className="parallax__layer--back">we specialise in the maldives</h2>
       <p className="parallax__layer--back">

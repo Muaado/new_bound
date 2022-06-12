@@ -6,7 +6,7 @@ import React from "react";
 import Image from "gatsby-plugin-sanity-image";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-
+import { Overlay } from "../Overlay";
 import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
 import { getCollectionUrl } from "../../lib/helpers";
@@ -129,6 +129,18 @@ const JourneyStyles = styled.div`
       &:nth-of-type(5) {
         grid-column: 5/8;
       }
+
+      &:hover {
+        .overlay {
+          opacity: 0.5;
+        }
+
+        p {
+          transition: all 0.3s;
+          opacity: 1;
+          z-index: 999;
+        }
+      }
     }
 
     img {
@@ -161,7 +173,7 @@ const JourneyStyles = styled.div`
       @media ${device.mobileXL} {
         height: 25rem !important;
       }
-      
+
       p {
         position: absolute;
         /* top: 90%; */
@@ -197,7 +209,7 @@ const Journey = ({ collections }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
-      <h1>Start your journey</h1>
+      <h2>Start your journey</h2>
       {/* <ul className="header">
         <li>most popular</li>
         <li>experiences</li>
@@ -217,7 +229,7 @@ const Journey = ({ collections }) => {
                 key={node.name}
               >
                 <p>{node.CollectionPageName}</p>
-
+                <Overlay className="overlay" />
                 {node.image && node.image.asset && (
                   <Image {...node.image} alt={node.image.alt} />
                 )}

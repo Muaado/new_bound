@@ -12,6 +12,7 @@ import { ContactUs } from "../components/Homepage/ContactUs";
 import { device } from "../styles/deviceSizes";
 import countries from "../lib/countries";
 import { useForm, ValidationError } from "@formspree/react";
+import { Button } from "../components/Button";
 
 export const query = graphql`
   query EnquirePageQuerys {
@@ -333,9 +334,8 @@ const EnquirePageNew = (props) => {
                 />
               </div>
               <div className="form-control">
-              <label htmlFor="email">Email Address</label>
+                <label htmlFor="email">Email Address</label>
 
-                
                 <input id="email" type="email" name="email" />
                 <ValidationError
                   prefix="Email"
@@ -400,9 +400,9 @@ const EnquirePageNew = (props) => {
                 </div>
               </div>
 
-              <button className="btn" type="submit" disabled={state.submitting}>
+              <Button type="submit" disabled={state.submitting}>
                 Enquire now
-              </button>
+              </Button>
             </div>
           </form>
 

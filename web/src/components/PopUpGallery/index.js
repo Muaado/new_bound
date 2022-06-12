@@ -9,11 +9,9 @@ import useWindowSize from "../../lib/useWindowSize";
 
 import Placeholder from "../../assets/placeholder.svg";
 
-const GalleryComponent = ({ images }) => {
+const GalleryComponent = ({ images, styles }) => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-
-  
 
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
@@ -32,7 +30,6 @@ const GalleryComponent = ({ images }) => {
     const notMobile = width > 900;
     const laptop = width > 999;
 
-    
     const slides = () => {
       if (isMobileOnly) return 1;
       if (isTablet) return 1;
@@ -55,16 +52,13 @@ const GalleryComponent = ({ images }) => {
       return 0;
     };
 
-    
-
     setNumberOfSlides(slides);
     setCellSpacing(spacing);
   }, [size]);
 
   const handleOpen = (i) => (e) => {
-
-      setShowLightbox(true);
-      setSelectedImage(i);    
+    setShowLightbox(true);
+    setSelectedImage(i);
   };
 
   const handleClose = () => {
@@ -78,11 +72,11 @@ const GalleryComponent = ({ images }) => {
     setSelectedImage((i + 1) % length);
   };
 
-  
   return (
-    <GalleryImage className="gallery carousel">
+    <GalleryImage className="gallery carousel" style={styles}>
       <div className="image-container">
         <Carousel
+          adaptiveHeight={true}
           speed={1000}
           cellSpacing={cellSpacing}
           slidesToShow={numberOfSlides}
@@ -98,17 +92,13 @@ const GalleryComponent = ({ images }) => {
             ? images.images.map((image) => (
                 <div key={image.alt} className="carousel__image-container">
                   {image && image.asset && (
- 
-
                     <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
                   )}
-
-                
                 </div>
               ))
             : [1, 2, 3].map((item) => (
                 <div key={item} className="carousel__image-container">
-                  <Placeholder style={{ width: "100%", height: "100%" }} />
+                  <Placeholder />
                 </div>
               ))}
         </Carousel>
@@ -125,7 +115,7 @@ const GalleryComponent = ({ images }) => {
           />
         )} */}
       </div>
-     
+
       {showLightbox && selectedImage !== null && (
         <LightBox
           showLightbox={showLightbox}

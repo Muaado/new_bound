@@ -122,16 +122,16 @@ export const BeachVillaStyles = styled.div`
     margin-top: 5rem;
   }
 
+  .villa_nuatilus_banner {
+    height: 600px;
+  }
+  .villa_banner_boundless {
+    height: 350px;
+  }
+
   .villa_banners {
     margin-top: 38px;
-    margin-bottom: 27px;
     width: 100%;
-    .villa_nuatilus_banner {
-      height: 619px;
-    }
-    .villa_banner_boundless {
-      height: 378px;
-    }
   }
 
   .villa_banner_boundless,
@@ -161,6 +161,7 @@ export const BeachVillaStyles = styled.div`
         }
       }
       h2 {
+        text-align: center;
         font-family: vendor !important;
         letter-spacing: 30px;
         color: #fff;
@@ -267,7 +268,7 @@ export const BeachVillaStyles = styled.div`
 
     .rightfeatured {
       width: 100%;
-      background: blue;
+      background: white;
       position: relative;
 
       img {
@@ -306,6 +307,38 @@ export const BeachVillaStyles = styled.div`
     }
   }
 
+  .rightfeatured,
+  .photofeatured {
+    position: relative;
+    .inner {
+      height: 100%;
+      :hover {
+        transition: all 0.3s;
+
+        .featuredVillaFooter,
+        .txtwrap,
+        img {
+          transition: all 0.3s ease-in-out;
+          opacity: 1;
+          z-index: 999;
+        }
+
+        &:after {
+          content: "";
+          background: #000;
+          left: 0;
+          top: 0;
+          opacity: 0.4;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index: 50;
+          /* right: -55vw; */
+        }
+      }
+    }
+  }
+
   .collection__details {
     padding: 20px 20px 0px 20px;
     @media ${device.mobileM} {
@@ -335,8 +368,8 @@ export const BeachVillaStyles = styled.div`
     }
 
     .collection_brand_logo img {
-      height: 100px;
-      width: 100px;
+      height: 150px;
+      width: 150px;
 
       @media ${device.iphonePortLandscape} {
         height: 100px;
@@ -353,13 +386,24 @@ export const BeachVillaStyles = styled.div`
       }
     }
     .villa_price {
-      font-size: 1.4rem;
-      font-weight: 600;
+      font-size: 1.6rem;
       -webkit-letter-spacing: 0.3rem;
       -moz-letter-spacing: 0.3rem;
       -ms-letter-spacing: 0.3rem;
       letter-spacing: 0.3rem;
       color: #7d7d7d;
+      .price-from {
+        text-transform: uppercase;
+        font-weight: 800 !important;
+        font-size: 10px;
+      }
+      .font-bold {
+        font-family: "rivera_bold_regular", "sans-serif";
+      }
+      .price-category {
+        font-size: 11px;
+        margin-left: 5px;
+      }
       // margin-left: 20px;
     }
 

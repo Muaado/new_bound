@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
 import Carousel from "nuka-carousel";
+import { Link } from "gatsby";
+import styled from "styled-components";
 import ChevronRight from "../../assets/icons/chevron-right.svg";
 import ChevronLeft from "../../assets/icons/chevron-left.svg";
-
-import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
 import CarouselButton from "../Ui/CarouselButton";
 import { getVillaUrl } from "../../lib/helpers";
-import { Link } from "gatsby";
 import Placeholder from "../../assets/placeholder.svg";
 import BackToResort from "../backToResort";
-const AccomodationStyles = styled.div`  
+import { Button } from "../Button";
 
+const AccomodationStyles = styled.div`
   @media ${device.tablet} {
     padding: 0;
   }
@@ -40,7 +40,6 @@ const AccomodationStyles = styled.div`
   .carousel {
     display: flex !important;
 
-    
     width: 100%;
 
     .slider-slide {
@@ -50,7 +49,6 @@ const AccomodationStyles = styled.div`
     }
 
     .slider-frame {
-
       // @media ${device.notMobile} {
       //   overflow: unset !important;
       // }
@@ -59,7 +57,6 @@ const AccomodationStyles = styled.div`
       //   overflow: hidden !important;
       // }
 
-      
       align-self: center;
       width: 100% !important;
     }
@@ -76,27 +73,45 @@ const AccomodationStyles = styled.div`
       @media ${device.mobileXL} {
         max-height: 350px;
         min-height: 350px;
-        width:100%;
+        width: 100%;
       }
 
-      
       max-height: 570px;
       width: 100%;
       background-size: cover;
-      
     }
 
-    .roomFooter{
+    .roomFooter {
       padding: 2rem;
+      .room_price {
+        font-size: 1.6rem;
+        -webkit-letter-spacing: 0.3rem;
+        -moz-letter-spacing: 0.3rem;
+        -ms-letter-spacing: 0.3rem;
+        letter-spacing: 0.3rem;
+        color: #7d7d7d;
+        .price-from {
+          text-transform: uppercase;
+          font-weight: 800 !important;
+          font-size: 10px;
+        }
+        .font-bold {
+          font-family: "rivera_bold_regular", "sans-serif";
+        }
+        .price-category {
+          font-size: 11px;
+          margin-left: 5px;
+        }
+        // margin-left: 20px;
+      }
     }
     .roomname {
       font-size: 25px;
       text-align: left;
       line-height: 4rem;
-      padding-bottom:10px;
+      padding-bottom: 10px;
       // min-height: 90px;
       font-family: "rivera_light_regular", sans-serif;
-  
 
       @media ${device.tablet} {
         /* text-align: left; */
@@ -104,47 +119,11 @@ const AccomodationStyles = styled.div`
         margin-right: 1rem;
       }
     }
-
-    .viewroom {
-      width: 150px;
-      border: 1.5px solid #b39a6a;
-      padding: 5px;
-      padding-top: 5px;
-      text-align: center;
-      display: block;
-      margin-top: 20px;
-      color: #b39a6a;
-      font-size: 12px;
-      height: 52px;
-      text-align: center;
-      padding-top: 16px;
-
-      @media ${device.tablet} {
-        /* text-align: left; */
-        // font-size: 1.6rem;
-        // margin-right: 1rem;
-        width: 100%;
-      }
-
-      
-    }
-
-    
-
-    .viewroom:hover {
-      background: #91715c;
-      color: #fff;
-    }
-
     .pricelbl {
       font-size: 18px;
       color: #595959;
-
-  
-   }
-
-   
-   
+    }
+  }
 `;
 
 const Accomodation = ({ villas, id }) => {
@@ -184,10 +163,10 @@ const Accomodation = ({ villas, id }) => {
     <AccomodationStyles
       id={id}
       className="resort__accomodation"
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
     >
       <h2>Accommodation</h2>
 
@@ -205,7 +184,7 @@ const Accomodation = ({ villas, id }) => {
         {villas.map(({ name, imageThumb, resort }) => (
           // <li key={name}>
           // check if name contains word 'demo'
-        
+
           <Link
             to={getVillaUrl({ name, resortName: resort.name })}
             key={name}
@@ -218,12 +197,15 @@ const Accomodation = ({ villas, id }) => {
             )}
             <div className="roomFooter">
               <p className="roomname">{name}</p>
-              <span className="pricelbl">from $5,950 PP</span>
-              <a className="viewroom">VIEW ROOM</a>
+              {/* <span className="pricelbl">from $5,950 PP</span> */}
+              <div className="room_price">
+                <span className="price-from font-bold">From</span>{" "}
+                <span className="font-bold">$5,950</span>
+                <span className="price-category">per person</span>
+              </div>
+              <Button>View Room</Button>
             </div>
           </Link>
-
-          // </li>
         ))}
       </Carousel>
     </AccomodationStyles>

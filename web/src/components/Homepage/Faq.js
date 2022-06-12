@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
 import ChevronUp from "../../assets/icons/chevron-up.svg";
 import { device } from "../../styles/deviceSizes";
+import { Button } from "../Button";
 
 const FaqStyles = styled.div`
   text-align: center;
@@ -23,7 +24,7 @@ const FaqStyles = styled.div`
   }
 
   h2 {
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin-bottom: 1rem;
   }
   .description {
@@ -136,20 +137,18 @@ const Faq = (props) => {
                 </p>
 
                 {selectedQuestion === index && (
-                <p className="answer"> {answer}</p>
-              )}
+                  <p className="answer"> {answer}</p>
+                )}
               </li>
             ))}
         </ul>
 
         {!slice && path === "/" ? (
           <Link to="/faq">
-            <button className="btn">View more...</button>
+            <Button>View more...</Button>
           </Link>
         ) : slice < 100 && path === "/resort" ? (
-          <button className="btn" onClick={onClick}>
-            View more...
-          </button>
+          <Button onClick={onClick}>View more...</Button>
         ) : (
           ""
         )}

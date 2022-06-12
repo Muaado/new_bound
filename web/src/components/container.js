@@ -35,7 +35,7 @@ const ContainerStyles = styled.main`
   } */
 
   .height-80vh {
-    height: 80vh;
+    height: 750px;
     &:before {
       height: inherit;
     }
@@ -58,6 +58,12 @@ const ContainerStyles = styled.main`
       width: 100%;
       object-fit: cover;
     }
+  }
+  h2 {
+    text-transform: uppercase;
+    color: var(--primary);
+    font-size: 35px;
+    letter-spacing: 16px;
   }
 `;
 

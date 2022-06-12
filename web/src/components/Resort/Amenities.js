@@ -78,13 +78,13 @@ const Amenities = ({
         <PortableText blocks={_rawDescription} />
       </div>
       <ul className="amenties">
-        <li key={numberOfRooms}>No of rooms: {numberOfRooms} </li>
-        <li key={numberOfRestaurants}>Restaurants: {numberOfRestaurants}</li>
-        <li key={numberOfBars}> No of bars: {numberOfBars}</li>
-        <li key={locationAtoll}>Location: {locationAtoll} </li>
-        <li key={timeToAirport}>Time to airport: {timeToAirport}</li>
+        <li key={numberOfRooms}>No of rooms : {numberOfRooms} </li>
+        <li key={numberOfRestaurants}>Restaurants : {numberOfRestaurants}</li>
+        <li key={numberOfBars}> No of bars : {numberOfBars}</li>
+        <li key={locationAtoll}>Location : {locationAtoll} </li>
+        <li key={timeToAirport}>Time to airport : {timeToAirport}</li>
         <li key={"transfers"}>
-          Transfers:{" "}
+          Transfers :{" "}
           {resortTransferType?.map(
             (type, index) =>
               `${type.transferType}${
