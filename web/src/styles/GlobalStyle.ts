@@ -141,7 +141,6 @@ export const GlobalStyle = createGlobalStyle`
 
   .carousel {
     outline: none;
-
     .slider-control-centerright,
     .slider-control-centerleft {
      @media ${device.tablet} {

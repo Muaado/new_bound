@@ -209,7 +209,9 @@ const HeaderStyles = styled.header`
         align-items: center;
         font-weight: bold;
         font-size: 2rem;
-
+        a {
+          font-family: "rivera_ultra_light_regular", sans-serif !important;
+        }
         /* color: var(--primary;) */
         svg {
           width: 1.5rem;
@@ -281,7 +283,7 @@ const HeaderStyles = styled.header`
     .nav-top-list {
       display: flex;
       gap: 6rem;
-      letter-spacing:1px;
+      letter-spacing: 1px;
 
       @media ${device.tablet} {
         /* font-size: 2.6rem; */
@@ -408,7 +410,7 @@ const DropdownListStyles = styled.div`
 
     .route {
       /* .image-container { */
-      transition: all 4s;
+      transition: none;
       /* opacity: 0; */
       &.show {
         /* opacity: 1; */
@@ -416,11 +418,9 @@ const DropdownListStyles = styled.div`
     }
   }
 
-  .image-container img { 
+  .image-container img {
     transition: all 4s;
     min-height: 100vh;
-  }
-    /* opacity: 0; */
   }
 
   ul {
@@ -462,11 +462,14 @@ const DropdownListStyles = styled.div`
           left: 1.5rem;
         }
       }
+      :hover {
+        font-weight: 600 !important;
+      }
     }
   }
 
   .second-column {
-    background:#f8f8f8;
+    background: #f8f8f8;
     padding: 4rem 4rem 10rem 4rem;
     display: flex;
     flex-direction: column;
@@ -496,12 +499,18 @@ const DropdownListStyles = styled.div`
       width: 100vw;
       overflow-x: hidden;
     }
+    a {
+      border-bottom: 1px solid rgba(179, 154, 106, 0.5) !important;
+      padding-bottom: 10px;
+      :hover {
+        font-weight: 600 !important;
+      }
+    }
   }
   /* li {
     min-width: max-content;
   } */
   a {
-
     /* opacity: 0; */
     // color: var(--darkGrey);
     // padding: 1.5rem 0;
@@ -512,18 +521,16 @@ const DropdownListStyles = styled.div`
 
     // font-size: 1.6rem;
 
-    font-family: "rivera_ultra_light_regular",sans-serif;
+    font-family: "rivera_ultra_light_regular", sans-serif;
     font-size: 1.6rem;
     padding-top: 20px;
-    font-weight:bolder;
-
+    font-weight: bolder;
 
     @media ${device.tablet} {
       border-bottom: 1px solid var(--lightGrey3);
     }
     /* width: 100%; */
   }
-
 
   .dropdown-close-icon {
     position: absolute;
@@ -544,19 +551,20 @@ const DropdownListStyles = styled.div`
     }
   }
 
-  a:hover, a:focus, a:active {
+  a:hover,
+  a:focus,
+  a:active {
     outline: none !important;
     text-decoration: none !important;
-    background: #fff;
+    font-weight: 600 !important;
   }
 
-  li:hover li:focus, li:active {
+  li:hover li:focus,
+  li:active {
     outline: none !important;
     text-decoration: none !important;
-    background: #fff;
+    font-weight: 600 !important;
   }
-
-
 `;
 export const Logo = ({ logo }) => (
   <div className="logo">
@@ -585,8 +593,8 @@ const DropDown = ({
       }`}
     >
       <ul className="first-column">
-        <li><Link
-          
+        <li>
+          <Link
             to="/"
             className="clickable"
             onClick={() => {
@@ -597,8 +605,8 @@ const DropDown = ({
             }}
           >
             Home
-          
-        </Link></li>
+          </Link>
+        </li>
         <li
           className={`${selectedList === "resorts" ? "selected" : ""} clickable
           ${className}
@@ -618,7 +626,8 @@ const DropDown = ({
         >
           Holiday stays
         </li>
-        <li><Link
+        <li>
+          <Link
             className="clickable"
             to="/magazine"
             onClick={() => {
@@ -629,8 +638,8 @@ const DropDown = ({
             }}
           >
             Magazine
-        
-        </Link></li>
+          </Link>
+        </li>
       </ul>
       <ul className="second-column">
         {lists?.map(
@@ -851,7 +860,8 @@ const Header = ({
           }}
         />
         <ul>
-          <a href="/"><li
+          <a href="/">
+            <li
               className="clickable"
               onClick={() => {
                 // handleOpenDropDown([], false);
@@ -859,8 +869,10 @@ const Header = ({
                 setSelectedList("");
                 setShowDropdown(false);
               }}
-            >Home
-          </li></a>
+            >
+              Home
+            </li>
+          </a>
           <li
             className={` ${
               selectedList === "resorts" ? "selected" : ""

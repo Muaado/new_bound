@@ -18,7 +18,14 @@ const VillaStyles = styled.div`
       letter-spacing: unset;
     }
   }
-
+  .villa__property-overview,
+  .accordion,
+  .resort__highlights,
+  #dine {
+    h2 {
+      letter-spacing: 16px;
+    }
+  }
   .backtoreswrapper {
     margin-top: 20px;
     margin-left: 30px;
@@ -34,9 +41,8 @@ const VillaStyles = styled.div`
       padding: 0;
       margin: 0;
       li {
-        cursor: pointer;
         float: left;
-        font-size: 10px;
+        font-size: 12px;
         color: #11103b;
         margin-right: 6px;
         list-style: none;
@@ -50,6 +56,10 @@ const VillaStyles = styled.div`
 
   .backtoresort:hover {
     color: #76622e;
+  }
+
+  .backtoresort .room-name:hover {
+    cursor: default;
   }
 
   .roomfeatwrap {
@@ -68,12 +78,12 @@ const VillaStyles = styled.div`
 
   .villa {
     &__image {
-      max-height: 80vh;
+      height: 750px;
       /* overflow-y: hidden; */
       position: relative;
 
       .image-container {
-        max-height: 80vh;
+        max-height: 750px;
         overflow-y: hidden;
         @media ${device.tabletL} {
           height: 80vh;
@@ -94,7 +104,7 @@ const VillaStyles = styled.div`
         position: absolute;
 
         width: 800px;
-        text-wrap: pre-wrap;
+        wrap-text: pre-wrap;
 
         font-weight: normal;
         text-transform: uppercase;
@@ -251,7 +261,7 @@ const VillaStyles = styled.div`
         }
 
         @media ${device.laptopM} {
-          height: 60vh !important;
+          height: 550px !important;
         }
         @media ${device.laptop} {
           /* height: 50vh !important; */
@@ -325,10 +335,8 @@ const VillaStyles = styled.div`
         /* background: black; */
         position: relative;
         /* height: 100rem; */
-        width: 50%;
-        /* margin-left: 50rem; */
-        /* padding: 15rem 8rem 15rem 15rem; */
-        margin: 5rem 5%;
+        width: 40%;
+        margin: 5rem 0px 5rem 5%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -379,7 +387,6 @@ const VillaStyles = styled.div`
           font-weight: 700;
         }
       }
-
       .alternate-name {
         transform: rotate(90deg);
         position: absolute;
@@ -427,7 +434,7 @@ const VillaStyles = styled.div`
       .unique_code_wrap {
         width: 100%;
         margin-bottom: 20px;
-        font-size: 16px;
+        font-size: 12px;
         font-family: "rivera_bold_regular", "sans-serif";
         color: #737070;
         text-orientation: use-glyph-orientation;

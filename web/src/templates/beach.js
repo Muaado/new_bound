@@ -174,7 +174,7 @@ const BeachTemplate = (props) => {
       }
 
       if (villa.price != "null") {
-        villa["price_new"] = formatter.format(villa.price) + "  PP";
+        villa["price_new"] = formatter.format(villa.price);
       } else if (villa.price) {
         villa["price_new"] = "-";
       }
@@ -272,7 +272,15 @@ const BeachTemplate = (props) => {
 
                             <div className="villa_price-logo-wrapper">
                               <div className="villa_price">
-                                {villa.price_new}
+                                <span className="price-from font-bold">
+                                  From
+                                </span>{" "}
+                                <span className="font-bold">
+                                  {villa.price_new}
+                                </span>
+                                <span className="price-category">
+                                  per person
+                                </span>
                               </div>
                               {villa.resort.resortBrandLogo && (
                                 <div className="collection_brand_logo">
@@ -292,7 +300,7 @@ const BeachTemplate = (props) => {
                     );
                   })}
                 </ul>
-                {key === 0 && banners[0]?.sectionHeroImage?.asset && (
+                {key === 2 && banners[0]?.sectionHeroImage?.asset && (
                   <div className="villa_banners villa_nuatilus_banner">
                     <Image
                       className="featuredreslogo"
@@ -312,57 +320,61 @@ const BeachTemplate = (props) => {
                   <div className="featured_villa_section">
                     {/* BEGIN LEFT SECTION */}
                     <div className="photofeatured">
-                      <Image
-                        className="featuredreslogo"
-                        {...col.featuredvillas[0].villaone.resort
-                          .resortBrandLogo}
-                        alt={
-                          col.featuredvillas[0].villaone.resort.resortBrandLogo
-                            .alt
-                        }
-                      />
-                      <Image
-                        className="featured_villa_image"
-                        {...col.featuredvillas[0].villaone.imageThumb}
-                      />
+                      <div class="inner">
+                        <Image
+                          className="featuredreslogo"
+                          {...col.featuredvillas[0].villaone.resort
+                            .resortBrandLogo}
+                          alt={
+                            col.featuredvillas[0].villaone.resort
+                              .resortBrandLogo.alt
+                          }
+                        />
+                        <Image
+                          className="featured_villa_image"
+                          {...col.featuredvillas[0].villaone.imageThumb}
+                        />
 
-                      <div className="featuredVillaFooter">
-                        <Link to={col.featuredvillas[0].villaone.url}>
-                          <h3 className="featuredVillaName">
-                            {col.featuredvillas[0].villaone.name}
-                          </h3>
-                        </Link>
-                        <h4 className="featuredVillaPrice">
-                          {col.featuredvillas[0].villaone.price}
-                        </h4>
-                        <Link to={col.featuredvillas[0].villaone.url}>
-                          <h4 className="featuredVillaView">View Room</h4>
-                        </Link>
+                        <div className="featuredVillaFooter">
+                          <Link to={col.featuredvillas[0].villaone.url}>
+                            <h3 className="featuredVillaName">
+                              {col.featuredvillas[0].villaone.name}
+                            </h3>
+                          </Link>
+                          <h4 className="featuredVillaPrice">
+                            {col.featuredvillas[0].villaone.price}
+                          </h4>
+                          <Link to={col.featuredvillas[0].villaone.url}>
+                            <h4 className="featuredVillaView">View Room</h4>
+                          </Link>
+                        </div>
                       </div>
                     </div>
                     {/*  END LEFT SECTION */}
 
                     {/* BEGIN RIGHT SECTION */}
                     <div className="rightfeatured">
-                      {col.featuredvillas[0].villaone.headerImages
-                        .images[1] && (
-                        <Image
-                          {...col.featuredvillas[0].villaone.headerImages
-                            .images[1]}
-                          alt={
-                            col.featuredvillas[0].villaone.headerImages
-                              .images[1].alt
-                          }
-                        />
-                      )}
-                      <div className="txtwrap">
-                        <h3>{col.featuredvillas[0].title}</h3>
-                        <h2 className="tagline">
-                          {col.featuredvillas[0].villaone.tagline}
-                        </h2>
-                        <p className="description">
-                          {col.featuredvillas[0].villaone.short_desc}
-                        </p>
+                      <div class="inner">
+                        {col.featuredvillas[0].villaone.headerImages
+                          .images[1] && (
+                          <Image
+                            {...col.featuredvillas[0].villaone.headerImages
+                              .images[1]}
+                            alt={
+                              col.featuredvillas[0].villaone.headerImages
+                                .images[1].alt
+                            }
+                          />
+                        )}
+                        <div className="txtwrap">
+                          <h3>{col.featuredvillas[0].title}</h3>
+                          <h2 className="tagline">
+                            {col.featuredvillas[0].villaone.tagline}
+                          </h2>
+                          <p className="description">
+                            {col.featuredvillas[0].villaone.short_desc}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>

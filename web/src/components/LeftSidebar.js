@@ -61,7 +61,7 @@ const LeftSidebarStyles = styled.div`
     /* padding: 2rem; */
     width: 5rem;
     height: 5rem;
-    background: var(--darkGreen);
+    background: rgba(179, 159, 106, 0.5);
     border: none;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     svg {

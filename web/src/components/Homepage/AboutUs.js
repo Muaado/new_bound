@@ -35,7 +35,6 @@ const AboutUsSectionStyles = styled.div`
         /* font-size: 5rem; */
 
         margin-bottom: 2rem;
-        color: var(--darkGreen);
         text-align: left !important;
         @media ${device.tabletL} {
           /* text-align: center !important; */
@@ -53,11 +52,11 @@ const AboutUsSectionStyles = styled.div`
 const AboutUs = ({ aboutUs }) => {
   return (
     <AboutUsSectionStyles
-      // className="about-us"
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
+    // className="about-us"
+    // data-aos="fade-up"
+    // data-aos-delay="50"
+    // data-aos-duration="1000"
+    // data-aos-easing="ease-in-out"
     >
       <div className="about-us__image-container">
         {aboutUs.image && aboutUs.image.asset && (

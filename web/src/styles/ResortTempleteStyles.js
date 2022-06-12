@@ -6,7 +6,7 @@ const ResortStyles = styled.div`
   /* overflow-y: auto;
   overscroll-behavior-y: contain;
   scroll-snap-type: y proximity; */
-  overflow-x:hidden;
+  overflow-x: hidden;
   h2 {
     letter-spacing: 1rem;
     text-align: center;
@@ -23,10 +23,6 @@ const ResortStyles = styled.div`
       margin: 5rem 0;
     }
   }
- 
-
-   
-  }
 
   /* .left-nav {
    
@@ -36,13 +32,15 @@ const ResortStyles = styled.div`
     &__image {
       position: relative;
       /* scroll-snap-align: center; */
-      height: 100vh;
+      height: 600px;
       overflow-y: hidden;
       /* position: relative;
       top: -18rem; */
       z-index: -1;
 
-      
+      .mouse_scroll {
+        left: 90% !important;
+      }
 
       transition: 1s all;
       opacity: 1;
@@ -58,43 +56,38 @@ const ResortStyles = styled.div`
       } */
       .text {
         position: absolute;
-        bottom: 10rem;
+        bottom: 0rem;
         left: 10%;
 
         @media ${device.tablet} {
           bottom: 0;
         }
-        
+
         .title_res {
           @media ${device.mobileXL} {
-              width:380px;
-              font-size: 2rem;
-              left:0;
-              padding-bottom:10px;
+            width: 380px;
+            font-size: 2rem;
+            left: 0;
+            padding-bottom: 10px;
           }
 
-          @media ${device.tablet}{
-            width:100%;
+          @media ${device.tablet} {
+            width: 100%;
           }
           width: 900px;
           text-wrap: pre-wrap;
-            
-            
+
           font-weight: normal;
           text-transform: uppercase;
           color: #fff;
           font-size: 4.6rem;
-
-         
         }
 
-        .atoll_title{
-          color : #e7e7e7;
+        .atoll_title {
+          color: #e7e7e7;
           font-size: 1.5rem;
           letter-spacing: 0.1rem;
         }
-  
-        
       }
     }
 
@@ -117,7 +110,6 @@ const ResortStyles = styled.div`
       display: flex;
       flex-direction: column;
       max-width: 100vw;
-
 
       @media ${device.tablet} {
         margin-top: 0;
@@ -305,15 +297,12 @@ const ResortStyles = styled.div`
       h2 {
         text-transform: capitalize;
       }
-
-     
     }
 
     &__activities {
       // .slider {
       //   /* height: 70rem; */
       // }
-     
 
       .slider-control-bottomcenter {
         position: absolute;
@@ -322,9 +311,8 @@ const ResortStyles = styled.div`
         .paging-item {
           display: none !important;
           /* height: fit-content !important; */
-      
         }
-      } 
+      }
     }
 
     .slider-slide {

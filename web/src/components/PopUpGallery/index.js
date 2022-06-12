@@ -9,7 +9,7 @@ import useWindowSize from "../../lib/useWindowSize";
 
 import Placeholder from "../../assets/placeholder.svg";
 
-const GalleryComponent = ({ images }) => {
+const GalleryComponent = ({ images, styles }) => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -73,9 +73,10 @@ const GalleryComponent = ({ images }) => {
   };
 
   return (
-    <GalleryImage className="gallery carousel">
+    <GalleryImage className="gallery carousel" style={styles}>
       <div className="image-container">
         <Carousel
+          adaptiveHeight={true}
           speed={1000}
           cellSpacing={cellSpacing}
           slidesToShow={numberOfSlides}
@@ -97,7 +98,7 @@ const GalleryComponent = ({ images }) => {
               ))
             : [1, 2, 3].map((item) => (
                 <div key={item} className="carousel__image-container">
-                  <Placeholder style={{ width: "100%", height: "650px" }} />
+                  <Placeholder />
                 </div>
               ))}
         </Carousel>

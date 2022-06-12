@@ -129,6 +129,29 @@ const JourneyStyles = styled.div`
       &:nth-of-type(5) {
         grid-column: 5/8;
       }
+
+      &:hover {
+        transition: all 0.3s;
+
+        p {
+          transition: all 0.3s;
+          opacity: 1;
+          z-index: 999;
+        }
+
+        &:after {
+          content: "";
+          background: #000;
+          left: 0;
+          top: 0;
+          opacity: 0.4;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          z-index: 50;
+          /* right: -55vw; */
+        }
+      }
     }
 
     img {
@@ -197,7 +220,7 @@ const Journey = ({ collections }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
-      <h1>Start your journey</h1>
+      <h2>Start your journey</h2>
       {/* <ul className="header">
         <li>most popular</li>
         <li>experiences</li>

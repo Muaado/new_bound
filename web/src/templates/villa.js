@@ -396,6 +396,8 @@ const VilaTemplate = (props) => {
                     {resortName}
                   </Link>
                 </li>
+                <li>&gt;</li>
+                <li className="backtoresort room-name">{name}</li>
               </ul>
             </div>
           </div>
@@ -453,7 +455,11 @@ const VilaTemplate = (props) => {
                 </Button>
               </Link>
             </div>
-            <PopUpGallery className="carousel" images={headerImages} />
+            <PopUpGallery
+              styles={{ marginRight: "15px" }}
+              className="carousel"
+              images={headerImages}
+            />
           </div>
 
           {/* {Begin Features section div} */}

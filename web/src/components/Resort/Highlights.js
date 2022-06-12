@@ -8,160 +8,170 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
-    margin-top: 10rem;
-    text-align: center;
-    padding: 0 15%;
-    display: flex;
-    flex-direction: column;
-    @media ${device.laptopM} {
-      padding: 0 10%;
-    }
-    @media ${device.tablet} {
-      margin-top: 5rem;
-      padding: 0 1.5rem;
+  margin-top: 10rem;
+  text-align: center;
+  padding: 0 15%;
+  display: flex;
+  flex-direction: column;
+  @media ${device.laptopM} {
+    padding: 0 10%;
+  }
+  @media ${device.tablet} {
+    margin-top: 5rem;
+    padding: 0 1.5rem;
+  }
+
+  .carousel {
+    display: none !important;
+    @media ${device.mobileXL} {
+      display: unset !important;
+
+      a {
+        bottom: 0;
+        padding: 5px;
+      }
+
+      img {
+        max-height: 230px;
+        min-height: 230px;
+      }
     }
 
-    .carousel {
+    .slider-control-bottomcenter {
       display: none !important;
-      @media ${device.mobileXL} {
-        display: unset !important;
-
-        a{
-          bottom: 0;
-          padding:5px;
-          
-        }
-
-        img{
-          max-height:230px;
-          min-height:230px;
-        }
-      }
-
-      .slider-control-bottomcenter {
-        display: none !important;
-      }
-      
-
-      
     }
-    h2 {
-      margin-bottom: 7rem;
-      font-size: 35px;
-      /* letter-spacing: 1rem; */
+  }
+  h2 {
+    margin-bottom: 7rem;
+    font-size: 35px;
+    /* letter-spacing: 1rem; */
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.6rem;
+
+    @media ${device.laptop} {
+      grid-template-columns: 1fr 1fr;
     }
 
-    ul {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.6rem;
+    @media ${device.tablet} {
+      grid-template-columns: 1fr;
+      display: none;
+    }
 
-      @media ${device.laptop} {
-        grid-template-columns: 1fr 1fr;
-      }
+    /* .overlay {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      opacity: 1;
+      background-color: #000;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      transition: 10s ease;
+    } */
+
+    li {
+      position: relative;
+      transition: all 5s ease-in;
 
       @media ${device.tablet} {
-        grid-template-columns: 1fr;
-        display: none;
+        height: 230px;
       }
 
-      li {
-        position: relative;
-        // height: 30rem;
-
-        @media ${device.tablet} {
-          height:230px;
-
-        }
-        /* 
-        width: 30rem; */
-        &:hover {
+      &:hover {
+        transition: 10s ease;
+        p,
+        a {
           transition: all 0.3s;
+          opacity: 1;
+          z-index: 999;
+        }
 
-          p {
-            transition: all 0.3s;
-            opacity: 1;
-          }
-          &:after {
-            content: "";
-            background: #000;
-            left: 0;
-            top: 0;
-            opacity: 0.4;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 50;
-            /* right: -55vw; */
-          }
+        &:after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 100%;
+          width: 100%;
+          opacity: 0.4;
+          visibility: none;
+          transition: 10s ease;
+          background: #000;
+          z-index: 50;
         }
       }
-      img {
-        width: 100%;
-        height: 100%;
-        min-height:322px;
-        min-width:230px;
-        max-height:260px;
-        object-fit: cover;
-      }
     }
-    a {
-      position: absolute;
-      color: #fff;
-      font-size: 1.8rem;
-      padding:8px;
-      width: -moz-fit-content;
-      /* width: fit-content; */
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      -webkit-align-items: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      align-items: center;
-      background: rgb(0 0 0 / 25%);
-      width:100%;
-      bottom:0;
-
-      svg {
-        margin-left: 1.5rem;
-        height: 0.9rem;
-        width: 0.9rem;
-      }
-      
-
-      @media ${device.laptopM} {
-        bottom: 0;
-      }
-      @media ${device.tabletL} {
-        padding: 1rem 2.5rem;
-      }
+    img {
+      width: 100%;
+      height: 100%;
+      min-height: 322px;
+      min-width: 230px;
+      max-height: 260px;
+      object-fit: cover;
     }
-    p {
-      width: 90%;
-      position: absolute;
-      /* top: 20%; */
-      top: 30%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 100;
+  }
+  a {
+    position: absolute;
+    color: #fff;
+    font-size: 1.8rem;
+    padding: 8px;
+    width: -moz-fit-content;
+    /* width: fit-content; */
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: rgb(0 0 0 / 25%);
+    width: 100%;
+    bottom: 0;
 
-      @media ${device.laptopM} {
-        top: 35%
-        font-size: 1.4rem;
-      }
-      @media ${device.tabletL} {
-        font-size: 1.4rem;
-      }
-
-      opacity: 0;
-      color: #fff;
-      align-self: center;
-      line-height: 2.4rem;
+    svg {
+      margin-left: 1.5rem;
+      height: 0.9rem;
+      width: 0.9rem;
     }
-  
-  `;
+
+    @media ${device.laptopM} {
+      bottom: 0;
+    }
+    @media ${device.tabletL} {
+      padding: 1rem 2.5rem;
+    }
+  }
+  p {
+    width: 90%;
+    position: absolute;
+    /* top: 20%; */
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+
+    @media ${device.laptopM} {
+      top: 35%;
+      font-size: 1.4rem;
+    }
+    @media ${device.tabletL} {
+      font-size: 1.4rem;
+    }
+
+    opacity: 0;
+    color: #fff;
+    align-self: center;
+    line-height: 2.4rem;
+  }
+`;
 
 const Highlights = ({ highlights }) => {
   return (
@@ -195,7 +205,9 @@ const Highlights = ({ highlights }) => {
             {/* </Link> */}
             <p>{description}</p>
             {imageThumb && imageThumb.asset && (
-              <Image {...imageThumb} alt={imageThumb.alt} />
+              <>
+                <Image {...imageThumb} alt={imageThumb.alt} />
+              </>
             )}
             <a className="highLbl">
               {name} <ChevronRight />
@@ -207,14 +219,15 @@ const Highlights = ({ highlights }) => {
         {highlights.length
           ? highlights.map(({ name, imageThumb, description }) => (
               <li key={imageThumb?.alt}>
-                {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
                 <a>
                   {name} <ChevronRight />
                 </a>
                 {/* </Link> */}
                 <p>{description}</p>
                 {imageThumb && imageThumb.asset && (
-                  <Image {...imageThumb} alt={imageThumb.alt} />
+                  <>
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  </>
                 )}
               </li>
             ))

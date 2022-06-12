@@ -134,10 +134,9 @@ const GalleryStyles = styled.div`
   }
 
   .carousel {
-    height: 75vh !important;
-
+    height: 550px !important;
     @media ${device.tablet} {
-      height: 50vh !important;
+      /* height: 50vh !important; */
     }
     img {
       height: 80%;

@@ -24,7 +24,7 @@ const FaqStyles = styled.div`
   }
 
   h2 {
-    text-transform: capitalize;
+    text-transform: uppercase;
     margin-bottom: 1rem;
   }
   .description {

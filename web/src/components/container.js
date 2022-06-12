@@ -59,6 +59,12 @@ const ContainerStyles = styled.main`
       object-fit: cover;
     }
   }
+  h2 {
+    text-transform: uppercase;
+    color: var(--primary);
+    font-size: 35px;
+    letter-spacing: 16px;
+  }
 `;
 
 const Container = ({ children }) => {
