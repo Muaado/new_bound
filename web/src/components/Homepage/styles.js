@@ -21,14 +21,14 @@ export const HeroStyles = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 750px;
+  height: 100vh;
 
   @media ${device.laptop} {
-    height: 550px;
+    height: 80vh;
   }
 
   @media ${device.tablet} {
-    height: 450px;
+    height: 65vh !important;
   }
 
   &:before {
