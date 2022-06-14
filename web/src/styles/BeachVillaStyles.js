@@ -13,7 +13,7 @@ export const BeachVillaStyles = styled.div`
   }
 
   .collection_container {
-    padding: 0 3%;
+    padding: 0 8%;
 
     @media ${device.laptopL} {
       padding: 0 3%;
@@ -74,10 +74,13 @@ export const BeachVillaStyles = styled.div`
       .collection__image {
         display: inline-block;
         overflow: hidden;
-        min-height: 390px;
-        max-height: 390px;
-        @media ${device.onlyMobile} {
+        min-height: 350px;
+        max-height: 350px;
+        width: 100%;
+        max-width: 100%;
+        @media ${device.mobileS} {
           height: unset !important;
+          max-width: 90%;
         }
       }
     }
@@ -123,9 +126,15 @@ export const BeachVillaStyles = styled.div`
   }
 
   .villa_nuatilus_banner {
+    .banner-overlay {
+      opacity: 0.2;
+    }
     height: 600px;
   }
   .villa_banner_boundless {
+    .banner-overlay {
+      opacity: 0.5;
+    }
     height: 350px;
   }
 
@@ -220,9 +229,13 @@ export const BeachVillaStyles = styled.div`
 
     .photofeatured {
       // padding:8px;
+      .overlay {
+        opacity: 0.2;
+      }
       text-transform: uppercase;
 
       img {
+        max-height: 100%;
       }
 
       .featuredVillaName {
@@ -246,7 +259,7 @@ export const BeachVillaStyles = styled.div`
       }
 
       .featuredVillaFooter {
-        font-family: "rivera_ultra_light_regular" sans-serif;
+        font-family: "rivera_ultra_light_regular" sans-serif !important;
         padding: 10px;
         position: absolute;
         bottom: 0;
@@ -260,7 +273,8 @@ export const BeachVillaStyles = styled.div`
           float: right;
         }
 
-        h4 {
+        h4,
+        h3 {
           color: #fff;
         }
       }
@@ -270,7 +284,10 @@ export const BeachVillaStyles = styled.div`
       width: 100%;
       background: white;
       position: relative;
-
+      z-index: 1;
+      .inner {
+        height: 100%;
+      }
       img {
         background-size: contain;
       }
@@ -282,8 +299,8 @@ export const BeachVillaStyles = styled.div`
         text-align: center;
         width: 100%;
 
-        h3 {
-          font-size: 30px;
+        h2 {
+          font-size: 25px;
           color: #fff;
           border-bottom: 2px solid #afafaf;
           margin-bottom: 5px;
@@ -304,36 +321,34 @@ export const BeachVillaStyles = styled.div`
           color: #fff;
         }
       }
+      .overlay {
+        opacity: 0.5;
+      }
     }
   }
 
   .rightfeatured,
   .photofeatured {
     position: relative;
-    .inner {
-      height: 100%;
-      :hover {
-        transition: all 0.3s;
-
-        .featuredVillaFooter,
-        .txtwrap,
-        img {
-          transition: all 0.3s ease-in-out;
-          opacity: 1;
-          z-index: 999;
+    :hover {
+      .featuredVillaFooter {
+        .featuredVillaName {
+          font-size: 22px;
         }
-
-        &:after {
-          content: "";
-          background: #000;
-          left: 0;
-          top: 0;
-          opacity: 0.4;
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          z-index: 50;
-          /* right: -55vw; */
+        .featuredVillaPrice,
+        .featuredVillaView {
+          font-size: 18px;
+        }
+      }
+      .txtwrap {
+        h2 {
+          font-size: 27px;
+        }
+        h3 {
+          font-size: 22px;
+        }
+        p {
+          font-size: 18px;
         }
       }
     }
@@ -349,6 +364,17 @@ export const BeachVillaStyles = styled.div`
 
       .villa_price-logo-wrapper {
         justify-content: space-around;
+      }
+    }
+    @media ${device.mobileS} {
+      padding: 20px 20px 0px 0px;
+      .villaname {
+        text-align: center;
+      }
+
+      .villa_price-logo-wrapper .villa_price {
+        letter-spacing: normal;
+        font-size: 12px;
       }
     }
 

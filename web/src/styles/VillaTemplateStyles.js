@@ -78,12 +78,12 @@ const VillaStyles = styled.div`
 
   .villa {
     &__image {
-      height: 750px;
+      height: 85vh;
       /* overflow-y: hidden; */
       position: relative;
 
       .image-container {
-        max-height: 750px;
+        max-height: 85vh;
         overflow-y: hidden;
         @media ${device.tabletL} {
           height: 80vh;
@@ -109,10 +109,10 @@ const VillaStyles = styled.div`
         font-weight: normal;
         text-transform: uppercase;
         color: #fff;
-        font-size: 4rem;
+        font-size: 4rem
         color: #fff;
         left: 10%;
-        bottom: 3%;
+        bottom: 4.2%;
         z-index: 100;
 
         @media ${device.mobileXL} {
@@ -135,7 +135,7 @@ const VillaStyles = styled.div`
       }
 
       .mouse_scroll {
-        bottom: 30% !important;
+        bottom: 35% !important;
       }
     }
 
@@ -436,7 +436,7 @@ const VillaStyles = styled.div`
         margin-bottom: 20px;
         font-size: 12px;
         font-family: "rivera_bold_regular", "sans-serif";
-        color: #737070;
+        color: #76622e8a;
         text-orientation: use-glyph-orientation;
         text-align: left;
       }

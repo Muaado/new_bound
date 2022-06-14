@@ -11,12 +11,13 @@ import { BeachVillaStyles } from "../styles/BeachVillaStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import LeftSidebar from "../components/LeftSidebar";
-
+import { Overlay } from "../components";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
+import { navigate } from "gatsby";
 
 export const query = graphql`
   query BeachTemplateQuery($id: String!) {
@@ -219,89 +220,91 @@ const BeachTemplate = (props) => {
                     //  for every second villa index add a new row
                     return (
                       // eslint-disable-next-line react/jsx-key
-                      <Link to={villa.url}>
-                        <li className="collection_wrap_item">
-                          <div className="collection__image">
-                            {villa.imageThumb && villa.imageThumb.asset && (
-                              <Image
-                                {...villa.imageThumb}
-                                alt={villa.imageThumb.alt}
-                              />
+                      // <Link to={villa.url}>
+                      <li
+                        className="collection_wrap_item"
+                        onClick={() => {
+                          navigate(`${villa.url}`);
+                        }}
+                      >
+                        <div className="collection__image">
+                          {villa.imageThumb && villa.imageThumb.asset && (
+                            <Image
+                              {...villa.imageThumb}
+                              alt={villa.imageThumb.alt}
+                            />
+                          )}
+                        </div>
+                        <div className="collection__details">
+                          <h4 className="villaname">{villa.name}</h4>
+                          <ul className="villa_icons">
+                            <li>
+                              <Measure className="villa_icon measureicon" />
+                              <span className="villa_icon_label">
+                                {villa.sizeSqm} sqm
+                              </span>
+                            </li>
+
+                            <li>
+                              <Shower />
+                              <span className="villa_icon_label">
+                                {villa.villa_showers}
+                              </span>
+                            </li>
+
+                            <li>
+                              <Bed />
+                              <span className="villa_icon_label">
+                                {villa.numrooms}
+                              </span>
+                            </li>
+
+                            <li>
+                              <TwoPeople />
+                              <span className="villa_icon_label">
+                                {villa.max_occupancy}
+                              </span>
+                            </li>
+
+                            {villa.villaPoolTypes[0] && (
+                              <li>
+                                <SwimmingPool />
+                                <span className="villa_icon_label">
+                                  {villa.villaPoolTypes[0].poolType}
+                                </span>
+                              </li>
+                            )}
+                          </ul>
+
+                          <div className="villa_price-logo-wrapper">
+                            <div className="villa_price">
+                              <span className="price-from">From</span>{" "}
+                              <span className="font-bold">
+                                {villa.price_new}
+                              </span>
+                              <span className="price-category">per person</span>
+                            </div>
+                            {villa.resort.resortBrandLogo && (
+                              <div className="collection_brand_logo">
+                                {villa.resort.resortBrandLogo &&
+                                  villa.resort.resortBrandLogo.asset && (
+                                    <Image
+                                      {...villa.resort.resortBrandLogo}
+                                      alt={villa.resort.resortBrandLogo.alt}
+                                    />
+                                  )}
+                              </div>
                             )}
                           </div>
-                          <div className="collection__details">
-                            <h4 className="villaname">{villa.name}</h4>
-                            <ul className="villa_icons">
-                              <li>
-                                <Measure className="villa_icon measureicon" />
-                                <span className="villa_icon_label">
-                                  {villa.sizeSqm} sqm
-                                </span>
-                              </li>
-
-                              <li>
-                                <Shower />
-                                <span className="villa_icon_label">
-                                  {villa.villa_showers}
-                                </span>
-                              </li>
-
-                              <li>
-                                <Bed />
-                                <span className="villa_icon_label">
-                                  {villa.numrooms}
-                                </span>
-                              </li>
-
-                              <li>
-                                <TwoPeople />
-                                <span className="villa_icon_label">
-                                  {villa.max_occupancy}
-                                </span>
-                              </li>
-
-                              {villa.villaPoolTypes[0] && (
-                                <li>
-                                  <SwimmingPool />
-                                  <span className="villa_icon_label">
-                                    {villa.villaPoolTypes[0].poolType}
-                                  </span>
-                                </li>
-                              )}
-                            </ul>
-
-                            <div className="villa_price-logo-wrapper">
-                              <div className="villa_price">
-                                <span className="price-from font-bold">
-                                  From
-                                </span>{" "}
-                                <span className="font-bold">
-                                  {villa.price_new}
-                                </span>
-                                <span className="price-category">
-                                  per person
-                                </span>
-                              </div>
-                              {villa.resort.resortBrandLogo && (
-                                <div className="collection_brand_logo">
-                                  {villa.resort.resortBrandLogo &&
-                                    villa.resort.resortBrandLogo.asset && (
-                                      <Image
-                                        {...villa.resort.resortBrandLogo}
-                                        alt={villa.resort.resortBrandLogo.alt}
-                                      />
-                                    )}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
+                        </div>
+                      </li>
+                      // </Link>
                     );
                   })}
                 </ul>
                 {key === 2 && banners[0]?.sectionHeroImage?.asset && (
                   <div className="villa_banners villa_nuatilus_banner">
+                    <Overlay className="banner-overlay" />
                     <Image
                       className="featuredreslogo"
                       {...banners[0]?.sectionHeroImage}
@@ -320,6 +323,7 @@ const BeachTemplate = (props) => {
                   <div className="featured_villa_section">
                     {/* BEGIN LEFT SECTION */}
                     <div className="photofeatured">
+                      <Overlay className="overlay" />
                       <div class="inner">
                         <Image
                           className="featuredreslogo"
@@ -337,9 +341,9 @@ const BeachTemplate = (props) => {
 
                         <div className="featuredVillaFooter">
                           <Link to={col.featuredvillas[0].villaone.url}>
-                            <h3 className="featuredVillaName">
+                            <h4 className="featuredVillaName">
                               {col.featuredvillas[0].villaone.name}
-                            </h3>
+                            </h4>
                           </Link>
                           <h4 className="featuredVillaPrice">
                             {col.featuredvillas[0].villaone.price}
@@ -354,6 +358,7 @@ const BeachTemplate = (props) => {
 
                     {/* BEGIN RIGHT SECTION */}
                     <div className="rightfeatured">
+                      <Overlay className="overlay" />
                       <div class="inner">
                         {col.featuredvillas[0].villaone.headerImages
                           .images[1] && (
@@ -367,10 +372,10 @@ const BeachTemplate = (props) => {
                           />
                         )}
                         <div className="txtwrap">
-                          <h3>{col.featuredvillas[0].title}</h3>
-                          <h2 className="tagline">
+                          <h2>{col.featuredvillas[0].title}</h2>
+                          <h3 className="tagline">
                             {col.featuredvillas[0].villaone.tagline}
-                          </h2>
+                          </h3>
                           <p className="description">
                             {col.featuredvillas[0].villaone.short_desc}
                           </p>
@@ -381,6 +386,7 @@ const BeachTemplate = (props) => {
                 )}
                 {key === 1 && banners[1]?.sectionHeroImage?.asset && (
                   <div className="villa_banners villa_banner_boundless">
+                    <Overlay className="banner-overlay" />
                     <Image
                       className="villaBoundlessBanner"
                       {...banners[1]?.sectionHeroImage}

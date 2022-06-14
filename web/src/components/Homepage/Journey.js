@@ -9,6 +9,7 @@ import { device } from "../../styles/deviceSizes";
 import { Overlay } from "../Overlay";
 import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
+import { FixedBackgroundImage } from "../Parallax";
 import { getCollectionUrl } from "../../lib/helpers";
 
 const JourneyStyles = styled.div`
@@ -20,25 +21,15 @@ const JourneyStyles = styled.div`
   /* font-family: "Playfair Display"; */
   text-align: center;
 
-  padding: 0 15%;
-  /* z-index: -1; */
-
-  width: 100%;
-  /* max-width: 1440px; */
-  @media ${device.laptopL} {
-    padding: 0 15%;
-  }
-  @media ${device.laptop} {
-    margin-top: 10rem;
-    padding: 0 10%;
-  }
-
   @media ${device.tablet} {
     margin-top: 7rem;
     padding: 0 1.5rem;
   }
   @media ${device.mobileXL} {
     padding: 0;
+  }
+  h2 {
+    margin-bottom: 3rem;
   }
 
   h1 {
@@ -80,30 +71,23 @@ const JourneyStyles = styled.div`
     margin-top: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 30rem; */
-
     gap: 1rem;
 
     a {
       position: relative;
-      /* height: 40rem;
-      width: 40rem; */
       height: 35rem;
+      z-index: 2;
       img {
-        z-index: -1;
+        /* z-index: 1; */
       }
-      /* width: 40rem; */
       p {
-        z-index: 1;
+        z-index: 2;
         color: #fff;
         position: absolute;
         text-transform: uppercase;
 
         text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
           0px 4px 4px rgba(0, 0, 0, 0.25);
-
-        /* top: 90%; */
         top: 90%;
         left: 50%;
         width: 100%;
@@ -133,6 +117,7 @@ const JourneyStyles = styled.div`
       &:hover {
         .overlay {
           opacity: 0.5;
+          z-index: 2;
         }
 
         p {
@@ -192,6 +177,26 @@ const JourneyStyles = styled.div`
       }
     }
   }
+
+  .parallax-main-wrapper {
+    background: url(https://i.ibb.co/nLsBdvB/Image-from-i-OS.jpg) center center /
+      cover fixed;
+    z-index: 1;
+    padding: 0 15%;
+
+    width: 100%;
+    @media ${device.laptopL} {
+      padding: 0 15%;
+    }
+    @media ${device.laptop} {
+      margin-top: 10rem;
+      padding: 0 10%;
+    }
+  }
+
+  .parallax-inner-wrapper {
+    margin: 5% 0;
+  }
 `;
 
 const Journey = ({ collections }) => {
@@ -203,68 +208,59 @@ const Journey = ({ collections }) => {
     windowWidth = window.innerWidth;
   }
   return (
-    <JourneyStyles
-    // data-aos="fade-up"
-    // data-aos-delay="50"
-    // data-aos-duration="1000"
-    // data-aos-easing="ease-in-out"
-    >
+    <JourneyStyles>
       <h2>Start your journey</h2>
-      {/* <ul className="header">
-        <li>most popular</li>
-        <li>experiences</li>
-        <li>by traveler</li>
-        <li>unique</li>
-        <li>view all</li>
-      </ul> */}
-
-      {windowWidth >= 805 ? (
-        <ul className="images">
-          {collections.edges
-            .sort((a, b) => a.node.rank - b.node.rank)
-            .map(({ node }) => (
-              <Link
-                to={`/collections/${node.slug.current}/`}
-                className="clickable"
-                key={node.name}
-              >
-                <p>{node.CollectionPageName}</p>
-                <Overlay className="overlay" />
-                {node.image && node.image.asset && (
-                  <Image {...node.image} alt={node.image.alt} />
-                )}
-              </Link>
-            ))}
-        </ul>
-      ) : (
-        <Carousel
-          speed={1000}
-          className="carousel"
-          slidesToShow={1}
-          disableEdgeSwiping
-          dragging
-          // easing
-          // animation=""
-          // cellSpacing={cellSpacing}
-          renderCenterRightControls={() => ""}
-          renderCenterLeftControls={() => ""}
-        >
-          {collections.edges
-            .sort((a, b) => a.node.rank - b.node.rank)
-            .map(({ node }) => (
-              <Link
-                key={node.alt}
-                className="carousel__image-container clickable"
-                to={getCollectionUrl({ name: node.name, type: node.type })}
-              >
-                <p>{node.name}</p>
-                {node.imageThumb && node.imageThumb.asset && (
-                  <Image {...node.imageThumb} alt={node.imageThumb.alt} />
-                )}
-              </Link>
-            ))}
-        </Carousel>
-      )}
+      <div className="parallax-main-wrapper">
+        <div className="parallax-inner-wrapper">
+          {windowWidth >= 805 ? (
+            <ul className="images">
+              {collections.edges
+                .sort((a, b) => a.node.rank - b.node.rank)
+                .map(({ node }) => (
+                  <Link
+                    to={`/collections/${node.slug.current}/`}
+                    className="clickable"
+                    key={node.name}
+                  >
+                    <p>{node.CollectionPageName}</p>
+                    <Overlay className="overlay" />
+                    {node.image && node.image.asset && (
+                      <Image {...node.image} alt={node.image.alt} />
+                    )}
+                  </Link>
+                ))}
+            </ul>
+          ) : (
+            <Carousel
+              speed={1000}
+              className="carousel"
+              slidesToShow={1}
+              disableEdgeSwiping
+              dragging
+              // easing
+              // animation=""
+              // cellSpacing={cellSpacing}
+              renderCenterRightControls={() => ""}
+              renderCenterLeftControls={() => ""}
+            >
+              {collections.edges
+                .sort((a, b) => a.node.rank - b.node.rank)
+                .map(({ node }) => (
+                  <Link
+                    key={node.alt}
+                    className="carousel__image-container clickable"
+                    to={getCollectionUrl({ name: node.name, type: node.type })}
+                  >
+                    <p>{node.name}</p>
+                    {node.imageThumb && node.imageThumb.asset && (
+                      <Image {...node.imageThumb} alt={node.imageThumb.alt} />
+                    )}
+                  </Link>
+                ))}
+            </Carousel>
+          )}
+        </div>
+      </div>
     </JourneyStyles>
   );
 };

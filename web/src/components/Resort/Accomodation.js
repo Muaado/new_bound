@@ -92,7 +92,7 @@ const AccomodationStyles = styled.div`
         color: #7d7d7d;
         .price-from {
           text-transform: uppercase;
-          font-weight: 800 !important;
+          font-weight: 400 !important;
           font-size: 10px;
         }
         .font-bold {
@@ -199,7 +199,7 @@ const Accomodation = ({ villas, id }) => {
               <p className="roomname">{name}</p>
               {/* <span className="pricelbl">from $5,950 PP</span> */}
               <div className="room_price">
-                <span className="price-from font-bold">From</span>{" "}
+                <span className="price-from">From</span>{" "}
                 <span className="font-bold">$5,950</span>
                 <span className="price-category">per person</span>
               </div>

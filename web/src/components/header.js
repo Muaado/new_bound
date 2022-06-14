@@ -500,7 +500,7 @@ const DropdownListStyles = styled.div`
       overflow-x: hidden;
     }
     a {
-      border-bottom: 1px solid rgba(179, 154, 106, 0.5) !important;
+      border-bottom: 1px solid rgba(179, 154, 106, 0.2) !important;
       padding-bottom: 10px;
       :hover {
         font-weight: 600 !important;
