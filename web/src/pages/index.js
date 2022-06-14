@@ -28,6 +28,7 @@ import LeftSidebar from "../components/LeftSidebar";
 import { MouseScroll } from "../components/Ui/MouseScroll";
 import Search from "../components/Search";
 import { Button } from "../components/Button";
+import { FixedBackgroundImage } from "../components";
 
 // import HomepageStaticImage from "../assets/homepage-image.png";
 
@@ -51,6 +52,7 @@ export const query = graphql`
     }
     asset {
       _id
+      url
     }
   }
 
@@ -249,7 +251,6 @@ const IndexPage = (props) => {
       <Container>
         <LeftSidebar />
         <HeroStyles>
-          {/* <h1> {site.description}</h1> */}
           {windowGlobal && window.innerWidth >= 805 ? (
             <SanityMuxPlayer
               assetDocument={site.video.asset}
@@ -269,14 +270,6 @@ const IndexPage = (props) => {
               <Image {...site.mobileHeroImage} alt={site.mobileHeroImage.alt} />
             )
           )}
-
-          {/* <Video
-            videoSrcURL={
-              // VideoBg
-
-              site.videoURL
-            }
-          /> */}
           <h1 className="disappear-on-scroll">Luxury experience curators</h1>
           <MouseScroll />
         </HeroStyles>
@@ -302,48 +295,48 @@ const IndexPage = (props) => {
               }
             }}
           />
-
           <Journey collections={collections} />
+          <HandCraftedJourneysStyles>
+            <div className="header-text">
+              <p className="subtitle">only the best</p>
+              <h2>hand-crafted journeys</h2>
+            </div>
+            <div className="parallax-main-wrapper">
+              <div className="parallax-inner-wrapper">
+                <p className="description">
+                  Looking for an unforgettable luxury holiday experience? Look
+                  no further than our experts at Boundless Maldives, to curate a
+                  unique and personalized holiday experience tailored
+                  specifically to your needs. Whether you're looking for a
+                  private island escape or a luxury travel experience on a
+                  private jet, Boundless Maldives will exceed your
+                  expectations.Call us today to kick off your next adventure.
+                </p>
+                <ul>
+                  {site.handCraftedJourneys.map(
+                    ({ title, image, description }) => (
+                      <li key={title}>
+                        {/* <Link to={getBlogUrl(publishedAt, slug.current)}> */}
+                        <div className="image-container">
+                          {image && image.asset && (
+                            <Image {...image} alt={image.alt} />
+                          )}
+                        </div>
+                        <div className="text-container">
+                          <h3>{title}</h3>
 
-          <HandCraftedJourneysStyles
-          // data-aos="fade-up"
-          // data-aos-delay="50"
-          // data-aos-duration="1000"
-          // data-aos-easing="ease-in-out"
-          >
-            <p className="subtitle">only the best</p>
-            <h2>hand-crafted journeys</h2>
-            <p className="description">
-              {/* Unparalleled luxury and privacy for discerning travelers. Indulge in the absolute best of everything with our hand-crafted services - exquisite private events, luxurious private island holidays and exclusive private jet travel. From the moment you arrive, you'll experience the Boundless Maldives difference. */}
-              Looking for an unforgettable luxury holiday experience? Look no
-              further than our experts at Boundless Maldives, to curate a unique
-              and personalized holiday experience tailored specifically to your
-              needs. Whether you're looking for a private island escape or a
-              luxury travel experience on a private jet, Boundless Maldives will
-              exceed your expectations.Call us today to kick off your next
-              adventure.
-            </p>
-            <ul>
-              {site.handCraftedJourneys.map(({ title, image, description }) => (
-                <li key={title}>
-                  {/* <Link to={getBlogUrl(publishedAt, slug.current)}> */}
-                  <div className="image-container">
-                    {image && image.asset && (
-                      <Image {...image} alt={image.alt} />
-                    )}
-                  </div>
-                  <div className="text-container">
-                    <h3>{title}</h3>
-
-                    <p className="itemDesc">{description} </p>
-                  </div>
-                  {/* </Link> */}
-                </li>
-              ))}
-            </ul>
-            <Link to="/enquire" className="white">
-              <Button>Enquire</Button>
-            </Link>
+                          <p className="itemDesc">{description} </p>
+                        </div>
+                        {/* </Link> */}
+                      </li>
+                    )
+                  )}
+                </ul>
+                <Link to="/enquire" className="white">
+                  <Button>Enquire</Button>
+                </Link>
+              </div>
+            </div>
           </HandCraftedJourneysStyles>
           <PromoSection image={site.promoImageWeb} />
           <AboutUs aboutUs={site.aboutUs} />
@@ -379,20 +372,8 @@ const IndexPage = (props) => {
             </Link>
           </MagazineStyles>
           <TailorMade />
-          <div
-          // className="second-image"
-          // data-aos="fade-up"
-          // data-aos-delay="50"
-          // data-aos-duration="1000"
-          // data-aos-easing="ease-in-out"
-          >
-            {site.secondImage && site.secondImage.asset && (
-              <Image
-                {...site.secondImage}
-                width={1440}
-                alt={site.secondImage.alt}
-              />
-            )}
+          <div className="second-image">
+            <FixedBackgroundImage bgImage={site?.secondImage?.asset?.url} />
           </div>
           {site.faq.length && <Faq path="/" faq={site.faq[0]} />}
           <NewsletterSection site={site} />

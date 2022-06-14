@@ -87,43 +87,21 @@ export const HeroStyles = styled.div`
 `;
 
 export const HandCraftedJourneysStyles = styled.div`
-  margin: 10rem 0;
-  padding: 0 15%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .text-container {
-  }
-
-  .text-container h3 {
-    text-align: left;
-  }
-
-  .text-container p {
-    text-align: left;
-  }
-
-  @media ${device.laptopL} {
-    padding: 0 15%;
-  }
-  @media ${device.laptop} {
-    padding: 0 10%;
-  }
-  @media ${device.tablet} {
-    margin: 5rem 0;
-    padding: 0 1.5rem;
-  }
-
   h2,
   p {
     text-align: center;
+  }
+  .header-text {
+    display: flex;
+    margin-top: 10rem;
+    align-items: center;
+    flex-direction: column;
   }
 
   h2 {
     text-transform: lowercase;
     max-width: 50rem;
+    text-align: center;
     margin-bottom: 3rem;
     letter-spacing: 1rem;
 
@@ -138,9 +116,9 @@ export const HandCraftedJourneysStyles = styled.div`
   }
 
   .description {
-    margin-bottom: 10rem;
+    margin: 10rem 0;
     font-size: 1.6rem;
-    max-width: 55rem;
+    /* max-width: 55rem; */
     color: #505050;
     line-height: 3rem;
   }
@@ -202,6 +180,45 @@ export const HandCraftedJourneysStyles = styled.div`
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
+  }
+
+  .parallax-main-wrapper {
+    background: url(https://i.ibb.co/nLsBdvB/Image-from-i-OS.jpg) center center /
+      cover fixed;
+    z-index: 1;
+    padding: 0 15%;
+    margin-bottom: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .text-container {
+    }
+
+    .text-container h3 {
+      text-align: left;
+    }
+
+    .text-container p {
+      text-align: left;
+    }
+
+    @media ${device.laptopL} {
+      padding: 0 15%;
+    }
+    @media ${device.laptop} {
+      padding: 0 10%;
+    }
+    @media ${device.tablet} {
+      margin: 5rem 0;
+      padding: 0 1.5rem;
+    }
+  }
+  .parrallax-inner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5%;
   }
 `;
 

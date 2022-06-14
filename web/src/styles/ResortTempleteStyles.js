@@ -32,7 +32,7 @@ const ResortStyles = styled.div`
     &__image {
       position: relative;
       /* scroll-snap-align: center; */
-      height: 750px;
+      height: 95vh;
       overflow-y: hidden;
       /* position: relative;
       top: -18rem; */
