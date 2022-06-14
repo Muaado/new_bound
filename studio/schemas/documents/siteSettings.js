@@ -143,6 +143,16 @@ export default {
         layout: "tags",
       },
     },
+    {
+      name: "parallaxBackground",
+      title: "Parallax Background",
+      type: "array",
+      of: [
+        {
+          type: "mainImage",
+        },
+      ],
+    },
     // {
     //   name: "author",
     //   type: "reference",
