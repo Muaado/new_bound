@@ -4,7 +4,7 @@ import { device } from "../../styles/deviceSizes";
 
 const MouseScrollStyles = styled.div`
   position: absolute;
-  bottom: 4rem;
+  bottom: 12rem;
   transform: translate(-50%, 0);
   left: 50%;
   height: 20%;
