@@ -300,7 +300,7 @@ const IndexPage = (props) => {
               }
             }}
           />
-          <Journey parallaxImage={parallaxImage} collections={collections} />
+          <Journey collections={collections} />
           <HandCraftedJourneysStyles parallaxImage={parallaxImage}>
             <div className="header-text">
               <p className="subtitle">only the best</p>
