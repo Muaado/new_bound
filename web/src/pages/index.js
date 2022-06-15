@@ -54,6 +54,7 @@ export const query = graphql`
       _id
       url
     }
+    colorType
   }
 
   query IndexPageQuery {

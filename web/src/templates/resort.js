@@ -34,7 +34,9 @@ import Placeholder from "../assets/placeholder.svg";
 import { toPlainText } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
+import { Overlay } from "../components";
 // import review from "../../../studio/schemas/documents/review";
+import { LIGHT_COLOR } from "../constants";
 
 export const query = graphql`
   query ResortTemplateQuery($id: String!) {
@@ -246,7 +248,8 @@ const ResortTemplate = (props) => {
     highlights,
     faq,
   } = resort;
-
+  const heroTextClass =
+    resort.image.colorType === LIGHT_COLOR ? "overlay-background" : undefined;
   return (
     <Layout>
       {errors && <SEO title="GraphQL Error" />}
@@ -259,9 +262,12 @@ const ResortTemplate = (props) => {
       )}
       <Container>
         <ResortStyles>
-          <div className="resort__image">
+          <div className={`resort__image ${heroTextClass}`}>
             {image && image.asset && (
-              <Image {...image} width={1440} alt={image?.alt} />
+              <>
+                <Overlay className="hero-overlay" />
+                <Image {...image} width={1440} alt={image?.alt} />
+              </>
             )}
             <div
               // id="header-text"

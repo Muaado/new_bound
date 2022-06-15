@@ -365,6 +365,13 @@ export const GlobalStyle = createGlobalStyle`
     }
     .villa__header{
       margin-top: 0px !important;
+  }
+
+  .overlay-background{
+    font-weight:600 !important;
+    .hero-overlay{
+      opacity: 0.5;
     }
+  }
 
 `;
