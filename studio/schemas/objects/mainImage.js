@@ -25,6 +25,17 @@ export default {
         isHighlighted: true,
       },
     },
+    {
+      title: "Color Type",
+      name: "colorType",
+      type: "string",
+      options: {
+        list: [
+          { title: "light", value: "LIGHT" },
+          { title: "dark", value: "DARK" },
+        ],
+      },
+    },
   ],
   preview: {
     select: {
