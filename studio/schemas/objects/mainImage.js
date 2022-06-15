@@ -29,8 +29,6 @@ export default {
       title: "Color Type",
       name: "colorType",
       type: "string",
-      validation: (Rule) =>
-        Rule.error("You have to fill out the image color type.").required(),
       options: {
         list: [
           { title: "light", value: "LIGHT" },
