@@ -68,14 +68,19 @@ export const BeachVillaStyles = styled.div`
       list-style: none;
       background-color: #f9f9f9;
       width: 100%;
+      height: fit-content;
       :hover {
         cursor: pointer;
       }
       .collection__image {
         display: inline-block;
         overflow: hidden;
-        min-height: 350px;
-        max-height: 350px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+        min-height: 300px;
+        max-height: 300px;
         width: 100%;
         max-width: 100%;
         @media ${device.mobileS} {
@@ -215,7 +220,7 @@ export const BeachVillaStyles = styled.div`
     display: grid;
     grid-template-columns: minmax(auto, 2fr) 1fr;
     // grid-template-columns: repeat(auto-fill, minmax(840px, 1fr));
-    gap: 1.3rem;
+    gap: 20px;
 
     @media ${device.iphonePortLandscape} {
       grid-template-columns: 1fr;
@@ -229,9 +234,6 @@ export const BeachVillaStyles = styled.div`
 
     .photofeatured {
       // padding:8px;
-      .overlay {
-        opacity: 0.2;
-      }
       text-transform: uppercase;
 
       img {
@@ -239,7 +241,7 @@ export const BeachVillaStyles = styled.div`
       }
 
       .featuredVillaName {
-        font-size: 20px;
+        font-size: 18px;
         color: #fff;
         border-bottom: 2px solid #afafaf;
         margin-bottom: 5px;
@@ -255,7 +257,7 @@ export const BeachVillaStyles = styled.div`
       }
 
       .featuredVillaPrice {
-        font-size: 20px;
+        font-size: 18px;
       }
 
       .featuredVillaFooter {
@@ -276,6 +278,11 @@ export const BeachVillaStyles = styled.div`
         h4,
         h3 {
           color: #fff;
+        }
+      }
+      :hover {
+        .overlay {
+          opacity: 0.4;
         }
       }
     }
@@ -300,7 +307,7 @@ export const BeachVillaStyles = styled.div`
         width: 100%;
 
         h2 {
-          font-size: 25px;
+          font-size: 23px;
           color: #fff;
           border-bottom: 2px solid #afafaf;
           margin-bottom: 5px;
@@ -309,8 +316,7 @@ export const BeachVillaStyles = styled.div`
         }
 
         .tagline {
-          font-size: 20px;
-          font-size: 20px;
+          font-size: 18px;
           margin-top: 40px;
           color: #fff;
         }
@@ -330,32 +336,10 @@ export const BeachVillaStyles = styled.div`
   .rightfeatured,
   .photofeatured {
     position: relative;
-    :hover {
-      .featuredVillaFooter {
-        .featuredVillaName {
-          font-size: 22px;
-        }
-        .featuredVillaPrice,
-        .featuredVillaView {
-          font-size: 18px;
-        }
-      }
-      .txtwrap {
-        h2 {
-          font-size: 27px;
-        }
-        h3 {
-          font-size: 22px;
-        }
-        p {
-          font-size: 18px;
-        }
-      }
-    }
   }
 
   .collection__details {
-    padding: 20px 20px 0px 20px;
+    padding: 20px 10px 5px 10px;
     @media ${device.mobileM} {
       padding: 20px 20px 0px 0px;
       .villaname {
@@ -379,7 +363,7 @@ export const BeachVillaStyles = styled.div`
     }
 
     h4 {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       text-transform: uppercase;
       color: #76622e;
       font-weight: 400 !important;
@@ -394,8 +378,8 @@ export const BeachVillaStyles = styled.div`
     }
 
     .collection_brand_logo img {
-      height: 150px;
-      width: 150px;
+      height: 80px;
+      width: 130px;
 
       @media ${device.iphonePortLandscape} {
         height: 100px;
@@ -412,7 +396,7 @@ export const BeachVillaStyles = styled.div`
       }
     }
     .villa_price {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       -webkit-letter-spacing: 0.3rem;
       -moz-letter-spacing: 0.3rem;
       -ms-letter-spacing: 0.3rem;
@@ -427,7 +411,7 @@ export const BeachVillaStyles = styled.div`
         font-family: "rivera_bold_regular", "sans-serif";
       }
       .price-category {
-        font-size: 11px;
+        font-size: 10px;
         margin-left: 5px;
       }
       // margin-left: 20px;
@@ -437,9 +421,8 @@ export const BeachVillaStyles = styled.div`
       margin-top: 20px;
       display: grid;
       // grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-columns: 60px 40px 40px 40px 50px;
-      gap: 2rem;
-      font-size: 1.4rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr;
+      font-size: 1.2rem;
       text-align: left;
       color: #fff;
       align-items: baseline;
@@ -452,7 +435,7 @@ export const BeachVillaStyles = styled.div`
         width: auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         .villa_icon_label {
           display: inline-block;
           width: auto;
@@ -461,6 +444,11 @@ export const BeachVillaStyles = styled.div`
           color: #787878;
           text-align: center;
           margin-top: 10px;
+        }
+        .inner-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
       }
     }

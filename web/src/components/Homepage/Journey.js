@@ -179,8 +179,8 @@ const JourneyStyles = styled.div`
   }
 
   .parallax-main-wrapper {
-    background: url(https://i.ibb.co/nLsBdvB/Image-from-i-OS.jpg) center center /
-      cover fixed;
+    background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
     z-index: 1;
     padding: 0 15%;
 
@@ -199,7 +199,7 @@ const JourneyStyles = styled.div`
   }
 `;
 
-const Journey = ({ collections }) => {
+const Journey = ({ collections, parallaxImage }) => {
   const windowGlobal = typeof window !== "undefined";
 
   let windowWidth = 1440;
@@ -208,7 +208,7 @@ const Journey = ({ collections }) => {
     windowWidth = window.innerWidth;
   }
   return (
-    <JourneyStyles>
+    <JourneyStyles parallaxImage={parallaxImage}>
       <h2>Start your journey</h2>
       <div className="parallax-main-wrapper">
         <div className="parallax-inner-wrapper">

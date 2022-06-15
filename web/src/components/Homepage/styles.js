@@ -183,8 +183,8 @@ export const HandCraftedJourneysStyles = styled.div`
   }
 
   .parallax-main-wrapper {
-    background: url(https://i.ibb.co/nLsBdvB/Image-from-i-OS.jpg) center center /
-      cover fixed;
+    background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
     z-index: 1;
     padding: 0 15%;
     margin-bottom: 10rem;
@@ -219,6 +219,12 @@ export const HandCraftedJourneysStyles = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 5%;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10rem;
   }
 `;
 

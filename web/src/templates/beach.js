@@ -239,39 +239,49 @@ const BeachTemplate = (props) => {
                           <h4 className="villaname">{villa.name}</h4>
                           <ul className="villa_icons">
                             <li>
-                              <Measure className="villa_icon measureicon" />
-                              <span className="villa_icon_label">
-                                {villa.sizeSqm} sqm
-                              </span>
+                              <div className="inner-content">
+                                <Measure className="villa_icon measureicon" />
+                                <span className="villa_icon_label">
+                                  {villa.sizeSqm} sqm
+                                </span>
+                              </div>
                             </li>
 
                             <li>
-                              <Shower />
-                              <span className="villa_icon_label">
-                                {villa.villa_showers}
-                              </span>
+                              <div className="inner-content">
+                                <Shower />
+                                <span className="villa_icon_label">
+                                  {villa.villa_showers}
+                                </span>
+                              </div>
                             </li>
 
                             <li>
-                              <Bed />
-                              <span className="villa_icon_label">
-                                {villa.numrooms}
-                              </span>
+                              <div className="inner-content">
+                                <Bed />
+                                <span className="villa_icon_label">
+                                  {villa.numrooms}
+                                </span>
+                              </div>
                             </li>
 
                             <li>
-                              <TwoPeople />
-                              <span className="villa_icon_label">
-                                {villa.max_occupancy}
-                              </span>
+                              <div className="inner-content">
+                                <TwoPeople />
+                                <span className="villa_icon_label">
+                                  {villa.max_occupancy}
+                                </span>
+                              </div>
                             </li>
 
                             {villa.villaPoolTypes[0] && (
                               <li>
-                                <SwimmingPool />
-                                <span className="villa_icon_label">
-                                  {villa.villaPoolTypes[0].poolType}
-                                </span>
+                                <div className="inner-content">
+                                  <SwimmingPool />
+                                  <span className="villa_icon_label">
+                                    {villa.villaPoolTypes[0].poolType}
+                                  </span>
+                                </div>
                               </li>
                             )}
                           </ul>

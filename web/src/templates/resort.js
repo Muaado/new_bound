@@ -201,6 +201,9 @@ export const query = graphql`
         }
         businessHoursDescription
       }
+      parallaxBackground {
+        ...SanityImage
+      }
     }
   }
 `;
@@ -214,6 +217,7 @@ const ResortTemplate = (props) => {
   const villas = data && data.villas;
   const restaurants = data && data.restaurants;
   const site = data && data.site;
+  const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
 
   const [slice, setSlice] = useState(Number);
   const [restaurantSlice, setRestaurentSlice] = useState(4);
@@ -294,6 +298,7 @@ const ResortTemplate = (props) => {
               resortTransferType={resortTransferType}
               timeToAirport={timeToAirport}
               _rawDescription={_rawDescription}
+              parallaxImage={parallaxImage}
             />
           </div>
           <Accomodation id="accomodation" villas={villas.nodes} />
@@ -316,7 +321,7 @@ const ResortTemplate = (props) => {
               )}
             </li>
           </ul> */}
-          <Highlights highlights={highlights} />
+          <Highlights parallaxImage={parallaxImage} highlights={highlights} />
 
           {/* Old Restaurant layout START */}
           {/* <div
@@ -390,7 +395,10 @@ const ResortTemplate = (props) => {
           {/* OLD RESTAURANT */}
 
           {restaurants?.nodes && (
-            <Restaurants restaurants={restaurants.nodes} />
+            <Restaurants
+              parallaxImage={parallaxImage}
+              restaurants={restaurants.nodes}
+            />
           )}
 
           {/* {galleries && <Gallery id="gallery" galleries={galleries} />} */}
@@ -428,6 +436,7 @@ const ResortTemplate = (props) => {
               data-aos-delay="50"
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
+              parallaxImage={parallaxImage}
             />
           )}
           {/* 
