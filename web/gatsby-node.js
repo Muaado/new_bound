@@ -100,6 +100,9 @@ async function createVillaPages(graphql, actions) {
             _id
             name
           }
+          rateModel {
+            _id
+          }
         }
       }
     }
@@ -110,7 +113,7 @@ async function createVillaPages(graphql, actions) {
   const villaEdges = (result.data.allSanityVilla || {}).nodes || [];
 
   villaEdges.forEach((node) => {
-    const { _id, name, resort, _type } = node;
+    const { _id, name, resort, _type, rateModel } = node;
 
     // console.log(node);
 
@@ -126,7 +129,13 @@ async function createVillaPages(graphql, actions) {
       createPage({
         path,
         component: require.resolve("./src/templates/villa.js"),
-        context: { id: _id, resortId: resort._id, _type, name },
+        context: {
+          id: _id,
+          resortId: resort._id,
+          _type,
+          name,
+          rateModelId: rateModel?._id || "",
+        },
       });
   });
 }
