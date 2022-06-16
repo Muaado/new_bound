@@ -6,6 +6,9 @@ import { device } from "../../styles/deviceSizes";
 // import { device } from "../styles/deviceSizes";
 
 const AmenitiesStyles = styled.div`
+  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
+  z-index: 1;
   display: flex;
   flex-direction: column;
   .description {
@@ -61,6 +64,9 @@ const AmenitiesStyles = styled.div`
       }
     }
   }
+  .amenties {
+    margin-bottom: 5rem;
+  }
 `;
 
 const Amenities = ({
@@ -71,9 +77,10 @@ const Amenities = ({
   resortTransferType,
   timeToAirport,
   _rawDescription,
+  parallaxImage,
 }) => {
   return (
-    <AmenitiesStyles>
+    <AmenitiesStyles parallaxImage={parallaxImage}>
       <div className="description">
         <PortableText blocks={_rawDescription} />
       </div>

@@ -179,9 +179,11 @@ const JourneyStyles = styled.div`
   }
 
   .parallax-main-wrapper {
-    background: url(https://i.ibb.co/nLsBdvB/Image-from-i-OS.jpg) center center /
-      cover fixed;
-    z-index: 1;
+    /* background: ${({
+      parallaxImage,
+    }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
+    z-index: 1; */
     padding: 0 15%;
 
     width: 100%;
@@ -192,10 +194,6 @@ const JourneyStyles = styled.div`
       margin-top: 10rem;
       padding: 0 10%;
     }
-  }
-
-  .parallax-inner-wrapper {
-    margin: 5% 0;
   }
 `;
 
@@ -211,55 +209,53 @@ const Journey = ({ collections }) => {
     <JourneyStyles>
       <h2>Start your journey</h2>
       <div className="parallax-main-wrapper">
-        <div className="parallax-inner-wrapper">
-          {windowWidth >= 805 ? (
-            <ul className="images">
-              {collections.edges
-                .sort((a, b) => a.node.rank - b.node.rank)
-                .map(({ node }) => (
-                  <Link
-                    to={`/collections/${node.slug.current}/`}
-                    className="clickable"
-                    key={node.name}
-                  >
-                    <p>{node.CollectionPageName}</p>
-                    <Overlay className="overlay" />
-                    {node.image && node.image.asset && (
-                      <Image {...node.image} alt={node.image.alt} />
-                    )}
-                  </Link>
-                ))}
-            </ul>
-          ) : (
-            <Carousel
-              speed={1000}
-              className="carousel"
-              slidesToShow={1}
-              disableEdgeSwiping
-              dragging
-              // easing
-              // animation=""
-              // cellSpacing={cellSpacing}
-              renderCenterRightControls={() => ""}
-              renderCenterLeftControls={() => ""}
-            >
-              {collections.edges
-                .sort((a, b) => a.node.rank - b.node.rank)
-                .map(({ node }) => (
-                  <Link
-                    key={node.alt}
-                    className="carousel__image-container clickable"
-                    to={getCollectionUrl({ name: node.name, type: node.type })}
-                  >
-                    <p>{node.name}</p>
-                    {node.imageThumb && node.imageThumb.asset && (
-                      <Image {...node.imageThumb} alt={node.imageThumb.alt} />
-                    )}
-                  </Link>
-                ))}
-            </Carousel>
-          )}
-        </div>
+        {windowWidth >= 805 ? (
+          <ul className="images">
+            {collections.edges
+              .sort((a, b) => a.node.rank - b.node.rank)
+              .map(({ node }) => (
+                <Link
+                  to={`/collections/${node.slug.current}/`}
+                  className="clickable"
+                  key={node.name}
+                >
+                  <p>{node.CollectionPageName}</p>
+                  <Overlay className="overlay" />
+                  {node.image && node.image.asset && (
+                    <Image {...node.image} alt={node.image.alt} />
+                  )}
+                </Link>
+              ))}
+          </ul>
+        ) : (
+          <Carousel
+            speed={1000}
+            className="carousel"
+            slidesToShow={1}
+            disableEdgeSwiping
+            dragging
+            // easing
+            // animation=""
+            // cellSpacing={cellSpacing}
+            renderCenterRightControls={() => ""}
+            renderCenterLeftControls={() => ""}
+          >
+            {collections.edges
+              .sort((a, b) => a.node.rank - b.node.rank)
+              .map(({ node }) => (
+                <Link
+                  key={node.alt}
+                  className="carousel__image-container clickable"
+                  to={getCollectionUrl({ name: node.name, type: node.type })}
+                >
+                  <p>{node.name}</p>
+                  {node.imageThumb && node.imageThumb.asset && (
+                    <Image {...node.imageThumb} alt={node.imageThumb.alt} />
+                  )}
+                </Link>
+              ))}
+          </Carousel>
+        )}
       </div>
     </JourneyStyles>
   );

@@ -8,9 +8,11 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
-  margin-top: 10rem;
+  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
+  z-index: 1;
   text-align: center;
-  padding: 0 15%;
+  padding: 5% 15%;
   display: flex;
   flex-direction: column;
   @media ${device.laptopM} {
@@ -137,73 +139,75 @@ const HighlightsStyles = styled.div`
   }
 `;
 
-const Highlights = ({ highlights }) => {
+const Highlights = ({ highlights, parallaxImage }) => {
   return (
-    <HighlightsStyles
-      id="highlights"
-      className="resort__highlights"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
-      <h2>Highlights</h2>
-
-      <Carousel
-        speed={1000}
-        wrapAround
-        className="carousel"
-        slidesToShow={1}
-        cellSpacing={0}
-
-        // renderCenterRightControls={({ nextSlide }) => (
-        //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-        // )}
-        // renderCenterLeftControls={({ previousSlide }) => (
-        //   <CarouselButton onClick={previousSlide} />
-        // )}
+    <>
+      <h2 className="heading">Highlights</h2>
+      <HighlightsStyles
+        id="highlights"
+        className="resort__highlights"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+        parallaxImage={parallaxImage}
       >
-        {highlights.map(({ name, imageThumb, description }) => (
-          <li key={imageThumb?.alt}>
-            {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
-            {/* </Link> */}
-            <p>{description}</p>
-            {imageThumb && imageThumb.asset && (
-              <>
-                <Image {...imageThumb} alt={imageThumb.alt} />
-              </>
-            )}
-            <a className="highLbl">
-              {name} <ChevronRight />
-            </a>
-          </li>
-        ))}
-      </Carousel>
-      <ul className="desktop-highlights">
-        {highlights.length
-          ? highlights.map(({ name, imageThumb, description }) => (
-              <li key={imageThumb?.alt}>
-                <Overlay className="overlay" />
-                <a>
-                  {name} <ChevronRight />
-                </a>
-                {/* </Link> */}
-                <p>{description}</p>
-                {imageThumb && imageThumb.asset && (
-                  <>
-                    <Image {...imageThumb} alt={imageThumb.alt} />
-                  </>
-                )}
-              </li>
-            ))
-          : [1, 2, 3, 4, 5, 6].map((item) => (
-              <li key={item}>
-                {/* {console.log("hrehreh")} */}
-                <Placeholder />
-              </li>
-            ))}
-      </ul>
-    </HighlightsStyles>
+        <Carousel
+          speed={1000}
+          wrapAround
+          className="carousel"
+          slidesToShow={1}
+          cellSpacing={0}
+
+          // renderCenterRightControls={({ nextSlide }) => (
+          //   <CarouselButton onClick={nextSlide} chevronRight={true} />
+          // )}
+          // renderCenterLeftControls={({ previousSlide }) => (
+          //   <CarouselButton onClick={previousSlide} />
+          // )}
+        >
+          {highlights.map(({ name, imageThumb, description }) => (
+            <li key={imageThumb?.alt}>
+              {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
+              {/* </Link> */}
+              <p>{description}</p>
+              {imageThumb && imageThumb.asset && (
+                <>
+                  <Image {...imageThumb} alt={imageThumb.alt} />
+                </>
+              )}
+              <a className="highLbl">
+                {name} <ChevronRight />
+              </a>
+            </li>
+          ))}
+        </Carousel>
+        <ul className="desktop-highlights">
+          {highlights.length
+            ? highlights.map(({ name, imageThumb, description }) => (
+                <li key={imageThumb?.alt}>
+                  <Overlay className="overlay" />
+                  <a>
+                    {name} <ChevronRight />
+                  </a>
+                  {/* </Link> */}
+                  <p>{description}</p>
+                  {imageThumb && imageThumb.asset && (
+                    <>
+                      <Image {...imageThumb} alt={imageThumb.alt} />
+                    </>
+                  )}
+                </li>
+              ))
+            : [1, 2, 3, 4, 5, 6].map((item) => (
+                <li key={item}>
+                  {/* {console.log("hrehreh")} */}
+                  <Placeholder />
+                </li>
+              ))}
+        </ul>
+      </HighlightsStyles>
+    </>
   );
 };
 

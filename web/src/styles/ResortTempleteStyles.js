@@ -6,10 +6,16 @@ const ResortStyles = styled.div`
   /* overflow-y: auto;
   overscroll-behavior-y: contain;
   scroll-snap-type: y proximity; */
-  overflow-x: hidden;
+  overflow: hidden;
+
+  .heading {
+    margin-top: 10rem;
+  }
+
   h2 {
     letter-spacing: 1rem;
     text-align: center;
+    margin-bottom: 7rem;
     font-size: 35px;
     @media ${device.tablet} {
       letter-spacing: normal;
@@ -56,7 +62,7 @@ const ResortStyles = styled.div`
       } */
       .text {
         position: absolute;
-        bottom: 0rem;
+        bottom: 2rem;
         left: 10%;
 
         @media ${device.tablet} {

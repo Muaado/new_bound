@@ -54,6 +54,7 @@ export const query = graphql`
       _id
       url
     }
+    colorType
   }
 
   query IndexPageQuery {
@@ -139,6 +140,9 @@ export const query = graphql`
         }
         businessHoursDescription
       }
+      parallaxBackground {
+        ...SanityImage
+      }
     }
 
     collections: allSanityCollectionPage(limit: 5) {
@@ -222,6 +226,7 @@ const IndexPage = (props) => {
   // }
 
   const site = (data || {}).site;
+  const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
 
@@ -296,7 +301,7 @@ const IndexPage = (props) => {
             }}
           />
           <Journey collections={collections} />
-          <HandCraftedJourneysStyles>
+          <HandCraftedJourneysStyles parallaxImage={parallaxImage}>
             <div className="header-text">
               <p className="subtitle">only the best</p>
               <h2>hand-crafted journeys</h2>
@@ -332,7 +337,7 @@ const IndexPage = (props) => {
                     )
                   )}
                 </ul>
-                <Link to="/enquire" className="white">
+                <Link to="/enquire" className="white button-wrapper">
                   <Button>Enquire</Button>
                 </Link>
               </div>

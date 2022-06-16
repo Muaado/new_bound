@@ -11,9 +11,12 @@ import Placeholder from "../../assets/placeholder.svg";
 // console.log(Placeholder);
 
 const ActivitiesStyles = styled.div`
-  margin: 10rem 0;
+  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
+      cover fixed`};
+  z-index: 1;
+  /* margin: 10rem 0; */
   text-align: center;
-  padding: 0 15%;
+  padding: 5% 15%;
   display: flex;
   flex-direction: column;
   @media ${device.laptopL} {
@@ -82,7 +85,7 @@ const ActivitiesStyles = styled.div`
       transform: translate(-50%, -50%);
       width: fit-content;
       color: #fff;
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
 
     &:hover {
@@ -138,64 +141,67 @@ const ActivitiesStyles = styled.div`
 
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, parallaxImage }) => {
   return (
-    <ActivitiesStyles
-      id="activities"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
-      <h2>Activities</h2>
-      {/* <p>
+    <>
+      <h2 className="heading">Activities</h2>
+      <ActivitiesStyles
+        id="activities"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+        parallaxImage={parallaxImage}
+      >
+        {/* <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation.
       </p> */}
-      <ul>
-        {activities?.length
-          ? activities?.map(({ name, imageThumb, resort }) => (
-              <li className="item" key={imageThumb.alt}>
-                <Overlay className="overlay" />
-                {/* <Link to={getActivityUrl({ name, resortName: resort.name })}> */}
-                {imageThumb && imageThumb.asset && (
-                  <Image {...imageThumb} alt={imageThumb.alt} />
-                )}
-                <p>{name}</p>
-                {/* </Link> */}
-              </li>
-            ))
-          : activitiesPlaceHolders.map((item) => (
-              <li className="item" key={item}>
-                <Placeholder />
-                {/* {item} */}
-              </li>
-            ))}
-      </ul>
+        <ul>
+          {activities?.length
+            ? activities?.map(({ name, imageThumb, resort }) => (
+                <li className="item" key={imageThumb.alt}>
+                  <Overlay className="overlay" />
+                  {/* <Link to={getActivityUrl({ name, resortName: resort.name })}> */}
+                  {imageThumb && imageThumb.asset && (
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  )}
+                  <p>{name}</p>
+                  {/* </Link> */}
+                </li>
+              ))
+            : activitiesPlaceHolders.map((item) => (
+                <li className="item" key={item}>
+                  <Placeholder />
+                  {/* {item} */}
+                </li>
+              ))}
+        </ul>
 
-      <Carousel
-        speed={1000}
-        className="carousel"
-        // renderCenterRightControls={({ nextSlide }) => (
-        //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-        // )}
-        // renderCenterLeftControls={({ previousSlide }) => (
-        //   <CarouselButton onClick={previousSlide} />
-        // )}
-      >
-        {activities?.map(({ name, imageThumb, resort }) => (
-          <li className="item item__carousel" key={imageThumb.alt}>
-            {/* <Link to={getActivityUrl({ name, resortName: resort.name })}> */}
-            {imageThumb && imageThumb.asset && (
-              <Image {...imageThumb} alt={imageThumb.alt} />
-            )}
-            <p>{name}</p>
-            {/* </Link> */}
-          </li>
-        ))}
-      </Carousel>
-    </ActivitiesStyles>
+        <Carousel
+          speed={1000}
+          className="carousel"
+          // renderCenterRightControls={({ nextSlide }) => (
+          //   <CarouselButton onClick={nextSlide} chevronRight={true} />
+          // )}
+          // renderCenterLeftControls={({ previousSlide }) => (
+          //   <CarouselButton onClick={previousSlide} />
+          // )}
+        >
+          {activities?.map(({ name, imageThumb, resort }) => (
+            <li className="item item__carousel" key={imageThumb.alt}>
+              {/* <Link to={getActivityUrl({ name, resortName: resort.name })}> */}
+              {imageThumb && imageThumb.asset && (
+                <Image {...imageThumb} alt={imageThumb.alt} />
+              )}
+              <p>{name}</p>
+              {/* </Link> */}
+            </li>
+          ))}
+        </Carousel>
+      </ActivitiesStyles>
+    </>
   );
 };
 
