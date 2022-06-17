@@ -139,26 +139,28 @@ export default {
     },
 
     {
-      title: "Villas",
-      name: "villa",
+      title: "villas",
+      name: "villas",
       type: "array",
       of: [
         {
-          // type: "reference",
-          type: "villa",
-          // to: {  },
+          type: "reference",
+          to: {
+            type: "villa",
+          },
         },
       ],
     },
     {
-      title: "restaurant",
-      name: "restaurant",
+      title: "restaurants",
+      name: "restaurants",
       type: "array",
       of: [
         {
-          // type: "reference",
-          type: "restaurant",
-          // to: {  },
+          type: "reference",
+          to: {
+            type: "restaurant",
+          },
         },
       ],
     },
@@ -169,9 +171,10 @@ export default {
       type: "array",
       of: [
         {
-          // type: "reference",
-          type: "spa",
-          // to: {  },
+          type: "reference",
+          to: {
+            type: "spa",
+          },
         },
       ],
     },
@@ -314,7 +317,6 @@ export default {
         },
       ],
     },
-
   ],
   preview: {
     select: {
