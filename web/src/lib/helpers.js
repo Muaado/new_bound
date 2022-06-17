@@ -81,3 +81,8 @@ export const getHighlightUrl = ({ name, resortName }) => {
 export const getCollectionUrl = ({ slug }) => {
   return `/collections/${slug.current}/`;
 };
+
+export const truncate = (str, limit) => {
+  const truncatedStr = str.slice(0, limit);
+  return truncatedStr;
+};

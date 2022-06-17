@@ -508,6 +508,7 @@ const VillaStyles = styled.div`
       // top:0;
 
       .content {
+        position: relative;
         background: rgb(0, 0, 0, 0.3);
         max-height: 700px;
         min-height: 700px;

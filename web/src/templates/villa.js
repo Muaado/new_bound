@@ -49,9 +49,28 @@ import ChevronLeft from "../assets/icons/chevrons-left.svg";
 
 import BackToResort from "../components/backToResort";
 import { Button } from "../components/Button";
+import { PricingDropDown } from "../components";
 
 export const query = graphql`
-  query VillaTemplateQuery($id: String!, $resortId: String!) {
+  fragment SanityPricingRateModel on SanityRateModel {
+    January
+    February
+    March
+    April
+    May
+    June
+    July
+    August
+    September
+    October
+    November
+    December
+  }
+  query VillaTemplateQuery(
+    $id: String!
+    $resortId: String!
+    $rateModelId: String
+  ) {
     villa: sanityVilla(_id: { eq: $id }) {
       name
       alternateName
@@ -215,12 +234,16 @@ export const query = graphql`
         }
       }
     }
+    rateModel: sanityRateModel(_id: { eq: $rateModelId }) {
+      ...SanityPricingRateModel
+    }
   }
 `;
 
 const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
+  const rateModel = data && data.rateModel;
   // const activities = data && data.activities;
   const spas = data && data.spas;
   const resorts = data && data.resorts;
@@ -229,7 +252,6 @@ const VilaTemplate = (props) => {
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
   const size = useWindowSize();
-
   useEffect(() => {
     const { width } = size;
     const isMobileOnly = width <= 576;
@@ -329,8 +351,6 @@ const VilaTemplate = (props) => {
     { title: "NOV", value: "10" },
     { title: "DEC", value: "11" },
   ];
-
-  console.log(villa);
 
   // const sortedPriceList = priceList.nodes.sort((a, b) =>
   //   parseInt(b.month) > parseInt(a.month) ? -1 : 1
@@ -448,7 +468,7 @@ const VilaTemplate = (props) => {
                   </li>
                 )}
               </ul>
-              <p className="pricelbl">{villa.price_new}</p>
+              <PricingDropDown items={rateModel} />
               <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
                 <Button style={{ paddingLeft: "100px", paddingRight: "100px" }}>
                   ENQUIRE
