@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const Overlay = styled.div`
-  background: #000;
+  background: ${({ bgColor }) => (bgColor ? bgColor : "#000")};
   position: absolute;
   height: 100%;
   width: 100%;

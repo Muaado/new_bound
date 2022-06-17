@@ -3,9 +3,11 @@ import React from "react";
 import PortableText from "../Ui/portableText";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
+import { Overlay } from "../Overlay";
 // import { device } from "../styles/deviceSizes";
 
 const AmenitiesStyles = styled.div`
+  position: relative;
   background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
       cover fixed`};
   z-index: 1;
@@ -81,6 +83,7 @@ const Amenities = ({
 }) => {
   return (
     <AmenitiesStyles parallaxImage={parallaxImage}>
+      <Overlay className="parallax-overlay" bgColor="#fff" />
       <div className="description">
         <PortableText blocks={_rawDescription} />
       </div>

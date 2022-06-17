@@ -183,6 +183,7 @@ export const HandCraftedJourneysStyles = styled.div`
   }
 
   .parallax-main-wrapper {
+    position: relative;
     background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
       cover fixed`};
     z-index: 1;
