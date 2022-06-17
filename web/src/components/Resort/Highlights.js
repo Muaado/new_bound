@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
+  position: relative;
   background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
       cover fixed`};
   z-index: 1;
@@ -152,6 +153,7 @@ const Highlights = ({ highlights, parallaxImage }) => {
         data-aos-easing="ease-in-out"
         parallaxImage={parallaxImage}
       >
+        <Overlay className="parallax-overlay" bgColor="#fff" />
         <Carousel
           speed={1000}
           wrapAround

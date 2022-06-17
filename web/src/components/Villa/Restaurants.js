@@ -5,8 +5,10 @@ import Placeholder from "../../assets/placeholder.svg";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 import { Button } from "../Button";
+import { Overlay } from "../Overlay";
 
 const RestaurantsStyles = styled.div`
+  position: relative;
   background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
       cover fixed`};
   z-index: 1;
@@ -124,6 +126,7 @@ const Restaurants = ({ restaurants, parallaxImage }) => {
         data-aos-easing="ease-in-out"
         parallaxImage={parallaxImage}
       >
+        <Overlay className="parallax-overlay" bgColor="#fff" />
         <ul>
           {restaurants
             .slice(0, restaurantSlice)

@@ -11,6 +11,7 @@ import Placeholder from "../../assets/placeholder.svg";
 // console.log(Placeholder);
 
 const ActivitiesStyles = styled.div`
+  position: relative;
   background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
       cover fixed`};
   z-index: 1;
@@ -153,6 +154,7 @@ const Activities = ({ activities, parallaxImage }) => {
         data-aos-easing="ease-in-out"
         parallaxImage={parallaxImage}
       >
+        <Overlay className="parallax-overlay" bgColor="#fff" />
         {/* <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

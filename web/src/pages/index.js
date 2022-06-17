@@ -28,7 +28,7 @@ import LeftSidebar from "../components/LeftSidebar";
 import { MouseScroll } from "../components/Ui/MouseScroll";
 import Search from "../components/Search";
 import { Button } from "../components/Button";
-import { FixedBackgroundImage } from "../components";
+import { FixedBackgroundImage, Overlay } from "../components";
 
 // import HomepageStaticImage from "../assets/homepage-image.png";
 
@@ -307,6 +307,7 @@ const IndexPage = (props) => {
               <h2>hand-crafted journeys</h2>
             </div>
             <div className="parallax-main-wrapper">
+              <Overlay className="parallax-overlay" bgColor="#fff" />
               <div className="parallax-inner-wrapper">
                 <p className="description">
                   Looking for an unforgettable luxury holiday experience? Look

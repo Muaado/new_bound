@@ -373,5 +373,8 @@ export const GlobalStyle = createGlobalStyle`
       opacity: 0.5;
     }
   }
-
+ .parallax-overlay {
+    opacity: 0.7 !important;
+    z-index: -1;
+  }
 `;
