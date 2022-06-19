@@ -5,17 +5,17 @@ export const DropDownWrapper = styled.div`
   color: black !important;
   border: 2px solid #11103b;
   cursor: pointer;
-  padding: 20px 0;
+  padding: 20px 0px;
   vertical-align: middle;
   align-items: center;
   flex-direction: column;
-  width: 45%;
-  @media ${device.laptop} {
+  width: 203px;
+  /* @media ${device.laptop} {
     width: 70%;
   }
   @media ${device.onlyMobileSm} {
     width: 100%;
-  }
+  } */
 
   justify-content: center;
   transition: all 0.2s;
@@ -31,7 +31,10 @@ export const DropDownList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 55%;
+  width: 75%;
+  /* @media ${device.onlyMobileSm} {
+    width: 70%;
+  } */
 `;
 
 export const ListItem = styled.div`

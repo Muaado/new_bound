@@ -229,14 +229,7 @@ const IndexPage = (props) => {
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
-
-  // console.log(collections);
   const magazinePosts = (data || {}).magazinePosts;
-  // const postNodes = (data || {}).posts
-  //   ? mapEdgesToNodes(data.posts)
-  //       .filter(filterOutDocsWithoutSlugs)
-  //       .filter(filterOutDocsPublishedInTheFuture)
-  //   : [];
 
   if (!site) {
     throw new Error(
@@ -276,8 +269,8 @@ const IndexPage = (props) => {
             )
           )}
           <h1 className="disappear-on-scroll">Luxury experience curators</h1>
-          <MouseScroll />
         </HeroStyles>
+        <MouseScroll pageType="home" />
         <div className="page-content">
           <Search
             className="homepage-search"

@@ -1,3 +1,4 @@
+import AssetSource from "part:sanity-plugin-media-library/asset-source";
 export default {
   name: "mainImage",
   type: "image",
@@ -31,8 +32,9 @@ export default {
       type: "string",
       options: {
         list: [
-          { title: "light", value: "LIGHT" },
-          { title: "dark", value: "DARK" },
+          { title: "Light", value: "LIGHT" },
+          { title: "Dark", value: "DARK" },
+          { title: "Darker", value: "DARKER" },
         ],
         isHighlighted: true,
       },

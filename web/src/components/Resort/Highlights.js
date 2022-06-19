@@ -17,11 +17,11 @@ const HighlightsStyles = styled.div`
   display: flex;
   flex-direction: column;
   @media ${device.laptopM} {
-    padding: 0 10%;
+    padding: 5% 10%;
   }
   @media ${device.tablet} {
     margin-top: 5rem;
-    padding: 0 1.5rem;
+    padding: 5% 1.5rem;
   }
 
   .carousel {

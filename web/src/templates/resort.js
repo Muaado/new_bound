@@ -1,42 +1,22 @@
-import { graphql, Link } from "gatsby";
-
-import React, { useRef, useState } from "react";
-// import GraphQLErrorList from "../components/graphql-error-list";
+import { graphql } from "gatsby";
+import React, { useState } from "react";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
-
-import Carousel from "nuka-carousel";
-import CarouselButton from "../components/Ui/CarouselButton";
-
 import Image from "gatsby-plugin-sanity-image";
-
-import PortableText from "../components/Ui/portableText";
-
-import ChevronRight from "../assets/icons/chevron-right.svg";
-
-// import Reviews from "../components/Resort/Reviews";
-
 import ResortStyles from "../styles/ResortTempleteStyles";
-import Gallery from "../components/Gallery";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import Accomodation from "../components/Resort/Accomodation";
-import { ContactUs } from "../components/Homepage/ContactUs";
-import Faq from "../components/Homepage/Faq";
 import LeftSidebar from "../components/LeftSidebar";
 import { MouseScroll } from "../components/Ui/MouseScroll";
-import { getHighlightUrl } from "../lib/helpers";
-
-import Placeholder from "../assets/placeholder.svg";
-
 import { toPlainText } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
-// import review from "../../../studio/schemas/documents/review";
-import { LIGHT_COLOR } from "../constants";
+import { LIGHT_COLOR, ROOM_PAGE } from "../constants";
+import { useScrollToRef } from "../hooks";
 
 export const query = graphql`
   query ResortTemplateQuery($id: String!) {
@@ -211,20 +191,21 @@ export const query = graphql`
 `;
 
 const ResortTemplate = (props) => {
+  const redirectedFrom = props?.location?.state?.redirectedFrom;
   const { data, errors } = props;
   const resort = data && data.resort;
-  // const featuredSpa = data && data.featuredSpa;
   const spas = data && data.spas;
-  // const activities = data && data.activities;
   const villas = data && data.villas;
   const restaurants = data && data.restaurants;
   const site = data && data.site;
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
 
-  const [slice, setSlice] = useState(Number);
-  const [restaurantSlice, setRestaurentSlice] = useState(4);
-
-  // console.log(restaurants); // const highlights = data && data.highlights;
+  const { elementRef, executeScroll } = useScrollToRef();
+  React.useEffect(() => {
+    if (redirectedFrom && redirectedFrom === ROOM_PAGE) {
+      executeScroll(elementRef);
+    }
+  }, [redirectedFrom]);
 
   const windowGlobal = typeof window !== "undefined";
   const {
@@ -280,9 +261,15 @@ const ResortTemplate = (props) => {
               <p className="atoll_title">{locationAtoll}</p>
               <h1 className="title_res resort_heading_title">{name}</h1>
             </div>
-            <MouseScroll />
           </div>
-
+          <MouseScroll
+            scrollHeightToHide={230}
+            scrollWrapperStyles={{
+              bottom: "unset",
+              height: "100%",
+              top: "10px",
+            }}
+          />
           <LeftSidebar
             list={["overview", "accomodation", "highlights", "dine", "gallery"]}
           />
@@ -307,7 +294,11 @@ const ResortTemplate = (props) => {
               parallaxImage={parallaxImage}
             />
           </div>
-          <Accomodation id="accomodation" villas={villas.nodes} />
+          <Accomodation
+            elementRef={elementRef}
+            id="accomodation"
+            villas={villas.nodes}
+          />
           {/* <div className="resort__description">
             <PortableText blocks={_rawDescription} />
           </div>
