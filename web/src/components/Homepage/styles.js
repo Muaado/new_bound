@@ -17,7 +17,7 @@ export const HeroStyles = styled.div`
   color: #fff;
 
   /* position: absolute; */
-  z-index: -1;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
@@ -116,7 +116,7 @@ export const HandCraftedJourneysStyles = styled.div`
   }
 
   .description {
-    margin: 10rem 0;
+    margin: 3rem 0 10rem 0;
     font-size: 1.6rem;
     /* max-width: 55rem; */
     color: #505050;
@@ -184,11 +184,9 @@ export const HandCraftedJourneysStyles = styled.div`
 
   .parallax-main-wrapper {
     position: relative;
-    background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
-      cover fixed`};
     z-index: 1;
     padding: 0 15%;
-    margin-bottom: 10rem;
+    margin: 10rem 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,6 +213,7 @@ export const HandCraftedJourneysStyles = styled.div`
       padding: 0 1.5rem;
     }
   }
+
   .parrallax-inner-wrapper {
     display: flex;
     flex-direction: column;
@@ -225,17 +224,17 @@ export const HandCraftedJourneysStyles = styled.div`
   .button-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 10rem;
+    margin-bottom: 5%;
   }
 `;
 
 export const MagazineStyles = styled.div`
-  margin-bottom: 22rem;
+  margin-bottom: 10rem;
   display: flex;
   flex-direction: column;
-
-  padding: 0 15%;
-
+  position: relative;
+  padding: 0 15% 5% 15%;
+  z-index: 1;
   @media ${device.laptopL} {
     padding: 0 15%;
   }
@@ -319,5 +318,8 @@ export const MagazineStyles = styled.div`
     align-self: center;
     width: fit-content;
     text-transform: capitalize;
+  }
+  .content {
+    padding: 10% 0% 5% 0%;
   }
 `;

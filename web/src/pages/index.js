@@ -295,12 +295,12 @@ const IndexPage = (props) => {
           />
           <Journey collections={collections} />
           <HandCraftedJourneysStyles parallaxImage={parallaxImage}>
-            <div className="header-text">
-              <p className="subtitle">only the best</p>
-              <h2>hand-crafted journeys</h2>
-            </div>
             <div className="parallax-main-wrapper">
-              <Overlay className="parallax-overlay" bgColor="#fff" />
+              <div className="header-text">
+                <p className="subtitle">only the best</p>
+                <h2>hand-crafted journeys</h2>
+              </div>
+              <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
               <div className="parallax-inner-wrapper">
                 <p className="description">
                   Looking for an unforgettable luxury holiday experience? Look
@@ -340,35 +340,33 @@ const IndexPage = (props) => {
           <PromoSection image={site.promoImageWeb} />
           <AboutUs aboutUs={site.aboutUs} />
           <WhyBoundlessSection whyBoundlessImage={site.whyBoundlessImage} />
-          <MagazineStyles
-          // data-aos="fade-up"
-          // data-aos-delay="50"
-          // data-aos-duration="1000"
-          // data-aos-easing="ease-in-out"
-          >
-            <h2>Magazine</h2>
-            <p className="subtitle">Inspiration</p>
-            <ul>
-              {magazinePosts.nodes.map(
-                ({ title, _rawExcerpt, mainImage, publishedAt, slug }) => (
-                  <li key={title}>
-                    <Link to={getBlogUrl(publishedAt, slug.current)}>
-                      <div className="image-container">
-                        {mainImage && mainImage.asset && (
-                          <Image {...mainImage} alt={mainImage.alt} />
-                        )}
-                      </div>
-                      <h3>{title}</h3>
-                      {_rawExcerpt && <PortableText blocks={_rawExcerpt} />}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
+          <MagazineStyles>
+            <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+            <div className="content">
+              <h2>Magazine</h2>
+              <p className="subtitle">Inspiration</p>
+              <ul>
+                {magazinePosts.nodes.map(
+                  ({ title, _rawExcerpt, mainImage, publishedAt, slug }) => (
+                    <li key={title}>
+                      <Link to={getBlogUrl(publishedAt, slug.current)}>
+                        <div className="image-container">
+                          {mainImage && mainImage.asset && (
+                            <Image {...mainImage} alt={mainImage.alt} />
+                          )}
+                        </div>
+                        <h3>{title}</h3>
+                        {_rawExcerpt && <PortableText blocks={_rawExcerpt} />}
+                      </Link>
+                    </li>
+                  )
+                )}
+              </ul>
 
-            <Link to="/archive">
-              <Button>View More...</Button>
-            </Link>
+              <Link to="/archive" className="button-wrapper">
+                <Button>View More...</Button>
+              </Link>
+            </div>
           </MagazineStyles>
           <TailorMade />
           <div className="second-image">

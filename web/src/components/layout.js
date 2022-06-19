@@ -48,22 +48,8 @@ const Layout = ({
       headerDropdownImage={headerDropdownImage}
     />
 
-    <div
-
-    // onClick={() => onHideNav()}
-    >
-      {children}
-    </div>
+    <div>{children}</div>
     <Footer logo={logo} contactUs={contactUs} />
-    {/* <footer>
-      <div>
-      <div>
-      &copy; {new Date().getFullYear()}, Built with{" "}
-      <a href="https://www.sanity.io">Sanity</a> &amp;{" "}
-      <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </div>
-      </div>
-    </footer> */}
     <GlobalStyle />
   </>
 );

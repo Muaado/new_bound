@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-
+import { Overlay } from "../Overlay";
 const TailorMadeStyles = styled.div`
+  position: relative;
+  z-index: 1;
   padding: 0 15%;
-  margin-bottom: 22rem;
   h2 {
     text-align: center;
     margin-bottom: 10rem;
@@ -74,6 +75,9 @@ const TailorMadeStyles = styled.div`
       }
     }
   }
+  .content {
+    padding: 10% 0% 10% 0%;
+  }
 `;
 
 const TailorMade = () => {
@@ -85,36 +89,41 @@ const TailorMade = () => {
       data-aos-duration="1000"
       data-aos-easing="ease-in-out"
     >
-      <h2>100% Tailor-Made Holidays</h2>
-      <ul>
-        <li className="tailor-made__step">
-          <p className="tailor-made__step-num">1</p>
-          <h3 className="tailor-made__step-title">Understanding Your Needs</h3>
-          <p className="tailor-made__step-text">
-            Our team of destination experts will start by getting to know you
-            and your unique requirements for your holiday
-          </p>
-        </li>
-        <li className="tailor-made__line"></li>
-        <li className="tailor-made__step">
-          <p className="tailor-made__step-num">2</p>
-          <h3 className="tailor-made__step-title">Personalization</h3>
-          <p className="tailor-made__step-text">
-            We work with you to build an ultra-personalized holiday itinerary
-            with your choice of accommodation, experiences and activities
-          </p>
-        </li>
-        <li className="tailor-made__line"></li>
-        <li className="tailor-made__step">
-          <p className="tailor-made__step-num">3</p>
-          <h3 className="tailor-made__step-title">Our Success</h3>
-          <p className="tailor-made__step-text">
-            All of our holidays include little extras designed to make a vig
-            difference to your trip, from fast-tracking you through airport
-            check-in and security to our network of local concierges
-          </p>
-        </li>
-      </ul>
+      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+      <div className="content">
+        <h2>100% Tailor-Made Holidays</h2>
+        <ul>
+          <li className="tailor-made__step">
+            <p className="tailor-made__step-num">1</p>
+            <h3 className="tailor-made__step-title">
+              Understanding Your Needs
+            </h3>
+            <p className="tailor-made__step-text">
+              Our team of destination experts will start by getting to know you
+              and your unique requirements for your holiday
+            </p>
+          </li>
+          <li className="tailor-made__line"></li>
+          <li className="tailor-made__step">
+            <p className="tailor-made__step-num">2</p>
+            <h3 className="tailor-made__step-title">Personalization</h3>
+            <p className="tailor-made__step-text">
+              We work with you to build an ultra-personalized holiday itinerary
+              with your choice of accommodation, experiences and activities
+            </p>
+          </li>
+          <li className="tailor-made__line"></li>
+          <li className="tailor-made__step">
+            <p className="tailor-made__step-num">3</p>
+            <h3 className="tailor-made__step-title">Our Success</h3>
+            <p className="tailor-made__step-text">
+              All of our holidays include little extras designed to make a vig
+              difference to your trip, from fast-tracking you through airport
+              check-in and security to our network of local concierges
+            </p>
+          </li>
+        </ul>
+      </div>
     </TailorMadeStyles>
   );
 };

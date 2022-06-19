@@ -6,10 +6,12 @@ import ChevronDown from "../../assets/icons/chevron-down.svg";
 import ChevronUp from "../../assets/icons/chevron-up.svg";
 import { device } from "../../styles/deviceSizes";
 import { Button } from "../Button";
+import { Overlay } from "../../components";
 
 const FaqStyles = styled.div`
   text-align: center;
-
+  position: relative;
+  z-index: 1;
   padding: 10rem 15% 10rem 15%;
   display: flex;
   flex-direction: column;
@@ -101,13 +103,8 @@ const Faq = (props) => {
 
   return (
     faq && (
-      <FaqStyles
-        className={`faq__section ${className}`}
-        // data-aos="fade-up"
-        // data-aos-delay="50"
-        // data-aos-dution="1000"
-        // data-aos-easing="ease-in-out"
-      >
+      <FaqStyles className={`faq__section ${className}`}>
+        <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
         <h2>{faq.name}</h2>
         <p className="description">
           Browse our FAQ's below, if you can not find the answer you're looking

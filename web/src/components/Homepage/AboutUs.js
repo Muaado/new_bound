@@ -4,12 +4,14 @@ import PortableText from "../Ui/portableText";
 
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
+import { Overlay } from "../../components";
 
 const AboutUsSectionStyles = styled.div`
   display: flex;
   align-items: center;
   padding: 10rem 15%;
-
+  position: relative;
+  z-index: 1;
   @media ${device.laptopL} {
     padding: 5rem 10%;
   }
@@ -58,6 +60,7 @@ const AboutUs = ({ aboutUs }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
+      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
       <div className="about-us__image-container">
         {aboutUs.image && aboutUs.image.asset && (
           <Image

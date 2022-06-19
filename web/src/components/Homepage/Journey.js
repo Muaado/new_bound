@@ -14,12 +14,22 @@ import { getCollectionUrl } from "../../lib/helpers";
 
 const JourneyStyles = styled.div`
   margin-top: 10rem;
-  margin-bottom: 2rem;
   align-self: center;
   display: flex;
   flex-direction: column;
-  /* font-family: "Playfair Display"; */
+  z-index: 1;
   text-align: center;
+  position: relative;
+  padding: 0% 15% 5% 15%;
+
+  width: 100%;
+  @media ${device.laptopL} {
+    padding: 0 15%;
+  }
+  @media ${device.laptop} {
+    margin-top: 10rem;
+    padding: 0 10%;
+  }
 
   @media ${device.tablet} {
     margin-top: 7rem;
@@ -29,6 +39,7 @@ const JourneyStyles = styled.div`
     padding: 0;
   }
   h2 {
+    margin-top: 10rem;
     margin-bottom: 3rem;
   }
 
@@ -68,7 +79,7 @@ const JourneyStyles = styled.div`
   }
 
   .images {
-    margin-top: 5rem;
+    margin: 5rem 0rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
@@ -76,12 +87,12 @@ const JourneyStyles = styled.div`
     a {
       position: relative;
       height: 35rem;
-      z-index: 2;
+      z-index: 1;
       img {
         /* z-index: 1; */
       }
       p {
-        z-index: 2;
+        z-index: 1;
         color: #fff;
         position: absolute;
         text-transform: uppercase;
@@ -177,24 +188,6 @@ const JourneyStyles = styled.div`
       }
     }
   }
-
-  .parallax-main-wrapper {
-    /* background: ${({
-      parallaxImage,
-    }) => `url(${parallaxImage}) center center / 
-      cover fixed`};
-    z-index: 1; */
-    padding: 0 15%;
-
-    width: 100%;
-    @media ${device.laptopL} {
-      padding: 0 15%;
-    }
-    @media ${device.laptop} {
-      margin-top: 10rem;
-      padding: 0 10%;
-    }
-  }
 `;
 
 const Journey = ({ collections }) => {
@@ -207,56 +200,55 @@ const Journey = ({ collections }) => {
   }
   return (
     <JourneyStyles>
+      <Overlay bgColor="#fdf7ed" className="parallax-overlay" />
       <h2>Start your journey</h2>
-      <div className="parallax-main-wrapper">
-        {windowWidth >= 805 ? (
-          <ul className="images">
-            {collections.edges
-              .sort((a, b) => a.node.rank - b.node.rank)
-              .map(({ node }) => (
-                <Link
-                  to={`/collections/${node.slug.current}/`}
-                  className="clickable"
-                  key={node.name}
-                >
-                  <p>{node.CollectionPageName}</p>
-                  <Overlay className="overlay" />
-                  {node.image && node.image.asset && (
-                    <Image {...node.image} alt={node.image.alt} />
-                  )}
-                </Link>
-              ))}
-          </ul>
-        ) : (
-          <Carousel
-            speed={1000}
-            className="carousel"
-            slidesToShow={1}
-            disableEdgeSwiping
-            dragging
-            // easing
-            // animation=""
-            // cellSpacing={cellSpacing}
-            renderCenterRightControls={() => ""}
-            renderCenterLeftControls={() => ""}
-          >
-            {collections.edges
-              .sort((a, b) => a.node.rank - b.node.rank)
-              .map(({ node }) => (
-                <Link
-                  key={node.alt}
-                  className="carousel__image-container clickable"
-                  to={getCollectionUrl({ name: node.name, type: node.type })}
-                >
-                  <p>{node.name}</p>
-                  {node.imageThumb && node.imageThumb.asset && (
-                    <Image {...node.imageThumb} alt={node.imageThumb.alt} />
-                  )}
-                </Link>
-              ))}
-          </Carousel>
-        )}
-      </div>
+      {windowWidth >= 805 ? (
+        <ul className="images">
+          {collections.edges
+            .sort((a, b) => a.node.rank - b.node.rank)
+            .map(({ node }) => (
+              <Link
+                to={`/collections/${node.slug.current}/`}
+                className="clickable"
+                key={node.name}
+              >
+                <p>{node.CollectionPageName}</p>
+                <Overlay className="overlay" />
+                {node.image && node.image.asset && (
+                  <Image {...node.image} alt={node.image.alt} />
+                )}
+              </Link>
+            ))}
+        </ul>
+      ) : (
+        <Carousel
+          speed={1000}
+          className="carousel"
+          slidesToShow={1}
+          disableEdgeSwiping
+          dragging
+          // easing
+          // animation=""
+          // cellSpacing={cellSpacing}
+          renderCenterRightControls={() => ""}
+          renderCenterLeftControls={() => ""}
+        >
+          {collections.edges
+            .sort((a, b) => a.node.rank - b.node.rank)
+            .map(({ node }) => (
+              <Link
+                key={node.alt}
+                className="carousel__image-container clickable"
+                to={getCollectionUrl({ name: node.name, type: node.type })}
+              >
+                <p>{node.name}</p>
+                {node.imageThumb && node.imageThumb.asset && (
+                  <Image {...node.imageThumb} alt={node.imageThumb.alt} />
+                )}
+              </Link>
+            ))}
+        </Carousel>
+      )}
     </JourneyStyles>
   );
 };
