@@ -6,12 +6,6 @@ import useWindowSize from "../lib/useWindowSize";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
-import {
-  getHighlightUrl,
-  getResortUrl,
-  getRestaurantUrl,
-  toPlainText,
-} from "../lib/helpers";
 
 import Image from "gatsby-plugin-sanity-image";
 
@@ -20,16 +14,9 @@ import Gallery from "../components/Gallery";
 import VillaStyles from "../styles/VillaTemplateStyles";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
-import Reviews from "../components/Resort/Reviews";
 import Spa from "../components/Resort/Spa";
 import LeftSidebar from "../components/LeftSidebar";
 import PopUpGallery from "../components/PopUpGallery";
-
-import PlusIcon from "../assets/icons/plus-icon.svg";
-import MinusIcon from "../assets/icons/minus-icon.svg";
-import CalendarIcon from "../assets/icons/calendar.svg";
-import ChevronUp from "../assets/icons/chevron-up.svg";
-import ChevronDown from "../assets/icons/chevron-down.svg";
 
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
@@ -37,19 +24,11 @@ import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { MouseScroll } from "../components/Ui/MouseScroll";
-import Resorts from "../components/Villa/Resorts";
-// import styled from "styled-components";
-
-import Placeholder from "../assets/pattern-randomized.svg";
-import Carousel from "nuka-carousel";
-import CarouselButton from "../components/Ui/CarouselButton";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
-import ChevronLeft from "../assets/icons/chevrons-left.svg";
-
-import BackToResort from "../components/backToResort";
 import { Button } from "../components/Button";
 import { PricingDropDown } from "../components";
+import { ROOM_PAGE } from "../constants";
 
 export const query = graphql`
   fragment SanityPricingRateModel on SanityRateModel {
@@ -395,10 +374,14 @@ const VilaTemplate = (props) => {
                 {resortName}{" "}
               </Link>
             </h1>
-            <MouseScroll />
           </div>
-
-          {/* )} */}
+          <MouseScroll
+            mainWrapperStyle={{ height: "15vh" }}
+            scrollWrapperStyles={{
+              bottom: "unset",
+              height: "100%",
+            }}
+          />
           <div className="backtoreswrapper">
             <div className="breadcrumb">
               <ul>
@@ -412,6 +395,9 @@ const VilaTemplate = (props) => {
                   <Link
                     className="backtoresort"
                     to={`/${resortName.toLowerCase().split(" ").join("-")}`}
+                    state={{
+                      redirectedFrom: ROOM_PAGE,
+                    }}
                   >
                     {resortName}
                   </Link>

@@ -2,10 +2,8 @@ import React from "react";
 import Image from "gatsby-plugin-sanity-image";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-
+import { Overlay } from "../../components";
 export const NewsLetterStyles = styled.div`
-  /* margin: 0 -12%; */
-  margin-bottom: 10rem;
   position: relative;
   /* height: 70rem; */
   color: #fff;
@@ -122,21 +120,12 @@ export const NewsLetterStyles = styled.div`
 const NewsletterSection = ({ site }) => {
   return (
     <NewsLetterStyles>
-      {/* <h2>{site.newsLetterTitle}</h2> */}
       {site.newsLetterBackground && site.newsLetterBackground.asset && (
         <Image
           {...site.newsLetterBackground}
           alt={site.newsLetterBackground?.alt}
         />
       )}
-
-      {/* <form className="form">
-        <h3>Subscribe to our newsletter</h3>
-        <div className="container">
-          <input placeholder="Enter your email here" />
-          <button className="btn">Subscribe</button>
-        </div>
-      </form> */}
     </NewsLetterStyles>
   );
 };

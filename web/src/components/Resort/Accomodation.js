@@ -126,7 +126,7 @@ const AccomodationStyles = styled.div`
   }
 `;
 
-const Accomodation = ({ villas, id }) => {
+const Accomodation = ({ villas, id, elementRef }) => {
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
   const size = useWindowSize();
@@ -167,6 +167,7 @@ const Accomodation = ({ villas, id }) => {
       data-aos-delay="50"
       data-aos-duration="1000"
       data-aos-easing="ease-in-out"
+      ref={elementRef}
     >
       <h2>Accommodation</h2>
 
@@ -201,7 +202,7 @@ const Accomodation = ({ villas, id }) => {
               <div className="room_price">
                 <span className="price-from">From</span>{" "}
                 <span className="font-bold">$5,950</span>
-                <span className="price-category">per person</span>
+                <span className="price-category">per night</span>
               </div>
               <Button>View Room</Button>
             </div>

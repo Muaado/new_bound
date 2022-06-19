@@ -1,23 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-
+import { Overlay } from "../../components";
 import Image from "gatsby-plugin-sanity-image";
 import PhoneIcon from "../../assets/icons/phone.svg";
 import EmailIcon from "../../assets/icons/email.svg";
 
 const ContactUsSection = styled.div`
-  margin-bottom: 10rem;
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
   font-size: 2rem;
-  padding: 0 15%;
+  padding: 5% 10% 5% 10%;
   p {
     color: #000;
   }
   @media ${device.laptopL} {
-    padding: 0 10%;
+    padding: 5% 10% 5% 10%;
   }
 
   @media ${device.laptop} {
@@ -112,7 +113,7 @@ const ContactUsSection = styled.div`
       }
     }
     p {
-      color:#505050;
+      color: #505050;
       font-style: italic;
     }
   }
@@ -128,19 +129,19 @@ const ContactUsSection = styled.div`
     /* top: -px; */
     visibility: hidden;
   }
+
+  .content {
+    padding: 5% 0 5% 0;
+  }
 `;
 
 export const ContactUs = ({ contactUs }) => {
   const { email, phoneOne, contactPeople, hours, businessHoursDescription } =
     contactUs;
   return (
-    <ContactUsSection
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
-      // id="contact-us"
-    >
+    <ContactUsSection>
+      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+      {/* <div className="content"> */}
       <a className="anchor" id="contact-us"></a>
       <div>
         <p>Need a little help?</p>
@@ -175,6 +176,7 @@ export const ContactUs = ({ contactUs }) => {
         </ul>
         <p>{businessHoursDescription}</p>
       </div>
+      {/* </div> */}
     </ContactUsSection>
   );
 };

@@ -292,7 +292,7 @@ const BeachTemplate = (props) => {
                               <span className="font-bold">
                                 {villa.price_new}
                               </span>
-                              <span className="price-category">per person</span>
+                              <span className="price-category">per night</span>
                             </div>
                             {villa.resort.resortBrandLogo && (
                               <div className="collection_brand_logo">

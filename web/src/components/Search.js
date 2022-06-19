@@ -14,7 +14,7 @@ export const SearchBar = styled.form`
     padding: 1rem 2rem;
     position: absolute;
     top: -3.5rem;
-
+    z-index: 1;
     background: #fff;
     align-self: center;
 

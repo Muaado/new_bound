@@ -377,4 +377,15 @@ export const GlobalStyle = createGlobalStyle`
     opacity: 0.7 !important;
     z-index: -1;
   }
+
+  .root-parallax {
+    background: url(https://cdn.sanity.io/images/y7yu20xn/master/5779a34c7b24c85ccfc7af2f57860afb4fa5b4ce-3508x2480.jpg) center center /  cover fixed;
+    z-index: -1;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
 `;

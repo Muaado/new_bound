@@ -75,7 +75,7 @@ export const PricingDropDown = ({ items }) => {
               <ListItem>
                 <span className="month"> {truncate(key, 3)} </span>
                 <span className="pricing">{`$${value}`}</span>
-                <span className="price-category">per person</span>
+                <span className="price-category">per night</span>
               </ListItem>
             );
           })}
