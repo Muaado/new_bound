@@ -3,15 +3,11 @@ import { device } from "../styles/deviceSizes";
 const ResortStyles = styled.div`
   display: flex;
   flex-direction: column;
+  z-index: 1;
   /* overflow-y: auto;
   overscroll-behavior-y: contain;
   scroll-snap-type: y proximity; */
   overflow: hidden;
-
-  .heading {
-    margin-top: 10rem;
-  }
-
   h2 {
     letter-spacing: 1rem;
     text-align: center;
@@ -23,10 +19,11 @@ const ResortStyles = styled.div`
   }
 
   #overview {
-    margin: 10rem 0;
-
     @media ${device.tablet} {
       margin: 5rem 0;
+    }
+    h2 {
+      margin: 15rem 0rem 3rem 0rem;
     }
   }
 
@@ -298,7 +295,6 @@ const ResortStyles = styled.div`
 
     &__spas {
       /* height: 120rem; */
-      margin-top: 10rem;
 
       h2 {
         text-transform: capitalize;

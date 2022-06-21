@@ -9,7 +9,6 @@ import Image from "gatsby-plugin-sanity-image";
 import styled from "styled-components";
 import Search from "../components/Search";
 import useForm from "../hooks/useForm";
-import { ContactUs } from "../components/Homepage/ContactUs";
 import { device } from "../styles/deviceSizes";
 import countries from "../lib/countries";
 import { Button } from "../components/Button";
@@ -139,7 +138,7 @@ const EnquirePageStyles = styled.div`
 `;
 
 const Enquire = (props) => {
-  const { data, errors } = props;
+  const { data } = props;
   const site = (data || {}).site;
   const resorts = (data || {}).resorts;
   const villas = (data || {}).villas;

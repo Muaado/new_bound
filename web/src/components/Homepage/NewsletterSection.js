@@ -16,8 +16,6 @@ export const NewsLetterStyles = styled.div`
   width: 100vw;
 
   @media ${device.laptopL} {
-    /* margin: 20rem 0; */
-    margin-bottom: 10rem;
     height: 50rem;
   }
 

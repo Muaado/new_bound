@@ -9,11 +9,9 @@ import { device } from "../../styles/deviceSizes";
 import { Overlay } from "../Overlay";
 import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
-import { FixedBackgroundImage } from "../Parallax";
 import { getCollectionUrl } from "../../lib/helpers";
 
 const JourneyStyles = styled.div`
-  margin-top: 10rem;
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -21,7 +19,6 @@ const JourneyStyles = styled.div`
   text-align: center;
   position: relative;
   padding: 0% 15% 5% 15%;
-
   width: 100%;
   @media ${device.laptopL} {
     padding: 0 15%;
@@ -39,7 +36,7 @@ const JourneyStyles = styled.div`
     padding: 0;
   }
   h2 {
-    margin-top: 10rem;
+    margin-top: 15rem;
     margin-bottom: 3rem;
   }
 
@@ -200,7 +197,7 @@ const Journey = ({ collections }) => {
   }
   return (
     <JourneyStyles>
-      <Overlay bgColor="#fdf7ed" className="parallax-overlay" />
+      <Overlay bgColor="white" opacity={1} />
       <h2>Start your journey</h2>
       {windowWidth >= 805 ? (
         <ul className="images">

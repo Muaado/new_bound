@@ -60,7 +60,7 @@ const AboutUs = ({ aboutUs }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
-      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+      <Overlay bgColor="white" opacity={1} />
       <div className="about-us__image-container">
         {aboutUs.image && aboutUs.image.asset && (
           <Image

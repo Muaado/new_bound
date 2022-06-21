@@ -12,7 +12,7 @@ const FaqStyles = styled.div`
   text-align: center;
   position: relative;
   z-index: 1;
-  padding: 10rem 15% 10rem 15%;
+  padding: 10rem 15% 5% 15%;
   display: flex;
   flex-direction: column;
   align-items: center;

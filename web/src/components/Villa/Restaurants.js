@@ -9,12 +9,8 @@ import { Overlay } from "../Overlay";
 
 const RestaurantsStyles = styled.div`
   position: relative;
-  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
-      cover fixed`};
   z-index: 1;
-  margin-bottom: 5rem;
   padding: 5% 15%;
-
   display: flex;
   flex-direction: column;
 
@@ -111,65 +107,49 @@ const RestaurantsStyles = styled.div`
     color: #676767;
   }
 `;
-const Restaurants = ({ restaurants, parallaxImage }) => {
+const Restaurants = ({ restaurants }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   return (
-    <>
+    <RestaurantsStyles
+      id="dine"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
+    >
+      <Overlay className="parallax-overlay" bgColor="#fff" />
       <h2 className="heading">Dine</h2>
-      <RestaurantsStyles
-        // className="villa__restaurants"
-        id="dine"
-        data-aos="fade-up"
-        data-aos-delay="50"
-        data-aos-duration="1000"
-        data-aos-easing="ease-in-out"
-        parallaxImage={parallaxImage}
-      >
-        <Overlay className="parallax-overlay" bgColor="#fff" />
-        <ul>
-          {restaurants
-            .slice(0, restaurantSlice)
-            .map(({ name, alternateName, imageThumb, description }) => (
-              <li
-                // data-aos="fade-up"
-                // data-aos-delay="50"
-                // data-aos-duration="1000"
-                // data-aos-easing="ease-in-out"
-                key={name}
-              >
-                <div key={name} className="image-container">
-                  {imageThumb && imageThumb.asset ? (
-                    <Image {...imageThumb} alt={imageThumb.alt} />
-                  ) : (
-                    <Placeholder style={{ width: "100%", height: "100%" }} />
-                  )}
-                </div>
-                <div className="villa__restaurants__text">
-                  <p className="rest-name">{name}</p>
-                  <span className="alternate-name">{alternateName}</span>
+      <ul>
+        {restaurants
+          .slice(0, restaurantSlice)
+          .map(({ name, alternateName, imageThumb, description }) => (
+            <li key={name}>
+              <div key={name} className="image-container">
+                {imageThumb && imageThumb.asset ? (
+                  <Image {...imageThumb} alt={imageThumb.alt} />
+                ) : (
+                  <Placeholder style={{ width: "100%", height: "100%" }} />
+                )}
+              </div>
+              <div className="villa__restaurants__text">
+                <p className="rest-name">{name}</p>
+                <span className="alternate-name">{alternateName}</span>
+                <p className="restaurant-description">{description}</p>
+              </div>
+            </li>
+          ))}
+      </ul>
 
-                  <p className="restaurant-description">{description}</p>
-                  {/* <Link
-                to={getRestaurantUrl({ name, resortName: resort.name })}
-              >
-                Read more...
-              </Link> */}
-                </div>
-              </li>
-            ))}
-        </ul>
-
-        {restaurantSlice === 4 && (
-          <Button
-            className="view-more-btn"
-            onClick={() => setRestaurantSLice(100)}
-          >
-            View more
-          </Button>
-        )}
-      </RestaurantsStyles>
-    </>
+      {restaurantSlice === 4 && (
+        <Button
+          className="view-more-btn"
+          onClick={() => setRestaurantSLice(100)}
+        >
+          View more
+        </Button>
+      )}
+    </RestaurantsStyles>
   );
 };
 

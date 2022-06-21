@@ -1,6 +1,7 @@
 import React from "react";
 import { useScoll } from "../../hooks";
 import { MouseScrollStyles, MainWrapper } from "./elements";
+import { Overlay } from "../Overlay";
 const PAGE_TYPE_HOME = "home";
 export const MouseScroll = ({
   scrollHeightToHide,
@@ -22,7 +23,10 @@ export const MouseScroll = ({
     pageType === PAGE_TYPE_HOME ? (
       mouseScrollComponent
     ) : (
-      <MainWrapper style={mainWrapperStyle}>{mouseScrollComponent}</MainWrapper>
+      <MainWrapper style={mainWrapperStyle}>
+        <Overlay bgColor="white" opacity={1} />
+        {mouseScrollComponent}
+      </MainWrapper>
     )
   ) : null;
 };

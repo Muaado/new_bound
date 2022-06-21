@@ -3,6 +3,7 @@ import { device } from "../styles/deviceSizes";
 export const BeachVillaStyles = styled.div`
   display: flex;
   flex-direction: column;
+  background: white;
   overflow-x: hidden;
 
   .toggleBanner {
@@ -339,7 +340,7 @@ export const BeachVillaStyles = styled.div`
   }
 
   .collection__details {
-    padding: 20px 10px 5px 10px;
+    padding: 20px 10px 5px 20px;
     @media ${device.mobileM} {
       padding: 20px 20px 0px 0px;
       .villaname {
