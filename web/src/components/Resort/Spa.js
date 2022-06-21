@@ -8,15 +8,13 @@ import { device } from "../../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
 
 const SpaStyles = styled.div`
-  /* margin-top: 14rem; */
-  /* height: 100%; */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   min-height: 70rem;
-  padding: 2rem;
+  padding: 5% 0 5% 0;
 
   background-size: 100vw;
   background-attachment: fixed;
@@ -189,23 +187,10 @@ const Spa = ({ spa, className }) => {
 
   useEffect(() => {
     const { width } = size;
-    const isMobileOnly = width <= 576;
-    const isTablet = width > 576 && width < 992;
-    const isSreenSM = width > 992 && width < 1200;
-    const isSreenLG = width > 1200 && width < 1440;
-    const screenXL = width > 1440 && width < 1600;
-    const screenXXL = width > 1600;
-    const notMobile = width > 576;
   }, [size]);
 
   return (
-    <SpaStyles
-      className={className}
-      // data-aos="fade-up"
-      // data-aos-delay="50"
-      // data-aos-duration="1000"
-      // data-aos-easing="ease-in-out"
-    >
+    <SpaStyles className={className}>
       <div className="container">
         <div className="left-section">
           <div className="image-web">

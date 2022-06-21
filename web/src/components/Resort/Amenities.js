@@ -7,9 +7,8 @@ import { Overlay } from "../Overlay";
 // import { device } from "../styles/deviceSizes";
 
 const AmenitiesStyles = styled.div`
+  width: 100%;
   position: relative;
-  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
-      cover fixed`};
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -69,6 +68,10 @@ const AmenitiesStyles = styled.div`
   .amenties {
     margin-bottom: 5rem;
   }
+  h2 {
+    margin-top: 10rem;
+    margin-bottom: 3rem;
+  }
 `;
 
 const Amenities = ({
@@ -79,11 +82,12 @@ const Amenities = ({
   resortTransferType,
   timeToAirport,
   _rawDescription,
-  parallaxImage,
+  title,
 }) => {
   return (
-    <AmenitiesStyles parallaxImage={parallaxImage}>
-      <Overlay className="parallax-overlay" bgColor="#fff" />
+    <AmenitiesStyles>
+      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+      <h2>{title}</h2>
       <div className="description">
         <PortableText blocks={_rawDescription} />
       </div>

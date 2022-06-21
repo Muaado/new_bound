@@ -1,14 +1,10 @@
 import { graphql, Link } from "gatsby";
 import React, { useEffect, useState } from "react";
-
 import useWindowSize from "../lib/useWindowSize";
-
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
-
 import Image from "gatsby-plugin-sanity-image";
-
 import PortableText from "../components/Ui/portableText";
 import Gallery from "../components/Gallery";
 import VillaStyles from "../styles/VillaTemplateStyles";
@@ -27,7 +23,7 @@ import { MouseScroll } from "../components/Ui/MouseScroll";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
-import { PricingDropDown } from "../components";
+import { PricingDropDown, Overlay } from "../components";
 import { ROOM_PAGE } from "../constants";
 
 export const query = graphql`
@@ -223,27 +219,14 @@ const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
   const rateModel = data && data.rateModel;
-  // const activities = data && data.activities;
   const spas = data && data.spas;
-  const resorts = data && data.resorts;
   const restaurants = data && data.restaurants;
-  // const priceList = data && data.priceList;
-  const [numberOfSlides, setNumberOfSlides] = useState(3);
-  const [cellSpacing, setCellSpacing] = useState(10);
   const size = useWindowSize();
   useEffect(() => {
     const { width } = size;
-    const isMobileOnly = width <= 576;
-    const isTablet = width > 576 && width < 992;
-    const isSreenSM = width > 992 && width < 1200;
-    const isSreenLG = width > 1200 && width < 1440;
-    const screenXL = width > 1440 && width < 1600;
-    const screenXXL = width > 1600;
-    const notMobile = width > 990;
   }, [size]);
 
   const [activeFeature, setActiveFeature] = useState(-1);
-  // const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   const {
     name,
@@ -314,34 +297,6 @@ const VilaTemplate = (props) => {
     }
   };
 
-  const [calendarOpen, setCalendarOpen] = useState(false);
-
-  const months = [
-    { title: "JAN", value: "0" },
-    { title: "FEB", value: "1" },
-    { title: "MAR", value: "2" },
-    { title: "APR", value: "3" },
-    { title: "MAY", value: "4" },
-    { title: "JUN", value: "5" },
-    { title: "JUL", value: "6" },
-    { title: "AUG", value: "7" },
-    { title: "SEP", value: "8" },
-    { title: "OCT", value: "9" },
-    { title: "NOV", value: "10" },
-    { title: "DEC", value: "11" },
-  ];
-
-  // const sortedPriceList = priceList.nodes.sort((a, b) =>
-  //   parseInt(b.month) > parseInt(a.month) ? -1 : 1
-  // );
-
-  // let medianPrice = 0;
-
-  // sortedPriceList.forEach((price) => {
-  //   medianPrice += price.price;
-  // });
-
-  // medianPrice = medianPrice / sortedPriceList.length;
   return (
     <Layout>
       {villa && (
@@ -357,7 +312,6 @@ const VilaTemplate = (props) => {
           list={["overview", "room-features", "gallery", "highlights", "dine"]}
         />
         <VillaStyles>
-          {/* {heroImage && ( */}
           <div className="villa__image">
             <div className="image-container">
               {heroImage && heroImage.asset ? (
@@ -366,7 +320,6 @@ const VilaTemplate = (props) => {
                 <Image {...randomHeaderImage} alt={randomHeaderImage.alt} />
               ) : (
                 <div></div>
-                // <Placeholder style={{ width: "100%", height: "100%" }} />
               )}
             </div>
             <h1 className="villa__image-title" id="header-text">
@@ -382,7 +335,8 @@ const VilaTemplate = (props) => {
               height: "100%",
             }}
           />
-          <div className="backtoreswrapper">
+          <div className="breadcrumb-wrapper">
+            <Overlay bgColor="white" opacity={1} />
             <div className="breadcrumb">
               <ul>
                 <li>
@@ -415,6 +369,7 @@ const VilaTemplate = (props) => {
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
+            <Overlay opacity={0.9} bgColor="#fdf7ed" />
             <div className="container">
               {villa.uniqueCode && (
                 <div className="unique_code_wrap">
@@ -468,18 +423,9 @@ const VilaTemplate = (props) => {
             />
           </div>
 
-          {/* {Begin Features section div} */}
-          <div
-            className="villa__room-features"
-            id="room-features"
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
-          >
+          <div className="villa__room-features" id="room-features">
             <div className="content">
               <div className="roomfeatwrap">
-                {/* <div className="image-container"> */}
                 {roomFeatures?.backgroundImage &&
                 roomFeatures?.backgroundImage.asset ? (
                   <Image
@@ -519,17 +465,7 @@ const VilaTemplate = (props) => {
               </ul>
             </div>
           </div>
-          {/* end features section div */}
-          {/* <Gallery galleries={galleries} id="gallery" /> */}
-          <div
-            className="villa__property-overview"
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
-          >
-            <h2>Property Overview</h2>
-
+          <div className="villa__property-overview">
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
@@ -538,6 +474,7 @@ const VilaTemplate = (props) => {
               resortTransferType={resortTransferType}
               timeToAirport={timeToAirport}
               _rawDescription={_rawDescription}
+              title="Property Overview"
             />
           </div>
 

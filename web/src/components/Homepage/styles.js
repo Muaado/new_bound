@@ -15,8 +15,6 @@ export const HeroStyles = styled.div`
   text-align: center;
   overflow: hidden;
   color: #fff;
-
-  /* position: absolute; */
   z-index: 1;
   top: 0;
   left: 0;
@@ -186,7 +184,6 @@ export const HandCraftedJourneysStyles = styled.div`
     position: relative;
     z-index: 1;
     padding: 0 15%;
-    margin: 10rem 0 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -229,7 +226,6 @@ export const HandCraftedJourneysStyles = styled.div`
 `;
 
 export const MagazineStyles = styled.div`
-  margin-bottom: 10rem;
   display: flex;
   flex-direction: column;
   position: relative;

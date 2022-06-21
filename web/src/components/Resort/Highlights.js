@@ -8,16 +8,13 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
-  position: relative;
-  background: ${({ parallaxImage }) => `url(${parallaxImage}) center center / 
-      cover fixed`};
   z-index: 1;
   text-align: center;
-  padding: 5% 15%;
+  padding: 10% 15%;
   display: flex;
   flex-direction: column;
   @media ${device.laptopM} {
-    padding: 5% 10%;
+    padding: 10% 10%;
   }
   @media ${device.tablet} {
     margin-top: 5rem;
@@ -73,6 +70,10 @@ const HighlightsStyles = styled.div`
 
     li:hover .overlay {
       opacity: 0.5;
+      z-index: unset;
+      a {
+        z-index: 1;
+      }
     }
 
     img {
@@ -140,76 +141,73 @@ const HighlightsStyles = styled.div`
   }
 `;
 
-const Highlights = ({ highlights, parallaxImage }) => {
+const Highlights = ({ highlights }) => {
   return (
-    <>
+    <HighlightsStyles
+      id="highlights"
+      className="resort__highlights"
+      data-aos="fade-up"
+      data-aos-delay="50"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out"
+    >
+      <Overlay bgColor="white" opacity={1} />
       <h2 className="heading">Highlights</h2>
-      <HighlightsStyles
-        id="highlights"
-        className="resort__highlights"
-        data-aos="fade-up"
-        data-aos-delay="50"
-        data-aos-duration="1000"
-        data-aos-easing="ease-in-out"
-        parallaxImage={parallaxImage}
-      >
-        <Overlay className="parallax-overlay" bgColor="#fff" />
-        <Carousel
-          speed={1000}
-          wrapAround
-          className="carousel"
-          slidesToShow={1}
-          cellSpacing={0}
+      <Carousel
+        speed={1000}
+        wrapAround
+        className="carousel"
+        slidesToShow={1}
+        cellSpacing={0}
 
-          // renderCenterRightControls={({ nextSlide }) => (
-          //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-          // )}
-          // renderCenterLeftControls={({ previousSlide }) => (
-          //   <CarouselButton onClick={previousSlide} />
-          // )}
-        >
-          {highlights.map(({ name, imageThumb, description }) => (
-            <li key={imageThumb?.alt}>
-              {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
-              {/* </Link> */}
-              <p>{description}</p>
-              {imageThumb && imageThumb.asset && (
-                <>
-                  <Image {...imageThumb} alt={imageThumb.alt} />
-                </>
-              )}
-              <a className="highLbl">
-                {name} <ChevronRight />
-              </a>
-            </li>
-          ))}
-        </Carousel>
-        <ul className="desktop-highlights">
-          {highlights.length
-            ? highlights.map(({ name, imageThumb, description }) => (
-                <li key={imageThumb?.alt}>
-                  <Overlay className="overlay" />
-                  <a>
-                    {name} <ChevronRight />
-                  </a>
-                  {/* </Link> */}
-                  <p>{description}</p>
-                  {imageThumb && imageThumb.asset && (
-                    <>
-                      <Image {...imageThumb} alt={imageThumb.alt} />
-                    </>
-                  )}
-                </li>
-              ))
-            : [1, 2, 3, 4, 5, 6].map((item) => (
-                <li key={item}>
-                  {/* {console.log("hrehreh")} */}
-                  <Placeholder />
-                </li>
-              ))}
-        </ul>
-      </HighlightsStyles>
-    </>
+        // renderCenterRightControls={({ nextSlide }) => (
+        //   <CarouselButton onClick={nextSlide} chevronRight={true} />
+        // )}
+        // renderCenterLeftControls={({ previousSlide }) => (
+        //   <CarouselButton onClick={previousSlide} />
+        // )}
+      >
+        {highlights.map(({ name, imageThumb, description }) => (
+          <li key={imageThumb?.alt}>
+            {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
+            {/* </Link> */}
+            <p>{description}</p>
+            {imageThumb && imageThumb.asset && (
+              <>
+                <Image {...imageThumb} alt={imageThumb.alt} />
+              </>
+            )}
+            <a className="highLbl">
+              {name} <ChevronRight />
+            </a>
+          </li>
+        ))}
+      </Carousel>
+      <ul className="desktop-highlights">
+        {highlights.length
+          ? highlights.map(({ name, imageThumb, description }) => (
+              <li key={imageThumb?.alt}>
+                <Overlay className="overlay" />
+                <a>
+                  {name} <ChevronRight />
+                </a>
+                {/* </Link> */}
+                <p>{description}</p>
+                {imageThumb && imageThumb.asset && (
+                  <>
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  </>
+                )}
+              </li>
+            ))
+          : [1, 2, 3, 4, 5, 6].map((item) => (
+              <li key={item}>
+                {/* {console.log("hrehreh")} */}
+                <Placeholder />
+              </li>
+            ))}
+      </ul>
+    </HighlightsStyles>
   );
 };
 

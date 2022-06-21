@@ -238,7 +238,6 @@ const IndexPage = (props) => {
   }
 
   const windowGlobal = typeof window !== "undefined";
-
   return (
     <Layout {...props}>
       <SEO

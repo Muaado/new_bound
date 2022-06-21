@@ -4,11 +4,12 @@ export const Overlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
+  z-index: -1;
   left: 0;
   top: 0;
   bottom: 0;
   right: 0;
-  opacity: ${({ show }) => (show ? 1 : 0)};
+  opacity: ${({ opacity }) => (opacity ? opacity : 0)};
   -webkit-transition: all 0.6s ease-in-out 0s;
   -moz-transition: all 0.6s ease-in-out 0s;
   transition: all 0.6s ease-in-out 0s;

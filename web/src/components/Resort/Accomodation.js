@@ -3,27 +3,17 @@ import Image from "gatsby-plugin-sanity-image";
 import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import ChevronRight from "../../assets/icons/chevron-right.svg";
-import ChevronLeft from "../../assets/icons/chevron-left.svg";
 import { device } from "../../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
-import CarouselButton from "../Ui/CarouselButton";
 import { getVillaUrl } from "../../lib/helpers";
 import Placeholder from "../../assets/placeholder.svg";
-import BackToResort from "../backToResort";
 import { Button } from "../Button";
+import { Overlay } from "../Overlay";
 
 const AccomodationStyles = styled.div`
   @media ${device.tablet} {
     padding: 0;
   }
-  // .slider-control-bottomcenter button
-  // {
-  //   background: black !important;
-  //   border-radius: 100%;
-  //   width: 10px !important;
-  //   height: 10px !important;
-  // }
 
   .slider-control-bottomcenter svg {
     display: none !important;
@@ -35,6 +25,7 @@ const AccomodationStyles = styled.div`
     text-align: center;
     /* padding: 5rem; */
     letter-spacing: normal;
+    margin-top: 10rem;
     margin-bottom: 7rem;
   }
   .carousel {
@@ -44,19 +35,9 @@ const AccomodationStyles = styled.div`
 
     .slider-slide {
       margin-right: 2rem;
-      /* width: 100% !important; */
-      /* min-width: 50rem !important; */
     }
 
     .slider-frame {
-      // @media ${device.notMobile} {
-      //   overflow: unset !important;
-      // }
-
-      // @media ${device.mobileL} {
-      //   overflow: hidden !important;
-      // }
-
       align-self: center;
       width: 100% !important;
     }
@@ -139,7 +120,6 @@ const Accomodation = ({ villas, id, elementRef }) => {
     const isSreenLG = width > 1200 && width < 1440;
     const screenXL = width > 1440 && width < 1600;
     const screenXXL = width > 1600;
-    const notMobile = width > 576;
 
     const slides = () => {
       if (isMobileOnly) return 1;
@@ -150,9 +130,8 @@ const Accomodation = ({ villas, id, elementRef }) => {
       if (screenXXL) return 3;
       return 2.9;
     };
+
     const spacing = () => {
-      // if (isMobileOnly) return 50;
-      // if (isTablet) return 20;
       return 20;
     };
 
@@ -169,46 +148,41 @@ const Accomodation = ({ villas, id, elementRef }) => {
       data-aos-easing="ease-in-out"
       ref={elementRef}
     >
-      <h2>Accommodation</h2>
+      <div className="content">
+        <h2>Accommodation</h2>
 
-      <Carousel
-        speed={1000}
-        wrapAround
-        className="carousel"
-        slidesToShow={numberOfSlides}
-        cellSpacing={cellSpacing}
-        // renderCenterRightControls={({ nextSlide }) => (
-        //   <CarouselButton onClick={nextSlide} />
-        // )}
-        // renderCenterLeftControls={({ previousSlide }) => ""}
-      >
-        {villas.map(({ name, imageThumb, resort }) => (
-          // <li key={name}>
-          // check if name contains word 'demo'
-
-          <Link
-            to={getVillaUrl({ name, resortName: resort.name })}
-            key={name}
-            className="image-container"
-          >
-            {imageThumb && imageThumb.asset ? (
-              <Image className="image" {...imageThumb} alt={imageThumb.alt} />
-            ) : (
-              <Placeholder />
-            )}
-            <div className="roomFooter">
-              <p className="roomname">{name}</p>
-              {/* <span className="pricelbl">from $5,950 PP</span> */}
-              <div className="room_price">
-                <span className="price-from">From</span>{" "}
-                <span className="font-bold">$5,950</span>
-                <span className="price-category">per night</span>
+        <Carousel
+          speed={1000}
+          wrapAround
+          className="carousel"
+          slidesToShow={numberOfSlides}
+          cellSpacing={cellSpacing}
+        >
+          {villas.map(({ name, imageThumb, resort }) => (
+            <Link
+              to={getVillaUrl({ name, resortName: resort.name })}
+              key={name}
+              // state={{}}
+              className="image-container"
+            >
+              {imageThumb && imageThumb.asset ? (
+                <Image className="image" {...imageThumb} alt={imageThumb.alt} />
+              ) : (
+                <Placeholder />
+              )}
+              <div className="roomFooter">
+                <p className="roomname">{name}</p>
+                <div className="room_price">
+                  <span className="price-from">From</span>{" "}
+                  <span className="font-bold">$5,950</span>
+                  <span className="price-category">per night</span>
+                </div>
+                <Button>View Room</Button>
               </div>
-              <Button>View Room</Button>
-            </div>
-          </Link>
-        ))}
-      </Carousel>
+            </Link>
+          ))}
+        </Carousel>
+      </div>
     </AccomodationStyles>
   );
 };

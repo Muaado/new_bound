@@ -14,10 +14,6 @@ const TailorMadeStyles = styled.div`
     padding: 0 15%;
   }
 
-  @media ${device.laptopL} {
-    margin-bottom: 10rem;
-  }
-
   ul {
     display: flex;
     justify-content: space-between;
@@ -89,7 +85,7 @@ const TailorMade = () => {
       data-aos-duration="1000"
       data-aos-easing="ease-in-out"
     >
-      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
+      <Overlay opacity={1} bgColor="white" />
       <div className="content">
         <h2>100% Tailor-Made Holidays</h2>
         <ul>

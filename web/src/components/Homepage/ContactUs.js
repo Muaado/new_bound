@@ -140,8 +140,7 @@ export const ContactUs = ({ contactUs }) => {
     contactUs;
   return (
     <ContactUsSection>
-      <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
-      {/* <div className="content"> */}
+      <Overlay opacity={1} bgColor="white" />
       <a className="anchor" id="contact-us"></a>
       <div>
         <p>Need a little help?</p>
