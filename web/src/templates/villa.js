@@ -1,5 +1,5 @@
 import { graphql, Link } from "gatsby";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useWindowSize from "../lib/useWindowSize";
 import Layout from "../containers/layout";
 import Container from "../components/container";
@@ -24,7 +24,8 @@ import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
-import { ROOM_PAGE } from "../constants";
+import { ROOM_PAGE, ACCOMODATIONS_SECTION } from "../constants";
+import { useScrollToRef } from "../hooks";
 
 export const query = graphql`
   fragment SanityPricingRateModel on SanityRateModel {
@@ -218,15 +219,23 @@ export const query = graphql`
 const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
+  const pageFrom = props?.location?.state?.pageFrom;
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
   const size = useWindowSize();
+  const { elementRef, executeScroll } = useScrollToRef();
   useEffect(() => {
     const { width } = size;
   }, [size]);
 
   const [activeFeature, setActiveFeature] = useState(-1);
+
+  useEffect(() => {
+    if (pageFrom && pageFrom === ACCOMODATIONS_SECTION) {
+      executeScroll(elementRef);
+    }
+  }, [pageFrom]);
 
   const {
     name,
@@ -368,6 +377,7 @@ const VilaTemplate = (props) => {
             data-aos-delay="50"
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
+            ref={elementRef}
           >
             <Overlay opacity={0.9} bgColor="#fdf7ed" />
             <div className="container">

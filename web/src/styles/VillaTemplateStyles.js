@@ -5,7 +5,7 @@ import "../styles/typography.css";
 const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 1;
   width: 100%;
   h1 {
