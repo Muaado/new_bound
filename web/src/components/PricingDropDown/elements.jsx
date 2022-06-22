@@ -10,13 +10,6 @@ export const DropDownWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 203px;
-  /* @media ${device.laptop} {
-    width: 70%;
-  }
-  @media ${device.onlyMobileSm} {
-    width: 100%;
-  } */
-
   justify-content: center;
   transition: all 0.2s;
 `;

@@ -48,7 +48,7 @@ const Layout = ({
       headerDropdownImage={headerDropdownImage}
     />
 
-    <div>{children}</div>
+    {children}
     <Footer logo={logo} contactUs={contactUs} />
     <GlobalStyle />
   </>

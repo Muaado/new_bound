@@ -7,6 +7,7 @@ const VillaStyles = styled.div`
   flex-direction: column;
   overflow-x: hidden;
   z-index: 1;
+  width: 100%;
   h1 {
     @media ${device.tablet} {
       letter-spacing: unset;

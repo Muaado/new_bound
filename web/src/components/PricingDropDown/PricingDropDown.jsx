@@ -10,6 +10,8 @@ import {
 import CloseSvg from "../../assets/icons/close.svg";
 import Calendar from "../../assets/icons/calendar.svg";
 import { truncate } from "../../lib/helpers";
+import { PricingModal } from "../../components";
+import { useIsMobile } from "../../hooks";
 
 const sortByCurrentMonthName = (array) => {
   const months = {
@@ -43,44 +45,60 @@ const sortByCurrentMonthName = (array) => {
 
 export const PricingDropDown = ({ items }) => {
   const [showList, setShowList] = useState(false);
+  const isMobile = useIsMobile();
+  const sortedItems = sortByCurrentMonthName(Object.keys(items)).map((key) => ({
+    monthName: key,
+    price: items[key],
+  }));
   return (
-    <DropDownWrapper>
-      {showList && (
-        <IconWrapper
+    <>
+      {!isMobile && showList && (
+        <PricingModal
+          isOpen={showList}
+          handleClose={() => setShowList(false)}
+          pricingItems={sortedItems}
+        />
+      )}
+      <DropDownWrapper>
+        {showList && (
+          <IconWrapper
+            onClick={() => {
+              setShowList(false);
+            }}
+          >
+            <SvgWrapper>
+              <CloseSvg />
+            </SvgWrapper>
+          </IconWrapper>
+        )}
+        <DropDownHeader
+          isOpen={showList}
           onClick={() => {
-            setShowList(false);
+            setShowList(true);
           }}
         >
-          <SvgWrapper>
-            <CloseSvg />
+          <div className="header-title">Monthly Pricing</div>
+          <SvgWrapper dimension={"16px"} style={{ marginLeft: "10px" }}>
+            <Calendar />
           </SvgWrapper>
-        </IconWrapper>
-      )}
-      <DropDownHeader
-        isOpen={showList}
-        onClick={() => {
-          setShowList(true);
-        }}
-      >
-        <div className="header-title">Monthly Pricing</div>
-        <SvgWrapper dimension={"16px"} style={{ marginLeft: "10px" }}>
-          <Calendar />
-        </SvgWrapper>
-      </DropDownHeader>
-      {showList && items && Object.keys(items).length && (
-        <DropDownList>
-          {sortByCurrentMonthName(Object.keys(items)).map((key) => {
-            const value = items[key];
-            return (
-              <ListItem>
-                <span className="month"> {truncate(key, 3)} </span>
-                <span className="pricing">{`$${value}`}</span>
-                <span className="price-category">per night</span>
-              </ListItem>
-            );
-          })}
-        </DropDownList>
-      )}
-    </DropDownWrapper>
+        </DropDownHeader>
+        {isMobile &&
+          showList &&
+          sortedItems &&
+          Object.keys(sortedItems).length && (
+            <DropDownList>
+              {sortedItems.map(({ monthName, price }) => {
+                return (
+                  <ListItem>
+                    <span className="month"> {truncate(monthName, 3)} </span>
+                    <span className="pricing">{`$${price}`}</span>
+                    <span className="price-category">per night</span>
+                  </ListItem>
+                );
+              })}
+            </DropDownList>
+          )}
+      </DropDownWrapper>
+    </>
   );
 };
