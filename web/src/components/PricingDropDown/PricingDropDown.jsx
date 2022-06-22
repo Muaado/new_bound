@@ -46,10 +46,13 @@ const sortByCurrentMonthName = (array) => {
 export const PricingDropDown = ({ items }) => {
   const [showList, setShowList] = useState(false);
   const isMobile = useIsMobile();
-  const sortedItems = sortByCurrentMonthName(Object.keys(items)).map((key) => ({
-    monthName: key,
-    price: items[key],
-  }));
+  const sortedItems =
+    items && Object.keys(items).length
+      ? sortByCurrentMonthName(Object.keys(items)).map((key) => ({
+          monthName: key,
+          price: items[key],
+        }))
+      : [];
   return (
     <>
       {!isMobile && showList && (

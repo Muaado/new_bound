@@ -14,7 +14,7 @@ export const StyledTable = styled.table`
     text-align: center;
   }
   tr {
-    border-bottom: 1px solid !important;
+    border-bottom: 0.0625rem solid !important;
   }
   th {
     text-transform: uppercase;
