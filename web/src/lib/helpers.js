@@ -1,5 +1,5 @@
 import { format, isFuture } from "date-fns";
-
+const querystring = require("query-string");
 export function cn(...args) {
   return args.filter(Boolean).join(" ");
 }
@@ -85,4 +85,16 @@ export const getCollectionUrl = ({ slug }) => {
 export const truncate = (str, limit) => {
   const truncatedStr = str.slice(0, limit);
   return truncatedStr;
+};
+const SSR = typeof window === "undefined";
+
+export const getQueryStringParams = (location_) => {
+  if (SSR && !location_) return {};
+  const location = location_ || window.location;
+  const qs = querystring.parse(location.search.slice(1));
+  return Object.entries(qs).reduce((acc, [k, v]) => {
+    if (Array.isArray(v) && typeof v[0] === "string") acc[k] = v[0];
+    else if (typeof v === "string") acc[k] = v;
+    return acc;
+  }, {});
 };

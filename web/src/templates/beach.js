@@ -334,7 +334,7 @@ const BeachTemplate = (props) => {
                     {/* BEGIN LEFT SECTION */}
                     <div className="photofeatured">
                       <Overlay className="overlay" />
-                      <div class="inner">
+                      <div className="inner">
                         <Image
                           className="featuredreslogo"
                           {...col.featuredvillas[0].villaone.resort
@@ -369,7 +369,7 @@ const BeachTemplate = (props) => {
                     {/* BEGIN RIGHT SECTION */}
                     <div className="rightfeatured">
                       <Overlay className="overlay" />
-                      <div class="inner">
+                      <div className="inner">
                         {col.featuredvillas[0].villaone.headerImages
                           .images[1] && (
                           <Image

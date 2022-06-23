@@ -421,7 +421,10 @@ const VilaTemplate = (props) => {
                   )}
                 </ul>
                 <PricingDropDown items={rateModel} />
-                <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
+                <Link
+                  to={`/enquire?id=${resortName}&name=${name}`}
+                  className="enquire-btn"
+                >
                   <Button
                     style={{ paddingLeft: "100px", paddingRight: "100px" }}
                   >

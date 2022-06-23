@@ -78,15 +78,16 @@ const TailorMadeStyles = styled.div`
 
 const TailorMade = () => {
   return (
-    <TailorMadeStyles
-      className="tailor-made"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
+    <TailorMadeStyles className="tailor-made">
       <Overlay opacity={1} bgColor="white" />
-      <div className="content">
+      <div
+        id="tailormade-content"
+        className="content"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
         <h2>100% Tailor-Made Holidays</h2>
         <ul>
           <li className="tailor-made__step">

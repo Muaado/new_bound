@@ -5,14 +5,19 @@ import SEO from "../components/seo";
 
 import { graphql } from "gatsby";
 import { HeroStyles } from "../components/Homepage/styles";
+import { EnquirePageStyles } from "../styles/EnquirePageStyles";
 import Image from "gatsby-plugin-sanity-image";
-import styled from "styled-components";
 import Search from "../components/Search";
-import useForm from "../hooks/useForm";
-import { device } from "../styles/deviceSizes";
 import countries from "../lib/countries";
 import { Button } from "../components/Button";
-
+import { getQueryStringParams } from "../lib";
+import Measure from "../assets/icons/villaSpecifications/measure.svg";
+import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
+import Bed from "../assets/icons/villaSpecifications/bed.svg";
+import Shower from "../assets/icons/villaSpecifications/shower.svg";
+import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
+import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect } from "react";
 export const query = graphql`
   query EnquirePageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -56,87 +61,6 @@ export const query = graphql`
   }
 `;
 
-const EnquirePageStyles = styled.div`
-  margin: 5rem 0;
-
-  form {
-    margin-bottom: 5rem;
-    display: flex;
-
-    @media ${device.tablet} {
-      flex-direction: column;
-      /* margin: 1rem 0; */
-    }
-    h2 {
-      margin-bottom: 4rem;
-      font-weight: normal;
-      font-size: 2rem;
-      color: #fff;
-      text-align: center;
-    }
-
-    & > div {
-      background: var(--primary);
-      padding: 3rem;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      &:first-of-type {
-        border-right: 1px solid #fff;
-      }
-    }
-
-    .form-control {
-      display: flex;
-      flex-direction: column;
-      width: 35vw;
-      margin-bottom: 2rem;
-
-      @media ${device.tablet} {
-        width: 100%;
-        /* margin: 1rem 0; */
-      }
-      &.two-column {
-        display: grid;
-        grid-template-columns: 48% 48%;
-        gap: 4%;
-      }
-      &.three-column {
-        display: grid;
-        grid-template-columns: 48% 1fr 1fr;
-        gap: 4%;
-        .phone {
-          display: flex;
-
-          select {
-            width: 10rem;
-            margin-right: 1rem;
-          }
-        }
-      }
-
-      /* & */
-
-      label {
-        text-transform: uppercase;
-        font-size: 1.4rem;
-      }
-      input,
-      select {
-        width: 100%;
-        padding: 1rem 1.5rem;
-      }
-      textarea {
-        height: 15rem;
-      }
-
-      span.required {
-        color: var(--red);
-      }
-    }
-  }
-`;
-
 const Enquire = (props) => {
   const { data } = props;
   const site = (data || {}).site;
@@ -148,53 +72,57 @@ const Enquire = (props) => {
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     );
   }
-  const resortId = typeof window !== `undefined` ? window.location.search : ``;
-  // const parameter2 = params.get("parameter2");
-  // const resortId = URLSearchParams.values();
+  const { id: resortId, name: villaName } = getQueryStringParams();
 
-  // console.log(url);
   const budgetRanges = [
     "£3,500 to £5,000",
     "£5,000 to £7,500",
     "£7,500 to 10,000",
     "Above £10,000 ",
   ];
-  const {
-    values: {
-      destination,
-      dateOfTravel,
-      duration,
-      budget,
-      comments,
-      title,
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      adults,
-      children,
-      countryCode,
-    } = {},
-    values,
-    updateValue,
-    updateValueManually,
-  } = useForm({
-    destination: { value: resortId?.split("=")[1]?.split("%20").join(" ") },
+
+  const defaultValues = {
     dateOfTravel: "",
     duration: "",
     budget: budgetRanges[0],
     comments: "",
+    countryofResidence: "",
     title: "",
     firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
     adults: "",
-    children: "",
+    childrens: 0,
     countryCode: "",
+    holidayType: "",
+  };
+
+  const {
+    control,
+    watch,
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues,
   });
 
-  // console.log(values);
+  const { fields: childrensAgeField, append } = useFieldArray({
+    control, // control props comes from useForm (optional: if you are using FormContext)
+    name: "childrensAge", // unique name for your Field Array
+  });
+
+  const childrensField = watch("childrens");
+  useEffect(() => {
+    if (childrensField) {
+      if (childrensAgeField.length) reset({ childrensAge: [] });
+      [...Array(parseInt(childrensField)).keys()].forEach(() => {
+        append({ age: 0 });
+      });
+    }
+  }, [childrensField]);
   return (
     <Layout {...props}>
       <SEO
@@ -204,7 +132,7 @@ const Enquire = (props) => {
       />
 
       <Container>
-        <HeroStyles className="height-80vh">
+        <HeroStyles>
           <h1> {site.description}</h1>
           {data.site.magazinePageImage && data.site.magazinePageImage.asset && (
             <Image
@@ -216,55 +144,47 @@ const Enquire = (props) => {
         <EnquirePageStyles>
           <form
             method="post"
-            action="https://getform.io/f/209039b1-5178-40df-8c4a-97f28465ec11"
+            onSubmit={handleSubmit((formValues) => {
+              console.log("formValues", formValues);
+            })}
+            // action="https://getform.io/f/209039b1-5178-40df-8c4a-97f28465ec11"
           >
-            <div>
-              <h2>Holiday details</h2>
-              <div className="form-control">
-                <label>
-                  Destination<span className="required">*</span>
-                </label>
-                <Search
-                  selectedRecord={resortId}
-                  className="enquire-search"
-                  resorts={resorts.nodes}
-                  villas={[]}
-                  placeholder="Select destination"
-                  value={destination}
-                  onChange={(input) => {
-                    updateValueManually("destination", input);
-                  }}
-                />
-                <input
-                  hidden
-                  name="destination"
-                  value={destination ? destination.value : ""}
-                />
+            <div className="room-villa-section">
+              <div className="header-content">
+                <h2>Request A Quote</h2>
+                <div className="villa-name">{villaName}</div>
+                <div className="divider" />
+                <div className="resort-name">{resortId}</div>
+                <div className="villa-features">
+                  <Measure />
+                  <TwoPeople />
+                  <Bed />
+                  <Shower />
+                  <SwimmingPool />
+                </div>
               </div>
-              <div className="form-control two-column">
-                <div>
+              <div className="footer-content">
+                <img src="https://cdn.sanity.io/images/y7yu20xn/master/00f14684903411257eccfd658ae00529dc74cf0d-1008x637.jpg?q=75&fit=max&auto=format&dpr=2" />
+              </div>
+            </div>
+            <div className="holidays-details-section">
+              <h2>Holiday details</h2>
+              <div className="two-column form-content">
+                <div className="form-control">
                   <label>
                     Date of travel<span className="required">*</span>
                   </label>
                   <input
-                    name="dateOfTravel"
+                    {...register("dateOfTravel")}
                     type="date"
                     placeholder=""
-                    value={dateOfTravel}
-                    onChange={(e) =>
-                      updateValueManually("dateOfTravel", e.target.value)
-                    }
                   />
                 </div>
-                <div>
+                <div className="form-control">
                   <label>
                     Duration<span className="required">*</span>
                   </label>
-                  <select
-                    name="duration"
-                    value={duration}
-                    onChange={updateValue}
-                  >
+                  <select {...register("duration")}>
                     {[...Array(30).keys()].map((number) => (
                       <option key={number + 1} value={number + 1}>
                         {number + 1}
@@ -273,10 +193,26 @@ const Enquire = (props) => {
                   </select>
                 </div>
               </div>
-              {/* <div className="form-control"></div> */}
               <div className="form-control">
-                <label>Total holiday budget $</label>
-                <select value={budget} onChange={updateValue} name="budget">
+                <label>Country of Residence</label>
+                <select {...register("countryOfResidence")}>
+                  <option>PAKISTAN</option>
+                  <option>UK</option>
+                  <option>CANADA</option>
+                </select>
+              </div>
+              <div className="form-control">
+                <label>Holiday Type</label>
+                <select {...register("holidayType")}>
+                  <option>Honeymoon</option>
+                  <option>Anniversary</option>
+                  <option>Relaxation holiday</option>
+                  <option>Romantic holiday</option>
+                </select>
+              </div>
+              <div className="form-control">
+                <label>Holiday budget</label>
+                <select {...register("budget")}>
                   {budgetRanges.map((range) => (
                     <option key={range} value={range}>
                       {range}
@@ -286,21 +222,17 @@ const Enquire = (props) => {
               </div>
               <div className="form-control">
                 <label>Tell us a bit more</label>
-                {/* <input name="" type="" placeholder="" /> */}
-                <textarea onChange={updateValue} name="comments">
-                  {comments}
-                </textarea>
+                <textarea {...register("comments")} />
               </div>
             </div>
-
-            <div>
+            <div className="yours-details-section">
               <h2>Your details</h2>
-              <div className="form-control two-column">
-                <div>
+              <div className="two-column form-content">
+                <div className="form-control">
                   <label>
                     Title<span className="required">*</span>
                   </label>
-                  <select value={title} name="title" onChange={updateValue}>
+                  <select {...register("title")}>
                     {["Mr.", "Mrs."].map((number) => (
                       <option key={number} value={number}>
                         {number}
@@ -308,43 +240,28 @@ const Enquire = (props) => {
                     ))}
                   </select>
                 </div>
-                <div>
+                <div className="form-control">
                   <label>
                     First name<span className="required">*</span>
                   </label>
                   <input
-                    name="firstName"
-                    value={firstName}
-                    onChange={updateValue}
+                    {...register("firstName")}
                     type="text"
                     placeholder=""
                   />
                 </div>
               </div>
-              {/* <div className="form-control"></div> */}
               <div className="form-control">
                 <label>
                   Last name<span className="required">*</span>
                 </label>
-                <input
-                  name="lastName"
-                  value={lastName}
-                  onChange={updateValue}
-                  type="text"
-                  placeholder=""
-                />
+                <input {...register("lastName")} type="text" placeholder="" />
               </div>
               <div className="form-control">
                 <label>
                   e-mail address<span className="required">*</span>
                 </label>
-                <input
-                  name="email"
-                  type="email"
-                  value={email}
-                  onChange={updateValue}
-                  placeholder=""
-                />
+                <input {...register("email")} type="email" placeholder="" />
               </div>
               <div className="form-control three-column ">
                 <div>
@@ -352,11 +269,7 @@ const Enquire = (props) => {
                     Telephone number<span className="required">*</span>
                   </label>
                   <div className="phone">
-                    <select
-                      value={countryCode}
-                      name="countryCode"
-                      onChange={updateValue}
-                    >
+                    <select {...register("countryCode")}>
                       {countries.map(({ code, name }, index) => (
                         <option
                           key={`${code}-${index}`}
@@ -367,18 +280,16 @@ const Enquire = (props) => {
                       ))}
                     </select>
                     <input
-                      name="phoneNumber"
+                      {...register("phoneNumber")}
                       type="text"
                       placeholder=""
-                      value={phoneNumber}
-                      onChange={updateValue}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label>Adults</label>
-                  <select value={adults} name="adults" onChange={updateValue}>
+                  <select {...register("adults")}>
                     {[...Array(7).keys()].map((number) => (
                       <option key={number + 1} value={number + 1}>
                         {number + 1}
@@ -388,11 +299,7 @@ const Enquire = (props) => {
                 </div>
                 <div>
                   <label>Children</label>
-                  <select
-                    value={children}
-                    name="children"
-                    onChange={updateValue}
-                  >
+                  <select {...register("childrens")}>
                     {[...Array(7).keys()].map((number) => (
                       <option key={number + 1} value={number + 1}>
                         {number + 1}
@@ -401,8 +308,28 @@ const Enquire = (props) => {
                   </select>
                 </div>
               </div>
-
-              <Button style={{ background: "var(--secondary)", color: "#fff" }}>
+              <div className="form-control">
+                <label>Childrens Age at the time of travel</label>
+                <div className="four-column">
+                  {childrensAgeField?.map((field, index) => (
+                    <select
+                      key={field.id}
+                      style={{ marginBottom: "2rem" }} // important to include key with field's id
+                      {...register(`childrensAge.${index}.value`)}
+                    >
+                      {[...Array(17).keys()].map((number) => (
+                        <option key={number} value={number}>
+                          {number}
+                        </option>
+                      ))}
+                    </select>
+                  ))}
+                </div>
+              </div>
+              <Button
+                type="submit"
+                style={{ background: "var(--secondary)", color: "#fff" }}
+              >
                 Enquire now
               </Button>
             </div>
