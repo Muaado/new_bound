@@ -269,7 +269,6 @@ const IndexPage = (props) => {
           )}
           <h1 className="disappear-on-scroll">Luxury experience curators</h1>
         </HeroStyles>
-        <MouseScroll pageType="home" />
         <div className="page-content">
           <Search
             className="homepage-search"

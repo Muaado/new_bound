@@ -219,9 +219,9 @@ const VillaStyles = styled.div`
     }
     &__header {
       margin: 10rem 0 0 0;
-      display: flex;
+      /* display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: center; */
       color: #76622e;
       padding: 5% 0%;
       /* padding: 0 10%; */
@@ -326,6 +326,11 @@ const VillaStyles = styled.div`
             }
           }
         }
+      }
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
       .container {
         /* background: black; */

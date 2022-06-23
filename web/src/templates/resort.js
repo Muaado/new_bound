@@ -263,25 +263,12 @@ const ResortTemplate = (props) => {
               <h1 className="title_res resort_heading_title">{name}</h1>
             </div>
           </div>
-          <MouseScroll
-            scrollHeightToHide={230}
-            scrollWrapperStyles={{
-              bottom: "unset",
-              height: "100%",
-              top: "10px",
-            }}
-          />
+
           <LeftSidebar
             list={["overview", "accomodation", "highlights", "dine", "gallery"]}
           />
 
-          <div
-            id="overview"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
-          >
+          <div id="overview">
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}

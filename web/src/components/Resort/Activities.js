@@ -134,43 +134,46 @@ const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
 
 const Activities = ({ activities }) => {
   return (
-    <ActivitiesStyles
-      id="activities"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
-      <h2>Activities</h2>
+    <ActivitiesStyles id="activities">
       <Overlay opacity={1} bgColor="white" />
-      <ul>
-        {activities?.length
-          ? activities?.map(({ name, imageThumb, resort }) => (
-              <li className="item" key={imageThumb.alt}>
-                <Overlay className="overlay" />
-                {imageThumb && imageThumb.asset && (
-                  <Image {...imageThumb} alt={imageThumb.alt} />
-                )}
-                <p>{name}</p>
-              </li>
-            ))
-          : activitiesPlaceHolders.map((item) => (
-              <li className="item" key={item}>
-                <Placeholder />
-              </li>
-            ))}
-      </ul>
+      <div
+        id="activities-content"
+        className="activities-content"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
+        <h2>Activities</h2>
+        <ul>
+          {activities?.length
+            ? activities?.map(({ name, imageThumb, resort }) => (
+                <li className="item" key={imageThumb.alt}>
+                  <Overlay className="overlay" />
+                  {imageThumb && imageThumb.asset && (
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  )}
+                  <p>{name}</p>
+                </li>
+              ))
+            : activitiesPlaceHolders.map((item) => (
+                <li className="item" key={item}>
+                  <Placeholder />
+                </li>
+              ))}
+        </ul>
 
-      <Carousel speed={1000} className="carousel">
-        {activities?.map(({ name, imageThumb, resort }) => (
-          <li className="item item__carousel" key={imageThumb.alt}>
-            {imageThumb && imageThumb.asset && (
-              <Image {...imageThumb} alt={imageThumb.alt} />
-            )}
-            <p>{name}</p>
-          </li>
-        ))}
-      </Carousel>
+        <Carousel speed={1000} className="carousel">
+          {activities?.map(({ name, imageThumb, resort }) => (
+            <li className="item item__carousel" key={imageThumb.alt}>
+              {imageThumb && imageThumb.asset && (
+                <Image {...imageThumb} alt={imageThumb.alt} />
+              )}
+              <p>{name}</p>
+            </li>
+          ))}
+        </Carousel>
+      </div>
     </ActivitiesStyles>
   );
 };
