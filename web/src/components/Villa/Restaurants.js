@@ -106,49 +106,57 @@ const RestaurantsStyles = styled.div`
     font-size: 14px;
     color: #676767;
   }
+
+  .dine-content {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const Restaurants = ({ restaurants }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   return (
-    <RestaurantsStyles
-      id="dine"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
+    <RestaurantsStyles id="dine">
       <Overlay className="parallax-overlay" bgColor="#fff" />
-      <h2 className="heading">Dine</h2>
-      <ul>
-        {restaurants
-          .slice(0, restaurantSlice)
-          .map(({ name, alternateName, imageThumb, description }) => (
-            <li key={name}>
-              <div key={name} className="image-container">
-                {imageThumb && imageThumb.asset ? (
-                  <Image {...imageThumb} alt={imageThumb.alt} />
-                ) : (
-                  <Placeholder style={{ width: "100%", height: "100%" }} />
-                )}
-              </div>
-              <div className="villa__restaurants__text">
-                <p className="rest-name">{name}</p>
-                <span className="alternate-name">{alternateName}</span>
-                <p className="restaurant-description">{description}</p>
-              </div>
-            </li>
-          ))}
-      </ul>
+      <div
+        id="dine-content"
+        className="dine-content"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
+        <h2 className="heading">Dine</h2>
+        <ul>
+          {restaurants
+            .slice(0, restaurantSlice)
+            .map(({ name, alternateName, imageThumb, description }) => (
+              <li key={name}>
+                <div key={name} className="image-container">
+                  {imageThumb && imageThumb.asset ? (
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  ) : (
+                    <Placeholder style={{ width: "100%", height: "100%" }} />
+                  )}
+                </div>
+                <div className="villa__restaurants__text">
+                  <p className="rest-name">{name}</p>
+                  <span className="alternate-name">{alternateName}</span>
+                  <p className="restaurant-description">{description}</p>
+                </div>
+              </li>
+            ))}
+        </ul>
 
-      {restaurantSlice === 4 && (
-        <Button
-          className="view-more-btn"
-          onClick={() => setRestaurantSLice(100)}
-        >
-          View more
-        </Button>
-      )}
+        {restaurantSlice === 4 && (
+          <Button
+            className="view-more-btn"
+            onClick={() => setRestaurantSLice(100)}
+          >
+            View more
+          </Button>
+        )}
+      </div>
     </RestaurantsStyles>
   );
 };

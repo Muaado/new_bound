@@ -27,8 +27,6 @@ const GalleryComponent = ({ images, styles }) => {
     const screenXL = width > 1440 && width < 1600;
     const screenXXL = width > 1600 && width < 1700;
     const screenXXXL = width > 1700;
-    const notMobile = width > 900;
-    const laptop = width > 999;
 
     const slides = () => {
       if (isMobileOnly) return 1;

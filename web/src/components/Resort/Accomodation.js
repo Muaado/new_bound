@@ -8,7 +8,7 @@ import useWindowSize from "../../lib/useWindowSize";
 import { getVillaUrl } from "../../lib/helpers";
 import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
-import { Overlay } from "../Overlay";
+import { ACCOMODATIONS_SECTION } from "../../constants";
 
 const AccomodationStyles = styled.div`
   @media ${device.tablet} {
@@ -162,7 +162,7 @@ const Accomodation = ({ villas, id, elementRef }) => {
             <Link
               to={getVillaUrl({ name, resortName: resort.name })}
               key={name}
-              // state={{}}
+              state={{ pageFrom: ACCOMODATIONS_SECTION }}
               className="image-container"
             >
               {imageThumb && imageThumb.asset ? (

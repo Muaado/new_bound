@@ -1,5 +1,5 @@
 import { graphql, Link } from "gatsby";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import useWindowSize from "../lib/useWindowSize";
 import Layout from "../containers/layout";
 import Container from "../components/container";
@@ -24,7 +24,8 @@ import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
-import { ROOM_PAGE } from "../constants";
+import { ROOM_PAGE, ACCOMODATIONS_SECTION } from "../constants";
+import { useScrollToRef } from "../hooks";
 
 export const query = graphql`
   fragment SanityPricingRateModel on SanityRateModel {
@@ -218,15 +219,23 @@ export const query = graphql`
 const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
+  const pageFrom = props?.location?.state?.pageFrom;
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
   const size = useWindowSize();
+  const { elementRef, executeScroll } = useScrollToRef();
   useEffect(() => {
     const { width } = size;
   }, [size]);
 
   const [activeFeature, setActiveFeature] = useState(-1);
+
+  useEffect(() => {
+    if (pageFrom && pageFrom === ACCOMODATIONS_SECTION) {
+      executeScroll(elementRef);
+    }
+  }, [pageFrom]);
 
   const {
     name,
@@ -328,13 +337,6 @@ const VilaTemplate = (props) => {
               </Link>
             </h1>
           </div>
-          <MouseScroll
-            mainWrapperStyle={{ height: "15vh" }}
-            scrollWrapperStyles={{
-              bottom: "unset",
-              height: "100%",
-            }}
-          />
           <div className="breadcrumb-wrapper">
             <Overlay bgColor="white" opacity={1} />
             <div className="breadcrumb">
@@ -363,64 +365,76 @@ const VilaTemplate = (props) => {
           </div>
           <div
             className="villa__header"
-            id="overview"
-            data-aos="fade-up"
-            data-aos-delay="50"
-            data-aos-duration="1000"
-            data-aos-easing="ease-in-out"
+            // id="overview"
+            // data-aos="fade-up"
+            // data-aos-delay="50"
+            // data-aos-duration="1000"
+            // data-aos-easing="ease-in-out"
+            ref={elementRef}
           >
-            <Overlay opacity={0.9} bgColor="#fdf7ed" />
-            <div className="container">
-              {villa.uniqueCode && (
-                <div className="unique_code_wrap">
-                  <strong>#</strong>
-                  {villa.uniqueCode}
-                </div>
-              )}
-              <h2 className="villa_name_title">{name}</h2>
-              {tagline && <p className="tagline">{tagline}</p>}
-              <PortableText blocks={_rawDescriptionVilla} />
-              <ul className="villa__header-icons">
-                <li>
-                  <Measure />
-                  {sizeSqm}m2
-                </li>
-                <li>
-                  <TwoPeople />
-                  {maxOccupancy.map(
-                    ({ number }, index) =>
-                      `${number}${
-                        index + 1 !== maxOccupancy.length ? "," : ""
-                      } `
-                  )}
-                </li>
-                <li>
-                  <Bed />
-                  {numrooms}
-                </li>
-                <li>
-                  <Shower />
-                  {numberOfShowers}
-                </li>
-                {villaPoolTypes[0] && (
-                  <li>
-                    <SwimmingPool />
-                    {villaPoolTypes[0].poolType}
-                  </li>
+            <Overlay opacity={1} bgColor="white" />
+            <div
+              className="content"
+              id="overview-content"
+              data-aos="fade-up"
+              data-aos-delay="50"
+              data-aos-duration="1000"
+              data-aos-easing="ease-in-out"
+            >
+              <div className="container">
+                {villa.uniqueCode && (
+                  <div className="unique_code_wrap">
+                    <strong>#</strong>
+                    {villa.uniqueCode}
+                  </div>
                 )}
-              </ul>
-              <PricingDropDown items={rateModel} />
-              <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
-                <Button style={{ paddingLeft: "100px", paddingRight: "100px" }}>
-                  ENQUIRE
-                </Button>
-              </Link>
+                <h2 className="villa_name_title">{name}</h2>
+                {tagline && <p className="tagline">{tagline}</p>}
+                <PortableText blocks={_rawDescriptionVilla} />
+                <ul className="villa__header-icons">
+                  <li>
+                    <Measure />
+                    {sizeSqm}m2
+                  </li>
+                  <li>
+                    <TwoPeople />
+                    {maxOccupancy.map(
+                      ({ number }, index) =>
+                        `${number}${
+                          index + 1 !== maxOccupancy.length ? "," : ""
+                        } `
+                    )}
+                  </li>
+                  <li>
+                    <Bed />
+                    {numrooms}
+                  </li>
+                  <li>
+                    <Shower />
+                    {numberOfShowers}
+                  </li>
+                  {villaPoolTypes[0] && (
+                    <li>
+                      <SwimmingPool />
+                      {villaPoolTypes[0].poolType}
+                    </li>
+                  )}
+                </ul>
+                <PricingDropDown items={rateModel} />
+                <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
+                  <Button
+                    style={{ paddingLeft: "100px", paddingRight: "100px" }}
+                  >
+                    ENQUIRE
+                  </Button>
+                </Link>
+              </div>
+              <PopUpGallery
+                styles={{ marginRight: "15px" }}
+                className="carousel"
+                images={headerImages}
+              />
             </div>
-            <PopUpGallery
-              styles={{ marginRight: "15px" }}
-              className="carousel"
-              images={headerImages}
-            />
           </div>
 
           <div className="villa__room-features" id="room-features">

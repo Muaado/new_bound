@@ -5,8 +5,9 @@ import "../styles/typography.css";
 const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 1;
+  width: 100%;
   h1 {
     @media ${device.tablet} {
       letter-spacing: unset;
@@ -218,9 +219,9 @@ const VillaStyles = styled.div`
     }
     &__header {
       margin: 10rem 0 0 0;
-      display: flex;
+      /* display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: center; */
       color: #76622e;
       padding: 5% 0%;
       /* padding: 0 10%; */
@@ -325,6 +326,11 @@ const VillaStyles = styled.div`
             }
           }
         }
+      }
+      .content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
       .container {
         /* background: black; */

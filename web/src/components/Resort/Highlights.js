@@ -9,6 +9,7 @@ import { device } from "../../styles/deviceSizes";
 
 const HighlightsStyles = styled.div`
   z-index: 1;
+  background: white;
   text-align: center;
   padding: 10% 15%;
   display: flex;
@@ -143,70 +144,61 @@ const HighlightsStyles = styled.div`
 
 const Highlights = ({ highlights }) => {
   return (
-    <HighlightsStyles
-      id="highlights"
-      className="resort__highlights"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
-      <Overlay bgColor="white" opacity={1} />
-      <h2 className="heading">Highlights</h2>
-      <Carousel
-        speed={1000}
-        wrapAround
-        className="carousel"
-        slidesToShow={1}
-        cellSpacing={0}
-
-        // renderCenterRightControls={({ nextSlide }) => (
-        //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-        // )}
-        // renderCenterLeftControls={({ previousSlide }) => (
-        //   <CarouselButton onClick={previousSlide} />
-        // )}
+    <HighlightsStyles id="highlights" className="resort__highlights">
+      <div
+        id="higlights-content"
+        className="content"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
       >
-        {highlights.map(({ name, imageThumb, description }) => (
-          <li key={imageThumb?.alt}>
-            {/* <Link to={getHighlightUrl({ name, resortName: resort.name })}> */}
-            {/* </Link> */}
-            <p>{description}</p>
-            {imageThumb && imageThumb.asset && (
-              <>
-                <Image {...imageThumb} alt={imageThumb.alt} />
-              </>
-            )}
-            <a className="highLbl">
-              {name} <ChevronRight />
-            </a>
-          </li>
-        ))}
-      </Carousel>
-      <ul className="desktop-highlights">
-        {highlights.length
-          ? highlights.map(({ name, imageThumb, description }) => (
-              <li key={imageThumb?.alt}>
-                <Overlay className="overlay" />
-                <a>
-                  {name} <ChevronRight />
-                </a>
-                {/* </Link> */}
-                <p>{description}</p>
-                {imageThumb && imageThumb.asset && (
-                  <>
-                    <Image {...imageThumb} alt={imageThumb.alt} />
-                  </>
-                )}
-              </li>
-            ))
-          : [1, 2, 3, 4, 5, 6].map((item) => (
-              <li key={item}>
-                {/* {console.log("hrehreh")} */}
-                <Placeholder />
-              </li>
-            ))}
-      </ul>
+        <h2 className="heading">Highlights</h2>
+        <Carousel
+          speed={1000}
+          wrapAround
+          className="carousel"
+          slidesToShow={1}
+          cellSpacing={0}
+        >
+          {highlights.map(({ name, imageThumb, description }) => (
+            <li key={imageThumb?.alt}>
+              <p>{description}</p>
+              {imageThumb && imageThumb.asset && (
+                <>
+                  <Image {...imageThumb} alt={imageThumb.alt} />
+                </>
+              )}
+              <a className="highLbl">
+                {name} <ChevronRight />
+              </a>
+            </li>
+          ))}
+        </Carousel>
+        <ul className="desktop-highlights">
+          {highlights.length
+            ? highlights.map(({ name, imageThumb, description }) => (
+                <li key={imageThumb?.alt}>
+                  <Overlay className="overlay" />
+                  <a>
+                    {name} <ChevronRight />
+                  </a>
+                  {/* </Link> */}
+                  <p>{description}</p>
+                  {imageThumb && imageThumb.asset && (
+                    <>
+                      <Image {...imageThumb} alt={imageThumb.alt} />
+                    </>
+                  )}
+                </li>
+              ))
+            : [1, 2, 3, 4, 5, 6].map((item) => (
+                <li key={item}>
+                  <Placeholder />
+                </li>
+              ))}
+        </ul>
+      </div>
     </HighlightsStyles>
   );
 };

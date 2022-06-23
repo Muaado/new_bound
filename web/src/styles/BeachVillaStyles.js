@@ -282,8 +282,13 @@ export const BeachVillaStyles = styled.div`
         }
       }
       :hover {
+        .featuredVillaFooter,
+        img {
+          z-index: 2;
+        }
         .overlay {
           opacity: 0.4;
+          z-index: 1 !important;
         }
       }
     }
@@ -303,6 +308,7 @@ export const BeachVillaStyles = styled.div`
       .txtwrap {
         text-transform: uppercase;
         position: absolute;
+        z-index: 2;
         top: 10%;
         text-align: center;
         width: 100%;
@@ -330,6 +336,7 @@ export const BeachVillaStyles = styled.div`
       }
       .overlay {
         opacity: 0.5;
+        z-index: 1 !important;
       }
     }
   }
