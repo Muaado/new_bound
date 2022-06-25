@@ -91,7 +91,7 @@ export const HandCraftedJourneysStyles = styled.div`
   }
   .header-text {
     display: flex;
-    margin-top: 10rem;
+    margin: 5rem 0rem;
     align-items: center;
     flex-direction: column;
   }
@@ -100,7 +100,6 @@ export const HandCraftedJourneysStyles = styled.div`
     text-transform: lowercase;
     max-width: 50rem;
     text-align: center;
-    margin-bottom: 3rem;
     letter-spacing: 1rem;
 
     @media ${device.tablet} {
@@ -248,7 +247,6 @@ export const MagazineStyles = styled.div`
     text-align: center;
   }
   .subtitle {
-    margin-bottom: 6rem;
     font-size: 2.4rem;
     text-transform: uppercase;
     color: var(--primary);
@@ -316,6 +314,9 @@ export const MagazineStyles = styled.div`
     text-transform: capitalize;
   }
   .content {
-    padding: 10% 0% 5% 0%;
+    padding: 0 0% 5% 0%;
+    .header {
+      margin: 5rem 0rem;
+    }
   }
 `;

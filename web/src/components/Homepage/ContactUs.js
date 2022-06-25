@@ -156,8 +156,8 @@ export const ContactUs = ({ contactUs }) => {
           </a>
         </div>
         <ul className="contact-people">
-          {contactPeople.map(({ image }) => (
-            <li key={image._id}>
+          {contactPeople.map(({ image }, key) => (
+            <li key={key}>
               {image && image.asset && <Image {...image} alt={image.alt} />}
             </li>
           ))}
@@ -166,8 +166,8 @@ export const ContactUs = ({ contactUs }) => {
       </div>
       <div className="hours">
         <ul>
-          {hours.map(({ days, hours }) => (
-            <li key={days}>
+          {hours.map(({ days, hours }, key) => (
+            <li key={key}>
               <span>{days}</span>
               <span>{hours}</span>
             </li>

@@ -25,8 +25,7 @@ const AccomodationStyles = styled.div`
     text-align: center;
     /* padding: 5rem; */
     letter-spacing: normal;
-    margin-top: 10rem;
-    margin-bottom: 7rem;
+    margin: 5rem 0;
   }
   .carousel {
     display: flex !important;
@@ -111,7 +110,6 @@ const Accomodation = ({ villas, id, elementRef }) => {
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
   const size = useWindowSize();
-
   useEffect(() => {
     const { width } = size;
     const isMobileOnly = width <= 576;
@@ -158,7 +156,7 @@ const Accomodation = ({ villas, id, elementRef }) => {
           slidesToShow={numberOfSlides}
           cellSpacing={cellSpacing}
         >
-          {villas.map(({ name, imageThumb, resort }) => (
+          {villas.map(({ name, imageThumb, resort, price }) => (
             <Link
               to={getVillaUrl({ name, resortName: resort.name })}
               key={name}
@@ -174,7 +172,7 @@ const Accomodation = ({ villas, id, elementRef }) => {
                 <p className="roomname">{name}</p>
                 <div className="room_price">
                   <span className="price-from">From</span>{" "}
-                  <span className="font-bold">$5,950</span>
+                  <span className="font-bold">${price}</span>
                   <span className="price-category">per night</span>
                 </div>
                 <Button>View Room</Button>

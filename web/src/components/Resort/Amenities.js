@@ -13,7 +13,8 @@ const AmenitiesStyles = styled.div`
   display: flex;
   flex-direction: column;
   .description {
-    max-width: 60vw;
+    max-width: 50%;
+    text-align: justify !important;
     /* font-size: 2.4rem; */
     font-weight: 100;
     text-align: center;
@@ -74,8 +75,8 @@ const AmenitiesStyles = styled.div`
     margin-bottom: 5rem;
   }
   h2 {
-    margin-top: 10rem;
-    margin-bottom: 3rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
 `;
 

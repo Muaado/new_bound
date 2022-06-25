@@ -8,7 +8,7 @@ const TailorMadeStyles = styled.div`
   padding: 0 15%;
   h2 {
     text-align: center;
-    margin-bottom: 10rem;
+    margin: 5rem 0;
   }
   @media ${device.laptopL} {
     padding: 0 15%;
@@ -72,7 +72,7 @@ const TailorMadeStyles = styled.div`
     }
   }
   .content {
-    padding: 10% 0% 10% 0%;
+    padding: 0 0% 10% 0%;
   }
 `;
 

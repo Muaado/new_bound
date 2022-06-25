@@ -36,8 +36,7 @@ const JourneyStyles = styled.div`
     padding: 0;
   }
   h2 {
-    margin-top: 15rem;
-    margin-bottom: 3rem;
+    margin: 10rem 0 5rem 0;
   }
 
   h1 {

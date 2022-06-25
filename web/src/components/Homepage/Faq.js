@@ -12,7 +12,7 @@ const FaqStyles = styled.div`
   text-align: center;
   position: relative;
   z-index: 1;
-  padding: 10rem 15% 5% 15%;
+  padding: 0 15% 5% 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,9 +29,14 @@ const FaqStyles = styled.div`
     text-transform: uppercase;
     margin-bottom: 1rem;
   }
+
+  .heading {
+    margin: 5rem 0;
+  }
+
   .description {
     width: 40rem;
-    margin-bottom: 5rem;
+    /* margin-bottom: 5rem; */
     font-size: 1.8rem;
     color: #505050;
 
@@ -105,11 +110,13 @@ const Faq = (props) => {
     faq && (
       <FaqStyles className={`faq__section ${className}`}>
         <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
-        <h2>{faq.name}</h2>
-        <p className="description">
-          Browse our FAQ's below, if you can not find the answer you're looking
-          for please contact us
-        </p>
+        <div className="heading">
+          <h2>{faq.name}</h2>
+          <p className="description">
+            Browse our FAQ's below, if you can not find the answer you're
+            looking for please contact us
+          </p>
+        </div>
 
         <ul>
           {faq?.faqQuestionsAnswers

@@ -341,8 +341,10 @@ const IndexPage = (props) => {
           <MagazineStyles>
             <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
             <div className="content">
-              <h2>Magazine</h2>
-              <p className="subtitle">Inspiration</p>
+              <div className="header">
+                <h2>Magazine</h2>
+                <p className="subtitle">Inspiration</p>
+              </div>
               <ul>
                 {magazinePosts.nodes.map(
                   ({ title, _rawExcerpt, mainImage, publishedAt, slug }) => (

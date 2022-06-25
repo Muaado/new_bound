@@ -83,8 +83,11 @@ export const getCollectionUrl = ({ slug }) => {
 };
 
 export const truncate = (str, limit) => {
-  const truncatedStr = str.slice(0, limit);
-  return truncatedStr;
+  if (limit < str.length) {
+    return str.slice(0, limit).concat("...");
+  } else {
+    return str;
+  }
 };
 const SSR = typeof window === "undefined";
 

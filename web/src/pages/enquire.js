@@ -17,7 +17,23 @@ import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { useForm, useFieldArray } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useEffect } from "react";
+
+const validationSchema = yup
+  .object({
+    firstName: yup.string().required("Required*"),
+    lastName: yup.string().required("Required*"),
+    dateOfTravel: yup.string().required("Required*"),
+    duration: yup.string().required("Required*"),
+    countryofResidence: "",
+    title: yup.string().required("Required*"),
+    email: yup.string().email("Enter is not valid").required("Required*"),
+    phoneNumber: yup.string().required("Required*"),
+  })
+  .required();
+
 export const query = graphql`
   query EnquirePageQuery {
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
@@ -107,6 +123,7 @@ const Enquire = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues,
+    resolver: yupResolver(validationSchema),
   });
 
   const { fields: childrensAgeField, append } = useFieldArray({
@@ -115,6 +132,7 @@ const Enquire = (props) => {
   });
 
   const childrensField = watch("childrens");
+
   useEffect(() => {
     if (childrensField) {
       if (childrensAgeField.length) reset({ childrensAge: [] });
@@ -123,6 +141,16 @@ const Enquire = (props) => {
       });
     }
   }, [childrensField]);
+
+  const {
+    dateOfTravel,
+    duration,
+    title,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+  } = errors;
   return (
     <Layout {...props}>
       <SEO
@@ -179,6 +207,7 @@ const Enquire = (props) => {
                     type="date"
                     placeholder=""
                   />
+                  <ErrorField error={dateOfTravel} />
                 </div>
                 <div className="form-control">
                   <label>
@@ -191,6 +220,7 @@ const Enquire = (props) => {
                       </option>
                     ))}
                   </select>
+                  <ErrorField error={dateOfTravel} />
                 </div>
               </div>
               <div className="form-control">
@@ -239,6 +269,7 @@ const Enquire = (props) => {
                       </option>
                     ))}
                   </select>
+                  <ErrorField error={title} />
                 </div>
                 <div className="form-control">
                   <label>
@@ -249,6 +280,7 @@ const Enquire = (props) => {
                     type="text"
                     placeholder=""
                   />
+                  <ErrorField error={firstName} />
                 </div>
               </div>
               <div className="form-control">
@@ -256,15 +288,17 @@ const Enquire = (props) => {
                   Last name<span className="required">*</span>
                 </label>
                 <input {...register("lastName")} type="text" placeholder="" />
+                <ErrorField error={lastName} />
               </div>
               <div className="form-control">
                 <label>
                   e-mail address<span className="required">*</span>
                 </label>
                 <input {...register("email")} type="email" placeholder="" />
+                <ErrorField error={email} />
               </div>
-              <div className="form-control three-column ">
-                <div>
+              <div className="three-column ">
+                <div className="form-control">
                   <label>
                     Telephone number<span className="required">*</span>
                   </label>
@@ -285,9 +319,10 @@ const Enquire = (props) => {
                       placeholder=""
                     />
                   </div>
+                  <ErrorField error={phoneNumber} />
                 </div>
 
-                <div>
+                <div className="form-control">
                   <label>Adults</label>
                   <select {...register("adults")}>
                     {[...Array(7).keys()].map((number) => (
@@ -297,35 +332,37 @@ const Enquire = (props) => {
                     ))}
                   </select>
                 </div>
-                <div>
+                <div className="form-control">
                   <label>Children</label>
                   <select {...register("childrens")}>
                     {[...Array(7).keys()].map((number) => (
-                      <option key={number + 1} value={number + 1}>
-                        {number + 1}
+                      <option key={number} value={number}>
+                        {number}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
-              <div className="form-control">
-                <label>Childrens Age at the time of travel</label>
-                <div className="four-column">
-                  {childrensAgeField?.map((field, index) => (
-                    <select
-                      key={field.id}
-                      style={{ marginBottom: "2rem" }} // important to include key with field's id
-                      {...register(`childrensAge.${index}.value`)}
-                    >
-                      {[...Array(17).keys()].map((number) => (
-                        <option key={number} value={number}>
-                          {number}
-                        </option>
-                      ))}
-                    </select>
-                  ))}
+              {childrensAgeField?.length ? (
+                <div className="form-control">
+                  <label>Childrens Age at the time of travel</label>
+                  <div className="four-column">
+                    {childrensAgeField?.map((field, index) => (
+                      <select
+                        key={field.id}
+                        style={{ marginBottom: "2rem" }} // important to include key with field's id
+                        {...register(`childrensAge.${index}.value`)}
+                      >
+                        {[...Array(17).keys()].map((number) => (
+                          <option key={number} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
               <Button
                 type="submit"
                 style={{ background: "var(--secondary)", color: "#fff" }}
@@ -337,6 +374,12 @@ const Enquire = (props) => {
         </EnquirePageStyles>
       </Container>
     </Layout>
+  );
+};
+
+const ErrorField = ({ error }) => {
+  return (
+    <span style={{ marginTop: "1rem", color: "red" }}>{error?.message}</span>
   );
 };
 
