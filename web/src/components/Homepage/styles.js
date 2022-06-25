@@ -19,10 +19,10 @@ export const HeroStyles = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 70vh;
+  height: 100vh;
 
   @media ${device.laptop} {
-    height: 70vh;
+    height: 80vh;
   }
 
   @media ${device.tablet} {
@@ -36,7 +36,7 @@ export const HeroStyles = styled.div`
     left: 0;
     top: 0;
     width: 100%;
-    height: 70vh;
+    height: 100vh;
     background-color: #000;
 
     @media ${device.laptop} {
