@@ -42,9 +42,16 @@ export const query = graphql`
       # villas {
 
       # }
-      # restaurants {
 
-      # }
+      restaurants {
+        name
+        alternateName
+        description
+        imageThumb {
+          ...SanityImage
+          alt
+        }
+      }
 
       activities {
         # sanityResortHighlightname
@@ -99,24 +106,13 @@ export const query = graphql`
     villas: allSanityVilla(filter: { resort: { _id: { eq: $id } } }) {
       nodes {
         name
+        price
         imageThumb {
           ...SanityImage
           alt
         }
         resort {
           name
-        }
-      }
-    }
-
-    restaurants: allSanityRestaurant(filter: { resort: { _id: { eq: $id } } }) {
-      nodes {
-        name
-        alternateName
-        description
-        imageThumb {
-          ...SanityImage
-          alt
         }
       }
     }
@@ -197,7 +193,8 @@ const ResortTemplate = (props) => {
   const resort = data && data.resort;
   const spas = data && data.spas;
   const villas = data && data.villas;
-  const restaurants = data && data.restaurants;
+  const restaurants = data && data.resort.restaurants;
+  console.log("RESTUANTENTs", restaurants);
   const site = data && data.site;
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
 
@@ -289,16 +286,10 @@ const ResortTemplate = (props) => {
             />
             <Highlights highlights={highlights} />
           </AccommodationHighlightsWrapper>
-          {restaurants?.nodes && (
-            <Restaurants restaurants={restaurants.nodes} />
-          )}
+          {restaurants && <Restaurants restaurants={restaurants} />}
           {spas.nodes && (
             <div
               speed={1000}
-              data-aos="fade-up"
-              data-aos-delay="50"
-              data-aos-duration="1000"
-              data-aos-easing="ease-in-out"
               className="resort__spas"
               slidesToShow={1}
               cellSpacing={0}

@@ -127,25 +127,23 @@ export const BeachVillaStyles = styled.div`
   }
 
   .mastercol {
-    margin-bottom: 8rem;
-    margin-top: 5rem;
+    margin: 4rem 0;
+  }
+
+  .banner-overlay {
+    opacity: 0.2;
+    z-index: 1;
   }
 
   .villa_nuatilus_banner {
-    .banner-overlay {
-      opacity: 0.2;
-    }
     height: 600px;
   }
   .villa_banner_boundless {
-    .banner-overlay {
-      opacity: 0.5;
-    }
     height: 350px;
   }
 
   .villa_banners {
-    margin-top: 38px;
+    margin-top: 40px;
     width: 100%;
   }
 
@@ -161,6 +159,7 @@ export const BeachVillaStyles = styled.div`
       color: #fff;
       top: 50%;
       left: 50%;
+      z-index: 2;
       font-family: vendor !important;
       font-weight: 400;
       transform: translate(-50%, -50%);
@@ -217,9 +216,9 @@ export const BeachVillaStyles = styled.div`
     }
   }
   .featured_villa_section {
-    margin-top: 9rem;
+    margin-top: 4rem;
     display: grid;
-    grid-template-columns: minmax(auto, 2fr) 1fr;
+    grid-template-columns: 2.062fr 1fr;
     // grid-template-columns: repeat(auto-fill, minmax(840px, 1fr));
     gap: 20px;
 

@@ -191,7 +191,14 @@ const Spa = ({ spa, className }) => {
 
   return (
     <SpaStyles className={className}>
-      <div className="container">
+      <div
+        className="container"
+        id="spa-container"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
         <div className="left-section">
           <div className="image-web">
             {spa.imageWeb && spa.imageWeb.asset && (

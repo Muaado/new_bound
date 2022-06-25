@@ -18,6 +18,7 @@ import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { navigate } from "gatsby";
+import { truncate } from "../lib/helpers";
 
 export const query = graphql`
   query BeachTemplateQuery($id: String!) {
@@ -120,8 +121,7 @@ export const query = graphql`
 `;
 
 const BeachTemplate = (props) => {
-  const { data, errors, pageContext } = props;
-  console.log("DATA", data);
+  const { data } = props;
   const collections = data && data.pagesdata;
   const site = data && data.site;
   const banners = data?.pagesdata?.banner;
@@ -138,10 +138,8 @@ const BeachTemplate = (props) => {
 
   let beachvillas = [];
   let cols = [];
-  let featuredvillas = [];
 
   collections.beachVillaCollection.forEach((collection) => {
-    let collectioname = collection.name;
     cols.push(collection);
   });
 
@@ -190,9 +188,6 @@ const BeachTemplate = (props) => {
     });
   });
 
-  console.log("BANNERS", banners);
-  // collectionData.getUrl = (data) => getVillaUrl(data);
-
   return (
     <Layout>
       <LeftSidebar />
@@ -211,17 +206,14 @@ const BeachTemplate = (props) => {
         <div className="collection_container">
           {cols?.map((col, key) => {
             return (
-              // eslint-disable-next-line react/jsx-key
-              <div className="mastercol">
+              <div key={key} className="mastercol">
                 <h3 className="col_name">{col.CollectionName}</h3>
 
                 <ul className="collection_wrap">
                   {col.villas?.map((villa, key) => {
-                    //  for every second villa index add a new row
                     return (
-                      // eslint-disable-next-line react/jsx-key
-                      // <Link to={villa.url}>
                       <li
+                        key={`${villa.name}${key}`}
                         className="collection_wrap_item"
                         onClick={() => {
                           navigate(`${villa.url}`);
@@ -236,7 +228,9 @@ const BeachTemplate = (props) => {
                           )}
                         </div>
                         <div className="collection__details">
-                          <h4 className="villaname">{villa.name}</h4>
+                          <h4 className="villaname">
+                            {truncate(villa.name, 40)}
+                          </h4>
                           <ul className="villa_icons">
                             <li>
                               <div className="inner-content">
@@ -308,7 +302,6 @@ const BeachTemplate = (props) => {
                           </div>
                         </div>
                       </li>
-                      // </Link>
                     );
                   })}
                 </ul>
@@ -334,7 +327,7 @@ const BeachTemplate = (props) => {
                     {/* BEGIN LEFT SECTION */}
                     <div className="photofeatured">
                       <Overlay className="overlay" />
-                      <div class="inner">
+                      <div className="inner">
                         <Image
                           className="featuredreslogo"
                           {...col.featuredvillas[0].villaone.resort
@@ -369,7 +362,7 @@ const BeachTemplate = (props) => {
                     {/* BEGIN RIGHT SECTION */}
                     <div className="rightfeatured">
                       <Overlay className="overlay" />
-                      <div class="inner">
+                      <div className="inner">
                         {col.featuredvillas[0].villaone.headerImages
                           .images[1] && (
                           <Image

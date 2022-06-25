@@ -8,7 +8,7 @@ const TailorMadeStyles = styled.div`
   padding: 0 15%;
   h2 {
     text-align: center;
-    margin-bottom: 10rem;
+    margin: 5rem 0;
   }
   @media ${device.laptopL} {
     padding: 0 15%;
@@ -72,21 +72,22 @@ const TailorMadeStyles = styled.div`
     }
   }
   .content {
-    padding: 10% 0% 10% 0%;
+    padding: 0 0% 10% 0%;
   }
 `;
 
 const TailorMade = () => {
   return (
-    <TailorMadeStyles
-      className="tailor-made"
-      data-aos="fade-up"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
-    >
+    <TailorMadeStyles className="tailor-made">
       <Overlay opacity={1} bgColor="white" />
-      <div className="content">
+      <div
+        id="tailormade-content"
+        className="content"
+        data-aos="fade-up"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
         <h2>100% Tailor-Made Holidays</h2>
         <ul>
           <li className="tailor-made__step">

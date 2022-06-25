@@ -10,7 +10,7 @@ import { Overlay } from "../Overlay";
 const RestaurantsStyles = styled.div`
   position: relative;
   z-index: 1;
-  padding: 5% 15%;
+  padding: 0% 15% 5% 15%;
   display: flex;
   flex-direction: column;
 
@@ -23,9 +23,11 @@ const RestaurantsStyles = styled.div`
     padding: 0 1.5rem;
     margin-bottom: 5rem;
   }
+
   h2 {
-    margin-bottom: 7rem;
+    margin: 5rem 0;
   }
+
   ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -113,6 +115,7 @@ const RestaurantsStyles = styled.div`
   }
 `;
 const Restaurants = ({ restaurants }) => {
+  console.log("RESTUARANTs", restaurants);
   const [restaurantSlice, setRestaurantSLice] = useState(4);
 
   return (
@@ -126,7 +129,7 @@ const Restaurants = ({ restaurants }) => {
         data-aos-duration="1000"
         data-aos-easing="ease-in-out"
       >
-        <h2 className="heading">Dine</h2>
+        <h2>Dine</h2>
         <ul>
           {restaurants
             .slice(0, restaurantSlice)

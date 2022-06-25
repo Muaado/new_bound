@@ -20,8 +20,6 @@ const renderTableRow = (rows) => {
         <tr>
           <td>{monthName}</td>
           <td>{price}</td>
-          <td>per night</td>
-          <td>note example</td>
         </tr>
       );
     })

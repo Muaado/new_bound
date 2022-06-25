@@ -363,15 +363,7 @@ const VilaTemplate = (props) => {
               </ul>
             </div>
           </div>
-          <div
-            className="villa__header"
-            // id="overview"
-            // data-aos="fade-up"
-            // data-aos-delay="50"
-            // data-aos-duration="1000"
-            // data-aos-easing="ease-in-out"
-            ref={elementRef}
-          >
+          <div className="villa__header" ref={elementRef}>
             <Overlay opacity={1} bgColor="white" />
             <div
               className="content"
@@ -421,7 +413,10 @@ const VilaTemplate = (props) => {
                   )}
                 </ul>
                 <PricingDropDown items={rateModel} />
-                <Link to={`/enquire?id=${resortName}`} className="enquire-btn">
+                <Link
+                  to={`/enquire?id=${resortName}&name=${name}`}
+                  className="enquire-btn"
+                >
                   <Button
                     style={{ paddingLeft: "100px", paddingRight: "100px" }}
                   >
@@ -488,7 +483,7 @@ const VilaTemplate = (props) => {
               resortTransferType={resortTransferType}
               timeToAirport={timeToAirport}
               _rawDescription={_rawDescription}
-              title="Property Overview"
+              title="ISland Overview"
             />
           </div>
 

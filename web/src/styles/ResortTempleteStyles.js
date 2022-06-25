@@ -22,9 +22,6 @@ const ResortStyles = styled.div`
     @media ${device.tablet} {
       margin: 5rem 0;
     }
-    h2 {
-      margin: 15rem 0rem 3rem 0rem;
-    }
   }
 
   /* .left-nav {

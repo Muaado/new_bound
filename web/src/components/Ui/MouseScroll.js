@@ -14,8 +14,8 @@ export const MouseScroll = ({
 
   const mouseScrollComponent = (
     <MouseScrollStyles style={scrollWrapperStyles}>
-      <div class="arrow arrow-first"></div>
-      <div class="arrow arrow-second"></div>
+      <div className="arrow arrow-first"></div>
+      <div className="arrow arrow-second"></div>
     </MouseScrollStyles>
   );
 

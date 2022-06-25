@@ -11,7 +11,7 @@ const HighlightsStyles = styled.div`
   z-index: 1;
   background: white;
   text-align: center;
-  padding: 10% 15%;
+  padding: 0% 15% 5% 15%;
   display: flex;
   flex-direction: column;
   @media ${device.laptopM} {
@@ -43,7 +43,7 @@ const HighlightsStyles = styled.div`
     }
   }
   h2 {
-    margin-bottom: 7rem;
+    margin: 5rem 0rem;
     font-size: 35px;
   }
 

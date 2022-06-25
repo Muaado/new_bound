@@ -13,12 +13,6 @@ export const PricingModal = (props) => {
       {
         name: "price",
       },
-      {
-        name: "category",
-      },
-      {
-        name: "note",
-      },
     ],
   };
   return (

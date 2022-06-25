@@ -240,7 +240,7 @@ const VillaStyles = styled.div`
       .carousel {
         /* height: 70rem !important;
         width: 55rem !important; */
-        height: 90vh;
+        height: 70vh;
         width: 100%;
         max-width: 50vw;
 
@@ -264,6 +264,7 @@ const VillaStyles = styled.div`
           width: 65%;
           max-width: unset;
           align-self: center;
+          height: 65vh !important;
         }
 
         @media ${device.tablet} {
@@ -346,6 +347,8 @@ const VillaStyles = styled.div`
 
         .villa_name_title {
           font-family: "river_bold_regular", sans-serif;
+          font-size: 30px;
+          letter-spacing: 1rem;
         }
         @media ${device.laptop} {
           /* display: flex;
