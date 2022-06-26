@@ -43,7 +43,7 @@ const sortByCurrentMonthName = (array) => {
   });
 };
 
-export const PricingDropDown = ({ items }) => {
+export const PricingDropDown = ({ items, headerImages, ...props }) => {
   const [showList, setShowList] = useState(false);
   const isMobile = useIsMobile();
   const sortedItems =
@@ -60,6 +60,8 @@ export const PricingDropDown = ({ items }) => {
           isOpen={showList}
           handleClose={() => setShowList(false)}
           pricingItems={sortedItems}
+          roomImages={headerImages?.images}
+          {...props}
         />
       )}
       <DropDownWrapper>

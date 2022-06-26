@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../Button";
 import { TableWrapper, StyledTable } from "./elements";
 
 const renderTableHeader = (columns) => {
@@ -20,6 +21,9 @@ const renderTableRow = (rows) => {
         <tr>
           <td>{monthName}</td>
           <td>{price}</td>
+          <td>
+            <a href="#">Enquire Now</a>
+          </td>
         </tr>
       );
     })

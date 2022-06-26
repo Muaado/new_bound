@@ -414,7 +414,11 @@ const VilaTemplate = (props) => {
                     </li>
                   )}
                 </ul>
-                <PricingDropDown items={rateModel} />
+                <PricingDropDown
+                  items={rateModel}
+                  headerImages={headerImages}
+                  roomName={villa.name}
+                />
                 <Link
                   to={`/enquire?id=${villaId}&name=${name}`}
                   className="enquire-btn"
