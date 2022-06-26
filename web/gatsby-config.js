@@ -48,5 +48,11 @@ module.exports = {
         display: "swap",
       },
     },
+    {
+      resolve: "gatsby-plugin-apollo",
+      options: {
+        uri: "https://y7yu20xn.api.sanity.io/v1/graphql/master/default",
+      },
+    },
   ],
 };
