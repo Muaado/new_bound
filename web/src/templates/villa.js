@@ -48,6 +48,7 @@ export const query = graphql`
     $rateModelId: String
   ) {
     villa: sanityVilla(_id: { eq: $id }) {
+      _id
       name
       alternateName
       tagline
@@ -238,6 +239,7 @@ const VilaTemplate = (props) => {
   }, [pageFrom]);
 
   const {
+    _id: villaId,
     name,
     alternateName,
     tagline,
@@ -414,7 +416,7 @@ const VilaTemplate = (props) => {
                 </ul>
                 <PricingDropDown items={rateModel} />
                 <Link
-                  to={`/enquire?id=${resortName}&name=${name}`}
+                  to={`/enquire?id=${villaId}&name=${name}`}
                   className="enquire-btn"
                 >
                   <Button
