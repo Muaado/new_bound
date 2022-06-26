@@ -43,6 +43,12 @@ export const EnquirePageStyles = styled.div`
 
       .header-content,
       .footer-content {
+        .carousel {
+          img {
+            height: 40vh;
+            width: 100%;
+          }
+        }
       }
 
       .header-content {

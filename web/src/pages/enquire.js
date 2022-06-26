@@ -2,7 +2,8 @@ import React from "react";
 import Container from "../components/container";
 import Layout from "../containers/layout";
 import SEO from "../components/seo";
-
+import Carousel from "nuka-carousel";
+import Placeholder from "../assets/placeholder.svg";
 import { graphql } from "gatsby";
 import { HeroStyles } from "../components/Homepage/styles";
 import { EnquirePageStyles } from "../styles/EnquirePageStyles";
@@ -20,6 +21,8 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { useQuery, gql } from "@apollo/client";
+import { Query_Villa } from "../gql";
 
 const validationSchema = yup
   .object({
@@ -142,6 +145,38 @@ const Enquire = (props) => {
     }
   }, [childrensField]);
 
+  const { data: villaData, error } = useQuery(Query_Villa, {
+    variables: { id: resortId },
+  });
+
+  const onSubmit = (data, event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    try {
+      fetch("https://getform.io/f/209039b1-5178-40df-8c4a-97f28465ec11", {
+        method: "POST",
+        body: formData,
+        // headers: { Accept: "application/json" },
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            window.location.href = response.url;
+          }
+        })
+        .catch((error) => console.log(error));
+    } catch (err) {
+      console.log("Error", err);
+    }
+  };
+
+  const villa = villaData?.Villa;
+  const resortName = villa?.resort?.name;
+  const headerImages = villa?.headerImages;
+
   const {
     dateOfTravel,
     duration,
@@ -171,18 +206,15 @@ const Enquire = (props) => {
         </HeroStyles>
         <EnquirePageStyles>
           <form
-            method="post"
-            onSubmit={handleSubmit((formValues) => {
-              console.log("formValues", formValues);
-            })}
-            // action="https://getform.io/f/209039b1-5178-40df-8c4a-97f28465ec11"
+            enctype="multipart/form-data"
+            onSubmit={(e) => handleSubmit(onSubmit)(e)}
           >
             <div className="room-villa-section">
               <div className="header-content">
                 <h2>Request A Quote</h2>
-                <div className="villa-name">{villaName}</div>
+                <div className="villa-name">{resortName}</div>
                 <div className="divider" />
-                <div className="resort-name">{resortId}</div>
+                <div className="resort-name">{villa?.name}</div>
                 <div className="villa-features">
                   <Measure />
                   <TwoPeople />
@@ -192,7 +224,22 @@ const Enquire = (props) => {
                 </div>
               </div>
               <div className="footer-content">
-                <img src="https://cdn.sanity.io/images/y7yu20xn/master/00f14684903411257eccfd658ae00529dc74cf0d-1008x637.jpg?q=75&fit=max&auto=format&dpr=2" />
+                <Carousel
+                  speed={1000}
+                  adaptiveHeight={true}
+                  className="carousel"
+                  slidesToShow={1}
+                  // cellSpacing={10}
+                >
+                  {headerImages?.images &&
+                    headerImages?.images?.map((image) => {
+                      return image?.asset ? (
+                        <Image className="image" {...image} alt={image.alt} />
+                      ) : (
+                        <Placeholder />
+                      );
+                    })}
+                </Carousel>
               </div>
             </div>
             <div className="holidays-details-section">

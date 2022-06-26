@@ -17,6 +17,7 @@
     "postcss-preset-env": "^6.6.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@formspree/react": "^2.2.5",
     "@hookform/resolvers": "^2.9.2",
     "@sanity/block-content-to-react": "^2.0.7",
@@ -34,6 +35,7 @@
     "gatsby-plugin-sanity-image": "^0.11.0",
     "gatsby-plugin-styled-components": "^4.14.0",
     "gatsby-source-sanity": "^7.0.2",
+    "graphql-compose": "^7.25.0",
     "lightbox-react": "^0.3.8",
     "nuka-carousel": "^4.8.0",
     "query-string": "^7.1.1",
@@ -45,5 +47,8 @@
     "sanity-mux-player": "^0.0.27",
     "styled-components": "^5.3.1",
     "yup": "^0.32.11"
+  },
+  "resolutions": {
+    "graphql": "^15.4.0"
   }
 }
