@@ -25,9 +25,6 @@ export const DropDownList = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 75%;
-  /* @media ${device.onlyMobileSm} {
-    width: 70%;
-  } */
 `;
 
 export const ListItem = styled.div`

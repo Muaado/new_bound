@@ -11,8 +11,8 @@ export const StyledModel = styled.div`
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   z-index: 1001;
-  /* padding: 20px 20px 20px; */
 `;
+
 export const ModalBody = styled.div`
   position: relative;
   width: 80%;
@@ -22,6 +22,9 @@ export const ModalBody = styled.div`
 export const ModalContent = styled.div`
   color: #fff;
   display: flex;
+  flex-direction: ${({ contentDirection }) =>
+    contentDirection ? contentDirection : "row"};
+
   align-items: ${({ alignContentCenter }) =>
     alignContentCenter ? "center" : "auto"};
   justify-content: ${({ alignContentCenter }) =>
@@ -92,5 +95,42 @@ export const ModalHeader = styled.div`
     height: 26px;
     margin: 0rem 2rem;
     border-radius: 50%;
+  }
+`;
+
+export const PricingModalContentWrapper = styled.div`
+  display: grid;
+  padding: 0.5rem 5rem 5rem 5rem;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  img {
+    height: 50%;
+    margin-top: 52px;
+  }
+  .detail-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-top: 5rem;
+    align-items: center;
+    h5 {
+      align-self: flex-start;
+      font-weight: bold;
+      color: #76622e;
+    }
+  }
+`;
+
+export const PricingModalHeader = styled.div`
+  h2 {
+    font-size: 30px;
+    color: #76622e;
+    padding: 2rem 0;
+    font-weight: bold;
+    text-align: center;
   }
 `;

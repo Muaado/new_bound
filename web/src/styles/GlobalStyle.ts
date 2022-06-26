@@ -77,7 +77,7 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
     color: #222;
     line-height: 1.4;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; */
   }
 
   body {
@@ -89,7 +89,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     word-wrap: break-word;
     font-kerning: normal;
-    }
+  }
   .btn {
    background: var(--secondary);
     color: var(--pureWhite);

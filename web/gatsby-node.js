@@ -140,61 +140,59 @@ async function createVillaPages(graphql, actions) {
   });
 }
 
-async function createCollectionTypePages(graphql, actions) {
-  const { createPage } = actions;
-  const result = await graphql(`
-    {
-      allSanityCollectionType {
-        nodes {
-          name
-          type
-        }
-      }
-    }
-  `);
+// async function createCollectionTypePages(graphql, actions) {
+//   const { createPage } = actions;
+//   const result = await graphql(`
+//     {
+//       allSanityCollectionType {
+//         nodes {
+//           name
+//           type
+//         }
+//       }
+//     }
+//   `);
 
-  if (result.errors) throw result.errors;
+//   if (result.errors) throw result.errors;
 
-  const collectionNodes =
-    (result.data.allSanityCollectionType || {}).nodes || [];
+//   const collectionNodes =
+//     (result.data.allSanityCollectionType || {}).nodes || [];
 
-  const types = [];
-  collectionNodes.forEach((collection) => {
-    const typeAdded = types.find((value) => value === collection.type);
-    if (!typeAdded)
-      types.push({
-        type: collection.type,
-        name: collection.name,
-      });
-  });
+//   const types = [];
+//   collectionNodes.forEach((collection) => {
+//     const typeAdded = types.find((value) => value === collection.type);
+//     if (!typeAdded)
+//       types.push({
+//         type: collection.type,
+//         name: collection.name,
+//       });
+//   });
 
-  types
-    // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
-    .forEach(({ type, name }) => {
-      // const { _id, name } = node;
-      // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
-      if (result.errors) throw result.errors;
+//   types
+//     // .filter((edge) => !isFuture(new Date(edge.node.publishedAt)))
+//     .forEach(({ type, name }) => {
+//       // const { _id, name } = node;
+//       // const dateSegment = format(new Date(publishedAt), "yyyy/MM");
+//       if (result.errors) throw result.errors;
 
-      let path;
-      path = `collection/${name.toLowerCase().split(" ").join("-")}`;
+//       let path;
+//       path = `collection/${name.toLowerCase().split(" ").join("-")}`;
 
-      if (type == "villa") {
-        createPage({
-          path,
-          component: require.resolve("./src/templates/beachvilla.js"),
-          context: { type, name },
-        });
-      } else if (type == "resort") {
-        createPage({
-          path,
-          component: require.resolve("./src/templates/resortcollection.js"),
-          context: { type, name },
-        });
-      }
-    });
-
-  // const collectionNodes = (result.data.allSanityCollectionType || {}).nodes || [];
-}
+//       if (type == "villa") {
+//         createPage({
+//           path,
+//           component: require.resolve("./src/templates/beachvilla.js"),
+//           context: { type, name },
+//         });
+//       } else if (type == "resort") {
+//         createPage({
+//           path,
+//           component: require.resolve("./src/templates/resortcollection.js"),
+//           context: { type, name },
+//         });
+//       }
+//     });
+// }
 
 async function createBeachVillaPages(graphql, actions) {
   const { createPage } = actions;
@@ -235,7 +233,7 @@ exports.createPages = async ({ graphql, actions }) => {
   await createResortPages(graphql, actions);
   await createVillaPages(graphql, actions);
   await createBlogPostPages(graphql, actions);
-  await createCollectionTypePages(graphql, actions);
+  // await createCollectionTypePages(graphql, actions);
   await createBeachVillaPages(graphql, actions);
 
   // await createRestaurantPages(graphql, actions);

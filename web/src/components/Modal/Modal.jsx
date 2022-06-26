@@ -22,6 +22,7 @@ export const Modal = ({
   handleClose,
   isOpen,
   alignContentCenter,
+  contentStyle,
 }) => {
   if (!isOpen) return null;
   return (
@@ -32,7 +33,10 @@ export const Modal = ({
             <div className="circle"></div>
             <h2>{headerText}</h2>
           </ModalHeader>
-          <ModalContent alignContentCenter={alignContentCenter}>
+          <ModalContent
+            alignContentCenter={alignContentCenter}
+            style={contentStyle}
+          >
             <SvgWrapper>
               <CloseSvg />
             </SvgWrapper>
