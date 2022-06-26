@@ -189,12 +189,13 @@ export const query = graphql`
 
 const ResortTemplate = (props) => {
   const redirectedFrom = props?.location?.state?.redirectedFrom;
+  const currentSlideIndex_ = props?.location?.state?.currentSlideIndex;
   const { data, errors } = props;
   const resort = data && data.resort;
   const spas = data && data.spas;
   const villas = data && data.villas;
   const restaurants = data && data.resort.restaurants;
-  console.log("RESTUANTENTs", restaurants);
+
   const site = data && data.site;
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
 
@@ -283,6 +284,7 @@ const ResortTemplate = (props) => {
               elementRef={elementRef}
               id="accomodation"
               villas={villas.nodes}
+              currentSlideIndex={currentSlideIndex_}
             />
             <Highlights highlights={highlights} />
           </AccommodationHighlightsWrapper>

@@ -1,12 +1,6 @@
 import { graphql, Link } from "gatsby";
-import BlogPost from "../components/Post/blog-post";
 import React from "react";
-import { GatsbyImage } from "gatsby-plugin-image";
-import GraphQLErrorList from "../components/graphql-error-list";
 import Layout from "../containers/layout";
-import Container from "../components/container";
-import SEO from "../components/seo";
-import { getResortUrl, getVillaUrl, toPlainText } from "../lib/helpers";
 import { BeachVillaStyles } from "../styles/BeachVillaStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
@@ -408,7 +402,6 @@ const BeachTemplate = (props) => {
             );
           })}
         </div>
-
         <ContactUs contactUs={site.contactUs} />
       </BeachVillaStyles>
     </Layout>

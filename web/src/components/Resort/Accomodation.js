@@ -106,9 +106,17 @@ const AccomodationStyles = styled.div`
   }
 `;
 
-const Accomodation = ({ villas, id, elementRef }) => {
+const Accomodation = ({
+  villas,
+  id,
+  elementRef,
+  currentSlideIndex: currentSlideIndex_,
+}) => {
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(
+    currentSlideIndex_ || 0
+  );
   const size = useWindowSize();
   useEffect(() => {
     const { width } = size;
@@ -154,13 +162,17 @@ const Accomodation = ({ villas, id, elementRef }) => {
           wrapAround
           className="carousel"
           slidesToShow={numberOfSlides}
+          slideIndex={currentSlideIndex}
+          afterSlide={(currentSlide) => {
+            setCurrentSlideIndex(currentSlide);
+          }}
           cellSpacing={cellSpacing}
         >
           {villas.map(({ name, imageThumb, resort, price }) => (
             <Link
               to={getVillaUrl({ name, resortName: resort.name })}
               key={name}
-              state={{ pageFrom: ACCOMODATIONS_SECTION }}
+              state={{ pageFrom: ACCOMODATIONS_SECTION, currentSlideIndex }}
               className="image-container"
             >
               {imageThumb && imageThumb.asset ? (
