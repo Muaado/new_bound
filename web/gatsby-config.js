@@ -36,6 +36,11 @@ module.exports = {
         // Sanity project info (required)
         projectId: "y7yu20xn",
         dataset: "master",
+        defaultImageConfig: {
+          quality: 50,
+          fit: "max",
+          auto: "format",
+        },
       },
     },
     {
@@ -52,6 +57,13 @@ module.exports = {
       resolve: "gatsby-plugin-apollo",
       options: {
         uri: "https://y7yu20xn.api.sanity.io/v1/graphql/master/default",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        devMode: false,
+        disable: true,
       },
     },
   ],

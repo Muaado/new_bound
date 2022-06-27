@@ -221,6 +221,7 @@ const VilaTemplate = (props) => {
   const { data, errors } = props;
   const villa = data && data.villa;
   const pageFrom = props?.location?.state?.pageFrom;
+  const roomSlideIndex = props?.location?.state?.currentSlideIndex;
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
@@ -355,6 +356,7 @@ const VilaTemplate = (props) => {
                     to={`/${resortName.toLowerCase().split(" ").join("-")}`}
                     state={{
                       redirectedFrom: ROOM_PAGE,
+                      currentSlideIndex: roomSlideIndex,
                     }}
                   >
                     {resortName}
@@ -414,11 +416,15 @@ const VilaTemplate = (props) => {
                     </li>
                   )}
                 </ul>
-                <PricingDropDown
-                  items={rateModel}
-                  headerImages={headerImages}
-                  roomName={villa.name}
-                />
+                {rateModel ? (
+                  <PricingDropDown
+                    items={rateModel}
+                    headerImages={headerImages}
+                    roomName={villa.name}
+                  />
+                ) : (
+                  "Price On Request"
+                )}
                 <Link
                   to={`/enquire?id=${villaId}&name=${name}`}
                   className="enquire-btn"
