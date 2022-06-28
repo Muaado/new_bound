@@ -10,7 +10,7 @@ import { Overlay } from "../Overlay";
 const RestaurantsStyles = styled.div`
   position: relative;
   z-index: 1;
-  padding: 0% 15% 5% 15%;
+  padding: 0 15% 10rem 15%;
   display: flex;
   flex-direction: column;
 
@@ -25,7 +25,7 @@ const RestaurantsStyles = styled.div`
   }
 
   h2 {
-    margin: 5rem 0;
+    margin: 7rem 0 5rem 0;
   }
 
   ul {

@@ -349,7 +349,7 @@ const FeaturedVillas = React.memo(({ featuredVillas }) => {
               </h4>
             </Link>
             <h4 className="featuredVillaPrice">
-              {featuredVilla.villaone.price}
+              {`${formatter.format(featuredVilla.villaone.price)}`}
             </h4>
             <Link to={featuredVilla.villaone.url}>
               <h4 className="featuredVillaView">View Room</h4>

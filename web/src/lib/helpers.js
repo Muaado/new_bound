@@ -101,3 +101,9 @@ export const getQueryStringParams = (location_) => {
     return acc;
   }, {});
 };
+
+export const priceFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});

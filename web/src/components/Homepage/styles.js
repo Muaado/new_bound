@@ -91,7 +91,7 @@ export const HandCraftedJourneysStyles = styled.div`
   }
   .header-text {
     display: flex;
-    margin: 5rem 0rem;
+    margin: 7rem 0rem 5rem 0;
     align-items: center;
     flex-direction: column;
   }
@@ -182,7 +182,7 @@ export const HandCraftedJourneysStyles = styled.div`
   .parallax-main-wrapper {
     position: relative;
     z-index: 1;
-    padding: 0 15%;
+    padding: 0 15% 10rem 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -220,7 +220,6 @@ export const HandCraftedJourneysStyles = styled.div`
   .button-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 5%;
   }
 `;
 
@@ -228,7 +227,7 @@ export const MagazineStyles = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0 15% 5% 15%;
+  padding: 0 15% 5rem 15%;
   z-index: 1;
   @media ${device.laptopL} {
     padding: 0 15%;
@@ -314,9 +313,9 @@ export const MagazineStyles = styled.div`
     text-transform: capitalize;
   }
   .content {
-    padding: 0 0% 5% 0%;
+    padding: 0 0% 5rem 0%;
     .header {
-      margin: 5rem 0rem;
+      margin: 7rem 0rem 5rem 0rem;
     }
   }
 `;

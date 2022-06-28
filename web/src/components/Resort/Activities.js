@@ -11,7 +11,7 @@ const ActivitiesStyles = styled.div`
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 0% 15% 5% 15%;
+  padding: 0% 15% 10rem 15%;
   display: flex;
   flex-direction: column;
 
@@ -20,7 +20,7 @@ const ActivitiesStyles = styled.div`
   }
 
   h2 {
-    margin: 5rem 0rem;
+    margin: 7rem 0rem 5rem 0;
     /* letter-spacing: 1rem; */
   }
   p {

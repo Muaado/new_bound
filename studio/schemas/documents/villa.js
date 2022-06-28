@@ -51,7 +51,11 @@ export default {
       type: "string",
       title: "Alternate name",
     },
-
+    {
+      title: "Price On Request",
+      name: "priceOnRequest",
+      type: "boolean",
+    },
     // {
     //   name: "featuredInNav",
     //   type: "boolean",

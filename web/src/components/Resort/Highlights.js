@@ -11,12 +11,14 @@ const HighlightsStyles = styled.div`
   z-index: 1;
   background: white;
   text-align: center;
-  padding: 0% 15% 5% 15%;
+  padding: 0% 15% 10rem 15%;
   display: flex;
   flex-direction: column;
+
   @media ${device.laptopM} {
-    padding: 10% 10%;
+    padding: 0% 15% 10rem 15%;
   }
+
   @media ${device.tablet} {
     margin-top: 5rem;
     padding: 5% 1.5rem;
@@ -43,7 +45,7 @@ const HighlightsStyles = styled.div`
     }
   }
   h2 {
-    margin: 5rem 0rem;
+    margin: 7rem 0rem 5rem 0rem;
     font-size: 35px;
   }
 
@@ -153,7 +155,7 @@ const Highlights = ({ highlights }) => {
         data-aos-duration="1000"
         data-aos-easing="ease-in-out"
       >
-        <h2 className="heading">Highlights</h2>
+        <h2>Highlights</h2>
         <Carousel
           speed={1000}
           wrapAround

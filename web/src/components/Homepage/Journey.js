@@ -88,7 +88,7 @@ const JourneyStyles = styled.div`
         /* z-index: 1; */
       }
       p {
-        z-index: 1;
+        z-index: 2;
         color: #fff;
         position: absolute;
         text-transform: uppercase;
@@ -128,6 +128,7 @@ const JourneyStyles = styled.div`
         }
 
         p {
+          font-weight: 600;
           transition: all 0.3s;
           opacity: 1;
           z-index: 999;

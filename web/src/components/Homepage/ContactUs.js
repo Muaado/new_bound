@@ -13,7 +13,7 @@ const ContactUsSection = styled.div`
   grid-template-columns: 1fr 1fr;
   width: 100%;
   font-size: 2rem;
-  padding: 5% 10% 5% 10%;
+  padding: 5% 10% 10rem 10%;
   p {
     color: #000;
   }

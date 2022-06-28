@@ -2,15 +2,13 @@ import React from "react";
 import Container from "../components/container";
 import Layout from "../containers/layout";
 import SEO from "../components/seo";
-import Carousel from "nuka-carousel";
 import Placeholder from "../assets/placeholder.svg";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { HeroStyles } from "../components/Homepage/styles";
 import { EnquirePageStyles } from "../styles/EnquirePageStyles";
 import Image from "gatsby-plugin-sanity-image";
-import Search from "../components/Search";
 import countries from "../lib/countries";
-import { Button } from "../components/Button";
+import { Button, Carousel } from "../components";
 import { getQueryStringParams } from "../lib";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
@@ -21,8 +19,9 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
+import { useScrollToRef } from "../hooks";
 
 const validationSchema = yup
   .object({
@@ -83,15 +82,21 @@ export const query = graphql`
 const Enquire = (props) => {
   const { data } = props;
   const site = (data || {}).site;
-  const resorts = (data || {}).resorts;
-  const villas = (data || {}).villas;
+  const pageFromUrl = props?.location?.state?.pageFromUrl;
+  const { elementRef, executeScroll } = useScrollToRef();
 
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     );
   }
-  const { id: resortId, name: villaName } = getQueryStringParams();
+  const { id: resortId } = getQueryStringParams();
+
+  useEffect(() => {
+    if (resortId) {
+      executeScroll(elementRef);
+    }
+  }, [resortId]);
 
   const budgetRanges = [
     "£3,500 to £5,000",
@@ -145,7 +150,7 @@ const Enquire = (props) => {
     }
   }, [childrensField]);
 
-  const { data: villaData, error } = useQuery(Query_Villa, {
+  const { data: villaData } = useQuery(Query_Villa, {
     variables: { id: resortId },
   });
 
@@ -205,219 +210,228 @@ const Enquire = (props) => {
           )}
         </HeroStyles>
         <EnquirePageStyles>
-          <form
-            enctype="multipart/form-data"
-            onSubmit={(e) => handleSubmit(onSubmit)(e)}
-          >
-            <div className="room-villa-section">
-              <div className="header-content">
-                <h2>Request A Quote</h2>
-                <div className="villa-name">{resortName}</div>
-                <div className="divider" />
-                <div className="resort-name">{villa?.name}</div>
-                <div className="villa-features">
-                  <Measure />
-                  <TwoPeople />
-                  <Bed />
-                  <Shower />
-                  <SwimmingPool />
+          <div className="content">
+            <div className="main-div" style={{ paddingTop: 0 }}>
+              <Link to={pageFromUrl}>
+                <Button
+                  className="go-back-button"
+                  onClick={undefined}
+                >{`<< go back`}</Button>
+              </Link>
+              <div className="room-villa-section">
+                <div className="header-content">
+                  <h2>Request A Quote</h2>
+                  <div className="villa-name">{resortName}</div>
+                  <div className="divider" />
+                  <div className="resort-name">{villa?.name}</div>
+                  <div className="villa-features">
+                    <Measure />
+                    <TwoPeople />
+                    <Bed />
+                    <Shower />
+                    <SwimmingPool />
+                  </div>
                 </div>
-              </div>
-              <div className="footer-content">
-                <Carousel
-                  speed={1000}
-                  adaptiveHeight={true}
-                  className="carousel"
-                  slidesToShow={1}
-                  // cellSpacing={10}
-                >
-                  {headerImages?.images &&
-                    headerImages?.images?.map((image) => {
-                      return image?.asset ? (
-                        <Image className="image" {...image} alt={image.alt} />
-                      ) : (
-                        <Placeholder />
-                      );
-                    })}
-                </Carousel>
+                <div className="footer-content">
+                  <Carousel
+                    className="carousel"
+                    slidesToShow={1}
+                    totalItems={headerImages?.images?.length}
+                  >
+                    {headerImages?.images &&
+                      headerImages?.images?.map((image) => {
+                        return image?.asset ? (
+                          <Image className="image" {...image} alt={image.alt} />
+                        ) : (
+                          <Placeholder />
+                        );
+                      })}
+                  </Carousel>
+                </div>
               </div>
             </div>
-            <div className="holidays-details-section">
-              <h2>Holiday details</h2>
-              <div className="two-column form-content">
-                <div className="form-control">
-                  <label>
-                    Date of travel<span className="required">*</span>
-                  </label>
-                  <input
-                    {...register("dateOfTravel")}
-                    type="date"
-                    placeholder=""
-                  />
-                  <ErrorField error={dateOfTravel} />
-                </div>
-                <div className="form-control">
-                  <label>
-                    Duration<span className="required">*</span>
-                  </label>
-                  <select {...register("duration")}>
-                    {[...Array(30).keys()].map((number) => (
-                      <option key={number + 1} value={number + 1}>
-                        {number + 1}
-                      </option>
-                    ))}
-                  </select>
-                  <ErrorField error={dateOfTravel} />
-                </div>
-              </div>
-              <div className="form-control">
-                <label>Country of Residence</label>
-                <select {...register("countryOfResidence")}>
-                  <option>PAKISTAN</option>
-                  <option>UK</option>
-                  <option>CANADA</option>
-                </select>
-              </div>
-              <div className="form-control">
-                <label>Holiday Type</label>
-                <select {...register("holidayType")}>
-                  <option>Honeymoon</option>
-                  <option>Anniversary</option>
-                  <option>Relaxation holiday</option>
-                  <option>Romantic holiday</option>
-                </select>
-              </div>
-              <div className="form-control">
-                <label>Holiday budget</label>
-                <select {...register("budget")}>
-                  {budgetRanges.map((range) => (
-                    <option key={range} value={range}>
-                      {range}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-control">
-                <label>Tell us a bit more</label>
-                <textarea {...register("comments")} />
-              </div>
-            </div>
-            <div className="yours-details-section">
-              <h2>Your details</h2>
-              <div className="two-column form-content">
-                <div className="form-control">
-                  <label>
-                    Title<span className="required">*</span>
-                  </label>
-                  <select {...register("title")}>
-                    {["Mr.", "Mrs."].map((number) => (
-                      <option key={number} value={number}>
-                        {number}
-                      </option>
-                    ))}
-                  </select>
-                  <ErrorField error={title} />
-                </div>
-                <div className="form-control">
-                  <label>
-                    First name<span className="required">*</span>
-                  </label>
-                  <input
-                    {...register("firstName")}
-                    type="text"
-                    placeholder=""
-                  />
-                  <ErrorField error={firstName} />
-                </div>
-              </div>
-              <div className="form-control">
-                <label>
-                  Last name<span className="required">*</span>
-                </label>
-                <input {...register("lastName")} type="text" placeholder="" />
-                <ErrorField error={lastName} />
-              </div>
-              <div className="form-control">
-                <label>
-                  e-mail address<span className="required">*</span>
-                </label>
-                <input {...register("email")} type="email" placeholder="" />
-                <ErrorField error={email} />
-              </div>
-              <div className="three-column ">
-                <div className="form-control">
-                  <label>
-                    Telephone number<span className="required">*</span>
-                  </label>
-                  <div className="phone">
-                    <select {...register("countryCode")}>
-                      {countries.map(({ code, name }, index) => (
-                        <option
-                          key={`${code}-${index}`}
-                          value={`${code}${name}`}
-                        >
-                          {code} {name}
+            <form
+              ref={elementRef}
+              enctype="multipart/form-data"
+              onSubmit={(e) => handleSubmit(onSubmit)(e)}
+            >
+              <div className="holidays-details-section main-div">
+                <h2>Holiday details</h2>
+                <div className="two-column form-content">
+                  <div className="form-control">
+                    <label>
+                      Date of travel<span className="required">*</span>
+                    </label>
+                    <input
+                      {...register("dateOfTravel")}
+                      type="date"
+                      placeholder=""
+                    />
+                    <ErrorField error={dateOfTravel} />
+                  </div>
+                  <div className="form-control">
+                    <label>
+                      Duration<span className="required">*</span>
+                    </label>
+                    <select {...register("duration")}>
+                      {[...Array(30).keys()].map((number) => (
+                        <option key={number + 1} value={number + 1}>
+                          {number + 1}
                         </option>
                       ))}
                     </select>
+                    <ErrorField error={dateOfTravel} />
+                  </div>
+                </div>
+                <div className="form-control">
+                  <label>Country of Residence</label>
+                  <select {...register("countryOfResidence")}>
+                    <option>PAKISTAN</option>
+                    <option>UK</option>
+                    <option>CANADA</option>
+                  </select>
+                </div>
+                <div className="form-control">
+                  <label>Holiday Type</label>
+                  <select {...register("holidayType")}>
+                    <option>Honeymoon</option>
+                    <option>Anniversary</option>
+                    <option>Relaxation holiday</option>
+                    <option>Romantic holiday</option>
+                  </select>
+                </div>
+                <div className="form-control">
+                  <label>Holiday budget</label>
+                  <select {...register("budget")}>
+                    {budgetRanges.map((range) => (
+                      <option key={range} value={range}>
+                        {range}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-control">
+                  <label>Tell us a bit more</label>
+                  <textarea {...register("comments")} />
+                </div>
+              </div>
+              <div className="yours-details-section main-div">
+                <h2>Your details</h2>
+                <div className="two-column form-content">
+                  <div className="form-control">
+                    <label>
+                      Title<span className="required">*</span>
+                    </label>
+                    <select {...register("title")}>
+                      {["Mr.", "Mrs."].map((number) => (
+                        <option key={number} value={number}>
+                          {number}
+                        </option>
+                      ))}
+                    </select>
+                    <ErrorField error={title} />
+                  </div>
+                  <div className="form-control">
+                    <label>
+                      First name<span className="required">*</span>
+                    </label>
                     <input
-                      {...register("phoneNumber")}
+                      {...register("firstName")}
                       type="text"
                       placeholder=""
                     />
+                    <ErrorField error={firstName} />
                   </div>
-                  <ErrorField error={phoneNumber} />
-                </div>
-
-                <div className="form-control">
-                  <label>Adults</label>
-                  <select {...register("adults")}>
-                    {[...Array(7).keys()].map((number) => (
-                      <option key={number + 1} value={number + 1}>
-                        {number + 1}
-                      </option>
-                    ))}
-                  </select>
                 </div>
                 <div className="form-control">
-                  <label>Children</label>
-                  <select {...register("childrens")}>
-                    {[...Array(7).keys()].map((number) => (
-                      <option key={number} value={number}>
-                        {number}
-                      </option>
-                    ))}
-                  </select>
+                  <label>
+                    Last name<span className="required">*</span>
+                  </label>
+                  <input {...register("lastName")} type="text" placeholder="" />
+                  <ErrorField error={lastName} />
                 </div>
-              </div>
-              {childrensAgeField?.length ? (
                 <div className="form-control">
-                  <label>Childrens Age at the time of travel</label>
-                  <div className="four-column">
-                    {childrensAgeField?.map((field, index) => (
-                      <select
-                        key={field.id}
-                        style={{ marginBottom: "2rem" }} // important to include key with field's id
-                        {...register(`childrensAge.${index}.value`)}
-                      >
-                        {[...Array(17).keys()].map((number) => (
-                          <option key={number} value={number}>
-                            {number}
+                  <label>
+                    e-mail address<span className="required">*</span>
+                  </label>
+                  <input {...register("email")} type="email" placeholder="" />
+                  <ErrorField error={email} />
+                </div>
+                <div className="three-column ">
+                  <div className="form-control">
+                    <label>
+                      Telephone number<span className="required">*</span>
+                    </label>
+                    <div className="phone">
+                      <select {...register("countryCode")}>
+                        {countries.map(({ code, name }, index) => (
+                          <option
+                            key={`${code}-${index}`}
+                            value={`${code}${name}`}
+                          >
+                            {code} {name}
                           </option>
                         ))}
                       </select>
-                    ))}
+                      <input
+                        {...register("phoneNumber")}
+                        type="text"
+                        placeholder=""
+                      />
+                    </div>
+                    <ErrorField error={phoneNumber} />
+                  </div>
+
+                  <div className="form-control">
+                    <label>Adults</label>
+                    <select {...register("adults")}>
+                      {[...Array(7).keys()].map((number) => (
+                        <option key={number + 1} value={number + 1}>
+                          {number + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-control">
+                    <label>Children</label>
+                    <select {...register("childrens")}>
+                      {[...Array(7).keys()].map((number) => (
+                        <option key={number} value={number}>
+                          {number}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
-              ) : null}
-              <Button
-                type="submit"
-                style={{ background: "var(--secondary)", color: "#fff" }}
-              >
-                Enquire now
-              </Button>
-            </div>
-          </form>
+                {childrensAgeField?.length ? (
+                  <div className="form-control">
+                    <label>Childrens Age at the time of travel</label>
+                    <div className="four-column">
+                      {childrensAgeField?.map((field, index) => (
+                        <select
+                          key={field.id}
+                          style={{ marginBottom: "2rem" }} // important to include key with field's id
+                          {...register(`childrensAge.${index}.value`)}
+                        >
+                          {[...Array(17).keys()].map((number) => (
+                            <option key={number} value={number}>
+                              {number}
+                            </option>
+                          ))}
+                        </select>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+                <Button
+                  type="submit"
+                  style={{ background: "var(--secondary)", color: "#fff" }}
+                >
+                  Enquire now
+                </Button>
+              </div>
+            </form>
+          </div>
         </EnquirePageStyles>
       </Container>
     </Layout>

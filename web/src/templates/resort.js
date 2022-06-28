@@ -107,6 +107,7 @@ export const query = graphql`
       nodes {
         name
         price
+        priceOnRequest
         imageThumb {
           ...SanityImage
           alt
@@ -288,7 +289,7 @@ const ResortTemplate = (props) => {
             />
             <Highlights highlights={highlights} />
           </AccommodationHighlightsWrapper>
-          {restaurants && <Restaurants restaurants={restaurants} />}
+          {restaurants.length && <Restaurants restaurants={restaurants} />}
           {spas.nodes && (
             <div
               speed={1000}

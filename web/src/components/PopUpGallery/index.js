@@ -3,7 +3,8 @@ import LightBox from "./lightbox";
 // import Image from "next/image"
 import Image from "gatsby-plugin-sanity-image";
 import { GalleryImage } from "./style";
-import Carousel from "nuka-carousel";
+
+import { Carousel } from "../Carousel";
 import CarouselButton from "../Ui/CarouselButton";
 import useWindowSize from "../../lib/useWindowSize";
 
@@ -74,17 +75,10 @@ const GalleryComponent = ({ images, styles }) => {
     <GalleryImage className="gallery carousel" style={styles}>
       <div className="image-container">
         <Carousel
-          adaptiveHeight={true}
-          speed={1000}
           cellSpacing={cellSpacing}
           slidesToShow={numberOfSlides}
+          totalItems={images?.images?.length}
           className=""
-          // renderCenterRightControls={({ nextSlide }) => (
-          //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-          // )}
-          // renderCenterLeftControls={({ previousSlide }) => (
-          //   <CarouselButton onClick={previousSlide} />
-          // )}
         >
           {images?.images.length
             ? images.images.map((image) => (

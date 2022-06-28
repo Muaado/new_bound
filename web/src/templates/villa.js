@@ -1,6 +1,7 @@
 import { graphql, Link } from "gatsby";
 import React, { useEffect, useState, useRef } from "react";
 import useWindowSize from "../lib/useWindowSize";
+import { getVillaUrl } from "../lib/helpers";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -234,10 +235,8 @@ const VilaTemplate = (props) => {
   const [activeFeature, setActiveFeature] = useState(-1);
 
   useEffect(() => {
-    if (pageFrom && pageFrom === ACCOMODATIONS_SECTION) {
-      executeScroll(elementRef);
-    }
-  }, [pageFrom]);
+    executeScroll(elementRef);
+  }, []);
 
   const {
     _id: villaId,
@@ -327,9 +326,19 @@ const VilaTemplate = (props) => {
           <div className="villa__image">
             <div className="image-container">
               {heroImage && heroImage.asset ? (
-                <Image {...heroImage} alt={heroImage.alt} />
+                <Image
+                  {...heroImage}
+                  width={950}
+                  height={400}
+                  alt={heroImage.alt}
+                />
               ) : randomHeaderImage && randomHeaderImage.asset ? (
-                <Image {...randomHeaderImage} alt={randomHeaderImage.alt} />
+                <Image
+                  {...randomHeaderImage}
+                  width={950}
+                  height={400}
+                  alt={randomHeaderImage.alt}
+                />
               ) : (
                 <div></div>
               )}
@@ -426,7 +435,13 @@ const VilaTemplate = (props) => {
                   "Price On Request"
                 )}
                 <Link
-                  to={`/enquire?id=${villaId}&name=${name}`}
+                  to={`/enquire?id=${villaId}`}
+                  state={{
+                    pageFromUrl: getVillaUrl({
+                      name: villa?.name,
+                      resortName: villa?.resort.name,
+                    }),
+                  }}
                   className="enquire-btn"
                 >
                   <Button

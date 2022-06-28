@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
-import Carousel from "nuka-carousel";
+// import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
@@ -8,24 +8,41 @@ import useWindowSize from "../../lib/useWindowSize";
 import { getVillaUrl } from "../../lib/helpers";
 import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
+import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
+
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});
 
 const AccomodationStyles = styled.div`
   @media ${device.tablet} {
     padding: 0;
   }
 
-  .slider-control-bottomcenter svg {
+  /* .slider-control-bottomcenter svg {
     display: none !important;
   }
   .slider-control-bottomcenter li {
     margin-right: 5px;
+  } */
+
+  .slider-control-bottomcenter {
+    top: 70% !important;
   }
+
+  .slider-control-centerright,
+  .slider-control-centerleft {
+    top: 40% !important;
+  }
+
   h2 {
     text-align: center;
     /* padding: 5rem; */
     letter-spacing: normal;
-    margin: 5rem 0;
+    margin: 7rem 0 5rem 0;
   }
   .carousel {
     display: flex !important;
@@ -103,6 +120,10 @@ const AccomodationStyles = styled.div`
       font-size: 18px;
       color: #595959;
     }
+    .content {
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 
@@ -163,12 +184,12 @@ const Accomodation = ({
           className="carousel"
           slidesToShow={numberOfSlides}
           slideIndex={currentSlideIndex}
-          afterSlide={(currentSlide) => {
-            setCurrentSlideIndex(currentSlide);
-          }}
+          getCurrentSlideIndex={(slideIndex) =>
+            setCurrentSlideIndex(slideIndex)
+          }
           cellSpacing={cellSpacing}
         >
-          {villas.map(({ name, imageThumb, resort, price }) => (
+          {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
             <Link
               to={getVillaUrl({ name, resortName: resort.name })}
               key={name}
@@ -176,17 +197,27 @@ const Accomodation = ({
               className="image-container"
             >
               {imageThumb && imageThumb.asset ? (
-                <Image className="image" {...imageThumb} alt={imageThumb.alt} />
+                <Image
+                  className="image"
+                  {...imageThumb}
+                  width={500}
+                  height={500}
+                  alt={imageThumb.alt}
+                />
               ) : (
                 <Placeholder />
               )}
               <div className="roomFooter">
                 <p className="roomname">{name}</p>
-                <div className="room_price">
-                  <span className="price-from">From</span>{" "}
-                  <span className="font-bold">${price}</span>
-                  <span className="price-category">per night</span>
-                </div>
+                {priceOnRequest ? (
+                  <p>Price On Request</p>
+                ) : (
+                  <div className="room_price">
+                    <span className="price-from">From</span>{" "}
+                    <span className="font-bold">{formatter.format(price)}</span>
+                    <span className="price-category">per night</span>
+                  </div>
+                )}
                 <Button>View Room</Button>
               </div>
             </Link>
