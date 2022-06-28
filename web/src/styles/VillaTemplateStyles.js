@@ -504,7 +504,7 @@ const VillaStyles = styled.div`
 
     &__room-features {
       .roomfeaturetitle {
-        margin-bottom: 7rem;
+        margin: 7rem 0rem 5rem 0rem;
         color: #fff;
         font-size: 35px;
       }
@@ -833,6 +833,9 @@ const VillaStyles = styled.div`
       @media ${device.mobileXL} {
         padding: 0 1.5rem;
         width: 100vw;
+      }
+      h2 {
+        margin: 7rem 0rem 5rem 0 !important;
       }
     }
 

@@ -10,6 +10,12 @@ import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
 import { ACCOMODATIONS_SECTION } from "../../constants";
 
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 0,
+});
+
 const AccomodationStyles = styled.div`
   @media ${device.tablet} {
     padding: 0;
@@ -25,7 +31,7 @@ const AccomodationStyles = styled.div`
     text-align: center;
     /* padding: 5rem; */
     letter-spacing: normal;
-    margin: 5rem 0;
+    margin: 7rem 0 5rem 0;
   }
   .carousel {
     display: flex !important;
@@ -168,7 +174,7 @@ const Accomodation = ({
           }}
           cellSpacing={cellSpacing}
         >
-          {villas.map(({ name, imageThumb, resort, price }) => (
+          {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
             <Link
               to={getVillaUrl({ name, resortName: resort.name })}
               key={name}
@@ -182,11 +188,15 @@ const Accomodation = ({
               )}
               <div className="roomFooter">
                 <p className="roomname">{name}</p>
-                <div className="room_price">
-                  <span className="price-from">From</span>{" "}
-                  <span className="font-bold">${price}</span>
-                  <span className="price-category">per night</span>
-                </div>
+                {priceOnRequest ? (
+                  <p>Price On Request</p>
+                ) : (
+                  <div className="room_price">
+                    <span className="price-from">From</span>{" "}
+                    <span className="font-bold">{formatter.format(price)}</span>
+                    <span className="price-category">per night</span>
+                  </div>
+                )}
                 <Button>View Room</Button>
               </div>
             </Link>

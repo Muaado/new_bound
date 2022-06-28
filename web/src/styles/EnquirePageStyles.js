@@ -2,17 +2,24 @@ import styled from "styled-components";
 import { device } from "./deviceSizes";
 export const EnquirePageStyles = styled.div`
   /* margin: 5rem 0; */
+  background: white;
   width: 100%;
   height: 100%;
 
-  form {
+  .content {
     background: white;
     width: 100%;
     padding: 10rem 5rem;
     height: 100%;
     color: black;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
+
+    .main-div {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+    }
 
     h2 {
       color: #000000;
@@ -23,24 +30,16 @@ export const EnquirePageStyles = styled.div`
       text-align: center;
     }
 
-    @media ${device.tablet} {
-      flex-direction: column;
-      /* margin: 1rem 0; */
+    .go-back-button {
+      margin: 0;
     }
 
-    & > div {
-      padding: 3rem;
-      display: flex;
-      flex-direction: column;
-      /* &:first-of-type {
-        border-right: 1px solid #fff;
-      } */
-    }
     .room-villa-section {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-content: center;
-
+      height: 100%;
       .header-content,
       .footer-content {
         .carousel {
@@ -89,6 +88,20 @@ export const EnquirePageStyles = styled.div`
         max-height: 300px;
       }
     }
+  }
+
+  form {
+    width: 100%;
+    height: 100%;
+    color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @media ${device.tablet} {
+      flex-direction: column;
+      /* margin: 1rem 0; */
+    }
+
     .holidays-details-section,
     .yours-details-section {
       background: #f5f5f5;
@@ -99,9 +112,9 @@ export const EnquirePageStyles = styled.div`
         label {
           text-transform: uppercase;
           color: #3d3d3d;
-          font-size: 1.6rem;
-          font-weight: 400;
-          margin-bottom: 1.4rem;
+          font-size: 1.4rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
         }
       }
 
@@ -154,9 +167,9 @@ export const EnquirePageStyles = styled.div`
     label {
       text-transform: uppercase;
       color: #3d3d3d;
-      font-size: 1.6rem;
-      font-weight: 400;
-      margin-bottom: 1.4rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
     }
 
     input,
@@ -170,6 +183,19 @@ export const EnquirePageStyles = styled.div`
 
     span.required {
       color: var(--red);
+    }
+    .react-tel-input {
+      .form-control {
+        border-radius: unset;
+        line-height: unset;
+        border-color: rgb(118, 118, 118);
+        height: unset;
+        padding-top: 0.9rem;
+        padding-bottom: 0.9rem;
+      }
+      .flag-dropdown {
+        border: 1px solid rgb(118, 118, 118);
+      }
     }
   }
 `;

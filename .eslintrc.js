@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     "react/prop-types": "off",
+    "import/first": "off",
   },
   extends: [
     "eslint:recommended",

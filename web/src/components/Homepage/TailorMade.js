@@ -8,7 +8,7 @@ const TailorMadeStyles = styled.div`
   padding: 0 15%;
   h2 {
     text-align: center;
-    margin: 5rem 0;
+    margin: 10rem 0 5rem 0rem;
   }
   @media ${device.laptopL} {
     padding: 0 15%;

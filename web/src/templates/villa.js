@@ -1,6 +1,7 @@
 import { graphql, Link } from "gatsby";
 import React, { useEffect, useState, useRef } from "react";
 import useWindowSize from "../lib/useWindowSize";
+import { getVillaUrl } from "../lib/helpers";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -426,7 +427,13 @@ const VilaTemplate = (props) => {
                   "Price On Request"
                 )}
                 <Link
-                  to={`/enquire?id=${villaId}&name=${name}`}
+                  to={`/enquire?id=${villaId}`}
+                  state={{
+                    pageFromUrl: getVillaUrl({
+                      name: villa?.name,
+                      resortName: villa?.resort.name,
+                    }),
+                  }}
                   className="enquire-btn"
                 >
                   <Button

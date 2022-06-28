@@ -12,7 +12,7 @@ const FaqStyles = styled.div`
   text-align: center;
   position: relative;
   z-index: 1;
-  padding: 0 15% 5% 15%;
+  padding: 0 15% 10rem 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +31,7 @@ const FaqStyles = styled.div`
   }
 
   .heading {
-    margin: 5rem 0;
+    margin: 7rem 0 5rem 0rem;
   }
 
   .description {

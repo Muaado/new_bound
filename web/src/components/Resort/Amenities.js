@@ -19,7 +19,7 @@ const AmenitiesStyles = styled.div`
     font-weight: 100;
     text-align: center;
     align-self: center;
-    padding: 5rem 0;
+    padding: 0rem 0 5rem 0;
 
     line-height: 3.6rem;
 
@@ -75,7 +75,7 @@ const AmenitiesStyles = styled.div`
     margin-bottom: 5rem;
   }
   h2 {
-    margin-top: 5rem;
+    margin-top: 10rem;
     margin-bottom: 5rem;
   }
 `;
