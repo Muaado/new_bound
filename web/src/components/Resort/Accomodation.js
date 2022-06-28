@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
-import Carousel from "nuka-carousel";
+// import Carousel from "nuka-carousel";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
@@ -8,6 +8,7 @@ import useWindowSize from "../../lib/useWindowSize";
 import { getVillaUrl } from "../../lib/helpers";
 import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
+import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -21,12 +22,22 @@ const AccomodationStyles = styled.div`
     padding: 0;
   }
 
-  .slider-control-bottomcenter svg {
+  /* .slider-control-bottomcenter svg {
     display: none !important;
   }
   .slider-control-bottomcenter li {
     margin-right: 5px;
+  } */
+
+  .slider-control-bottomcenter {
+    top: 70% !important;
   }
+
+  .slider-control-centerright,
+  .slider-control-centerleft {
+    top: 40% !important;
+  }
+
   h2 {
     text-align: center;
     /* padding: 5rem; */
@@ -109,6 +120,10 @@ const AccomodationStyles = styled.div`
       font-size: 18px;
       color: #595959;
     }
+    .content {
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 
@@ -169,9 +184,9 @@ const Accomodation = ({
           className="carousel"
           slidesToShow={numberOfSlides}
           slideIndex={currentSlideIndex}
-          afterSlide={(currentSlide) => {
-            setCurrentSlideIndex(currentSlide);
-          }}
+          getCurrentSlideIndex={(slideIndex) =>
+            setCurrentSlideIndex(slideIndex)
+          }
           cellSpacing={cellSpacing}
         >
           {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
@@ -182,7 +197,13 @@ const Accomodation = ({
               className="image-container"
             >
               {imageThumb && imageThumb.asset ? (
-                <Image className="image" {...imageThumb} alt={imageThumb.alt} />
+                <Image
+                  className="image"
+                  {...imageThumb}
+                  width={500}
+                  height={500}
+                  alt={imageThumb.alt}
+                />
               ) : (
                 <Placeholder />
               )}

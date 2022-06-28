@@ -235,10 +235,8 @@ const VilaTemplate = (props) => {
   const [activeFeature, setActiveFeature] = useState(-1);
 
   useEffect(() => {
-    if (pageFrom && pageFrom === ACCOMODATIONS_SECTION) {
-      executeScroll(elementRef);
-    }
-  }, [pageFrom]);
+    executeScroll(elementRef);
+  }, []);
 
   const {
     _id: villaId,
@@ -328,9 +326,19 @@ const VilaTemplate = (props) => {
           <div className="villa__image">
             <div className="image-container">
               {heroImage && heroImage.asset ? (
-                <Image {...heroImage} alt={heroImage.alt} />
+                <Image
+                  {...heroImage}
+                  width={950}
+                  height={400}
+                  alt={heroImage.alt}
+                />
               ) : randomHeaderImage && randomHeaderImage.asset ? (
-                <Image {...randomHeaderImage} alt={randomHeaderImage.alt} />
+                <Image
+                  {...randomHeaderImage}
+                  width={950}
+                  height={400}
+                  alt={randomHeaderImage.alt}
+                />
               ) : (
                 <div></div>
               )}

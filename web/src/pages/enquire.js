@@ -21,6 +21,7 @@ import * as yup from "yup";
 import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
+import { useScrollToRef } from "../hooks";
 
 const validationSchema = yup
   .object({
@@ -81,16 +82,21 @@ export const query = graphql`
 const Enquire = (props) => {
   const { data } = props;
   const site = (data || {}).site;
-  const pageFromUrl = props.location.state.pageFromUrl;
-  const resorts = (data || {}).resorts;
-  const villas = (data || {}).villas;
+  const pageFromUrl = props?.location?.state?.pageFromUrl;
+  const { elementRef, executeScroll } = useScrollToRef();
 
   if (!site) {
     throw new Error(
       'Missing "Site settings". Open the studio at http://localhost:3333 and add some content to "Site settings" and restart the development server.'
     );
   }
-  const { id: resortId, name: villaName } = getQueryStringParams();
+  const { id: resortId } = getQueryStringParams();
+
+  useEffect(() => {
+    if (resortId) {
+      executeScroll(elementRef);
+    }
+  }, [resortId]);
 
   const budgetRanges = [
     "£3,500 to £5,000",
@@ -144,7 +150,7 @@ const Enquire = (props) => {
     }
   }, [childrensField]);
 
-  const { data: villaData, error } = useQuery(Query_Villa, {
+  const { data: villaData } = useQuery(Query_Villa, {
     variables: { id: resortId },
   });
 
@@ -210,7 +216,7 @@ const Enquire = (props) => {
                 <Button
                   className="go-back-button"
                   onClick={undefined}
-                >{`<< Go Back`}</Button>
+                >{`<< go back`}</Button>
               </Link>
               <div className="room-villa-section">
                 <div className="header-content">
@@ -245,6 +251,7 @@ const Enquire = (props) => {
               </div>
             </div>
             <form
+              ref={elementRef}
               enctype="multipart/form-data"
               onSubmit={(e) => handleSubmit(onSubmit)(e)}
             >
