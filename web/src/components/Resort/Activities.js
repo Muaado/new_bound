@@ -147,11 +147,11 @@ const Activities = ({ activities }) => {
         <h2>Activities</h2>
         <ul>
           {activities?.length
-            ? activities?.map(({ name, imageThumb, resort }) => (
-                <li className="item" key={imageThumb.alt}>
+            ? activities?.map(({ name, imageThumb }) => (
+                <li className="item" key={imageThumb?.alt}>
                   <Overlay className="overlay" />
-                  {imageThumb && imageThumb.asset && (
-                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  {imageThumb && imageThumb?.asset && (
+                    <Image {...imageThumb} alt={imageThumb?.alt} />
                   )}
                   <p>{name}</p>
                 </li>
@@ -164,10 +164,10 @@ const Activities = ({ activities }) => {
         </ul>
 
         <Carousel speed={1000} className="carousel">
-          {activities?.map(({ name, imageThumb, resort }) => (
-            <li className="item item__carousel" key={imageThumb.alt}>
-              {imageThumb && imageThumb.asset && (
-                <Image {...imageThumb} alt={imageThumb.alt} />
+          {activities?.map(({ name, imageThumb }) => (
+            <li className="item item__carousel" key={imageThumb?.alt}>
+              {imageThumb && imageThumb?.asset && (
+                <Image {...imageThumb} alt={imageThumb?.alt} />
               )}
               <p>{name}</p>
             </li>
