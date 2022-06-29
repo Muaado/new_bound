@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import React, { useState, useEffect } from "react";
+import { graphql, useStaticQuery, navigate } from "gatsby";
 import Layout from "../components/layout";
-import { getCollectionUrl, getResortUrl, getVillaUrl } from "../lib/helpers";
+import { getCollectionUrl, getResortUrl } from "../lib/helpers";
+import { isLoggedIn } from "../services/auth";
 
 const query = graphql`
   query SiteTitleQuery {
@@ -78,13 +79,6 @@ function LayoutContainer(props) {
     );
   }
 
-  // const villas = navData.villas.nodes.map(
-  //   ({ name, resort }) =>
-  //     resort && {
-  //       url: getVillaUrl({ name, resortName: resort.name }),
-  //       name: name,
-  //     }
-  // );
   const resorts = navData.resorts.nodes
     .map(({ name }) => {
       if (typeof name === "string")
@@ -104,10 +98,6 @@ function LayoutContainer(props) {
         };
     }
   );
-
-  // const collectionsone = navData.collectionsone.nodes;
-
-  // console.log(collections);
 
   const windowGlobal = typeof window !== "undefined";
   if (windowGlobal) {
@@ -135,6 +125,11 @@ function LayoutContainer(props) {
       }
     });
   }
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <Layout

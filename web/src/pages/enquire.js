@@ -22,6 +22,7 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
+import LeftSidebar from "../components/LeftSidebar";
 
 const validationSchema = yup
   .object({
@@ -193,6 +194,7 @@ const Enquire = (props) => {
   } = errors;
   return (
     <Layout {...props}>
+      <LeftSidebar />
       <SEO
         title={site.title}
         description={site.description}
