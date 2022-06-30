@@ -127,6 +127,9 @@ const ActivitiesStyles = styled.div`
       }
     }
   }
+  .card-text-wrapper {
+    top: 50% !important;
+  }
 `;
 
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
@@ -154,7 +157,7 @@ const Activities = ({ activities }) => {
                     {imageThumb && imageThumb?.asset && (
                       <Image {...imageThumb} alt={imageThumb?.alt} />
                     )}
-                    <p>{name}</p>
+                    <div className="card-text-wrapper">{name}</div>
                   </li>
                 ))
               : activitiesPlaceHolders.map((item) => (

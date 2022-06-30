@@ -151,6 +151,9 @@ const HighlightsStyles = styled.div`
     align-self: center;
     line-height: 2.4rem;
   }
+  .card-text-wrapper {
+    top: 50% !important;
+  }
 `;
 
 const Highlights = ({ highlights }) => {
