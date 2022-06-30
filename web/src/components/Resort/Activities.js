@@ -4,8 +4,9 @@ import Image from "gatsby-plugin-sanity-image";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 import { Overlay } from "../Overlay";
-import Carousel from "nuka-carousel";
+import { Carousel } from "../Carousel";
 import Placeholder from "../../assets/placeholder.svg";
+import { useIsTablet } from "../../hooks";
 
 const ActivitiesStyles = styled.div`
   position: relative;
@@ -16,7 +17,7 @@ const ActivitiesStyles = styled.div`
   flex-direction: column;
 
   @media ${device.tablet} {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 10rem 1.5rem;
   }
 
   h2 {
@@ -33,7 +34,7 @@ const ActivitiesStyles = styled.div`
     }
   }
 
-  ul {
+  .desktop-activities {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.6rem;
@@ -58,10 +59,6 @@ const ActivitiesStyles = styled.div`
     transition: all 10s ease-in;
     height: 322px;
 
-    &__carousel {
-      max-height: unset;
-      height: 100%;
-    }
     a {
       height: 100%;
       width: 100%;
@@ -92,40 +89,42 @@ const ActivitiesStyles = styled.div`
       opacity: 0;
     }
     @media ${device.tablet} {
-      &:before {
-        /* transform: translate(-50%, -50%); */
-        content: "";
-        position: absolute;
+      .carousel-overlay {
         opacity: 0.3;
-        width: 100%;
-        height: 103%;
-        background-color: #000;
+        z-index: 1;
       }
-
       p {
         opacity: 1;
       }
     }
   }
-
   .carousel {
-    display: none !important;
-    @media ${device.mobileXL} {
-      display: unset !important;
-
-      a {
-        bottom: 0;
-        padding: 5px;
+    /* margin: 4rem 0rem 10rem; */
+    .slider-slide,
+    .slider-list {
+      @media ${device.tablet} {
+        height: 35rem !important;
       }
-
-      img {
-        max-height: 240px;
-        min-height: 240px;
+      @media ${device.mobileXL} {
+        height: 25rem !important;
       }
     }
 
     .slider-control-bottomcenter {
-      display: none !important;
+      bottom: -5rem !important;
+    }
+
+    &__image-container {
+      @media ${device.tablet} {
+        height: 35rem !important;
+      }
+      @media ${device.mobileXL} {
+        height: 25rem !important;
+      }
+
+      img {
+        object-position: center;
+      }
     }
   }
 `;
@@ -133,6 +132,7 @@ const ActivitiesStyles = styled.div`
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
 
 const Activities = ({ activities }) => {
+  const isTablet = useIsTablet();
   return (
     <ActivitiesStyles id="activities">
       <Overlay opacity={1} bgColor="white" />
@@ -145,34 +145,42 @@ const Activities = ({ activities }) => {
         data-aos-easing="ease-in-out"
       >
         <h2>Activities</h2>
-        <ul>
-          {activities?.length
-            ? activities?.map(({ name, imageThumb }) => (
-                <li className="item" key={imageThumb?.alt}>
-                  <Overlay className="overlay" />
-                  {imageThumb && imageThumb?.asset && (
-                    <Image {...imageThumb} alt={imageThumb?.alt} />
-                  )}
-                  <p>{name}</p>
-                </li>
-              ))
-            : activitiesPlaceHolders.map((item) => (
-                <li className="item" key={item}>
-                  <Placeholder />
-                </li>
-              ))}
-        </ul>
-
-        <Carousel speed={1000} className="carousel">
-          {activities?.map(({ name, imageThumb }) => (
-            <li className="item item__carousel" key={imageThumb?.alt}>
-              {imageThumb && imageThumb?.asset && (
-                <Image {...imageThumb} alt={imageThumb?.alt} />
-              )}
-              <p>{name}</p>
-            </li>
-          ))}
-        </Carousel>
+        {!isTablet ? (
+          <ul className="desktop-activities">
+            {activities?.length
+              ? activities?.map(({ name, imageThumb }) => (
+                  <li className="item" key={imageThumb?.alt}>
+                    <Overlay className="overlay" />
+                    {imageThumb && imageThumb?.asset && (
+                      <Image {...imageThumb} alt={imageThumb?.alt} />
+                    )}
+                    <p>{name}</p>
+                  </li>
+                ))
+              : activitiesPlaceHolders.map((item) => (
+                  <li className="item" key={item}>
+                    <Placeholder />
+                  </li>
+                ))}
+          </ul>
+        ) : (
+          <Carousel
+            speed={1000}
+            className="carousel"
+            renderCenterLeftControls={() => undefined}
+            renderCenterRightControls={() => undefined}
+          >
+            {activities?.map(({ name, imageThumb }) => (
+              <li className="item item__carousel" key={imageThumb?.alt}>
+                <Overlay className="carousel-overlay" />
+                {imageThumb && imageThumb?.asset && (
+                  <Image {...imageThumb} alt={imageThumb?.alt} />
+                )}
+                <div className="card-text-wrapper">{name}</div>
+              </li>
+            ))}
+          </Carousel>
+        )}
       </div>
     </ActivitiesStyles>
   );

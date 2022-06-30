@@ -14,7 +14,7 @@ import { device } from "../../styles/deviceSizes";
 const WhyBoundlessSectionStyles = styled.div`
   position: relative;
   @media ${device.tablet} {
-    margin-bottom: 5rem;
+    margin-bottom: 5rem 0rem 0rem 0rem;
   }
   p {
     color: #fff;

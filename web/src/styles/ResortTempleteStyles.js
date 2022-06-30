@@ -18,22 +18,12 @@ const ResortStyles = styled.div`
     }
   }
 
-  #overview {
-    @media ${device.tablet} {
-      margin: 5rem 0;
-    }
-  }
-
-  /* .left-nav {
-   
-  } */
-
   .resort {
     &__image {
       position: relative;
       /* scroll-snap-align: center; */
       height: 95vh;
-      overflow-y: hidden;
+      overflow: hidden;
       /* position: relative;
       top: -18rem; */
       z-index: -1;
@@ -299,17 +289,11 @@ const ResortStyles = styled.div`
     }
 
     &__activities {
-      // .slider {
-      //   /* height: 70rem; */
-      // }
-
       .slider-control-bottomcenter {
         position: absolute;
         bottom: -3rem !important;
-
         .paging-item {
           display: none !important;
-          /* height: fit-content !important; */
         }
       }
     }

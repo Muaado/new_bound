@@ -140,9 +140,6 @@ export const query = graphql`
         }
         businessHoursDescription
       }
-      parallaxBackground {
-        ...SanityImage
-      }
     }
 
     collections: allSanityCollectionPage(limit: 5) {
@@ -188,45 +185,13 @@ export const query = graphql`
         }
       }
     }
-    # posts: allSanityPost(
-    #   limit: 6
-    #   sort: { fields: [publishedAt], order: DESC }
-    #   filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
-    # ) {
-    #   edges {
-    #     node {
-    #       id
-    #       publishedAt
-    #       mainImage {
-    #         ...SanityImage
-    #         alt
-    #       }
-    #       title
-    #       _rawExcerpt
-    #       slug {
-    #         current
-    #       }
-    #     }
-    #   }
-    # }
   }
 `;
 
 const IndexPage = (props) => {
-  const { data, errors } = props;
-
+  const { data } = props;
   const { collections } = data;
-
-  // if (errors) {
-  //   return (
-  //     <Layout>
-  //       <GraphQLErrorList errors={errors} />
-  //     </Layout>
-  //   );
-  // }
-
   const site = (data || {}).site;
-  const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
   const magazinePosts = (data || {}).magazinePosts;
@@ -292,7 +257,7 @@ const IndexPage = (props) => {
             }}
           />
           <Journey collections={collections} />
-          <HandCraftedJourneysStyles parallaxImage={parallaxImage}>
+          <HandCraftedJourneysStyles>
             <div className="parallax-main-wrapper">
               <div className="header-text">
                 <p className="subtitle">only the best</p>
@@ -313,7 +278,6 @@ const IndexPage = (props) => {
                   {site.handCraftedJourneys.map(
                     ({ title, image, description }) => (
                       <li key={title}>
-                        {/* <Link to={getBlogUrl(publishedAt, slug.current)}> */}
                         <div className="image-container">
                           {image && image.asset && (
                             <Image {...image} alt={image.alt} />
@@ -324,7 +288,6 @@ const IndexPage = (props) => {
 
                           <p className="itemDesc">{description} </p>
                         </div>
-                        {/* </Link> */}
                       </li>
                     )
                   )}

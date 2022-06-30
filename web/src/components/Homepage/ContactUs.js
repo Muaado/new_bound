@@ -17,19 +17,18 @@ const ContactUsSection = styled.div`
   p {
     color: #000;
   }
+
   @media ${device.laptopL} {
     padding: 5% 10% 5% 10%;
   }
 
   @media ${device.laptop} {
     grid-template-columns: 1fr;
-    /* align-content: center;
-    align-items: center;
-    justify-content: center; */
     justify-items: center;
   }
+
   @media ${device.tablet} {
-    padding: 0 1.5rem;
+    padding: 5rem 1.5rem 10rem 1.5rem;
     /* max-width: 100vw; */
   }
 

@@ -21,8 +21,7 @@ const FaqStyles = styled.div`
     padding: 10rem 15% 10rem 15%;
   }
   @media ${device.tablet} {
-    margin-bottom: 5rem;
-    padding: 5rem 1.5rem;
+    padding: 5rem 1.5rem 10rem 1.5rem;
   }
 
   h2 {

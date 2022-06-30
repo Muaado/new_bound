@@ -33,7 +33,7 @@ export const PricingModal = (props) => {
         {roomImages.length && (
           <div className="detail-section">
             <img src={roomImages[0]?.asset.url} />
-            <div className="text-wrapper">
+            <div className="note-text-wrapper">
               <h5>Note:</h5>
               <p>
                 Price may vary during the festive season. The prices shown here
