@@ -111,7 +111,7 @@ export const PricingModalContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
-  .text-wrapper {
+  .note-text-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;

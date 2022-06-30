@@ -22,13 +22,6 @@ const AccomodationStyles = styled.div`
     padding: 0;
   }
 
-  /* .slider-control-bottomcenter svg {
-    display: none !important;
-  }
-  .slider-control-bottomcenter li {
-    margin-right: 5px;
-  } */
-
   .slider-control-bottomcenter {
     top: 70% !important;
   }
@@ -64,15 +57,14 @@ const AccomodationStyles = styled.div`
     display: flex;
     flex-direction: column;
 
-    min-height: 614px;
+    /* min-height: 614px; */
     img {
-      min-height: 570px;
+      /* min-height: 570px; */
       @media ${device.mobileXL} {
         max-height: 350px;
         min-height: 350px;
         width: 100%;
       }
-
       max-height: 570px;
       width: 100%;
       background-size: cover;

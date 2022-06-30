@@ -21,7 +21,6 @@ export const NewsLetterStyles = styled.div`
 
   @media ${device.tablet} {
     height: 50rem;
-    margin-bottom: 5rem;
   }
 
   h2 {

@@ -3,6 +3,7 @@ import { device } from "../../styles/deviceSizes";
 export const DropDownWrapper = styled.div`
   display: flex;
   color: black !important;
+  align-self: center;
   border: 2px solid #11103b;
   cursor: pointer;
   padding: 20px 0px;

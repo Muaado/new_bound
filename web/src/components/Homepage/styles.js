@@ -188,25 +188,21 @@ export const HandCraftedJourneysStyles = styled.div`
     align-items: center;
 
     .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      h3,
+      p {
+        text-align: left;
+      }
     }
 
-    .text-container h3 {
-      text-align: left;
-    }
-
-    .text-container p {
-      text-align: left;
-    }
-
-    @media ${device.laptopL} {
-      padding: 0 15%;
-    }
     @media ${device.laptop} {
-      padding: 0 10%;
+      padding: 10rem 10%;
     }
     @media ${device.tablet} {
-      margin: 5rem 0;
-      padding: 0 1.5rem;
+      padding: 0 1.5rem 10rem 1.5rem;
     }
   }
 
@@ -237,7 +233,6 @@ export const MagazineStyles = styled.div`
   }
 
   @media ${device.tablet} {
-    margin-bottom: 7rem;
     padding: 0 1.5rem;
   }
 
@@ -313,7 +308,7 @@ export const MagazineStyles = styled.div`
     text-transform: capitalize;
   }
   .content {
-    padding: 0 0% 5rem 0%;
+    padding: 0 0% 10rem 0%;
     .header {
       margin: 7rem 0rem 5rem 0rem;
     }

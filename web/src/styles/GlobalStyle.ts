@@ -172,8 +172,12 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     line-height: 2.8rem;
     color: #505050;
-      @media ${device.tablet} {
-      font-size: 1.4rem;
+    @media ${device.tablet} {
+      font-size: 1.4rem !important;
+      line-height: 2.2rem;
+    }
+    @media ${device.onlyMobileSm} {
+      font-size: 1.2rem !important;
       line-height: 2.2rem;
     }
   }
@@ -387,5 +391,42 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     justify-content: center;
   }
+
+  .card-text-wrapper {
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 60%;
+    border: 3px solid var(--primary);
+    background: rgb(0, 0, 0, 0.5);
+    z-index: 2;
+    color: #fff;
+    position: absolute;
+    text-transform: uppercase;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem 0px;
+  }
+
+  @media ${device.tablet} {
+     h2{
+      font-size: 30px  !important;
+     }
+  }
+
+  @media ${device.onlyMobileSm} {
+    h2{
+      font-size: 25px  !important;
+      letter-spacing: 0.2rem !important;
+    }
+    .card-text-wrapper{
+      font-size: 1.2rem;
+    }
+    
+  }
+
 
 `;

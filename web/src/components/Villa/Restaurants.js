@@ -15,13 +15,11 @@ const RestaurantsStyles = styled.div`
   flex-direction: column;
 
   @media ${device.laptop} {
-    padding: 0 10%;
+    padding: 0 10% 10rem 10%;
   }
 
   @media ${device.tablet} {
-    margin-top: 5rem;
-    padding: 0 1.5rem;
-    margin-bottom: 5rem;
+    padding: 0 1.5rem 10rem 1.5rem;
   }
 
   h2 {

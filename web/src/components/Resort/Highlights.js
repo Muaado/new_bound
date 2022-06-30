@@ -1,11 +1,11 @@
-import Carousel from "nuka-carousel";
+import { Carousel } from "../Carousel";
 import React from "react";
 import { Overlay } from "../Overlay";
-import ChevronRight from "../../assets/icons/chevron-right.svg";
 import Image from "gatsby-plugin-sanity-image";
 import Placeholder from "../../assets/placeholder.svg";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
+import { useIsTablet } from "../../hooks";
 
 const HighlightsStyles = styled.div`
   z-index: 1;
@@ -20,36 +20,45 @@ const HighlightsStyles = styled.div`
   }
 
   @media ${device.tablet} {
-    margin-top: 5rem;
-    padding: 5% 1.5rem;
+    padding: 0 1.5rem 10rem 1.5rem;
   }
 
   .carousel {
-    display: none !important;
-    @media ${device.mobileXL} {
-      display: unset !important;
-
-      a {
-        bottom: 0;
-        padding: 5px;
+    /* margin: 4rem 0rem 10rem; */
+    .slider-slide,
+    .slider-list {
+      @media ${device.tablet} {
+        height: 35rem !important;
       }
-
-      img {
-        max-height: 230px;
-        min-height: 230px;
+      @media ${device.mobileXL} {
+        height: 25rem !important;
       }
     }
 
     .slider-control-bottomcenter {
-      display: none !important;
+      bottom: -5rem !important;
+    }
+
+    &__image-container {
+      @media ${device.tablet} {
+        height: 35rem !important;
+      }
+      @media ${device.mobileXL} {
+        height: 25rem !important;
+      }
+
+      img {
+        object-position: center;
+      }
     }
   }
+
   h2 {
     margin: 7rem 0rem 5rem 0rem;
     font-size: 35px;
   }
 
-  ul {
+  .desktop-highlights {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.6rem;
@@ -74,7 +83,7 @@ const HighlightsStyles = styled.div`
     li:hover .overlay {
       opacity: 0.5;
       z-index: unset;
-      .text-wrapper {
+      .card-text-wrapper {
         z-index: 1;
       }
     }
@@ -142,29 +151,13 @@ const HighlightsStyles = styled.div`
     align-self: center;
     line-height: 2.4rem;
   }
-
-  .text-wrapper {
-    width: 60%;
-    border: 3px solid var(--primary);
-    background: rgb(0, 0, 0, 0.5);
-    z-index: 2;
-    color: #fff;
-    position: absolute;
-    text-transform: uppercase;
-
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
-      0px 4px 4px rgba(0, 0, 0, 0.25);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1rem 0px;
-
-    @media ${device.laptopM} {
-    }
+  .card-text-wrapper {
+    top: 50% !important;
   }
 `;
 
 const Highlights = ({ highlights }) => {
+  const isTablet = useIsTablet();
   return (
     <HighlightsStyles id="highlights" className="resort__highlights">
       <div
@@ -176,47 +169,55 @@ const Highlights = ({ highlights }) => {
         data-aos-easing="ease-in-out"
       >
         <h2>Highlights</h2>
-        <Carousel
-          speed={1000}
-          wrapAround
-          className="carousel"
-          slidesToShow={1}
-          cellSpacing={0}
-        >
-          {highlights.map(({ name, imageThumb, description }) => (
-            <li key={imageThumb?.alt}>
-              <p>{description}</p>
-              {imageThumb && imageThumb.asset ? (
-                <Image {...imageThumb} alt={imageThumb.alt} />
-              ) : (
-                <Placeholder />
-              )}
-              <a href="" className="highLbl">
-                {name} <ChevronRight />
-              </a>
-            </li>
-          ))}
-        </Carousel>
-        <ul className="desktop-highlights">
-          {highlights.length
-            ? highlights.map(({ name, imageThumb, description }) => (
-                <li key={imageThumb?.alt}>
-                  <Overlay className="overlay" />
-                  <div className="text-wrapper">{name}</div>
-                  <p>{description}</p>
-                  {imageThumb && imageThumb.asset ? (
-                    <Image {...imageThumb} alt={imageThumb.alt} />
-                  ) : (
+        {isTablet ? (
+          <Carousel
+            speed={1000}
+            wrapAround
+            className="carousel"
+            slidesToShow={1}
+            cellSpacing={0}
+            renderCenterRightControls={() => undefined}
+            renderCenterLeftControls={() => undefined}
+          >
+            {highlights.map(({ name, imageThumb }) => (
+              <li key={imageThumb?.alt}>
+                <div className="card-text-wrapper">{name}</div>
+                {imageThumb && imageThumb.asset && (
+                  <Image
+                    {...imageThumb}
+                    width={400}
+                    height={400}
+                    alt={imageThumb.alt}
+                  />
+                )}
+              </li>
+            ))}
+          </Carousel>
+        ) : (
+          <ul className="desktop-highlights">
+            {highlights.length
+              ? highlights.map(({ name, imageThumb, description }) => (
+                  <li key={imageThumb?.alt}>
+                    <Overlay className="overlay" />
+                    <div className="card-text-wrapper">{name}</div>
+                    <p>{description}</p>
+                    {imageThumb && imageThumb.asset && (
+                      <Image
+                        {...imageThumb}
+                        width={400}
+                        height={400}
+                        alt={imageThumb.alt}
+                      />
+                    )}
+                  </li>
+                ))
+              : [1, 2, 3, 4, 5, 6].map((item) => (
+                  <li key={item}>
                     <Placeholder />
-                  )}
-                </li>
-              ))
-            : [1, 2, 3, 4, 5, 6].map((item) => (
-                <li key={item}>
-                  <Placeholder />
-                </li>
-              ))}
-        </ul>
+                  </li>
+                ))}
+          </ul>
+        )}
       </div>
     </HighlightsStyles>
   );

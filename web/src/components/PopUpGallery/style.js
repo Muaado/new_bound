@@ -78,8 +78,4 @@ export const GalleryImage = styled.div`
       min-height: 30rem;
     }
   }
-
-  /* @media ${device.tablet} {
-    width: 100vw ;
-  } */
 `;

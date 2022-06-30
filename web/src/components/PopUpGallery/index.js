@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import LightBox from "./lightbox";
 // import Image from "next/image"
 import Image from "gatsby-plugin-sanity-image";
-import { GalleryImage } from "./style";
 
 import { Carousel } from "../Carousel";
-import CarouselButton from "../Ui/CarouselButton";
 import useWindowSize from "../../lib/useWindowSize";
 
 import Placeholder from "../../assets/placeholder.svg";
 
-const GalleryComponent = ({ images, styles }) => {
+const GalleryComponent = ({ images }) => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -72,41 +70,27 @@ const GalleryComponent = ({ images, styles }) => {
   };
 
   return (
-    <GalleryImage className="gallery carousel" style={styles}>
-      <div className="image-container">
-        <Carousel
-          cellSpacing={cellSpacing}
-          slidesToShow={numberOfSlides}
-          totalItems={images?.images?.length}
-          className=""
-        >
-          {images?.images.length
-            ? images.images.map((image) => (
-                <div key={image.alt} className="carousel__image-container">
-                  {image && image.asset && (
-                    <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
-                  )}
-                </div>
-              ))
-            : [1, 2, 3].map((item) => (
-                <div key={item} className="carousel__image-container">
-                  <Placeholder />
-                </div>
-              ))}
-        </Carousel>
-
-        {/* {images.images[0] && (
-          <Image 
-            {...images.images[0]}
-            alt={images.images[0].alt}
-            // layout="fixed"
-            // width="350"
-            // height="200"
-            // src={props.images[0]}
-            onClick={handleOpen(0)}
-          />
-        )} */}
-      </div>
+    <>
+      <Carousel
+        cellSpacing={cellSpacing}
+        slidesToShow={numberOfSlides}
+        totalItems={images?.images?.length}
+        className=""
+      >
+        {images?.images.length
+          ? images.images.map((image) => (
+              <div key={image.alt} className="carousel__image-container">
+                {image && image.asset && (
+                  <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
+                )}
+              </div>
+            ))
+          : [1, 2, 3].map((item) => (
+              <div key={item} className="carousel__image-container">
+                <Placeholder />
+              </div>
+            ))}
+      </Carousel>
 
       {showLightbox && selectedImage !== null && (
         <LightBox
@@ -118,7 +102,7 @@ const GalleryComponent = ({ images, styles }) => {
           selectedImage={selectedImage}
         />
       )}
-    </GalleryImage>
+    </>
   );
 };
 export default GalleryComponent;

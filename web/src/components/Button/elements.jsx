@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { device } from "../../styles/deviceSizes";
 export const StyledButton = styled.button`
   transition: all 1s ease-in-out;
   width: 150px;
@@ -17,5 +17,9 @@ export const StyledButton = styled.button`
     cursor: pointer;
     background: #91715c;
     color: #fff;
+  }
+  @media ${device.onlyMobileS} {
+    font-size: 10px;
+    padding: 10px 0px 10px 0px;
   }
 `;

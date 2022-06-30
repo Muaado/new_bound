@@ -241,7 +241,6 @@ const VilaTemplate = (props) => {
   const {
     _id: villaId,
     name,
-    alternateName,
     tagline,
     _rawDescription: _rawDescriptionVilla,
     short_desc,
@@ -253,9 +252,7 @@ const VilaTemplate = (props) => {
     villaPoolTypes,
     heroImage,
     headerImages,
-    price,
     numrooms,
-    // gallery,
   } = villa;
 
   const {
@@ -432,7 +429,7 @@ const VilaTemplate = (props) => {
                     roomName={villa.name}
                   />
                 ) : (
-                  "Price On Request"
+                  <div className="room-price"> Price On Request</div>
                 )}
                 <Link
                   to={`/enquire?id=${villaId}`}
@@ -451,11 +448,9 @@ const VilaTemplate = (props) => {
                   </Button>
                 </Link>
               </div>
-              <PopUpGallery
-                styles={{ marginRight: "15px" }}
-                className="carousel"
-                images={headerImages}
-              />
+              <div className="gallery-carousel">
+                <PopUpGallery images={headerImages} />
+              </div>
             </div>
           </div>
 
