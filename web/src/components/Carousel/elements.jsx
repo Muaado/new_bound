@@ -10,6 +10,7 @@ export const StyledButton = styled.button`
     background-position: center;
     border-radius: 50%;
     border-color: black;
+    opacity: 0.65;
     stroke: black;
     stroke-width: 10px;
     width: 3rem;

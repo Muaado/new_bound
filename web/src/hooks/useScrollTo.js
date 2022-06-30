@@ -1,7 +1,6 @@
 import { useRef } from "react";
 
-const scrollToRef = (ref) =>
-  ref.current.scrollIntoView({ behavior: "smooth", alignToTop: false });
+const scrollToRef = (ref) => ref.current.scrollIntoView({ alignToTop: true });
 
 export const useScrollToRef = () => {
   const elementRef = useRef(null);

@@ -87,7 +87,10 @@ const JourneyStyles = styled.div`
       img {
         /* z-index: 1; */
       }
-      p {
+      .text-wrapper {
+        width: 60%;
+        border: 3px solid var(--primary);
+        background: rgb(0, 0, 0, 0.5);
         z-index: 2;
         color: #fff;
         position: absolute;
@@ -97,12 +100,13 @@ const JourneyStyles = styled.div`
           0px 4px 4px rgba(0, 0, 0, 0.25);
         top: 90%;
         left: 50%;
-        width: 100%;
         transform: translate(-50%, -50%);
+        padding: 1rem 0px;
 
         @media ${device.laptopM} {
         }
       }
+
       grid-column: 1 / span;
       &:first-of-type {
         grid-column: 1/4;
@@ -127,8 +131,7 @@ const JourneyStyles = styled.div`
           z-index: 2;
         }
 
-        p {
-          font-weight: 600;
+        .text-wrapper {
           transition: all 0.3s;
           opacity: 1;
           z-index: 999;
@@ -167,7 +170,7 @@ const JourneyStyles = styled.div`
         height: 25rem !important;
       }
 
-      p {
+      .text-wrapper {
         position: absolute;
         /* top: 90%; */
         bottom: 0;
@@ -209,7 +212,7 @@ const Journey = ({ collections }) => {
                 className="clickable"
                 key={node.name}
               >
-                <p>{node.CollectionPageName}</p>
+                <div className="text-wrapper">{node.CollectionPageName}</div>
                 <Overlay className="overlay" />
                 {node.image && node.image.asset && (
                   <Image {...node.image} alt={node.image.alt} />

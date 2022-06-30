@@ -74,7 +74,7 @@ const HighlightsStyles = styled.div`
     li:hover .overlay {
       opacity: 0.5;
       z-index: unset;
-      a {
+      .text-wrapper {
         z-index: 1;
       }
     }
@@ -142,6 +142,26 @@ const HighlightsStyles = styled.div`
     align-self: center;
     line-height: 2.4rem;
   }
+
+  .text-wrapper {
+    width: 60%;
+    border: 3px solid var(--primary);
+    background: rgb(0, 0, 0, 0.5);
+    z-index: 2;
+    color: #fff;
+    position: absolute;
+    text-transform: uppercase;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem 0px;
+
+    @media ${device.laptopM} {
+    }
+  }
 `;
 
 const Highlights = ({ highlights }) => {
@@ -182,10 +202,7 @@ const Highlights = ({ highlights }) => {
             ? highlights.map(({ name, imageThumb, description }) => (
                 <li key={imageThumb?.alt}>
                   <Overlay className="overlay" />
-                  <a>
-                    {name} <ChevronRight />
-                  </a>
-                  {/* </Link> */}
+                  <div className="text-wrapper">{name}</div>
                   <p>{description}</p>
                   {imageThumb && imageThumb.asset && (
                     <>
