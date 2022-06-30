@@ -186,12 +186,12 @@ const Highlights = ({ highlights }) => {
           {highlights.map(({ name, imageThumb, description }) => (
             <li key={imageThumb?.alt}>
               <p>{description}</p>
-              {imageThumb && imageThumb.asset && (
-                <>
-                  <Image {...imageThumb} alt={imageThumb.alt} />
-                </>
+              {imageThumb && imageThumb.asset ? (
+                <Image {...imageThumb} alt={imageThumb.alt} />
+              ) : (
+                <Placeholder />
               )}
-              <a className="highLbl">
+              <a href="" className="highLbl">
                 {name} <ChevronRight />
               </a>
             </li>
@@ -204,10 +204,10 @@ const Highlights = ({ highlights }) => {
                   <Overlay className="overlay" />
                   <div className="text-wrapper">{name}</div>
                   <p>{description}</p>
-                  {imageThumb && imageThumb.asset && (
-                    <>
-                      <Image {...imageThumb} alt={imageThumb.alt} />
-                    </>
+                  {imageThumb && imageThumb.asset ? (
+                    <Image {...imageThumb} alt={imageThumb.alt} />
+                  ) : (
+                    <Placeholder />
                   )}
                 </li>
               ))
