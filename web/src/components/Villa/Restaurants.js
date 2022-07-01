@@ -113,9 +113,7 @@ const RestaurantsStyles = styled.div`
   }
 `;
 const Restaurants = ({ restaurants }) => {
-  console.log("RESTUARANTs", restaurants);
   const [restaurantSlice, setRestaurantSLice] = useState(4);
-
   return (
     <RestaurantsStyles id="dine">
       <Overlay className="parallax-overlay" bgColor="#fff" />

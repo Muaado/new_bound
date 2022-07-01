@@ -15,6 +15,65 @@ import { navigate } from "gatsby";
 import { truncate } from "../lib/helpers";
 
 export const query = graphql`
+  fragment Fragment_Villa on SanityVilla {
+    _id
+    name
+    alternateName
+    short_desc
+    showers {
+      option
+      number
+    }
+    maxOccupancy {
+      option
+      number
+    }
+    villaPoolTypes {
+      poolType
+    }
+    sizeSqm
+    imageThumb {
+      ...SanityImage
+      alt
+    }
+    price
+    numrooms
+
+    resort {
+      name
+      resortBrandLogo {
+        ...SanityImage
+        alt
+      }
+    }
+  }
+
+  fragment Fragment_Featured_Villa on SanityFeaturedVilla {
+    title
+    villaone {
+      name
+      price
+      short_desc
+      tagline
+      numrooms
+      imageThumb {
+        ...SanityImage
+        alt
+      }
+      headerImages {
+        images {
+          ...SanityImage
+          alt
+        }
+      }
+      resort {
+        resortBrandLogo {
+          ...SanityImage
+          alt
+        }
+      }
+    }
+  }
   query BeachTemplateQuery($id: String!) {
     pagesdata: sanityCollectionPage(id: { eq: $id }) {
       _id
@@ -28,62 +87,23 @@ export const query = graphql`
           ...SanityImage
         }
         villas {
-          _id
-          name
-          alternateName
-          short_desc
-          showers {
-            option
-            number
-          }
-          maxOccupancy {
-            option
-            number
-          }
-          villaPoolTypes {
-            poolType
-          }
-          sizeSqm
-          imageThumb {
-            ...SanityImage
-            alt
-          }
-          price
-          numrooms
-
-          resort {
-            name
-            resortBrandLogo {
-              ...SanityImage
-              alt
-            }
-          }
+          ...Fragment_Villa
         }
         featuredvillas {
-          title
-          villaone {
-            name
-            price
-            short_desc
-            tagline
-            numrooms
-            imageThumb {
-              ...SanityImage
-              alt
-            }
-            headerImages {
-              images {
-                ...SanityImage
-                alt
-              }
-            }
-            resort {
-              resortBrandLogo {
-                ...SanityImage
-                alt
-              }
-            }
-          }
+          ...Fragment_Featured_Villa
+        }
+      }
+      waterVillaCollection {
+        CollectionName
+        sectionHeroImage {
+          ...SanityImage
+        }
+        villas {
+          ...Fragment_Villa
+        }
+
+        featuredvillas {
+          ...Fragment_Featured_Villa
         }
       }
       banner {
@@ -167,6 +187,14 @@ const computeVillaFields = ({ villa }) => {
 const BeachTemplate = (props) => {
   const { data } = props;
   const collections = data && data.pagesdata;
+  const villas = collections?.beachVillaCollection?.length
+    ? collections.beachVillaCollection
+    : collections?.waterVillaCollection?.length
+    ? collections?.waterVillaCollection
+    : [];
+
+  const banners = collections?.banner;
+
   const site = data && data.site;
 
   return (
@@ -190,7 +218,7 @@ const BeachTemplate = (props) => {
         )}
 
         <div className="collection_container">
-          {collections.beachVillaCollection?.map(
+          {villas?.map(
             (
               { villas, CollectionName, featuredvillas, _id },
               collectionNumber
@@ -308,7 +336,7 @@ const BeachTemplate = (props) => {
                   {collectionNumber === 1 || collectionNumber === 2 ? (
                     <CollectionBanners
                       collectionNumber={collectionNumber}
-                      banners={collections.banner}
+                      banners={banners}
                     />
                   ) : null}
                 </div>
