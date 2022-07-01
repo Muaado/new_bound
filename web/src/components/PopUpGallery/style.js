@@ -24,6 +24,9 @@ export const GalleryImage = styled.div`
     height: 550px;
     cursor: pointer;
     transform: translate(-50%, -50%);
+    @media ${device.onlyMobile} {
+      height: auto;
+    }
     & > div {
       display: flex;
       align-items: center;
@@ -34,7 +37,6 @@ export const GalleryImage = styled.div`
         max-height: 60rem !important;
         min-width: 50vw !important;
         max-width: 50vw !important;
-
         @media ${device.laptopM} {
           min-height: 50rem !important;
           max-height: 50rem !important;
