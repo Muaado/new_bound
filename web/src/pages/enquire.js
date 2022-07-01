@@ -15,7 +15,7 @@ import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
@@ -23,6 +23,7 @@ import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
+import PhoneInput from "../components/PhoneInput/PhoneInput";
 
 const validationSchema = yup
   .object({
@@ -94,7 +95,7 @@ const Enquire = (props) => {
   const { id: resortId } = getQueryStringParams();
 
   useEffect(() => {
-    if (resortId) {
+    if (resortId && elementRef?.current) {
       executeScroll(elementRef);
     }
   }, [resortId]);
@@ -214,11 +215,8 @@ const Enquire = (props) => {
         <EnquirePageStyles>
           <div className="content">
             <div className="main-div" style={{ paddingTop: 0 }}>
-              <Link to={pageFromUrl}>
-                <Button
-                  className="go-back-button"
-                  onClick={undefined}
-                >{`<< go back`}</Button>
+              <Link to={pageFromUrl} className="go-back-button">
+                <Button onClick={undefined}>{`<< go back`}</Button>
               </Link>
               <div className="room-villa-section">
                 <div className="header-content">
@@ -359,28 +357,23 @@ const Enquire = (props) => {
                   <input {...register("email")} type="email" placeholder="" />
                   <ErrorField error={email} />
                 </div>
-                <div className="three-column ">
+                <div className="three-column form-control">
                   <div className="form-control">
-                    <label>
-                      Telephone number<span className="required">*</span>
-                    </label>
-                    <div className="phone">
-                      <select {...register("countryCode")}>
-                        {countries.map(({ code, name }, index) => (
-                          <option
-                            key={`${code}-${index}`}
-                            value={`${code}${name}`}
-                          >
-                            {code} {name}
-                          </option>
-                        ))}
-                      </select>
-                      <input
-                        {...register("phoneNumber")}
-                        type="text"
-                        placeholder=""
-                      />
-                    </div>
+                    <label>Phone Number</label>
+                    <Controller
+                      control={control}
+                      name="phoneNumber"
+                      render={({ field: { onChange, value } }) => (
+                        <PhoneInput
+                          country="gb"
+                          value={value}
+                          onChange={(value) => {
+                            onChange(value);
+                          }}
+                          specialLabel=""
+                        />
+                      )}
+                    />
                     <ErrorField error={phoneNumber} />
                   </div>
 
@@ -427,6 +420,7 @@ const Enquire = (props) => {
                 ) : null}
                 <Button
                   type="submit"
+                  className="submit-btn"
                   style={{ background: "var(--secondary)", color: "#fff" }}
                 >
                   Enquire now
