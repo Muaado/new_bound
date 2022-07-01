@@ -449,7 +449,10 @@ const VilaTemplate = (props) => {
                 </Link>
               </div>
               <div className="gallery-carousel">
-                <PopUpGallery images={headerImages} />
+                <PopUpGallery
+                  images={headerImages}
+                  styles={{ height: "100%" }}
+                />
               </div>
             </div>
           </div>

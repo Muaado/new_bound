@@ -253,47 +253,24 @@ const VillaStyles = styled.div`
         }
 
         .gallery-carousel {
+          position: relative;
+          width: 50%;
+          margin: 5rem 0px 0rem 0;
+          padding: 0rem 1.5rem;
           height: 100%;
-          width: 100%;
-          max-width: 50vw;
-          padding-right: 1.5rem;
-          z-index: 100;
+          img {
+            height: 70vh;
+          }
+
+          @media ${device.onlyMobileSm} {
+            width: 100%;
+            margin-bottom: 10rem;
+            img {
+              height: 40vh;
+            }
+          }
           @media ${device.laptop} {
-            width: 65%;
-            max-width: unset;
-            align-self: center;
-          }
-
-          @media ${device.tablet} {
-            width: 85%;
-          }
-
-          @media ${device.onlyMobileS} {
-            padding: 0rem 1.5rem;
-            .carousel__image-container {
-              max-height: 300px;
-            }
-          }
-
-          @media ${device.mobileXL} {
             width: 100%;
-          }
-
-          &__button-right,
-          &__button-left {
-            display: none;
-          }
-
-          .carousel__image-container {
-            width: 100%;
-            height: 100%;
-            max-height: 600px;
-
-            ul {
-              li {
-                margin: 0;
-              }
-            }
           }
         }
       }

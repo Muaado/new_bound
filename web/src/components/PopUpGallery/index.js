@@ -8,7 +8,7 @@ import useWindowSize from "../../lib/useWindowSize";
 
 import Placeholder from "../../assets/placeholder.svg";
 
-const GalleryComponent = ({ images }) => {
+const GalleryComponent = ({ images, styles }) => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -75,21 +75,18 @@ const GalleryComponent = ({ images }) => {
         cellSpacing={cellSpacing}
         slidesToShow={numberOfSlides}
         totalItems={images?.images?.length}
+        style={styles}
         className=""
       >
         {images?.images.length
           ? images.images.map((image) => (
-              <div key={image.alt} className="carousel__image-container">
+              <React.Fragment key={image.alt}>
                 {image && image.asset && (
                   <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
                 )}
-              </div>
+              </React.Fragment>
             ))
-          : [1, 2, 3].map((item) => (
-              <div key={item} className="carousel__image-container">
-                <Placeholder />
-              </div>
-            ))}
+          : [1, 2, 3].map((item) => <Placeholder />)}
       </Carousel>
 
       {showLightbox && selectedImage !== null && (
