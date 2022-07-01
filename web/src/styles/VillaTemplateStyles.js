@@ -21,6 +21,11 @@ const VillaStyles = styled.div`
       letter-spacing: 16px;
     }
   }
+  .villa__property-overview {
+    h2 {
+      margin-top: 7rem;
+    }
+  }
   .room-price {
     width: 100%;
     text-align: center;
@@ -262,6 +267,11 @@ const VillaStyles = styled.div`
             height: 70vh;
           }
 
+          @media ${device.onlydesktopL} {
+            img {
+              max-height: 60vh;
+            }
+          }
           @media ${device.onlyMobileSm} {
             width: 100%;
             margin-bottom: 10rem;
@@ -446,12 +456,20 @@ const VillaStyles = styled.div`
     }
 
     &__room-features {
+      position: relative;
+      height: 700px;
       .roomfeaturetitle {
         margin: 7rem 0rem 5rem 0rem;
         color: #fff;
         font-size: 35px;
       }
       max-height: 700px !important;
+
+      .content {
+        position: absolute;
+        width: 100%;
+        min-height: 100%;
+      }
       // top:0;
 
       .hide {
@@ -497,6 +515,7 @@ const VillaStyles = styled.div`
         margin-top: -1px;
         border-bottom: 0.5px solid rgb(255, 255, 255, 0.5);
       }
+
       .accordion-label:hover {
         cursor: pointer;
         font-weight: 600;
@@ -606,7 +625,7 @@ const VillaStyles = styled.div`
       }
 
       img {
-        height: 520px;
+        height: 700px;
         width: 100%;
         position: absolute;
         z-index: -1;
@@ -751,6 +770,7 @@ const VillaStyles = styled.div`
       }
     }
     &__property-overview {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;

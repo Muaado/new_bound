@@ -412,6 +412,10 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 25px  !important;
       letter-spacing: 0.2rem !important;
     }
+    h3{
+       font-size: 20px  !important;
+      letter-spacing: 0 !important;
+    }
     .card-text-wrapper{
       font-size: 1.2rem;
     }
