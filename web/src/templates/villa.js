@@ -464,6 +464,8 @@ const VilaTemplate = (props) => {
                 roomFeatures?.backgroundImage.asset ? (
                   <Image
                     {...roomFeatures.backgroundImage}
+                    width={950}
+                    height={700}
                     alt={roomFeatures.backgroundImage.alt}
                   />
                 ) : (
@@ -508,7 +510,7 @@ const VilaTemplate = (props) => {
               resortTransferType={resortTransferType}
               timeToAirport={timeToAirport}
               _rawDescription={_rawDescription}
-              title="ISland Overview"
+              title="Island Overview"
             />
           </div>
 
