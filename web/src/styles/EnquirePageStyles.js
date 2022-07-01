@@ -15,6 +15,13 @@ export const EnquirePageStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 2fr;
 
+    @media ${device.onlyMobileS} {
+      grid-template-columns: 1fr;
+      padding: 10rem 0rem;
+      .submit-btn {
+        align-self: center;
+      }
+    }
     .main-div {
       padding: 3rem;
       display: flex;
@@ -32,6 +39,8 @@ export const EnquirePageStyles = styled.div`
 
     .go-back-button {
       margin: 0;
+      display: flex;
+      justify-content: center;
     }
 
     .room-villa-section {
@@ -42,6 +51,8 @@ export const EnquirePageStyles = styled.div`
       height: 100%;
       .header-content,
       .footer-content {
+        height: 100%;
+        width: 100%;
         .carousel {
           img {
             height: 40vh;
@@ -62,6 +73,7 @@ export const EnquirePageStyles = styled.div`
         }
         .resort-name {
           font-size: 22px;
+          text-align: center;
           align-self: center;
         }
 
@@ -80,6 +92,9 @@ export const EnquirePageStyles = styled.div`
             height: 3rem;
           }
         }
+        @media ${device.onlyMobileS} {
+          margin-top: 5rem;
+        }
       }
       .footer-content {
         align-self: center;
@@ -96,7 +111,9 @@ export const EnquirePageStyles = styled.div`
     color: black;
     display: grid;
     grid-template-columns: 1fr 1fr;
-
+    @media ${device.onlyMobileS} {
+      grid-template-columns: 1fr;
+    }
     @media ${device.tablet} {
       flex-direction: column;
       /* margin: 1rem 0; */
@@ -108,6 +125,9 @@ export const EnquirePageStyles = styled.div`
       .two-column {
         display: grid;
         grid-template-columns: 48% 48%;
+        @media ${device.onlyMobile} {
+          grid-template-columns: 1fr;
+        }
         gap: 4%;
         label {
           text-transform: uppercase;
@@ -121,6 +141,10 @@ export const EnquirePageStyles = styled.div`
       .three-column {
         display: grid;
         grid-template-columns: 48% 1fr 1fr;
+        @media ${device.onlyMobile} {
+          grid-template-columns: 1fr;
+        }
+
         gap: 4%;
         .phone {
           display: flex;
@@ -135,6 +159,9 @@ export const EnquirePageStyles = styled.div`
       .four-column {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        @media ${device.onlyMobile} {
+          grid-template-columns: 1fr;
+        }
         gap: 4%;
       }
     }

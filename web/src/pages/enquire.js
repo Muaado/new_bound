@@ -94,7 +94,7 @@ const Enquire = (props) => {
   const { id: resortId } = getQueryStringParams();
 
   useEffect(() => {
-    if (resortId) {
+    if (resortId && elementRef?.current) {
       executeScroll(elementRef);
     }
   }, [resortId]);
@@ -214,11 +214,8 @@ const Enquire = (props) => {
         <EnquirePageStyles>
           <div className="content">
             <div className="main-div" style={{ paddingTop: 0 }}>
-              <Link to={pageFromUrl}>
-                <Button
-                  className="go-back-button"
-                  onClick={undefined}
-                >{`<< go back`}</Button>
+              <Link to={pageFromUrl} className="go-back-button">
+                <Button onClick={undefined}>{`<< go back`}</Button>
               </Link>
               <div className="room-villa-section">
                 <div className="header-content">
@@ -359,7 +356,7 @@ const Enquire = (props) => {
                   <input {...register("email")} type="email" placeholder="" />
                   <ErrorField error={email} />
                 </div>
-                <div className="three-column ">
+                <div className="three-column form-control">
                   <div className="form-control">
                     <label>
                       Telephone number<span className="required">*</span>
@@ -427,6 +424,7 @@ const Enquire = (props) => {
                 ) : null}
                 <Button
                   type="submit"
+                  className="submit-btn"
                   style={{ background: "var(--secondary)", color: "#fff" }}
                 >
                   Enquire now
