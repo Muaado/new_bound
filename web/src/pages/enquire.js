@@ -15,7 +15,7 @@ import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
@@ -23,6 +23,7 @@ import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
+import PhoneInput from "../components/PhoneInput/PhoneInput";
 
 const validationSchema = yup
   .object({
@@ -358,26 +359,21 @@ const Enquire = (props) => {
                 </div>
                 <div className="three-column form-control">
                   <div className="form-control">
-                    <label>
-                      Telephone number<span className="required">*</span>
-                    </label>
-                    <div className="phone">
-                      <select {...register("countryCode")}>
-                        {countries.map(({ code, name }, index) => (
-                          <option
-                            key={`${code}-${index}`}
-                            value={`${code}${name}`}
-                          >
-                            {code} {name}
-                          </option>
-                        ))}
-                      </select>
-                      <input
-                        {...register("phoneNumber")}
-                        type="text"
-                        placeholder=""
-                      />
-                    </div>
+                    <label>Phone Number</label>
+                    <Controller
+                      control={control}
+                      name="phoneNumber"
+                      render={({ field: { onChange, value } }) => (
+                        <PhoneInput
+                          country="gb"
+                          value={value}
+                          onChange={(value) => {
+                            onChange(value);
+                          }}
+                          specialLabel=""
+                        />
+                      )}
+                    />
                     <ErrorField error={phoneNumber} />
                   </div>
 
