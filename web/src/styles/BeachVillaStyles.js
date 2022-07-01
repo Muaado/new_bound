@@ -145,6 +145,9 @@ export const BeachVillaStyles = styled.div`
   .villa_banners {
     margin-top: 40px;
     width: 100%;
+    @media ${device.onlyMobileSm} {
+      max-height: 300px;
+    }
   }
 
   .villa_banner_boundless,
