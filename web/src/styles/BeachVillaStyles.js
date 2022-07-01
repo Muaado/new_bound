@@ -86,7 +86,7 @@ export const BeachVillaStyles = styled.div`
         max-width: 100%;
         @media ${device.mobileS} {
           height: unset !important;
-          max-width: 90%;
+          /* max-width: 90%; */
         }
       }
     }
@@ -347,8 +347,11 @@ export const BeachVillaStyles = styled.div`
 
   .collection__details {
     padding: 20px 10px 5px 20px;
-    @media ${device.mobileM} {
-      padding: 20px 20px 0px 0px;
+    @media ${device.onlyMobileS} {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       .villaname {
         text-align: center;
       }
@@ -436,6 +439,10 @@ export const BeachVillaStyles = styled.div`
       svg {
         height: 25px;
         width: 25px;
+      }
+
+      @media ${device.onlyMobileS} {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
       }
 
       li {
