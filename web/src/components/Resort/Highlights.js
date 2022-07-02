@@ -5,7 +5,7 @@ import Image from "gatsby-plugin-sanity-image";
 import Placeholder from "../../assets/placeholder.svg";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-import { useIsTablet } from "../../hooks";
+import { useIsMobileLarge, useIsTablet } from "../../hooks";
 
 const HighlightsStyles = styled.div`
   z-index: 1;
@@ -67,10 +67,9 @@ const HighlightsStyles = styled.div`
       grid-template-columns: 1fr 1fr;
     }
 
-    @media ${device.tablet} {
-      grid-template-columns: 1fr;
-      display: none;
-    }
+    /* @media ${device.tablet} {
+      grid-template-columns: 1fr qfr;
+    } */
 
     li {
       position: relative;
@@ -95,6 +94,9 @@ const HighlightsStyles = styled.div`
       min-width: 230px;
       max-height: 260px;
       object-fit: cover;
+      @media ${device.onlyMobileS} {
+        min-height: unset;
+      }
     }
   }
   a {
@@ -157,7 +159,7 @@ const HighlightsStyles = styled.div`
 `;
 
 const Highlights = ({ highlights }) => {
-  const isTablet = useIsTablet();
+  const isMobile = useIsMobileLarge();
   return (
     <HighlightsStyles id="highlights" className="resort__highlights">
       <div
@@ -169,15 +171,13 @@ const Highlights = ({ highlights }) => {
         data-aos-easing="ease-in-out"
       >
         <h2>Highlights</h2>
-        {isTablet ? (
+        {isMobile ? (
           <Carousel
             speed={1000}
             wrapAround
             className="carousel"
             slidesToShow={1}
             cellSpacing={0}
-            renderCenterRightControls={() => undefined}
-            renderCenterLeftControls={() => undefined}
           >
             {highlights.map(({ name, imageThumb }) => (
               <li key={imageThumb?.alt}>

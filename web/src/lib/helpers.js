@@ -89,6 +89,7 @@ export const truncate = (str, limit) => {
     return str;
   }
 };
+
 const SSR = typeof window === "undefined";
 
 export const getQueryStringParams = (location_) => {
@@ -107,3 +108,42 @@ export const priceFormatter = new Intl.NumberFormat("en-US", {
   currency: "USD",
   minimumFractionDigits: 0,
 });
+
+export const computeVillaFields = ({ villa }) => {
+  const villaShowers = villa.showers;
+  const maxOccupancy = villa.maxOccupancy;
+  // console.log(villa);
+
+  let villMaxOccupancy = "-";
+  let villaShowers_ = "-";
+  let villaPrice = "-";
+  // for every 3rd villa, add villa_odd class as True
+
+  if (maxOccupancy.length == 2) {
+    villMaxOccupancy = maxOccupancy[0].number + " , " + maxOccupancy[1].number;
+  } else if (maxOccupancy.length == 1) {
+    villMaxOccupancy = maxOccupancy[0].number;
+  }
+
+  if (villaShowers.length == 2) {
+    villaShowers_ = villaShowers[0].number + villaShowers[1].number;
+  } else if (villaShowers.length == 1) {
+    villaShowers_ = villaShowers[0].number;
+  }
+
+  if (villa.price) {
+    villaPrice = priceFormatter.format(villa.price);
+  }
+
+  const villaUrl = `/${villa.resort.name
+    .toLowerCase()
+    .split(" ")
+    .join("-")}/${villa.name.toLowerCase().split(" ").join("-")}`;
+
+  return {
+    villaShowers: villaShowers_,
+    villaPrice,
+    villaUrl,
+    villMaxOccupancy,
+  };
+};

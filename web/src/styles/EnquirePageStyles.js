@@ -49,9 +49,10 @@ export const EnquirePageStyles = styled.div`
       justify-content: center;
       align-content: center;
       height: 100%;
+      margin-top: 5rem;
       .header-content,
       .footer-content {
-        height: 100%;
+        height: 50%;
         width: 100%;
         .carousel {
           img {
@@ -100,6 +101,7 @@ export const EnquirePageStyles = styled.div`
         align-self: center;
         margin-top: 5rem;
         width: 100%;
+        height: 100%;
         max-height: 300px;
       }
     }

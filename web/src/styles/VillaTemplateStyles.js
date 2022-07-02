@@ -499,6 +499,9 @@ const VillaStyles = styled.div`
         padding-left: 15%;
         padding-right: 15%;
         width: 100%;
+        @media ${device.onlyMobileSm} {
+          padding: 0;
+        }
       }
       .accordion-item:last-child {
         border-bottom: none;
