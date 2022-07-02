@@ -39,8 +39,6 @@ const Journey = ({ collections }) => {
           slidesToShow={1}
           disableEdgeSwiping
           dragging
-          renderCenterRightControls={() => ""}
-          renderCenterLeftControls={() => ""}
         >
           {collections.edges
             .sort((a, b) => a.node.rank - b.node.rank)

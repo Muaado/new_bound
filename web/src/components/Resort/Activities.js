@@ -99,32 +99,8 @@ const ActivitiesStyles = styled.div`
     }
   }
   .carousel {
-    /* margin: 4rem 0rem 10rem; */
-    .slider-slide,
-    .slider-list {
-      @media ${device.tablet} {
-        height: 35rem !important;
-      }
-      @media ${device.mobileXL} {
-        height: 25rem !important;
-      }
-    }
-
     .slider-control-bottomcenter {
       bottom: -5rem !important;
-    }
-
-    &__image-container {
-      @media ${device.tablet} {
-        height: 35rem !important;
-      }
-      @media ${device.mobileXL} {
-        height: 25rem !important;
-      }
-
-      img {
-        object-position: center;
-      }
     }
   }
   .card-text-wrapper {
@@ -167,12 +143,7 @@ const Activities = ({ activities }) => {
                 ))}
           </ul>
         ) : (
-          <Carousel
-            speed={1000}
-            className="carousel"
-            renderCenterLeftControls={() => undefined}
-            renderCenterRightControls={() => undefined}
-          >
+          <Carousel speed={1000} className="carousel">
             {activities?.map(({ name, imageThumb }) => (
               <li className="item item__carousel" key={imageThumb?.alt}>
                 <Overlay className="carousel-overlay" />

@@ -58,18 +58,22 @@ export const BeachVillaStyles = styled.div`
       }
     }
 
-    @media ${device.iphonePortLandscape} {
+    @media ${device.tablet} {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* @media ${device.iphonePortLandscape} {
       grid-template-columns: 1fr;
       gap: 1 rem;
       align-items: center;
       max-width: 100vw;
-    }
+    } */
 
     li.collection_wrap_item {
       list-style: none;
       background-color: #f9f9f9;
       width: 100%;
-      height: fit-content;
+      height: 100%;
       :hover {
         cursor: pointer;
       }
@@ -225,12 +229,17 @@ export const BeachVillaStyles = styled.div`
     // grid-template-columns: repeat(auto-fill, minmax(840px, 1fr));
     gap: 20px;
 
-    @media ${device.iphonePortLandscape} {
+    @media ${device.onlyMobileSm} {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    /* @media ${device.iphonePortLandscape} {
       grid-template-columns: 1fr;
       gap: 1 rem;
       align-items: center;
       max-width: 100vw;
-    }
+    } */
 
     width: 100%;
     position: relative;
@@ -327,12 +336,22 @@ export const BeachVillaStyles = styled.div`
         .tagline {
           font-size: 18px;
           margin-top: 40px;
+          @media ${device.onlyMobileSm} {
+            margin-top: 0px;
+          }
           color: #fff;
         }
 
         .description {
           padding: 10%;
           text-transform: none;
+
+          @media ${device.tablet} {
+            padding: 5% 10% 10% 10%;
+          }
+          @media ${device.onlyMobileSm} {
+            padding: 0%;
+          }
           color: #fff;
         }
       }

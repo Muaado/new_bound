@@ -201,8 +201,9 @@ const ResortTemplate = (props) => {
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
 
   const { elementRef, executeScroll } = useScrollToRef();
+
   React.useEffect(() => {
-    if (redirectedFrom && redirectedFrom === ROOM_PAGE) {
+    if (redirectedFrom) {
       executeScroll(elementRef);
     }
   }, [redirectedFrom]);

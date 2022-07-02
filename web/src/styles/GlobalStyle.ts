@@ -385,14 +385,13 @@ export const GlobalStyle = createGlobalStyle`
   .card-text-wrapper {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
       0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 60%;
-    border: 3px solid var(--primary);
-    background: rgb(0, 0, 0, 0.5);
+    border: 1.5px solid var(--primary);
+    background: rgb(0, 0, 0, 0.4);
     z-index: 2;
     color: #fff;
     position: absolute;
     text-transform: uppercase;
-
+    width: 20rem;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
       0px 4px 4px rgba(0, 0, 0, 0.25);
     top: 87%;
@@ -418,6 +417,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     .card-text-wrapper{
       font-size: 1.2rem;
+      text-align: center;
     }
     
   }

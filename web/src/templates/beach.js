@@ -5,14 +5,15 @@ import { BeachVillaStyles } from "../styles/BeachVillaStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import LeftSidebar from "../components/LeftSidebar";
-import { Overlay } from "../components";
+import { Overlay, Carousel } from "../components";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { navigate } from "gatsby";
-import { truncate } from "../lib/helpers";
+import { truncate, computeVillaFields, priceFormatter } from "../lib/helpers";
+import { useIsMobileLarge } from "../hooks";
 
 export const query = graphql`
   fragment Fragment_Villa on SanityVilla {
@@ -136,54 +137,6 @@ export const query = graphql`
   }
 `;
 
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
-
-const computeVillaFields = ({ villa }) => {
-  const villaShowers = villa.showers;
-  const maxOccupancy = villa.maxOccupancy;
-  // console.log(villa);
-
-  let villMaxOccupancy = "-";
-  let villaShowers_ = "-";
-  let villaPrice = "-";
-  // for every 3rd villa, add villa_odd class as True
-
-  if (maxOccupancy.length == 2) {
-    villMaxOccupancy = maxOccupancy[0].number + " , " + maxOccupancy[1].number;
-  } else if (maxOccupancy.length == 1) {
-    villMaxOccupancy = maxOccupancy[0].number;
-  }
-
-  if (villaShowers.length == 2) {
-    villaShowers_ = villaShowers[0].number + villaShowers[1].number;
-  } else if (villaShowers.length == 1) {
-    villaShowers_ = villaShowers[0].number;
-  }
-
-  if (villa.price) {
-    villaPrice = formatter.format(villa.price);
-  }
-
-  const villaUrl = `/${villa.resort.name
-    .toLowerCase()
-    .split(" ")
-    .join("-")}/${villa.name.toLowerCase().split(" ").join("-")}`;
-
-  return {
-    villaShowers: villaShowers_,
-    villaPrice,
-    villaUrl,
-    villMaxOccupancy,
-  };
-};
-
 const BeachTemplate = (props) => {
   const { data } = props;
   const collections = data && data.pagesdata;
@@ -196,7 +149,8 @@ const BeachTemplate = (props) => {
   const banners = collections?.banner;
 
   const site = data && data.site;
-
+  const isMobile = useIsMobileLarge();
+  console.log("isMobile", isMobile);
   return (
     <Layout>
       <LeftSidebar />
@@ -226,110 +180,132 @@ const BeachTemplate = (props) => {
               return (
                 <div key={_id} className="mastercol">
                   <h3 className="col_name">{CollectionName}</h3>
-                  <ul className="collection_wrap">
-                    {villas?.map((villa) => {
-                      const {
-                        villMaxOccupancy,
-                        villaPrice,
-                        villaShowers,
-                        villaUrl,
-                      } = computeVillaFields({ villa });
-                      return (
-                        <li
-                          key={villa._id}
-                          className="collection_wrap_item"
-                          onClick={() => {
-                            navigate(villaUrl);
-                          }}
-                        >
-                          <div className="collection__image">
-                            {villa.imageThumb && villa.imageThumb.asset && (
-                              <Image
-                                {...villa.imageThumb}
-                                alt={villa.imageThumb.alt}
-                                width={400}
-                                height={400}
-                              />
-                            )}
+                  {isMobile ? (
+                    <Carousel slideToShow={1} totalItems={villas.length}>
+                      {villas?.map((villa) => (
+                        <li key={villa._id}>
+                          <div className="card-text-wrapper">
+                            {truncate(villa.name, 40)}
                           </div>
-                          <div className="collection__details">
-                            <h4 className="villaname">
-                              {truncate(villa.name, 40)}
-                            </h4>
-                            <ul className="villa_icons">
-                              <li>
-                                <div className="inner-content">
-                                  <Measure className="villa_icon measureicon" />
-                                  <span className="villa_icon_label">
-                                    {villa.sizeSqm} sqm
-                                  </span>
-                                </div>
-                              </li>
-
-                              <li>
-                                <div className="inner-content">
-                                  <Shower />
-                                  <span className="villa_icon_label">
-                                    {villaShowers}
-                                  </span>
-                                </div>
-                              </li>
-
-                              <li>
-                                <div className="inner-content">
-                                  <Bed />
-                                  <span className="villa_icon_label">
-                                    {villa.numrooms}
-                                  </span>
-                                </div>
-                              </li>
-
-                              <li>
-                                <div className="inner-content">
-                                  <TwoPeople />
-                                  <span className="villa_icon_label">
-                                    {villMaxOccupancy}
-                                  </span>
-                                </div>
-                              </li>
-
-                              {villa.villaPoolTypes[0] && (
+                          {villa.imageThumb && villa.imageThumb.asset && (
+                            <Image
+                              {...villa.imageThumb}
+                              alt={villa.imageThumb.alt}
+                              width={400}
+                              height={400}
+                            />
+                          )}
+                        </li>
+                      ))}
+                    </Carousel>
+                  ) : (
+                    <ul className="collection_wrap">
+                      {villas?.map((villa) => {
+                        const {
+                          villMaxOccupancy,
+                          villaPrice,
+                          villaShowers,
+                          villaUrl,
+                        } = computeVillaFields({ villa });
+                        return (
+                          <li
+                            key={villa._id}
+                            className="collection_wrap_item"
+                            onClick={() => {
+                              navigate(villaUrl);
+                            }}
+                          >
+                            <div className="collection__image">
+                              {villa.imageThumb && villa.imageThumb.asset && (
+                                <Image
+                                  {...villa.imageThumb}
+                                  alt={villa.imageThumb.alt}
+                                  width={400}
+                                  height={400}
+                                />
+                              )}
+                            </div>
+                            <div className="collection__details">
+                              <h4 className="villaname">
+                                {truncate(villa.name, 40)}
+                              </h4>
+                              <ul className="villa_icons">
                                 <li>
                                   <div className="inner-content">
-                                    <SwimmingPool />
+                                    <Measure className="villa_icon measureicon" />
                                     <span className="villa_icon_label">
-                                      {villa.villaPoolTypes[0].poolType}
+                                      {villa.sizeSqm} sqm
                                     </span>
                                   </div>
                                 </li>
-                              )}
-                            </ul>
 
-                            <div className="villa_price-logo-wrapper">
-                              <div className="villa_price">
-                                <span className="price-from">From</span>{" "}
-                                <span className="font-bold">{villaPrice}</span>
-                                <span className="price-category">
-                                  per night
-                                </span>
-                              </div>
-                              {villa.resort.resortBrandLogo && (
-                                <div className="collection_brand_logo">
-                                  {villa.resort.resortBrandLogo &&
-                                    villa.resort.resortBrandLogo.asset && (
-                                      <Image
-                                        {...villa.resort.resortBrandLogo}
-                                        alt={villa.resort.resortBrandLogo.alt}
-                                      />
-                                    )}
+                                <li>
+                                  <div className="inner-content">
+                                    <Shower />
+                                    <span className="villa_icon_label">
+                                      {villaShowers}
+                                    </span>
+                                  </div>
+                                </li>
+
+                                <li>
+                                  <div className="inner-content">
+                                    <Bed />
+                                    <span className="villa_icon_label">
+                                      {villa.numrooms}
+                                    </span>
+                                  </div>
+                                </li>
+
+                                <li>
+                                  <div className="inner-content">
+                                    <TwoPeople />
+                                    <span className="villa_icon_label">
+                                      {villMaxOccupancy}
+                                    </span>
+                                  </div>
+                                </li>
+
+                                {villa.villaPoolTypes[0] && (
+                                  <li>
+                                    <div className="inner-content">
+                                      <SwimmingPool />
+                                      <span className="villa_icon_label">
+                                        {villa.villaPoolTypes[0].poolType}
+                                      </span>
+                                    </div>
+                                  </li>
+                                )}
+                              </ul>
+
+                              <div className="villa_price-logo-wrapper">
+                                <div className="villa_price">
+                                  <span className="price-from">From</span>{" "}
+                                  <span className="font-bold">
+                                    {villaPrice}
+                                  </span>
+                                  <span className="price-category">
+                                    per night
+                                  </span>
                                 </div>
-                              )}
+                                {villa.resort.resortBrandLogo && (
+                                  <div className="collection_brand_logo">
+                                    {villa.resort.resortBrandLogo &&
+                                      villa.resort.resortBrandLogo.asset && (
+                                        <Image
+                                          {...villa.resort.resortBrandLogo}
+                                          alt={villa.resort.resortBrandLogo.alt}
+                                        />
+                                      )}
+                                  </div>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                   {featuredvillas?.length ? (
                     <FeaturedVillas featuredVillas={featuredvillas} />
                   ) : null}
@@ -377,7 +353,7 @@ const FeaturedVillas = React.memo(({ featuredVillas }) => {
               </h4>
             </Link>
             <h4 className="featuredVillaPrice">
-              {`${formatter.format(featuredVilla.villaone.price)}`}
+              {`${priceFormatter.format(featuredVilla.villaone.price)}`}
             </h4>
             <Link to={featuredVilla.villaone.url}>
               <h4 className="featuredVillaView">View Room</h4>

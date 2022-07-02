@@ -20,13 +20,13 @@ import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
-import { MouseScroll } from "../components/Ui/MouseScroll";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
-import { ROOM_PAGE, ACCOMODATIONS_SECTION } from "../constants";
+import { ROOM_PAGE } from "../constants";
 import { useScrollToRef } from "../hooks";
+import { computeVillaFields } from "../lib/helpers";
 
 export const query = graphql`
   fragment SanityPricingRateModel on SanityRateModel {
@@ -81,6 +81,7 @@ export const query = graphql`
           alt
         }
         features {
+          _key
           _rawDescription
           title
         }
@@ -219,44 +220,36 @@ export const query = graphql`
 `;
 
 const VilaTemplate = (props) => {
-  const { data, errors } = props;
+  const { data } = props;
   const villa = data && data.villa;
-  const pageFrom = props?.location?.state?.pageFrom;
   const roomSlideIndex = props?.location?.state?.currentSlideIndex;
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
-  const size = useWindowSize();
+  const pageFrom = props?.location?.state?.pageFrom;
   const { elementRef, executeScroll } = useScrollToRef();
+  if (pageFrom) {
+    executeScroll(elementRef);
+  }
+
   useEffect(() => {
-    const { width } = size;
-  }, [size]);
+    if (pageFrom) {
+      executeScroll(elementRef);
+    }
+  }, [pageFrom]);
 
   const [activeFeature, setActiveFeature] = useState(-1);
 
-  useEffect(() => {
-    executeScroll(elementRef);
-  }, []);
-
   const {
-    _id: villaId,
     name,
-    tagline,
     _rawDescription: _rawDescriptionVilla,
     short_desc,
-    // imageWebW
     roomFeatures,
-    maxOccupancy,
-    sizeSqm,
-    showers,
-    villaPoolTypes,
     heroImage,
     headerImages,
-    numrooms,
   } = villa;
 
   const {
-    id,
     name: resortName,
     locationAtoll,
     numberOfBars,
@@ -265,37 +258,14 @@ const VilaTemplate = (props) => {
     resortTransferType,
     timeToAirport,
     _rawDescription,
-    reviews,
     activities,
-
-    gallery: galleries,
     highlights,
   } = villa.resort;
-
-  let formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    // These options are needed to round to whole numbers if that's what you want.
-    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  });
 
   const randomHeaderImage =
     headerImages?.images[
       Math.floor(Math.random() * headerImages?.images.length)
     ];
-
-  let numberOfShowers = 0;
-
-  showers.forEach(({ number }) => (numberOfShowers += number));
-
-  let new_price = "";
-  if (villa.price != "null") {
-    villa["price_new"] = formatter.format(villa.price) + "  PP";
-  } else if (villa.price) {
-    villa["price_new"] = "-";
-  }
 
   const handleActiveFeature = (index) => {
     if (activeFeature !== index) {
@@ -336,9 +306,7 @@ const VilaTemplate = (props) => {
                   height={400}
                   alt={randomHeaderImage.alt}
                 />
-              ) : (
-                <div></div>
-              )}
+              ) : null}
             </div>
             <h1 className="villa__image-title" id="header-text">
               <Link to={`/${resortName.toLowerCase().split(" ").join("-")}`}>
@@ -373,89 +341,12 @@ const VilaTemplate = (props) => {
               </ul>
             </div>
           </div>
-          <div className="villa__header" ref={elementRef}>
-            <Overlay opacity={1} bgColor="white" />
-            <div
-              className="content"
-              id="overview-content"
-              data-aos="fade-in"
-              data-aos-delay="50"
-              data-aos-duration="1000"
-              data-aos-easing="ease-in-out"
-            >
-              <div className="container">
-                {villa.uniqueCode && (
-                  <div className="unique_code_wrap">
-                    <strong>#</strong>
-                    {villa.uniqueCode}
-                  </div>
-                )}
-                <h2 className="villa_name_title">{name}</h2>
-                {tagline && <p className="tagline">{tagline}</p>}
-                <PortableText blocks={_rawDescriptionVilla} />
-                <ul className="villa__header-icons">
-                  <li>
-                    <Measure />
-                    {sizeSqm}m2
-                  </li>
-                  <li>
-                    <TwoPeople />
-                    {maxOccupancy.map(
-                      ({ number }, index) =>
-                        `${number}${
-                          index + 1 !== maxOccupancy.length ? "," : ""
-                        } `
-                    )}
-                  </li>
-                  <li>
-                    <Bed />
-                    {numrooms}
-                  </li>
-                  <li>
-                    <Shower />
-                    {numberOfShowers}
-                  </li>
-                  {villaPoolTypes[0] && (
-                    <li>
-                      <SwimmingPool />
-                      {villaPoolTypes[0].poolType}
-                    </li>
-                  )}
-                </ul>
-                {rateModel ? (
-                  <PricingDropDown
-                    items={rateModel}
-                    headerImages={headerImages}
-                    roomName={villa.name}
-                  />
-                ) : (
-                  <div className="room-price"> Price On Request</div>
-                )}
-                <Link
-                  to={`/enquire?id=${villaId}`}
-                  state={{
-                    pageFromUrl: getVillaUrl({
-                      name: villa?.name,
-                      resortName: villa?.resort.name,
-                    }),
-                  }}
-                  className="enquire-btn"
-                >
-                  <Button
-                    style={{ paddingLeft: "100px", paddingRight: "100px" }}
-                  >
-                    ENQUIRE
-                  </Button>
-                </Link>
-              </div>
-              <div className="gallery-carousel">
-                <PopUpGallery
-                  images={headerImages}
-                  styles={{ height: "100%" }}
-                />
-              </div>
-            </div>
-          </div>
+
+          <VillaHeader
+            villa={villa}
+            rateModel={rateModel}
+            elementRef={elementRef}
+          />
 
           <div className="villa__room-features" id="room-features">
             <div className="content">
@@ -476,8 +367,8 @@ const VilaTemplate = (props) => {
               <ul className="accordion">
                 <h2 className="roomfeaturetitle">Room features</h2>
                 {roomFeatures?.features?.map(
-                  ({ title, _rawDescription }, index) => (
-                    <li key={title} className="accordion-item">
+                  ({ _key, title, _rawDescription }, index) => (
+                    <li key={_key} className="accordion-item">
                       <input
                         id={index}
                         className="hide"
@@ -520,20 +411,8 @@ const VilaTemplate = (props) => {
             <Restaurants restaurants={restaurants.nodes} />
           )}
 
-          {/* <Resorts resorts={resorts.nodes} /> */}
-          {/* <Reviews reviews={reviews} /> */}
           {spas.nodes && (
-            <div
-              className="villa__spa-overview"
-              // heightMode="max"
-              // renderCenterRightControls={({ nextSlide }) => (
-              //   <CarouselButton onClick={nextSlide} chevronRight={true} />
-              // )}
-              // renderCenterLeftControls={({ previousSlide }) => (
-              //   <CarouselButton onClick={previousSlide} />
-              // )}
-            >
-              {/* get first spa from spas and use Spa component to print spa information */}
+            <div className="villa__spa-overview">
               {spas.nodes.map((spa) => (
                 <Spa spa={spa} key={spa.name} />
               ))}
@@ -556,3 +435,92 @@ const VilaTemplate = (props) => {
 };
 
 export default VilaTemplate;
+
+export const VillaHeader = ({ villa, elementRef, rateModel }) => {
+  const {
+    _id: villaId,
+    tagline,
+    _rawDescription: _rawDescriptionVilla,
+    sizeSqm,
+    villaPoolTypes,
+    headerImages,
+    numrooms,
+  } = villa;
+
+  const { villaShowers, villMaxOccupancy } = computeVillaFields({ villa });
+  return (
+    <div id="room-overview" className="villa__header" ref={elementRef}>
+      <Overlay opacity={1} bgColor="white" />
+      <div
+        className="content"
+        id="overview-content"
+        data-aos="fade-in"
+        data-aos-delay="50"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out"
+      >
+        <div className="container">
+          {villa.uniqueCode && (
+            <div className="unique_code_wrap">
+              <strong>#</strong>
+              {villa.uniqueCode}
+            </div>
+          )}
+          <h2 className="villa_name_title">{villa.name}</h2>
+          {tagline && <p className="tagline">{tagline}</p>}
+          <PortableText blocks={_rawDescriptionVilla} />
+          <ul className="villa__header-icons">
+            <li>
+              <Measure />
+              {sizeSqm}m2
+            </li>
+            <li>
+              <TwoPeople />
+              {villMaxOccupancy}
+            </li>
+            <li>
+              <Bed />
+              {numrooms}
+            </li>
+            <li>
+              <Shower />
+              {villaShowers}
+            </li>
+            {villaPoolTypes[0] && (
+              <li>
+                <SwimmingPool />
+                {villaPoolTypes[0].poolType}
+              </li>
+            )}
+          </ul>
+          {rateModel ? (
+            <PricingDropDown
+              items={rateModel}
+              headerImages={headerImages}
+              roomName={villa.name}
+            />
+          ) : (
+            <div className="room-price"> Price On Request</div>
+          )}
+          <Link
+            to={`/enquire?id=${villaId}`}
+            state={{
+              pageFromUrl: getVillaUrl({
+                name: villa?.name,
+                resortName: villa?.resort.name,
+              }),
+            }}
+            className="enquire-btn"
+          >
+            <Button style={{ paddingLeft: "100px", paddingRight: "100px" }}>
+              ENQUIRE
+            </Button>
+          </Link>
+        </div>
+        <div className="gallery-carousel">
+          <PopUpGallery images={headerImages} styles={{ height: "100%" }} />
+        </div>
+      </div>
+    </div>
+  );
+};
