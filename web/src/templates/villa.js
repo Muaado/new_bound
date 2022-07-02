@@ -226,12 +226,12 @@ const VilaTemplate = (props) => {
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
-
+  const pageFrom = props?.location?.state?.pageFrom;
   const { elementRef, executeScroll } = useScrollToRef();
   if (pageFrom) {
     executeScroll(elementRef);
   }
-  const pageFrom = props?.location?.state?.pageFrom;
+
   useEffect(() => {
     if (pageFrom) {
       executeScroll(elementRef);
