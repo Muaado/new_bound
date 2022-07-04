@@ -191,8 +191,8 @@ const BeachTemplate = (props) => {
                             <Image
                               {...villa.imageThumb}
                               alt={villa.imageThumb.alt}
-                              width={400}
-                              height={400}
+                              width={720}
+                              height={576}
                             />
                           )}
                         </li>
@@ -220,8 +220,8 @@ const BeachTemplate = (props) => {
                                 <Image
                                   {...villa.imageThumb}
                                   alt={villa.imageThumb.alt}
-                                  width={400}
-                                  height={400}
+                                  width={720}
+                                  height={576}
                                 />
                               )}
                             </div>
