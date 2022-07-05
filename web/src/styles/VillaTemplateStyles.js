@@ -88,10 +88,10 @@ const VillaStyles = styled.div`
   .villa {
     &__image {
       position: relative;
-
       .image-container {
         max-height: 85vh;
         overflow-y: hidden;
+        height: 80vh;
         @media ${device.tabletL} {
           height: 80vh;
         }
@@ -137,10 +137,6 @@ const VillaStyles = styled.div`
 
       &-title:hover {
         font-weight: bold;
-      }
-
-      .mouse_scroll {
-        bottom: 35% !important;
       }
     }
 

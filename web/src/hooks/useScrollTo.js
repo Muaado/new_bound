@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
-const scrollToRef = (ref) =>
-  ref?.current?.scrollIntoView({ alignToTop: false });
+const scrollToRef = (ref) => ref?.current?.scrollIntoView();
+
 export const useScrollToRef = () => {
   let elementRef = useRef(null);
   const executeScroll = () => scrollToRef(elementRef);
@@ -10,5 +10,6 @@ export const useScrollToRef = () => {
       elementRef = null;
     };
   }, []);
+
   return { elementRef, executeScroll };
 };
