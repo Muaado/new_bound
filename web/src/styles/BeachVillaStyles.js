@@ -80,12 +80,24 @@ export const BeachVillaStyles = styled.div`
       .collection__image {
         display: inline-block;
         overflow: hidden;
+        height: 300px;
+        @media ${device.onlyDesktopS} {
+          height: 400px;
+        }
         img {
           height: 100%;
           width: 100%;
+          max-height: 100%;
+          min-height: 100%;
+          :hover {
+            transform: scale(1.1);
+          }
+          transition: all 0.5s ease;
+          vertical-align: middle;
+          object-fit: cover;
+          object-position: 100% 100%;
         }
-        min-height: 300px;
-        max-height: 300px;
+
         width: 100%;
         max-width: 100%;
         @media ${device.mobileS} {
@@ -94,18 +106,6 @@ export const BeachVillaStyles = styled.div`
         }
       }
     }
-  }
-
-  .collection__image img {
-    width: 100%;
-    min-height: 390px;
-    max-height: 390px;
-    object-fit: cover;
-    :hover {
-      transform: scale(1.1);
-    }
-    transition: all 0.5s ease;
-    vertical-align: middle;
   }
 
   .collectionpage_title {

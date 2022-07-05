@@ -228,9 +228,6 @@ const VilaTemplate = (props) => {
   const restaurants = data && data.restaurants;
   const pageFrom = props?.location?.state?.pageFrom;
   const { elementRef, executeScroll } = useScrollToRef();
-  if (pageFrom) {
-    executeScroll(elementRef);
-  }
 
   useEffect(() => {
     if (pageFrom) {
