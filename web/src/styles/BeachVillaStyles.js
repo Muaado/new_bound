@@ -81,6 +81,9 @@ export const BeachVillaStyles = styled.div`
         display: inline-block;
         overflow: hidden;
         height: 300px;
+        @media ${device.onlyDesktopS} {
+          height: 400px;
+        }
         img {
           height: 100%;
           width: 100%;
@@ -91,6 +94,8 @@ export const BeachVillaStyles = styled.div`
           }
           transition: all 0.5s ease;
           vertical-align: middle;
+          object-fit: cover;
+          object-position: 100% 100%;
         }
 
         width: 100%;

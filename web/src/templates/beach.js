@@ -220,8 +220,8 @@ const BeachTemplate = (props) => {
                                 <Image
                                   {...villa.imageThumb}
                                   alt={villa.imageThumb.alt}
-                                  width={720}
-                                  height={576}
+                                  width={400}
+                                  height={400}
                                 />
                               )}
                             </div>

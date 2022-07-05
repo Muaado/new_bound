@@ -8,6 +8,7 @@ const mobileLandscapeWidth = `${mobileLandscapeWidthPixels}px`;
 const mobileWidthPixels = 320;
 const mobileLargeWidthPixels = 425;
 const mobileWidth = `${mobileWidthPixels}px`;
+const desktopWidthPixels = 1440;
 
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
@@ -33,3 +34,5 @@ export const useIsTablet = () =>
   useMediaQuery(`(max-width: ${tabletWidthPixels}px)`);
 export const useIsMobileLarge = () =>
   useMediaQuery(`(max-width: ${mobileLargeWidthPixels + 1}px)`);
+export const useIsDesktop = () =>
+  useMediaQuery(`(min-width: ${desktopWidthPixels + 1}px)`);
