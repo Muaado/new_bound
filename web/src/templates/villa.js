@@ -346,21 +346,17 @@ const VilaTemplate = (props) => {
           />
 
           <div className="villa__room-features" id="room-features">
+            <Overlay zIndex={1} opacity={0.5} />
+            {roomFeatures?.backgroundImage &&
+            roomFeatures?.backgroundImage.asset ? (
+              <Image
+                {...roomFeatures.backgroundImage}
+                width={950}
+                height={700}
+                alt={roomFeatures.backgroundImage.alt}
+              />
+            ) : null}
             <div className="content">
-              <div className="roomfeatwrap">
-                {roomFeatures?.backgroundImage &&
-                roomFeatures?.backgroundImage.asset ? (
-                  <Image
-                    {...roomFeatures.backgroundImage}
-                    width={950}
-                    height={700}
-                    alt={roomFeatures.backgroundImage.alt}
-                  />
-                ) : (
-                  <div></div>
-                )}
-              </div>
-
               <ul className="accordion">
                 <h2 className="roomfeaturetitle">Room features</h2>
                 {roomFeatures?.features?.map(

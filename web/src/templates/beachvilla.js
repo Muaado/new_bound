@@ -2,7 +2,7 @@ import { graphql, Link } from "gatsby";
 import BlogPost from "../components/Post/blog-post";
 import React from "react";
 import Layout from "../containers/layout";
-import { BeachVillaStyles } from "../styles/BeachVillaStyles";
+import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import LeftSidebar from "../components/LeftSidebar";
@@ -215,7 +215,7 @@ const BeachVillaTemplate = (props) => {
   return (
     <Layout>
       <LeftSidebar />
-      <BeachVillaStyles>
+      <CollectionStyles>
         <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
           <div className="collection__image_hero">
@@ -309,7 +309,7 @@ const BeachVillaTemplate = (props) => {
         </div>
 
         <ContactUs contactUs={site.contactUs} />
-      </BeachVillaStyles>
+      </CollectionStyles>
     </Layout>
   );
 };

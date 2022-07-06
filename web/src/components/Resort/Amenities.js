@@ -37,6 +37,9 @@ const AmenitiesStyles = styled.div`
     display: flex;
     flex-direction: column;
     padding-bottom: 5rem;
+    @media ${device.onlyMobileSm} {
+      padding-bottom: 0rem;
+    }
     ul {
       align-self: center;
       width: fit-content;

@@ -94,6 +94,9 @@ export const HandCraftedJourneysStyles = styled.div`
     margin: 7rem 0rem 5rem 0;
     align-items: center;
     flex-direction: column;
+    @media ${device.onlyMobileSm} {
+      margin: 5rem 0rem 0rem 0;
+    }
   }
 
   h2 {
@@ -195,14 +198,17 @@ export const HandCraftedJourneysStyles = styled.div`
       h3,
       p {
         text-align: left;
+        @media ${device.onlyMobileSm} {
+          text-align: justify;
+        }
       }
     }
 
     @media ${device.laptop} {
       padding: 10rem 10%;
     }
-    @media ${device.tablet} {
-      padding: 0 1.5rem 10rem 1.5rem;
+    @media ${device.onlyMobileS} {
+      padding: 0 1.5rem 5rem 1.5rem;
     }
   }
 
@@ -289,10 +295,11 @@ export const MagazineStyles = styled.div`
       text-transform: unset;
     }
     p {
-      /* max-width: 25rem; */
       @media ${device.tablet} {
         align-self: center;
-        /* max-width: unset; */
+      }
+      @media ${device.onlyMobileSm} {
+        text-align: justify;
       }
     }
   }
@@ -311,6 +318,12 @@ export const MagazineStyles = styled.div`
     padding: 0 0% 10rem 0%;
     .header {
       margin: 7rem 0rem 5rem 0rem;
+    }
+    @media ${device.onlyMobileSm} {
+      padding: 0 0% 5rem 0%;
+      .header {
+        margin: 5rem 0rem 5rem 0rem;
+      }
     }
   }
 `;

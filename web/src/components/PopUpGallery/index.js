@@ -75,6 +75,7 @@ const GalleryComponent = ({ images, styles }) => {
         cellSpacing={cellSpacing}
         slidesToShow={numberOfSlides}
         totalItems={images?.images?.length}
+        getCurrentSlideIndex={(activeSlide) => setSelectedImage(activeSlide)}
         style={styles}
         className=""
       >

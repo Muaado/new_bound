@@ -20,9 +20,15 @@ const ActivitiesStyles = styled.div`
     padding: 0 1.5rem 10rem 1.5rem;
   }
 
+  @media ${device.onlyMobileSm} {
+    padding: 0 1.5rem 5rem 1.5rem;
+  }
+
   h2 {
     margin: 7rem 0rem 5rem 0;
-    /* letter-spacing: 1rem; */
+    @media ${device.onlyMobileSm} {
+      margin: 5rem 0rem 5rem 0;
+    }
   }
   p {
     margin-bottom: 5rem;
@@ -98,11 +104,7 @@ const ActivitiesStyles = styled.div`
       }
     }
   }
-  .carousel {
-    .slider-control-bottomcenter {
-      bottom: -5rem !important;
-    }
-  }
+
   .card-text-wrapper {
     top: 50% !important;
   }

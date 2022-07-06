@@ -15,11 +15,14 @@ const RestaurantsStyles = styled.div`
   flex-direction: column;
 
   @media ${device.laptop} {
-    padding: 0 10% 10rem 10%;
+    padding: 0 10 10rem 10%;
   }
 
   @media ${device.tablet} {
     padding: 0 1.5rem 10rem 1.5rem;
+  }
+  @media ${device.onlyMobileSm} {
+    padding: 0 1.5rem 5rem 1.5rem;
   }
 
   h2 {
@@ -75,6 +78,7 @@ const RestaurantsStyles = styled.div`
     display: flex;
     font-size: 1.7rem;
     font-weight: 100;
+    font-family: "rivera_light_regular", sans-serif;
     margin-bottom: 2rem;
     color: #a9a7a7;
     text-transform: capitalize;
@@ -111,6 +115,23 @@ const RestaurantsStyles = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  @media ${device.onlyMobileSm} {
+    .alternate-name {
+      margin-bottom: 1rem;
+    }
+    .rest-name {
+      padding: 5px 0 10px 0;
+    }
+    ul {
+      li {
+        gap: 2rem;
+      }
+    }
+    h2 {
+      margin: 5rem 0 5rem 0;
+    }
+  }
 `;
 const Restaurants = ({ restaurants }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
@@ -139,8 +160,8 @@ const Restaurants = ({ restaurants }) => {
                   )}
                 </div>
                 <div className="villa__restaurants__text">
-                  <p className="rest-name">{name}</p>
-                  <span className="alternate-name">{alternateName}</span>
+                  <h3 className="rest-name">{name}</h3>
+                  <h4 className="alternate-name">{alternateName}</h4>
                   <p className="restaurant-description">{description}</p>
                 </div>
               </li>

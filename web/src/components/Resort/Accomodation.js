@@ -10,6 +10,7 @@ import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
 import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
+import { useIsMobile, useIsTablet } from "../../hooks";
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -23,7 +24,10 @@ const AccomodationStyles = styled.div`
   }
 
   .slider-control-bottomcenter {
-    top: 70% !important;
+    top: 65% !important;
+    @media ${device.mobileS} {
+      top: 60% !important;
+    }
   }
 
   .slider-control-centerright,
@@ -98,13 +102,14 @@ const AccomodationStyles = styled.div`
       font-size: 25px;
       text-align: left;
       line-height: 4rem;
+      color: #505050;
       padding-bottom: 10px;
       // min-height: 90px;
       font-family: "rivera_light_regular", sans-serif;
 
       @media ${device.tablet} {
         /* text-align: left; */
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         margin-right: 1rem;
       }
     }
@@ -130,11 +135,12 @@ const Accomodation = ({
   const [currentSlideIndex, setCurrentSlideIndex] = useState(
     currentSlideIndex_ || 0
   );
+  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
   const size = useWindowSize();
   useEffect(() => {
     const { width } = size;
     const isMobileOnly = width <= 576;
-    const isTablet = width > 576 && width < 992;
     const isSreenSM = width > 992 && width < 1200;
     const isSreenLG = width > 1200 && width < 1440;
     const screenXL = width > 1440 && width < 1600;
@@ -179,8 +185,8 @@ const Accomodation = ({
           getCurrentSlideIndex={(slideIndex) =>
             setCurrentSlideIndex(slideIndex)
           }
-          renderBottomCenterControls={false}
           cellSpacing={cellSpacing}
+          {...(!isMobile ? { renderBottomCenterControls: false } : {})}
         >
           {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
             <Link
@@ -201,7 +207,7 @@ const Accomodation = ({
                 <Placeholder />
               )}
               <div className="roomFooter">
-                <p className="roomname">{name}</p>
+                <h3 className="roomname">{name}</h3>
                 {priceOnRequest ? (
                   <p>Price On Request</p>
                 ) : (

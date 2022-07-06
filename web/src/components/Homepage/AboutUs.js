@@ -32,20 +32,17 @@ const AboutUsSectionStyles = styled.div`
     }
     &__text {
       h2 {
-        /* font-family: "Playfair display"; */
         text-transform: uppercase;
-        /* font-size: 5rem; */
-
         margin-bottom: 2rem;
         text-align: left !important;
-        @media ${device.tabletL} {
-          /* text-align: center !important; */
-        }
       }
 
       p {
         max-width: 80rem;
         margin: 2rem 0;
+        @media ${device.onlyMobileSm} {
+          text-align: justify;
+        }
       }
     }
   }
@@ -53,13 +50,7 @@ const AboutUsSectionStyles = styled.div`
 
 const AboutUs = ({ aboutUs }) => {
   return (
-    <AboutUsSectionStyles
-    // className="about-us"
-    // data-aos="fade-up"
-    // data-aos-delay="50"
-    // data-aos-duration="1000"
-    // data-aos-easing="ease-in-out"
-    >
+    <AboutUsSectionStyles>
       <Overlay bgColor="white" opacity={1} />
       <div className="about-us__image-container">
         {aboutUs.image && aboutUs.image.asset && (
@@ -82,7 +73,6 @@ const AboutUs = ({ aboutUs }) => {
             blocks={aboutUs._rawDescription}
           />
         )}
-        {/* <p>{}</p> */}
       </div>
     </AboutUsSectionStyles>
   );

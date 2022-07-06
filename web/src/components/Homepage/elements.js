@@ -28,6 +28,9 @@ export const JourneyStyles = styled.div`
 
   h2 {
     margin: 10rem 0 5rem 0;
+    @media ${device.onlyMobileSm} {
+      margin: 5rem 0 0 0;
+    }
   }
 
   h1 {
@@ -70,15 +73,15 @@ export const JourneyStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 1rem;
+    @media ${device.onlyMobileSm} {
+      grid-template-columns: 1fr;
+      padding: 0 1.5rem;
+    }
 
     a {
       position: relative;
       height: 35rem;
       z-index: 1;
-      img {
-        /* z-index: 1; */
-      }
-
       grid-column: 1 / span;
       &:first-of-type {
         grid-column: 1/4;
@@ -109,13 +112,10 @@ export const JourneyStyles = styled.div`
           z-index: 999;
         }
       }
-    }
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      position: relative;
+      @media ${device.onlyMobileSm} {
+        grid-column: 1 !important;
+        height: 30rem !important;
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../styles/deviceSizes";
-export const BeachVillaStyles = styled.div`
+export const CollectionStyles = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
@@ -42,7 +42,7 @@ export const BeachVillaStyles = styled.div`
     @media ${device.onlyMobile} {
       font-size: 3rem;
       letetr-spacing: 0.2rem;
-      text-align: center;
+      text-align: left;
     }
   }
 
@@ -89,13 +89,16 @@ export const BeachVillaStyles = styled.div`
           width: 100%;
           max-height: 100%;
           min-height: 100%;
-          :hover {
-            transform: scale(1.1);
-          }
           transition: all 0.5s ease;
           vertical-align: middle;
           object-fit: cover;
           object-position: 100% 100%;
+        }
+
+        :hover {
+          img {
+            transform: scale(1.1);
+          }
         }
 
         width: 100%;
@@ -103,6 +106,16 @@ export const BeachVillaStyles = styled.div`
         @media ${device.mobileS} {
           height: unset !important;
           /* max-width: 90%; */
+        }
+        .card-text-wrapper {
+          width: 25rem;
+          top: 15%;
+          z-index: 2;
+          h4 {
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+          }
         }
       }
     }

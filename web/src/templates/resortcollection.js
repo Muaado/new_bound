@@ -6,7 +6,7 @@ import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
 import { getResortUrl, getVillaUrl, toPlainText } from "../lib/helpers";
-import { BeachVillaStyles } from "../styles/BeachVillaStyles";
+import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import LeftSidebar from "../components/LeftSidebar";
@@ -112,7 +112,7 @@ const ResortCollectionTemplate = (props) => {
   return (
     <Layout>
       <LeftSidebar />
-      <BeachVillaStyles>
+      <CollectionStyles>
         <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (
           <div className="collection__image_hero">
@@ -168,7 +168,7 @@ const ResortCollectionTemplate = (props) => {
         </div>
 
         <ContactUs contactUs={site.contactUs} />
-      </BeachVillaStyles>
+      </CollectionStyles>
     </Layout>
   );
 };
