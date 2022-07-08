@@ -11,6 +11,7 @@ import { Button } from "../Button";
 import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
 import { useIsMobile, useIsTablet } from "../../hooks";
+import { PriceTemplate } from "../PriceTemplate";
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -76,27 +77,6 @@ const AccomodationStyles = styled.div`
 
     .roomFooter {
       padding: 2rem;
-      .room_price {
-        font-size: 1.6rem;
-        -webkit-letter-spacing: 0.3rem;
-        -moz-letter-spacing: 0.3rem;
-        -ms-letter-spacing: 0.3rem;
-        letter-spacing: 0.3rem;
-        color: #7d7d7d;
-        .price-from {
-          text-transform: uppercase;
-          font-weight: 400 !important;
-          font-size: 10px;
-        }
-        .font-bold {
-          font-family: "rivera_bold_regular", "sans-serif";
-        }
-        .price-category {
-          font-size: 11px;
-          margin-left: 5px;
-        }
-        // margin-left: 20px;
-      }
     }
     .roomname {
       font-size: 25px;
@@ -211,11 +191,7 @@ const Accomodation = ({
                 {priceOnRequest ? (
                   <p>Price On Request</p>
                 ) : (
-                  <div className="room_price">
-                    <span className="price-from">From</span>{" "}
-                    <span className="font-bold">{formatter.format(price)}</span>
-                    <span className="price-category">per night</span>
-                  </div>
+                  <PriceTemplate price={formatter.format(price)} />
                 )}
                 <Button>View Room</Button>
               </div>

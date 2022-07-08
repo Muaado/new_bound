@@ -84,6 +84,7 @@ export const CollectionStyles = styled.div`
         @media ${device.onlyDesktopS} {
           height: 400px;
         }
+
         img {
           height: 100%;
           width: 100%;
@@ -106,16 +107,6 @@ export const CollectionStyles = styled.div`
         @media ${device.mobileS} {
           height: unset !important;
           /* max-width: 90%; */
-        }
-        .card-text-wrapper {
-          width: 25rem;
-          top: 15%;
-          z-index: 2;
-          h4 {
-            font-size: 14px;
-            font-weight: normal;
-            text-align: center;
-          }
         }
       }
     }
@@ -145,6 +136,34 @@ export const CollectionStyles = styled.div`
 
   .mastercol {
     margin: 4rem 0;
+    .roomname {
+      font-size: 25px;
+      text-align: left;
+      color: #505050;
+      padding: 20px 0px 10px 0px;
+      // min-height: 90px;
+      font-family: "rivera_light_regular", sans-serif;
+
+      @media ${device.tablet} {
+        /* text-align: left; */
+        font-size: 1.8rem;
+        margin-right: 1rem;
+      }
+    }
+    .slider-control-bottomcenter {
+      top: 58% !important;
+      @media ${device.mobileSmall} {
+        top: 56% !important;
+      }
+      @media ${device.mobileS} {
+        top: 52% !important;
+      }
+    }
+
+    .slider-control-centerright,
+    .slider-control-centerleft {
+      top: 30% !important;
+    }
   }
 
   .banner-overlay {
@@ -162,7 +181,11 @@ export const CollectionStyles = styled.div`
   .villa_banners {
     margin-top: 40px;
     width: 100%;
+
     @media ${device.onlyMobileSm} {
+      margin-left: -3.16%;
+      margin-right: -10px;
+      width: 100vw;
       max-height: 300px;
     }
   }
@@ -461,44 +484,51 @@ export const CollectionStyles = styled.div`
       }
       // margin-left: 20px;
     }
+  }
+  .villa_icons {
+    margin-top: 20px;
+    display: grid;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr;
+    font-size: 1.2rem;
+    text-align: left;
+    color: #fff;
+    align-items: baseline;
+    svg {
+      height: 25px;
+      width: 25px;
+    }
 
-    .villa_icons {
-      margin-top: 20px;
-      display: grid;
-      // grid-template-columns: 1fr 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr;
-      font-size: 1.2rem;
-      text-align: left;
-      color: #fff;
-      align-items: baseline;
-      svg {
-        height: 25px;
-        width: 25px;
-      }
+    @media ${device.onlyMobileS} {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
+    }
 
-      @media ${device.onlyMobileS} {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1.5fr;
-      }
-
-      li {
+    li {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .villa_icon_label {
+        display: inline-block;
         width: auto;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #787878;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .inner-content {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        .villa_icon_label {
-          display: inline-block;
-          width: auto;
-          font-size: 1rem;
-          font-weight: bold;
-          color: #787878;
-          text-align: center;
-          margin-top: 10px;
-        }
-        .inner-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
+        align-items: center;
+      }
+    }
+  }
+  .card-image-wrapper {
+    @media ${device.onlyMobileSm} {
+      position: relative;
+      .card-text-wrapper {
+        top: 80% !important;
       }
     }
   }

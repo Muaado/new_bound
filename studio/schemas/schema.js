@@ -63,13 +63,13 @@ import banner from "./documents/banner";
 
 import featuredVilla from "./objects/featuredVilla";
 
-
 import featuredMagazinePost from "./objects/featuredMagazinePost";
 
 import shower from "./objects/villa/shower";
 import collection from "./documents/collection";
 import collectionType from "./documents/collectionType";
 import faq from "./objects/faq";
+import month from "./objects/month";
 
 import CollectionPage from "./documents/CollectionPage";
 import beachVillaCollection from "./documents/beachVillaCollection";
@@ -78,6 +78,7 @@ import largeVillaCollection from "./documents/largeVillaCollection";
 import honeymoonCollection from "./documents/honeymoonCollection";
 import mostPopularCollection from "./documents/mostPopularCollection";
 import rateModel from "./documents/rateModel";
+
 // import priceList from "./objects/villa/priceList";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -119,6 +120,7 @@ export default createSchema({
     imageWithTitle,
     alternateName,
     faq,
+    month,
     faqQuestionAnswer,
     shower,
     maxOccupancy,

@@ -15,7 +15,10 @@ export const PricingModal = (props) => {
         name: "Price",
       },
       {
-        name: "Status",
+        name: "Notes",
+      },
+      {
+        name: "",
       },
     ],
   };

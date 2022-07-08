@@ -20,7 +20,8 @@ const renderTableRow = (rows) => {
       return (
         <tr>
           <td>{monthName}</td>
-          <td>{price}</td>
+          <td>$ {price}</td>
+          <td></td>
           <td>
             <a href="#">Enquire Now</a>
           </td>
