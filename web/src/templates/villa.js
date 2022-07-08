@@ -29,19 +29,9 @@ import { useScrollToRef } from "../hooks";
 import { computeVillaFields } from "../lib/helpers";
 
 export const query = graphql`
-  fragment SanityPricingRateModel on SanityRateModel {
-    January
-    February
-    March
-    April
-    May
-    June
-    July
-    August
-    September
-    October
-    November
-    December
+  fragment SanityMonthFields on SanityMonth {
+    price
+    note
   }
   query VillaTemplateQuery(
     $id: String!
@@ -214,7 +204,42 @@ export const query = graphql`
       }
     }
     rateModel: sanityRateModel(_id: { eq: $rateModelId }) {
-      ...SanityPricingRateModel
+      january {
+        ...SanityMonthFields
+      }
+      february {
+        ...SanityMonthFields
+      }
+      march {
+        ...SanityMonthFields
+      }
+      april {
+        ...SanityMonthFields
+      }
+      may {
+        ...SanityMonthFields
+      }
+      june {
+        ...SanityMonthFields
+      }
+      july {
+        ...SanityMonthFields
+      }
+      august {
+        ...SanityMonthFields
+      }
+      september {
+        ...SanityMonthFields
+      }
+      october {
+        ...SanityMonthFields
+      }
+      november {
+        ...SanityMonthFields
+      }
+      december {
+        ...SanityMonthFields
+      }
     }
   }
 `;
@@ -228,7 +253,6 @@ const VilaTemplate = (props) => {
   const restaurants = data && data.restaurants;
   const pageFrom = props?.location?.state?.pageFrom;
   const collectionPage = props?.location?.state?.collectionPage;
-
   const { elementRef, executeScroll } = useScrollToRef();
 
   useEffect(() => {
@@ -497,12 +521,13 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
             )}
           </ul>
           {rateModel ? (
-            <PricingDropDown
-              items={rateModel}
-              headerImages={headerImages}
-              roomName={villa.name}
-            />
+            <></>
           ) : (
+            // <PricingDropDown
+            //   items={rateModel}
+            //   headerImages={headerImages}
+            //   roomName={villa.name}
+            // />
             <div className="room-price"> Price On Request</div>
           )}
           <Link
