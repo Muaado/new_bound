@@ -9,7 +9,7 @@ import { EnquirePageStyles } from "../styles/EnquirePageStyles";
 import Image from "gatsby-plugin-sanity-image";
 import countries from "../lib/countries";
 import { Button, Carousel } from "../components";
-import { getQueryStringParams } from "../lib";
+import { getQueryStringParams, getVillaUrl } from "../lib";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
@@ -152,7 +152,7 @@ const Enquire = (props) => {
     }
   }, [childrensField]);
 
-  const { data: villaData } = useQuery(Query_Villa, {
+  const { data: villaData, loading } = useQuery(Query_Villa, {
     variables: { id: resortId },
   });
 
@@ -215,7 +215,14 @@ const Enquire = (props) => {
         <EnquirePageStyles>
           <div className="content">
             <div className="main-div" style={{ paddingTop: 0 }}>
-              <Link to={pageFromUrl} className="go-back-button">
+              <Link
+                to={
+                  pageFromUrl ||
+                  (!loading && getVillaUrl({ name: villa?.name, resortName }))
+                }
+                state={{ pageFrom: "enquire-page" }}
+                className="go-back-button"
+              >
                 <Button onClick={undefined}>{`<< go back`}</Button>
               </Link>
               <div className="room-villa-section">

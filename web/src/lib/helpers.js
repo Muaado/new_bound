@@ -53,7 +53,7 @@ export const getResortUrl = ({ name }) => {
 };
 
 export const getVillaUrl = ({ name, resortName }) => {
-  return `/${resortName.toLowerCase().split(" ").join("-")}/${name
+  return `/${resortName?.toLowerCase().split(" ").join("-")}/${name
     .toLowerCase()
     .split(" ")
     .join("-")}`;
