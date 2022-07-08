@@ -16,12 +16,12 @@ const renderTableHeader = (columns) => {
 const renderTableRow = (rows) => {
   return (
     rows.length &&
-    rows.map(({ monthName, price }) => {
+    rows.map(({ monthName, price, note }) => {
       return (
         <tr>
           <td>{monthName}</td>
           <td>$ {price}</td>
-          <td></td>
+          <td>{note}</td>
           <td>
             <a href="#">Enquire Now</a>
           </td>

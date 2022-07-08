@@ -43,15 +43,24 @@ const sortByCurrentMonthName = (array) => {
   });
 };
 
-export const PricingDropDown = ({ items, headerImages, ...props }) => {
+export const PricingDropDown = ({ rateModel, headerImages, ...props }) => {
   const [showList, setShowList] = useState(false);
   const isMobile = useIsMobile();
+  const generalNote = rateModel?.generalNote;
   const sortedItems =
-    items && Object.keys(items).length
-      ? sortByCurrentMonthName(Object.keys(items)).map((key) => ({
-          monthName: key,
-          price: items[key],
-        }))
+    rateModel && Object.keys(rateModel).length
+      ? sortByCurrentMonthName(Object.keys(rateModel))
+          .map((key) => {
+            if (key === "generalNote") {
+              return;
+            }
+            return {
+              monthName: key,
+              price: rateModel[key]?.price,
+              note: rateModel[key]?.note,
+            };
+          })
+          .filter((item) => item !== undefined)
       : [];
   return (
     <>
@@ -60,6 +69,7 @@ export const PricingDropDown = ({ items, headerImages, ...props }) => {
           isOpen={showList}
           handleClose={() => setShowList(false)}
           pricingItems={sortedItems}
+          generalNote={generalNote}
           roomImages={headerImages?.images}
           {...props}
         />

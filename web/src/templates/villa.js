@@ -204,6 +204,7 @@ export const query = graphql`
       }
     }
     rateModel: sanityRateModel(_id: { eq: $rateModelId }) {
+      generalNote
       january {
         ...SanityMonthFields
       }
@@ -521,13 +522,12 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
             )}
           </ul>
           {rateModel ? (
-            <></>
+            <PricingDropDown
+              rateModel={rateModel}
+              headerImages={headerImages}
+              roomName={villa.name}
+            />
           ) : (
-            // <PricingDropDown
-            //   items={rateModel}
-            //   headerImages={headerImages}
-            //   roomName={villa.name}
-            // />
             <div className="room-price"> Price On Request</div>
           )}
           <Link

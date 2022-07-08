@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { device } from "../../styles/deviceSizes";
 export const StyledModel = styled.div`
   position: fixed;
   inset: 0;
@@ -102,6 +102,10 @@ export const PricingModalContentWrapper = styled.div`
   display: grid;
   padding: 0.5rem 5rem 5rem 5rem;
   grid-template-columns: 1fr 1fr;
+
+  @media ${device.desktopS} {
+    grid-template-columns: 1.5fr 1fr;
+  }
   grid-gap: 20px;
   img {
     height: 50%;
