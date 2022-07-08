@@ -227,6 +227,8 @@ const VilaTemplate = (props) => {
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
   const pageFrom = props?.location?.state?.pageFrom;
+  const collectionPage = props?.location?.state?.collectionPage;
+
   const { elementRef, executeScroll } = useScrollToRef();
 
   useEffect(() => {
@@ -324,13 +326,21 @@ const VilaTemplate = (props) => {
                 <li>
                   <Link
                     className="backtoresort"
-                    to={`/${resortName.toLowerCase().split(" ").join("-")}`}
-                    state={{
-                      redirectedFrom: ROOM_PAGE,
-                      currentSlideIndex: roomSlideIndex,
-                    }}
+                    to={
+                      collectionPage
+                        ? collectionPage?.url
+                        : `/${resortName.toLowerCase().split(" ").join("-")}`
+                    }
+                    state={
+                      collectionPage
+                        ? {}
+                        : {
+                            redirectedFrom: ROOM_PAGE,
+                            currentSlideIndex: roomSlideIndex,
+                          }
+                    }
                   >
-                    {resortName}
+                    {collectionPage?.collectionName || resortName}
                   </Link>
                 </li>
                 <li>&gt;</li>

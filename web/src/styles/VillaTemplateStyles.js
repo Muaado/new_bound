@@ -436,7 +436,7 @@ const VillaStyles = styled.div`
       }
 
       .enquire-btn {
-        margin-top: 20px;
+        margin-top: 10px;
         width: 100%;
         align-self: center;
         background: transparent;

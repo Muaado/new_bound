@@ -110,6 +110,14 @@ export const priceFormatter = new Intl.NumberFormat("en-US", {
 });
 
 export const computeVillaFields = ({ villa }) => {
+  if (!villa) {
+    return {
+      villaShowers: "",
+      villaPrice: "",
+      villaUrl: "",
+      villMaxOccupancy: "",
+    };
+  }
   const villaShowers = villa.showers;
   const maxOccupancy = villa.maxOccupancy;
   // console.log(villa);

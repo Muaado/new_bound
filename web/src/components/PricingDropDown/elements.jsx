@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 export const DropDownWrapper = styled.div`
   display: flex;
-  color: black !important;
+  color: #b39a6a !important;
   align-self: center;
-  border: 2px solid #11103b;
+  border: 1.5px solid #b39a6a;
   cursor: pointer;
   padding: 20px 0px;
   vertical-align: middle;
@@ -13,6 +13,14 @@ export const DropDownWrapper = styled.div`
   width: 203px;
   justify-content: center;
   transition: all 0.2s;
+  :hover {
+    cursor: pointer;
+    background: #91715c;
+    color: #fff !important;
+    svg {
+      fill: #fff !important;
+    }
+  }
 `;
 export const DropDownHeader = styled.div`
   display: flex;
@@ -66,7 +74,8 @@ export const IconWrapper = styled.div`
 `;
 export const SvgWrapper = styled.div`
   svg {
-    stroke: black;
+    fill: #b39a6a;
+    stroke: #b39a6a;
     stroke-width: 2px;
     width: ${({ dimension }) => (dimension ? dimension : "10px")};
     height: ${({ dimension }) => (dimension ? dimension : "10px")};
