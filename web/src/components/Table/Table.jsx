@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../Button";
+import { navigate } from "gatsby";
 import { TableWrapper, StyledTable } from "./elements";
 
 const renderTableHeader = (columns) => {
@@ -13,7 +14,7 @@ const renderTableHeader = (columns) => {
   );
 };
 
-const renderTableRow = (rows) => {
+const renderTableRow = (rows, villaId) => {
   return (
     rows.length &&
     rows.map(({ monthName, price, note }) => {
@@ -22,8 +23,14 @@ const renderTableRow = (rows) => {
           <td>{monthName}</td>
           <td>$ {price}</td>
           <td>{note}</td>
-          <td>
-            <a href="#">Enquire Now</a>
+          <td
+            onClick={() => {
+              navigate(`/enquire?id=${villaId}`);
+            }}
+          >
+            <Button styles={{ padding: "10px 2px", margin: "0" }}>
+              Enquire Now
+            </Button>
           </td>
         </tr>
       );
@@ -31,13 +38,13 @@ const renderTableRow = (rows) => {
   );
 };
 
-export const Table = ({ tableData }) => {
+export const Table = ({ tableData, villaId }) => {
   const { rows, columns } = tableData;
   return (
     <TableWrapper>
       <StyledTable>
         {renderTableHeader(columns)}
-        {renderTableRow(rows)}
+        {renderTableRow(rows, villaId)}
       </StyledTable>
     </TableWrapper>
   );

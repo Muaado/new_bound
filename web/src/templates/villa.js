@@ -526,6 +526,7 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
               rateModel={rateModel}
               headerImages={headerImages}
               roomName={villa.name}
+              villaId={villaId}
             />
           ) : (
             <div className="room-price"> Price On Request</div>
