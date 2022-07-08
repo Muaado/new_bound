@@ -260,23 +260,17 @@ const VillaStyles = styled.div`
           padding: 0rem 1.5rem;
           height: 100%;
           img {
-            height: 70vh;
-          }
-
-          @media ${device.onlydesktopL} {
-            img {
-              max-height: 60vh;
+            height: 650px;
+            @media ${device.onlyMobileSm} {
+              height: 300px;
             }
+          }
+          @media ${device.onlyMobileS} {
+            width: 100%;
           }
           @media ${device.onlyMobileSm} {
-            width: 100%;
-            margin-bottom: 10rem;
-            img {
-              height: 40vh;
-            }
-          }
-          @media ${device.laptop} {
-            width: 100%;
+            margin-bottom: 5rem;
+            padding: 0 0 !important;
           }
         }
       }
@@ -460,13 +454,12 @@ const VillaStyles = styled.div`
         font-size: 35px;
       }
       max-height: 700px !important;
-
       .content {
         position: absolute;
         width: 100%;
         min-height: 100%;
+        z-index: 1;
       }
-      // top:0;
 
       .hide {
         clip: rect(0 0 0 0);
@@ -499,6 +492,7 @@ const VillaStyles = styled.div`
           padding: 0;
         }
       }
+
       .accordion-item:last-child {
         border-bottom: none;
       }
@@ -513,6 +507,9 @@ const VillaStyles = styled.div`
         // background:#76622eb3;
         margin-top: -1px;
         border-bottom: 0.5px solid rgb(255, 255, 255, 0.5);
+        @media ${device.onlyMobileSm} {
+          font-size: 16px;
+        }
       }
 
       .accordion-label:hover {
@@ -522,14 +519,11 @@ const VillaStyles = styled.div`
 
       .accordion-label:after {
         content: "+";
-
-        // width: 13em;
         height: 1em;
         text-align: center;
         transition: all 0.8s ease;
         display: flex;
         justify-content: space-between;
-        // padding: 1em;
         font-weight: bolder;
         float: right;
         padding: 10px;
@@ -538,6 +532,7 @@ const VillaStyles = styled.div`
         margin-top: -12px;
         margin-right: 10px;
       }
+
       input[type="checkbox"]:checked ~ .accordion-label:after {
         // transform: rotate(45deg);
         content: "x";
@@ -556,6 +551,10 @@ const VillaStyles = styled.div`
         height: 0;
         // transform: scale(1, 0);
         transform-origin: center top;
+
+        @media ${device.onlyMobileSm} {
+          font-size: 14px;
+        }
       }
 
       input[type="checkbox"]:checked ~ .accordion-child {
@@ -778,6 +777,9 @@ const VillaStyles = styled.div`
       }
       h2 {
         margin: 7rem 0rem 5rem 0 !important;
+        @media ${device.onlyMobileSm} {
+          margin: 5rem 0rem 5rem 0 !important;
+        }
       }
     }
 

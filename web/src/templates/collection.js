@@ -1,7 +1,7 @@
 import { graphql, Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../containers/layout";
-import { BeachVillaStyles } from "../styles/BeachVillaStyles";
+import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
 import LeftSidebar from "../components/LeftSidebar";
@@ -14,6 +14,7 @@ import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg"
 import { navigate } from "gatsby";
 import { truncate, computeVillaFields, priceFormatter } from "../lib/helpers";
 import { useIsMobileLarge } from "../hooks";
+import { VillaDescriptionWrapper } from "./elements";
 
 export const query = graphql`
   fragment Fragment_Villa on SanityVilla {
@@ -138,6 +139,7 @@ export const query = graphql`
 `;
 
 const BeachTemplate = (props) => {
+  const [showVillaDescription, setShowVillaDescription] = useState(false);
   const { data } = props;
   const collections = data && data.pagesdata;
   const villas = collections?.beachVillaCollection?.length
@@ -150,11 +152,10 @@ const BeachTemplate = (props) => {
 
   const site = data && data.site;
   const isMobile = useIsMobileLarge();
-  console.log("isMobile", isMobile);
   return (
     <Layout>
       <LeftSidebar />
-      <BeachVillaStyles>
+      <CollectionStyles>
         <h1 className="collectionpage_title">
           {collections.CollectionPageName}
         </h1>
@@ -191,8 +192,8 @@ const BeachTemplate = (props) => {
                             <Image
                               {...villa.imageThumb}
                               alt={villa.imageThumb.alt}
-                              width={720}
-                              height={576}
+                              width={400}
+                              height={400}
                             />
                           )}
                         </li>
@@ -224,6 +225,18 @@ const BeachTemplate = (props) => {
                                   height={400}
                                 />
                               )}
+                              {/* <div
+                                className="card-text-wrapper"
+                                onClick={() => {
+                                  setShowVillaDescription(true);
+                                }}
+                              >
+                                <h4>{villa.name}</h4>
+                              </div> */}
+                              {/* <Overlay opacity={0.3} zIndex={1} />
+                              <VillaDescriptionWrapper>
+                                <p>{villa.short_desc}</p>
+                              </VillaDescriptionWrapper> */}
                             </div>
                             <div className="collection__details">
                               <h4 className="villaname">
@@ -321,7 +334,7 @@ const BeachTemplate = (props) => {
           )}
         </div>
         <ContactUs contactUs={site.contactUs} />
-      </BeachVillaStyles>
+      </CollectionStyles>
     </Layout>
   );
 };

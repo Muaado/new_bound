@@ -51,7 +51,7 @@ const FaqStyles = styled.div`
     margin-bottom: 7rem;
 
     li {
-      padding: 3rem;
+      padding: 1.5rem 3rem 1.5rem 3rem;
       text-align: left;
       width: 100%;
       border: 1px solid var(--grey);
@@ -60,8 +60,8 @@ const FaqStyles = styled.div`
 
       transition: all 1s;
       box-shadow: none;
-      min-height: 10rem;
-      max-height: 15rem;
+      min-height: 5rem;
+      max-height: 10rem;
       outline: none;
 
       &.selected {

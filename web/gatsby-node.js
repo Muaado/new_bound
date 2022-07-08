@@ -223,7 +223,7 @@ async function createBeachVillaPages(graphql, actions) {
 
     createPage({
       path,
-      component: require.resolve("./src/templates/beach.js"),
+      component: require.resolve("./src/templates/collection.js"),
       context: { id, _type },
     });
   });

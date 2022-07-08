@@ -4,7 +4,7 @@ export const Overlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: -1;
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : -1)};
   left: 0;
   top: 0;
   bottom: 0;

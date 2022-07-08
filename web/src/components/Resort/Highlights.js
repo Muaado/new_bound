@@ -5,7 +5,7 @@ import Image from "gatsby-plugin-sanity-image";
 import Placeholder from "../../assets/placeholder.svg";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-import { useIsMobileLarge, useIsTablet } from "../../hooks";
+import { useIsMobileLarge } from "../../hooks";
 
 const HighlightsStyles = styled.div`
   z-index: 1;
@@ -23,6 +23,10 @@ const HighlightsStyles = styled.div`
     padding: 0 1.5rem 10rem 1.5rem;
   }
 
+  @media ${device.onlyMobileSm} {
+    padding: 0 1.5rem 5rem 1.5rem;
+  }
+
   .carousel {
     /* margin: 4rem 0rem 10rem; */
     .slider-slide,
@@ -33,10 +37,6 @@ const HighlightsStyles = styled.div`
       @media ${device.mobileXL} {
         height: 25rem !important;
       }
-    }
-
-    .slider-control-bottomcenter {
-      bottom: -5rem !important;
     }
 
     &__image-container {
@@ -55,6 +55,9 @@ const HighlightsStyles = styled.div`
 
   h2 {
     margin: 7rem 0rem 5rem 0rem;
+    @media ${device.onlyMobileSm} {
+      margin: 5rem 0rem 5rem 0rem;
+    }
     font-size: 35px;
   }
 

@@ -8,31 +8,27 @@ import { useIsTablet } from "../../hooks";
 import { Carousel } from "../Carousel";
 
 const Journey = ({ collections }) => {
-  const isTablet = useIsTablet();
   return (
     <JourneyStyles>
       <h2>Start your journey</h2>
-      {!isTablet ? (
-        <ul className="images">
-          {collections.edges
-            .sort((a, b) => a.node.rank - b.node.rank)
-            .map(({ node }) => (
-              <Link
-                to={`/collections/${node.slug.current}/`}
-                className="clickable"
-                key={node.name}
-              >
-                <div className="card-text-wrapper">
-                  {node.CollectionPageName}
-                </div>
-                <Overlay className="overlay" />
-                {node.image && node.image.asset && (
-                  <Image {...node.image} alt={node.image.alt} />
-                )}
-              </Link>
-            ))}
-        </ul>
-      ) : (
+      <ul className="images">
+        {collections.edges
+          .sort((a, b) => a.node.rank - b.node.rank)
+          .map(({ node }) => (
+            <Link
+              to={`/collections/${node.slug.current}/`}
+              className="clickable"
+              key={node.name}
+            >
+              <div className="card-text-wrapper">{node.CollectionPageName}</div>
+              <Overlay className="overlay" />
+              {node.image && node.image.asset && (
+                <Image {...node.image} alt={node.image.alt} />
+              )}
+            </Link>
+          ))}
+      </ul>
+      {/* ) : (
         <Carousel
           speed={1000}
           className="carousel"
@@ -57,7 +53,7 @@ const Journey = ({ collections }) => {
               </Link>
             ))}
         </Carousel>
-      )}
+      )} */}
     </JourneyStyles>
   );
 };
