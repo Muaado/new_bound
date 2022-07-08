@@ -1,50 +1,39 @@
 import React from "react";
-import { Button } from "../Button";
-import { navigate } from "gatsby";
 import { TableWrapper, StyledTable } from "./elements";
 
 const renderTableHeader = (columns) => {
   return (
     <tr>
       {columns.length &&
-        columns.map(({ name }) => {
-          return <th>{name}</th>;
+        columns.map((col) => {
+          return <th>{col}</th>;
         })}
     </tr>
   );
 };
 
-const renderTableRow = (rows, villaId) => {
+const renderTableRow = (rows) => {
   return (
     rows.length &&
-    rows.map(({ monthName, price, note }) => {
+    rows.map((row) => {
       return (
         <tr>
-          <td>{monthName}</td>
-          <td>$ {price}</td>
-          <td>{note}</td>
-          <td
-            onClick={() => {
-              navigate(`/enquire?id=${villaId}`);
-            }}
-          >
-            <Button styles={{ padding: "10px 2px", margin: "0" }}>
-              Enquire Now
-            </Button>
-          </td>
+          {row.map((row_) => (
+            <td>{row_}</td>
+          ))}
         </tr>
       );
     })
   );
 };
 
-export const Table = ({ tableData, villaId }) => {
-  const { rows, columns } = tableData;
+export const Table = ({ tableContent }) => {
+  const { rows, columns } = tableContent;
   return (
     <TableWrapper>
       <StyledTable>
         {renderTableHeader(columns)}
-        {renderTableRow(rows, villaId)}
+        {renderTableRow(rows)}
       </StyledTable>
     </TableWrapper>
   );
