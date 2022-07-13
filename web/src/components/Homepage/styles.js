@@ -76,7 +76,7 @@ export const HeroStyles = styled.div`
   video {
     height: 100%;
     width: 100vw;
-    object-fit: fill;
+    object-fit: cover;
 
     @media ${device.laptop} {
       width: 100%;
