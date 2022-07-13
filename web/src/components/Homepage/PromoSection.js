@@ -94,10 +94,7 @@ const PromoSection = ({ image }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
-      <FixedBackgroundImage
-        bgImage={image?.asset?.url}
-        bgPosition={isIOSDevice() ? "scroll" : undefined}
-      >
+      <FixedBackgroundImage bgImage={image?.asset?.url} isIos={isIOSDevice()}>
         <h2 className="parallax__layer--back">we specialise in the maldives</h2>
         <p className="parallax__layer--back">
           hand-picked portfolio of the world’s most luxurious resorts and Villas
