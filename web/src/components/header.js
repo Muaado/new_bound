@@ -14,10 +14,6 @@ import ChevronUp from "../assets/icons/chevron-up.svg";
 import PlusIcon from "../assets/icons/plus-icon.svg";
 import MinusIcon from "../assets/icons/minus-icon.svg";
 
-import Phone from "../assets/icons/phone.svg";
-import CustomerService from "../assets/icons/customer-service.svg";
-import { MouseScroll } from "./Ui/MouseScroll";
-
 const HeaderStyles = styled.header`
   width: 100vw;
 
