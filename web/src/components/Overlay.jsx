@@ -14,5 +14,5 @@ export const Overlay = styled.div`
   -webkit-transition: all 0.6s ease-in-out 0s;
   -moz-transition: all 0.6s ease-in-out 0s;
   -o-transition: all 1s ease-out;
-  visibility: ${({ opacity }) => (opacity > 0 ? "visible" : "hidden")};
+  visibility: "visible";
 `;
