@@ -156,3 +156,12 @@ export const computeVillaFields = ({ villa }) => {
     villMaxOccupancy,
   };
 };
+
+export const isIOSDevice = () => {
+  if (SSR) return;
+  if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
+    return true;
+  } else {
+    return false;
+  }
+};
