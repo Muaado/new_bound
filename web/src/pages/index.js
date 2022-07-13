@@ -186,7 +186,6 @@ export const query = graphql`
 `;
 
 const IndexPage = (props) => {
-  console.log("isIOS", isIOSDevice());
   const { data } = props;
   const { collections } = data;
   const site = (data || {}).site;

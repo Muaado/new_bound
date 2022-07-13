@@ -18,7 +18,7 @@ export const HeroStyles = styled.div`
   z-index: 1;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
 
   @media ${device.laptop} {
@@ -65,9 +65,11 @@ export const HeroStyles = styled.div`
   }
 
   .video {
-    height: inherit;
+    width: 100%;
+    height: 100%;
     div {
-      height: inherit;
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -77,9 +79,8 @@ export const HeroStyles = styled.div`
     object-fit: fill;
 
     @media ${device.laptop} {
-      width: 120%;
+      width: 100%;
       position: relative;
-      left: -10%;
     }
   }
 `;
