@@ -9,7 +9,9 @@ import {
 } from "./elements";
 import CloseSvg from "../../assets/icons/close.svg";
 import Calendar from "../../assets/icons/calendar.svg";
-import { truncate } from "../../lib/helpers";
+import PlusIcon from "../../assets/icons/plus-icon.svg";
+import MinusIcon from "../../assets/icons/minus-icon.svg";
+import { truncate, priceFormatter } from "../../lib/helpers";
 import { PricingModal } from "../../components";
 import { useIsMobile } from "../../hooks";
 
@@ -45,6 +47,7 @@ const sortByCurrentMonthName = (array) => {
 
 export const PricingDropDown = ({ rateModel, headerImages, ...props }) => {
   const [showList, setShowList] = useState(false);
+  const [activeMonth, setActiveMonth] = useState(null);
   const isMobile = useIsMobile();
   const generalNote = rateModel?.generalNote;
   const sortedItems =
@@ -74,11 +77,18 @@ export const PricingDropDown = ({ rateModel, headerImages, ...props }) => {
           {...props}
         />
       )}
-      <DropDownWrapper>
+      <DropDownWrapper
+        className={`${showList ? "noHover" : ""}`}
+        onClick={() => {
+          setShowList(!showList);
+          setActiveMonth(null);
+        }}
+      >
         {showList && (
           <IconWrapper
             onClick={() => {
               setShowList(false);
+              setActiveMonth(null);
             }}
           >
             <SvgWrapper>
@@ -86,12 +96,7 @@ export const PricingDropDown = ({ rateModel, headerImages, ...props }) => {
             </SvgWrapper>
           </IconWrapper>
         )}
-        <DropDownHeader
-          isOpen={showList}
-          onClick={() => {
-            setShowList(true);
-          }}
-        >
+        <DropDownHeader isOpen={showList}>
           <div className="header-title">Monthly Pricing</div>
           <SvgWrapper dimension={"16px"} style={{ marginLeft: "10px" }}>
             <Calendar />
@@ -102,13 +107,51 @@ export const PricingDropDown = ({ rateModel, headerImages, ...props }) => {
           sortedItems &&
           Object.keys(sortedItems).length && (
             <DropDownList>
-              {sortedItems.map(({ monthName, price }) => {
+              {sortedItems.map(({ monthName, price, note }) => {
                 return (
-                  <ListItem>
-                    <span className="month"> {truncate(monthName, 3)} </span>
-                    <span className="pricing">{`$${price}`}</span>
-                    <span className="price-category">per night</span>
-                  </ListItem>
+                  <>
+                    <ListItem key={monthName}>
+                      <span className="month">
+                        {truncate(monthName, 3, " ")}{" "}
+                      </span>
+                      <span className="pricing">{`${priceFormatter.format(
+                        price
+                      )}`}</span>
+                      <span className="price-category">per night</span>
+
+                      <SvgWrapper
+                        dimension={"8px"}
+                        style={{
+                          marginLeft: "10px",
+                          display: "flex",
+                          width: "10%",
+                          justifyContent: "space-around",
+                        }}
+                        strokeWidth="1px"
+                      >
+                        {activeMonth === monthName ? (
+                          <MinusIcon
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setActiveMonth(null);
+                            }}
+                          />
+                        ) : (
+                          <PlusIcon
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setActiveMonth(monthName);
+                            }}
+                          />
+                        )}
+                      </SvgWrapper>
+                    </ListItem>
+                    {activeMonth === monthName ? (
+                      <ListItem>
+                        <p>{note}</p>
+                      </ListItem>
+                    ) : null}
+                  </>
                 );
               })}
             </DropDownList>

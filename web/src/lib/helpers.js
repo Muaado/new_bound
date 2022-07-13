@@ -58,6 +58,7 @@ export const getVillaUrl = ({ name, resortName }) => {
     .split(" ")
     .join("-")}`;
 };
+
 export const getRestaurantUrl = ({ name, resortName }) => {
   return `/${resortName.toLowerCase().split(" ").join("-")}/restaurant/${name
     .toLowerCase()
@@ -82,9 +83,9 @@ export const getCollectionUrl = ({ slug }) => {
   return `/collections/${slug?.current}/`;
 };
 
-export const truncate = (str, limit) => {
+export const truncate = (str, limit, extraString) => {
   if (limit < str.length) {
-    return str.slice(0, limit).concat("...");
+    return str.slice(0, limit).concat(extraString || "....");
   } else {
     return str;
   }
