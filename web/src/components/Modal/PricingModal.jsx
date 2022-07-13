@@ -4,6 +4,7 @@ import { Table } from "../Table";
 import { Button } from "../Button";
 import { PricingModalContentWrapper, PricingModalHeader } from "./elements";
 import { navigate } from "gatsby";
+import { priceFormatter } from "../../lib/helpers";
 
 const createHeaders = [
   {
@@ -23,7 +24,7 @@ const createHeaders = [
 const createRow = ({ monthName, price, note }, villaId) => {
   return [
     monthName,
-    price,
+    priceFormatter.format(price),
     note,
     <Button
       styles={{ padding: "10px 2px", margin: "0" }}

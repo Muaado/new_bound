@@ -13,7 +13,8 @@ export const DropDownWrapper = styled.div`
   width: 203px;
   justify-content: center;
   transition: all 0.2s;
-  :hover {
+
+  :not(.noHover):hover {
     cursor: pointer;
     background: #91715c;
     color: #fff !important;
@@ -33,7 +34,8 @@ export const DropDownList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 75%;
+  width: 100%;
+  padding: 0px 25px;
 `;
 
 export const ListItem = styled.div`
@@ -42,23 +44,28 @@ export const ListItem = styled.div`
   justify-content: space-evenly;
   align-items: center;
   .month {
-    width: 25px;
+    width: 20%;
     display: flex;
-    font-size: 16px;
-    /* margin-right: 10px; */
+    font-size: 12px;
+    text-transform: capitalize;
     text-align: left;
   }
   .pricing {
     display: flex;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 600;
-    /* margin-right: 10px; */
+    width: 30%;
     text-align: center;
   }
   .price-category {
+    width: 30%;
     display: flex;
     font-size: 10px;
-    text-align: right;
+    text-align: left;
+  }
+  p {
+    padding: 0 !important;
+    text-align: center !important;
   }
 `;
 
@@ -76,7 +83,7 @@ export const SvgWrapper = styled.div`
   svg {
     fill: #b39a6a;
     stroke: #b39a6a;
-    stroke-width: 2px;
+    stroke-width: ${({ strokeWidth }) => strokeWidth || "2px"};
     width: ${({ dimension }) => (dimension ? dimension : "10px")};
     height: ${({ dimension }) => (dimension ? dimension : "10px")};
   }
