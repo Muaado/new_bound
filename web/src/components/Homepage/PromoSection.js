@@ -1,6 +1,6 @@
 import React from "react";
 import { FixedBackgroundImage } from "../Parallax";
-
+import { isIOSDevice } from "../../lib/helpers";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
@@ -94,7 +94,10 @@ const PromoSection = ({ image }) => {
     // data-aos-duration="1000"
     // data-aos-easing="ease-in-out"
     >
-      <FixedBackgroundImage bgImage={image?.asset?.url}>
+      <FixedBackgroundImage
+        bgImage={image?.asset?.url}
+        bgPosition={isIOSDevice() ? "scroll" : undefined}
+      >
         <h2 className="parallax__layer--back">we specialise in the maldives</h2>
         <p className="parallax__layer--back">
           hand-picked portfolio of the world’s most luxurious resorts and Villas
