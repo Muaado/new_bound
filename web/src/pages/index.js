@@ -25,13 +25,10 @@ import { getBlogUrl, getResortUrl, getVillaUrl } from "../lib/helpers";
 import WhyBoundlessSection from "../components/Homepage/WhyBoundlessSection";
 import NewsletterSection from "../components/Homepage/NewsletterSection";
 import LeftSidebar from "../components/LeftSidebar";
-import { MouseScroll } from "../components/Ui/MouseScroll";
 import Search from "../components/Search";
 import { Button } from "../components/Button";
 import { FixedBackgroundImage, Overlay } from "../components";
-
-// import HomepageStaticImage from "../assets/homepage-image.png";
-
+import { isIOSDevice } from "../lib/helpers";
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
     crop {
@@ -333,7 +330,10 @@ const IndexPage = (props) => {
           </MagazineStyles>
           <TailorMade />
           <div className="second-image">
-            <FixedBackgroundImage bgImage={site?.secondImage?.asset?.url} />
+            <FixedBackgroundImage
+              bgImage={site?.secondImage?.asset?.url}
+              bgPosition={isIOSDevice() ? "scroll" : undefined}
+            />
           </div>
           {site.faq.length && <Faq path="/" faq={site.faq[0]} />}
           <NewsletterSection site={site} />

@@ -9,9 +9,10 @@ export const Overlay = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
+  transition: all 0.6s ease-in-out 0s;
   opacity: ${({ opacity }) => (opacity ? opacity : 0)};
   -webkit-transition: all 0.6s ease-in-out 0s;
   -moz-transition: all 0.6s ease-in-out 0s;
-  transition: all 0.6s ease-in-out 0s;
-  visibility: visible;
+  -o-transition: all 1s ease-out;
+  visibility: ${({ opacity }) => (opacity > 0 ? "visible" : "hidden")};
 `;
