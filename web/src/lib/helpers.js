@@ -158,6 +158,7 @@ export const computeVillaFields = ({ villa }) => {
 };
 
 export const isIOSDevice = () => {
+  if (SSR) return;
   if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
     return true;
   } else {
