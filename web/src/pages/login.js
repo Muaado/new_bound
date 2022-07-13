@@ -17,7 +17,6 @@ const validationSchema = yup
 
 const LoginWrapper = styled.div`
   display: flex;
-  padding: 5rem 0rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;
