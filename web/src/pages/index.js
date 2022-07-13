@@ -186,6 +186,7 @@ export const query = graphql`
 `;
 
 const IndexPage = (props) => {
+  console.log("isIOS", isIOSDevice());
   const { data } = props;
   const { collections } = data;
   const site = (data || {}).site;
@@ -332,7 +333,7 @@ const IndexPage = (props) => {
           <div className="second-image">
             <FixedBackgroundImage
               bgImage={site?.secondImage?.asset?.url}
-              bgPosition={isIOSDevice() ? "scroll" : undefined}
+              isIos={isIOSDevice()}
             />
           </div>
           {site.faq.length && <Faq path="/" faq={site.faq[0]} />}
