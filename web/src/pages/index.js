@@ -9,7 +9,6 @@ import { navigate } from "gatsby";
 import PromoSection from "../components/Homepage/PromoSection";
 import AboutUs from "../components/Homepage/AboutUs";
 import Journey from "../components/Homepage/Journey";
-
 import Image from "gatsby-plugin-sanity-image";
 import Faq from "../components/Homepage/Faq";
 import TailorMade from "../components/Homepage/TailorMade";
@@ -213,11 +212,11 @@ const IndexPage = (props) => {
           {windowGlobal && window.innerWidth >= 805 ? (
             <SanityMuxPlayer
               assetDocument={site.video.asset}
-              autoload={true | false}
-              autoplay={true | false}
+              autoload={true}
+              autoplay={true}
               className="video"
               height={"100vh"}
-              loop={true | false}
+              loop={true}
               muted={true}
               showControls={false}
               style={{}}
