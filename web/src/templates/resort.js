@@ -1,23 +1,22 @@
 import { graphql } from "gatsby";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
-import Image from "gatsby-plugin-sanity-image";
 import ResortStyles from "../styles/ResortTempleteStyles";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import Accomodation from "../components/Resort/Accomodation";
 import LeftSidebar from "../components/LeftSidebar";
-import { MouseScroll } from "../components/Ui/MouseScroll";
 import { toPlainText } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
-import { LIGHT_COLOR, ROOM_PAGE } from "../constants";
+import { LIGHT_COLOR } from "../constants";
 import { useScrollToRef } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
+import Image from "gatsby-plugin-sanity-image";
 
 export const query = graphql`
   query ResortTemplateQuery($id: String!) {
@@ -244,26 +243,24 @@ const ResortTemplate = (props) => {
       )}
       <Container>
         <ResortStyles>
-          <div className={`resort__image ${heroTextClass}`}>
-            {image && image.asset && (
-              <>
-                <Overlay className="hero-overlay" />
+          {image && (
+            <div className={`resort__image ${heroTextClass}`}>
+              <Overlay className="hero-overlay" />
+              {image && image.asset && (
                 <Image {...image} width={1440} alt={image?.alt} />
-              </>
-            )}
-            <div
-              // id="header-text"
-              className="text disappear-on-scroll"
-              data-aos="zoom-out-up"
-              data-aos-delay="50"
-              data-aos-duration="500"
-              data-aos-easing="ease-in-out"
-            >
-              <p className="atoll_title">{locationAtoll}</p>
-              <h1 className="title_res resort_heading_title">{name}</h1>
+              )}
+              <div
+                className="text disappear-on-scroll"
+                data-aos="zoom-out-up"
+                data-aos-delay="50"
+                data-aos-duration="500"
+                data-aos-easing="ease-in-out"
+              >
+                <p className="atoll_title">{locationAtoll}</p>
+                <h1 className="title_res resort_heading_title">{name}</h1>
+              </div>
             </div>
-          </div>
-
+          )}
           <LeftSidebar
             list={["overview", "accomodation", "highlights", "dine", "gallery"]}
           />
