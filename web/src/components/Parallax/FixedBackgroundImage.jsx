@@ -10,6 +10,7 @@ export const FixedBackgroundImage = styled.div`
             background-size: cover;
             background-attachment: ${({ isIos }) =>
               isIos ? "local" : "fixed"};
+            z-index: -1;
           }
         `
       : css`
