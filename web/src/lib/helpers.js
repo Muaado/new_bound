@@ -154,6 +154,9 @@ export const computeVillaFields = ({ villa }) => {
     villaPrice,
     villaUrl,
     villMaxOccupancy,
+    sizeSqm: villa?.sizeSqm,
+    numofRooms: villa?.numrooms,
+    villaPoolTypes: villa?.villaPoolTypes,
   };
 };
 

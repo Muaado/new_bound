@@ -11,6 +11,21 @@ export const Query_Villa = gql`
           alt
         }
       }
+      numrooms
+      sizeSqm
+      showers {
+        option
+        number
+      }
+
+      villaPoolTypes {
+        poolType
+      }
+
+      maxOccupancy {
+        option
+        number
+      }
       resort {
         name
       }

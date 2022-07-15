@@ -115,7 +115,7 @@ const SpaStyles = styled.div`
       }
       h2 {
         @media ${device.onlyMobileS} {
-          color: white;
+          color: #505050;
         }
       }
     }

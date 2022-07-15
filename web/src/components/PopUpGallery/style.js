@@ -16,12 +16,13 @@ export const GalleryImage = styled.div`
   @media ${device.laptopL} {
     padding-right: 0 !important;
   }
-  width: ${({ imageWidth }) => (imageWidth ? imageWidth : "100%")};
+  width: "100%";
   &.open {
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 550px;
+    height: 80%;
+    width: 70%;
     cursor: pointer;
     transform: translate(-50%, -50%);
     @media ${device.onlyMobile} {

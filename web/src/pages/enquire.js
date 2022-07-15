@@ -24,6 +24,7 @@ import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
 import PhoneInput from "../components/PhoneInput/PhoneInput";
+import { VillaIcons } from "../components/Villa/VillaIcons";
 
 const validationSchema = yup
   .object({
@@ -184,15 +185,8 @@ const Enquire = (props) => {
   const resortName = villa?.resort?.name;
   const headerImages = villa?.headerImages;
 
-  const {
-    dateOfTravel,
-    duration,
-    title,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-  } = errors;
+  const { dateOfTravel, title, firstName, lastName, email, phoneNumber } =
+    errors;
   return (
     <Layout {...props}>
       <LeftSidebar />
@@ -231,13 +225,7 @@ const Enquire = (props) => {
                   <div className="villa-name">{resortName}</div>
                   <div className="divider" />
                   <div className="resort-name">{villa?.name}</div>
-                  <div className="villa-features">
-                    <Measure />
-                    <TwoPeople />
-                    <Bed />
-                    <Shower />
-                    <SwimmingPool />
-                  </div>
+                  <VillaIcons villa={villa} className="villa-features" />
                 </div>
                 <div className="footer-content">
                   <Carousel

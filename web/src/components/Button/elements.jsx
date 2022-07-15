@@ -9,7 +9,7 @@ export const StyledButton = styled.button`
   border: 1.5px solid var(--primary);
   text-align: center;
   margin-top: 20px;
-  color: #b39a6a;
+  color: var(--primary);
   font-size: 12px;
   justify-content: center;
   background: none;

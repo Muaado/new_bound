@@ -129,7 +129,7 @@ const RestaurantsStyles = styled.div`
       }
     }
     h2 {
-      margin: 5rem 0 5rem 0;
+      margin: 5rem 0 2rem 0;
     }
   }
 `;

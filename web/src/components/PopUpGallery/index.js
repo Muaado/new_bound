@@ -53,20 +53,14 @@ const GalleryComponent = ({ images, styles }) => {
     setCellSpacing(spacing);
   }, [size]);
 
-  const handleOpen = (i) => (e) => {
+  const handleOpen = (index) => {
+    setSelectedImage(index);
     setShowLightbox(true);
-    setSelectedImage(i);
   };
 
   const handleClose = () => {
     setShowLightbox(false);
     setSelectedImage(null);
-  };
-  const handlePrevRequest = (i, length) => (e) => {
-    setSelectedImage((i - 1 + length) % length);
-  };
-  const handleNextRequest = (i, length) => (e) => {
-    setSelectedImage((i + 1) % length);
   };
 
   return (
@@ -80,26 +74,28 @@ const GalleryComponent = ({ images, styles }) => {
         className=""
       >
         {images?.images.length
-          ? images.images.map((image) => (
+          ? images.images.map((image, index) => (
               <React.Fragment key={image.alt}>
                 {image && image.asset && (
-                  <Image {...image} alt={image.alt} onClick={handleOpen(0)} />
+                  <Image
+                    {...image}
+                    alt={image.alt}
+                    onClick={() => handleOpen(index)}
+                  />
                 )}
               </React.Fragment>
             ))
           : [1, 2, 3].map((item) => <Placeholder />)}
       </Carousel>
 
-      {showLightbox && selectedImage !== null && (
+      {showLightbox && selectedImage !== null ? (
         <LightBox
           showLightbox={showLightbox}
-          images={images.images}
+          images={images?.images}
           handleClose={handleClose}
-          handleNextRequest={handleNextRequest}
-          handlePrevRequest={handlePrevRequest}
           selectedImage={selectedImage}
         />
-      )}
+      ) : null}
     </>
   );
 };

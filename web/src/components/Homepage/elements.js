@@ -78,7 +78,7 @@ export const JourneyStyles = styled.div`
       padding: 0 1.5rem;
     }
 
-    a {
+    .clickable {
       position: relative;
       height: 35rem;
       z-index: 1;

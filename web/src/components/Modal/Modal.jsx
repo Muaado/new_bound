@@ -30,7 +30,6 @@ export const Modal = ({
       <StyledModel onClick={handleClose}>
         <ModalBody>
           <ModalHeader>
-            <div className="circle"></div>
             <h2>{headerText}</h2>
           </ModalHeader>
           <ModalContent

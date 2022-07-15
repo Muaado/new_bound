@@ -88,9 +88,20 @@ export const EnquirePageStyles = styled.div`
           display: flex;
           margin: 2rem 20% 0% 20%;
           justify-content: space-between;
+          font-size: 12px;
           svg {
             width: 3rem;
             height: 3rem;
+          }
+
+          li {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+          .icon-label {
+            margin-top: 1rem;
           }
         }
         @media ${device.onlyMobileS} {

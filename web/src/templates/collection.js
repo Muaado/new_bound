@@ -83,7 +83,7 @@ export const query = graphql`
       }
     }
   }
-  query BeachTemplateQuery($id: String!) {
+  query CollectionTemplateQuery($id: String!) {
     pagesdata: sanityCollectionPage(id: { eq: $id }) {
       _id
       CollectionPageName
@@ -149,7 +149,6 @@ export const query = graphql`
 `;
 
 const CollectionTemplate = (props) => {
-  const [showVillaDescription, setShowVillaDescription] = useState(false);
   const { data } = props;
   const collections = data && data.pagesdata;
   const villas = collections?.beachVillaCollection?.length
@@ -210,9 +209,9 @@ const CollectionTemplate = (props) => {
                                 key={villa._id}
                                 className="card-image-wrapper"
                               >
-                                <div className="card-text-wrapper">
+                                {/* <div className="card-text-wrapper">
                                   {truncate(villa.name, 40)}
-                                </div>
+                                </div> */}
                                 {villa.imageThumb && villa.imageThumb.asset && (
                                   <Image
                                     {...villa.imageThumb}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LightboxReact from "lightbox-react";
 import "lightbox-react/style.css";
 
@@ -6,37 +6,34 @@ import { GalleryImage } from "./style";
 
 import Image from "gatsby-plugin-sanity-image";
 
-const Lightbox = ({
-  images,
-  selectedImage,
-  handleClose,
-  handlePrevRequest,
-  handleNextRequest,
-  showLightbox,
-}) => {
-  const array = [];
-  images.forEach((image) =>
-    array.push(
-      <GalleryImage
-        imageWidth={showLightbox ? "50%" : undefined}
-        className={`gallery ${showLightbox ? "open" : ""}`}
-      >
-        {image && image.asset && <Image {...image} alt={image.alt} />}
-      </GalleryImage>
-    )
-  );
+const Lightbox = ({ images, selectedImage, handleClose, showLightbox }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(selectedImage);
+
+  const allImages = images?.map((image) => (
+    <GalleryImage className={`gallery ${showLightbox ? "open" : ""}`}>
+      {image && image.asset && <Image {...image} alt={image.alt} />}
+    </GalleryImage>
+  ));
 
   return (
     <LightboxReact
       className="modal"
       enableZoom={false}
       clickOutsideToClose={true}
-      mainSrc={array[selectedImage]}
-      nextSrc={array[(selectedImage + 1) % array.length]}
-      prevSrc={array[(selectedImage + array.length - 1) % images.length]}
+      mainSrc={allImages[currentImageIndex]}
+      nextSrc={allImages[(currentImageIndex + 1) % allImages.length]}
+      prevSrc={
+        allImages[(currentImageIndex + allImages.length - 1) % allImages.length]
+      }
       onCloseRequest={handleClose}
-      onMovePrevRequest={handlePrevRequest(selectedImage, array.length)}
-      onMoveNextRequest={handleNextRequest(selectedImage, array.length)}
+      onMovePrevRequest={() =>
+        setCurrentImageIndex(
+          (currentImageIndex + images.length - 1) % images.length
+        )
+      }
+      onMoveNextRequest={() =>
+        setCurrentImageIndex((currentImageIndex + 1) % images.length)
+      }
     />
   );
 };

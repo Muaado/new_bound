@@ -1,32 +1,24 @@
 import { graphql, Link } from "gatsby";
-import React, { useEffect, useState, useRef } from "react";
-import useWindowSize from "../lib/useWindowSize";
+import React, { useEffect, useState } from "react";
 import { getVillaUrl } from "../lib/helpers";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
 import Image from "gatsby-plugin-sanity-image";
 import PortableText from "../components/Ui/portableText";
-import Gallery from "../components/Gallery";
 import VillaStyles from "../styles/VillaTemplateStyles";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import LeftSidebar from "../components/LeftSidebar";
 import PopUpGallery from "../components/PopUpGallery";
-
-import Measure from "../assets/icons/villaSpecifications/measure.svg";
-import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
-import Bed from "../assets/icons/villaSpecifications/bed.svg";
-import Shower from "../assets/icons/villaSpecifications/shower.svg";
-import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
+import { VillaIcons } from "../components/Villa/VillaIcons";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
 import { ROOM_PAGE } from "../constants";
-import { useScrollToRef } from "../hooks";
-import { computeVillaFields } from "../lib/helpers";
+import { useScrollToRef, useIsMobile } from "../hooks";
 
 export const query = graphql`
   fragment SanityMonthFields on SanityMonth {
@@ -54,12 +46,7 @@ export const query = graphql`
         }
       }
       short_desc
-
       _rawDescription
-      # imageWeb {
-      #   ...SanityImage
-      #   alt
-      # }
 
       heroImage {
         ...SanityImage
@@ -128,8 +115,6 @@ export const query = graphql`
         }
 
         activities {
-          # sanityResortHighlightname
-
           name
           imageThumb {
             ...SanityImage
@@ -143,11 +128,6 @@ export const query = graphql`
         }
       }
     }
-
-    # restaurants {
-    #
-    #     }
-
     spas: allSanitySpa(filter: { resort: { _id: { eq: $resortId } } }) {
       nodes {
         id
@@ -163,21 +143,6 @@ export const query = graphql`
         }
       }
     }
-
-    # activities: allSanityActivity(
-    #   filter: { resort: { _id: { eq: $resortId } } }
-    # ) {
-    #   nodes {
-    #     name
-    #     resort {
-    #       name
-    #     }
-    #     imageThumb {
-    #       ...SanityImage
-    #       alt
-    #     }
-    #   }
-    # }
     resorts: allSanityResort {
       nodes {
         name
@@ -470,13 +435,10 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
     _id: villaId,
     tagline,
     _rawDescription: _rawDescriptionVilla,
-    sizeSqm,
-    villaPoolTypes,
     headerImages,
-    numrooms,
   } = villa;
+  const isMobile = useIsMobile();
 
-  const { villaShowers, villMaxOccupancy } = computeVillaFields({ villa });
   return (
     <div id="room-overview" className="villa__header" ref={elementRef}>
       <Overlay opacity={1} bgColor="white" />
@@ -498,30 +460,7 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
           <h2 className="villa_name_title">{villa.name}</h2>
           {tagline && <p className="tagline">{tagline}</p>}
           <PortableText blocks={_rawDescriptionVilla} />
-          <ul className="villa__header-icons">
-            <li>
-              <Measure />
-              {sizeSqm}m2
-            </li>
-            <li>
-              <TwoPeople />
-              {villMaxOccupancy}
-            </li>
-            <li>
-              <Bed />
-              {numrooms}
-            </li>
-            <li>
-              <Shower />
-              {villaShowers}
-            </li>
-            {villaPoolTypes[0] && (
-              <li>
-                <SwimmingPool />
-                {villaPoolTypes[0].poolType}
-              </li>
-            )}
-          </ul>
+          <VillaIcons villa={villa} className="villa__header-icons" />
           {villa?.priceOnRequest ? (
             <div className="room-price">Price On Request</div>
           ) : (
@@ -547,9 +486,11 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
             </Button>
           </Link>
         </div>
-        <div className="gallery-carousel">
-          <PopUpGallery images={headerImages} styles={{ height: "100%" }} />
-        </div>
+        {!isMobile ? (
+          <div className="gallery-carousel">
+            <PopUpGallery images={headerImages} styles={{ height: "100%" }} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

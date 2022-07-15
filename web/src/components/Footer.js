@@ -6,10 +6,11 @@ import Instagram from "../assets/icons/instagram.svg";
 import Twitter from "../assets/icons/twitter.svg";
 import Github from "../assets/icons/github.svg";
 
-const FooterStyles = styled.footer`
+const FooterStyles = styled.div`
   width: 100%;
   overflow: hidden !important;
   display: inline-block;
+  margin-bottom: -10px;
   text-align: center;
   .footer-distributed {
     background: #f4f4f5;

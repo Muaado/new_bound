@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 export const DropDownWrapper = styled.div`
   display: flex;
-  color: #b39a6a !important;
+  color: var(--primary) !important;
   align-self: center;
-  border: 1.5px solid #b39a6a;
+  border: 1.5px solid var(--primary);
+  background: transparent;
   cursor: pointer;
-  padding: 20px 0px;
+  padding: 12px 0px;
   vertical-align: middle;
   align-items: center;
   flex-direction: column;
   width: 203px;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 1s ease-in-out;
 
   :not(.noHover):hover {
     cursor: pointer;
@@ -25,9 +26,12 @@ export const DropDownWrapper = styled.div`
 `;
 export const DropDownHeader = styled.div`
   display: flex;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
   padding: ${({ isOpen }) => `0px 0px ${isOpen ? "20px" : "0px"} 0px;`};
+  .header-title {
+    margin-top: 2px;
+  }
 `;
 
 export const DropDownList = styled.div`
