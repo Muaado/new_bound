@@ -247,7 +247,13 @@ const ResortTemplate = (props) => {
             <div className={`resort__image ${heroTextClass}`}>
               <Overlay className="hero-overlay" />
               {image && image.asset && (
-                <Image {...image} width={1440} alt={image?.alt} />
+                <Image
+                  asset={image?.asset}
+                  width={950}
+                  height={400}
+                  config={{ fit: "clip" }}
+                  alt={image?.alt}
+                />
               )}
               <div
                 className="text disappear-on-scroll"

@@ -122,6 +122,17 @@ export const HandCraftedJourneysStyles = styled.div`
     /* max-width: 55rem; */
     color: #505050;
     line-height: 3rem;
+    padding: 0 10rem;
+    @media ${device.onlyDesktopS} {
+      padding: 0rem 30rem;
+    }
+    @media ${device.onlyMobile} {
+      padding: 0rem 5rem;
+    }
+    @media ${device.tabletS} {
+      padding: 0rem 0rem;
+      text-align: justify;
+    }
   }
 
   ul {

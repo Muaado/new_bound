@@ -14,14 +14,14 @@ const AmenitiesStyles = styled.div`
   flex-direction: column;
   .description {
     max-width: 50%;
-    text-align: justify !important;
-    /* font-size: 2.4rem; */
     font-weight: 100;
     text-align: center;
     align-self: center;
     padding: 0rem 0 5rem 0;
-
     line-height: 3.6rem;
+    p {
+      text-align: center;
+    }
 
     @media ${device.tablet} {
       width: 90vw;

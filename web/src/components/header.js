@@ -565,7 +565,15 @@ const DropdownListStyles = styled.div`
 export const Logo = ({ logo }) => (
   <div className="logo">
     <Link to="/">
-      {logo && logo.asset && <Image {...logo} alt={logo.alt} />}
+      {logo && logo.asset && (
+        <Image
+          asset={logo.asset}
+          width={100}
+          height={150}
+          config={{ fit: "clip" }}
+          alt={logo.alt}
+        />
+      )}
     </Link>
   </div>
 );

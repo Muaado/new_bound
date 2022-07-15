@@ -168,35 +168,39 @@ const Accomodation = ({
           cellSpacing={cellSpacing}
           {...(!isMobile ? { renderBottomCenterControls: false } : {})}
         >
-          {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
-            <Link
-              to={getVillaUrl({ name, resortName: resort.name })}
-              key={name}
-              state={{ pageFrom: ACCOMODATIONS_SECTION, currentSlideIndex }}
-              className="image-container"
-            >
-              {imageThumb && imageThumb.asset ? (
-                <Image
-                  className="image"
-                  {...imageThumb}
-                  width={500}
-                  height={500}
-                  alt={imageThumb.alt}
-                />
-              ) : (
-                <Placeholder />
-              )}
-              <div className="roomFooter">
-                <h3 className="roomname">{name}</h3>
-                {priceOnRequest ? (
-                  <p>Price On Request</p>
-                ) : (
-                  <PriceTemplate price={formatter.format(price)} />
-                )}
-                <Button>View Room</Button>
-              </div>
-            </Link>
-          ))}
+          {villas.length &&
+            villas.map(
+              ({ name, imageThumb, resort, price, priceOnRequest }) => (
+                <Link
+                  to={getVillaUrl({ name, resortName: resort.name })}
+                  key={name}
+                  state={{ pageFrom: ACCOMODATIONS_SECTION, currentSlideIndex }}
+                  className="image-container"
+                >
+                  {imageThumb && imageThumb.asset ? (
+                    <Image
+                      className="image"
+                      asset={imageThumb?.asset}
+                      width={500}
+                      height={500}
+                      config={{ fit: "clip" }}
+                      alt={imageThumb.alt}
+                    />
+                  ) : (
+                    <Placeholder />
+                  )}
+                  <div className="roomFooter">
+                    <h3 className="roomname">{name}</h3>
+                    {priceOnRequest ? (
+                      <p>Price On Request</p>
+                    ) : (
+                      <PriceTemplate price={formatter.format(price)} />
+                    )}
+                    <Button>View Room</Button>
+                  </div>
+                </Link>
+              )
+            )}
         </Carousel>
       </div>
     </AccomodationStyles>

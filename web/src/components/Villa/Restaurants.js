@@ -154,7 +154,13 @@ const Restaurants = ({ restaurants }) => {
               <li key={name}>
                 <div key={name} className="image-container">
                   {imageThumb && imageThumb.asset ? (
-                    <Image {...imageThumb} alt={imageThumb.alt} />
+                    <Image
+                      asset={imageThumb?.asset}
+                      width={400}
+                      height={400}
+                      config={{ fit: "clip" }}
+                      alt={imageThumb.alt}
+                    />
                   ) : (
                     <Placeholder style={{ width: "100%", height: "100%" }} />
                   )}

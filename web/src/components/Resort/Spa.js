@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
-import PortableText from "../Ui/portableText";
-
 import styled from "styled-components";
+import { useIsTablet } from "../../hooks/useIsMobile";
 import { device } from "../../styles/deviceSizes";
-// import { device } from "../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
 
 const SpaStyles = styled.div`
@@ -104,7 +102,6 @@ const SpaStyles = styled.div`
       }
     }
     .right-section {
-      /* height: 100%; */
       padding: 6rem 0;
       display: flex;
       flex-direction: column;
@@ -115,6 +112,11 @@ const SpaStyles = styled.div`
       }
       @media ${device.tablet} {
         padding: 0;
+      }
+      h2 {
+        @media ${device.onlyMobileS} {
+          color: white;
+        }
       }
     }
   }
@@ -184,7 +186,7 @@ const SpaStyles = styled.div`
 
 const Spa = ({ spa, className }) => {
   const size = useWindowSize();
-
+  const isTablet = useIsTablet();
   useEffect(() => {
     const { width } = size;
   }, [size]);
@@ -202,18 +204,33 @@ const Spa = ({ spa, className }) => {
         <div className="left-section">
           <div className="image-web">
             {spa.imageWeb && spa.imageWeb.asset && (
-              <Image {...spa.imageWeb} alt={spa.imageWeb.alt} />
+              <Image
+                asset={spa.imageWeb.asset}
+                width={400}
+                height={400}
+                config={{ fit: "clip" }}
+                alt={spa.imageWeb.alt}
+              />
             )}
           </div>
           <p>{spa.description}</p>
         </div>
+
         <div className="right-section">
           <h2 className="spaname">{spa.name}</h2>
-          <div className="image-thumb">
-            {spa.imageThumb && spa.imageThumb.asset && (
-              <Image {...spa.imageThumb} alt={spa.imageThumb.alt} />
-            )}
-          </div>
+          {!isTablet ? (
+            <div className="image-thumb">
+              {spa.imageThumb && spa.imageThumb.asset && (
+                <Image
+                  asset={spa?.imageThumb?.asset}
+                  width={300}
+                  height={300}
+                  config={{ fit: "clip" }}
+                  alt={spa.imageThumb.alt}
+                />
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
     </SpaStyles>

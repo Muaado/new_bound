@@ -133,7 +133,13 @@ const Activities = ({ activities }) => {
                   <li className="item" key={imageThumb?.alt}>
                     <Overlay className="overlay" />
                     {imageThumb && imageThumb?.asset && (
-                      <Image {...imageThumb} alt={imageThumb?.alt} />
+                      <Image
+                        asset={imageThumb?.asset}
+                        width={400}
+                        height={400}
+                        config={{ fit: "clip" }}
+                        alt={imageThumb?.alt}
+                      />
                     )}
                     <div className="card-text-wrapper">{name}</div>
                   </li>
@@ -150,7 +156,13 @@ const Activities = ({ activities }) => {
               <li className="item item__carousel" key={imageThumb?.alt}>
                 <Overlay className="carousel-overlay" />
                 {imageThumb && imageThumb?.asset && (
-                  <Image {...imageThumb} alt={imageThumb?.alt} />
+                  <Image
+                    asset={imageThumb?.asset}
+                    width={400}
+                    height={400}
+                    config={{ fit: "clip" }}
+                    alt={imageThumb?.alt}
+                  />
                 )}
                 <div className="card-text-wrapper">{name}</div>
               </li>

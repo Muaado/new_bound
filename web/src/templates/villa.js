@@ -40,6 +40,7 @@ export const query = graphql`
   ) {
     villa: sanityVilla(_id: { eq: $id }) {
       _id
+      priceOnRequest
       name
       alternateName
       tagline
@@ -381,7 +382,7 @@ const VilaTemplate = (props) => {
           />
 
           <div className="villa__room-features" id="room-features">
-            <Overlay zIndex={1} opacity={0.5} />
+            <Overlay zIndex={1} opacity={0.7} />
             {roomFeatures?.backgroundImage &&
             roomFeatures?.backgroundImage.asset ? (
               <Image
@@ -521,15 +522,15 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
               </li>
             )}
           </ul>
-          {rateModel ? (
+          {villa?.priceOnRequest ? (
+            <div className="room-price">Price On Request</div>
+          ) : (
             <PricingDropDown
               rateModel={rateModel}
               headerImages={headerImages}
               roomName={villa.name}
               villaId={villaId}
             />
-          ) : (
-            <div className="room-price"> Price On Request</div>
           )}
           <Link
             to={`/enquire?id=${villaId}`}

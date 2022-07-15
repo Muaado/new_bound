@@ -28,32 +28,6 @@ const Journey = ({ collections }) => {
             </Link>
           ))}
       </ul>
-      {/* ) : (
-        <Carousel
-          speed={1000}
-          className="carousel"
-          slidesToShow={1}
-          disableEdgeSwiping
-          dragging
-        >
-          {collections.edges
-            .sort((a, b) => a.node.rank - b.node.rank)
-            .map(({ node }) => (
-              <Link
-                key={node.alt}
-                className="carousel__image-container clickable"
-                to={getCollectionUrl({ name: node.name, type: node.type })}
-              >
-                <div className="card-text-wrapper">
-                  {node.CollectionPageName}
-                </div>
-                {node.image && node.image.asset && (
-                  <Image {...node.image} alt={node.image.alt} />
-                )}
-              </Link>
-            ))}
-        </Carousel>
-      )} */}
     </JourneyStyles>
   );
 };
