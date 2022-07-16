@@ -214,10 +214,12 @@ export const EnquirePageStyles = styled.div`
 
     input,
     select {
+      -webkit-appearance: none;
       width: 100%;
       padding: 1rem 1.5rem;
     }
     textarea {
+      -webkit-appearance: none;
       height: 15rem;
     }
 

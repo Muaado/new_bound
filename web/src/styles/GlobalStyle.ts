@@ -169,7 +169,7 @@ export const GlobalStyle = createGlobalStyle`
     }
     @media ${device.onlyMobileSm} {
       -webkit-text-size-adjust:none;
-      font-size: 1.2rem !important;
+      font-size: 12px !important;
       line-height: 2.2rem;
     }
   }
