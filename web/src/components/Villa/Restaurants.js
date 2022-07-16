@@ -107,7 +107,6 @@ const RestaurantsStyles = styled.div`
   }
 
   .restaurant-description {
-    font-size: 14px;
     color: #676767;
   }
 
@@ -129,7 +128,7 @@ const RestaurantsStyles = styled.div`
       }
     }
     h2 {
-      margin: 5rem 0 5rem 0;
+      margin: 5rem 0 2rem 0;
     }
   }
 `;
@@ -154,7 +153,13 @@ const Restaurants = ({ restaurants }) => {
               <li key={name}>
                 <div key={name} className="image-container">
                   {imageThumb && imageThumb.asset ? (
-                    <Image {...imageThumb} alt={imageThumb.alt} />
+                    <Image
+                      asset={imageThumb?.asset}
+                      width={400}
+                      height={400}
+                      config={{ fit: "clip" }}
+                      alt={imageThumb.alt}
+                    />
                   ) : (
                     <Placeholder style={{ width: "100%", height: "100%" }} />
                   )}

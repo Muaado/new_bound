@@ -73,7 +73,7 @@ export const SvgWrapper = styled.div`
 `;
 
 export const ModalHeader = styled.div`
-  background-color: #76622e;
+  background-color: var(--primary);
   width: 100%;
   height: 50px;
   color: white;
@@ -85,16 +85,6 @@ export const ModalHeader = styled.div`
     width: 100%;
     text-align: center;
     align-self: center;
-  }
-  .circle {
-    display: flex;
-    align-self: center;
-    justify-self: flex-start;
-    background: white;
-    width: 30px;
-    height: 26px;
-    margin: 0rem 2rem;
-    border-radius: 50%;
   }
 `;
 

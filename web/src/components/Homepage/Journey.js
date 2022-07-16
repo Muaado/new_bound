@@ -1,11 +1,8 @@
 import React from "react";
 import Image from "gatsby-plugin-sanity-image";
 import { Overlay } from "../Overlay";
-import { Link } from "gatsby";
-import { getCollectionUrl } from "../../lib/helpers";
+import { navigate } from "gatsby";
 import { JourneyStyles } from "./elements";
-import { useIsTablet } from "../../hooks";
-import { Carousel } from "../Carousel";
 
 const Journey = ({ collections }) => {
   return (
@@ -15,45 +12,29 @@ const Journey = ({ collections }) => {
         {collections.edges
           .sort((a, b) => a.node.rank - b.node.rank)
           .map(({ node }) => (
-            <Link
-              to={`/collections/${node.slug.current}/`}
+            <div
               className="clickable"
+              onClick={() => {
+                navigate(`/collections/${node.slug.current}/`);
+              }}
               key={node.name}
             >
-              <div className="card-text-wrapper">{node.CollectionPageName}</div>
+              <div
+                className="card-text-wrapper"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  navigate(`/collections/${node.slug.current}/`);
+                }}
+              >
+                {node.CollectionPageName}
+              </div>
               <Overlay className="overlay" />
               {node.image && node.image.asset && (
                 <Image {...node.image} alt={node.image.alt} />
               )}
-            </Link>
+            </div>
           ))}
       </ul>
-      {/* ) : (
-        <Carousel
-          speed={1000}
-          className="carousel"
-          slidesToShow={1}
-          disableEdgeSwiping
-          dragging
-        >
-          {collections.edges
-            .sort((a, b) => a.node.rank - b.node.rank)
-            .map(({ node }) => (
-              <Link
-                key={node.alt}
-                className="carousel__image-container clickable"
-                to={getCollectionUrl({ name: node.name, type: node.type })}
-              >
-                <div className="card-text-wrapper">
-                  {node.CollectionPageName}
-                </div>
-                {node.image && node.image.asset && (
-                  <Image {...node.image} alt={node.image.alt} />
-                )}
-              </Link>
-            ))}
-        </Carousel>
-      )} */}
     </JourneyStyles>
   );
 };

@@ -10,11 +10,6 @@ import Image from "gatsby-plugin-sanity-image";
 import countries from "../lib/countries";
 import { Button, Carousel } from "../components";
 import { getQueryStringParams, getVillaUrl } from "../lib";
-import Measure from "../assets/icons/villaSpecifications/measure.svg";
-import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
-import Bed from "../assets/icons/villaSpecifications/bed.svg";
-import Shower from "../assets/icons/villaSpecifications/shower.svg";
-import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -24,6 +19,7 @@ import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
 import PhoneInput from "../components/PhoneInput/PhoneInput";
+import { VillaIcons } from "../components/Villa/VillaIcons";
 
 const validationSchema = yup
   .object({
@@ -184,15 +180,8 @@ const Enquire = (props) => {
   const resortName = villa?.resort?.name;
   const headerImages = villa?.headerImages;
 
-  const {
-    dateOfTravel,
-    duration,
-    title,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-  } = errors;
+  const { dateOfTravel, title, firstName, lastName, email, phoneNumber } =
+    errors;
   return (
     <Layout {...props}>
       <LeftSidebar />
@@ -231,13 +220,7 @@ const Enquire = (props) => {
                   <div className="villa-name">{resortName}</div>
                   <div className="divider" />
                   <div className="resort-name">{villa?.name}</div>
-                  <div className="villa-features">
-                    <Measure />
-                    <TwoPeople />
-                    <Bed />
-                    <Shower />
-                    <SwimmingPool />
-                  </div>
+                  <VillaIcons villa={villa} className="villa-features" />
                 </div>
                 <div className="footer-content">
                   <Carousel
@@ -293,9 +276,9 @@ const Enquire = (props) => {
                 <div className="form-control">
                   <label>Country of Residence</label>
                   <select {...register("countryOfResidence")}>
-                    <option>PAKISTAN</option>
-                    <option>UK</option>
-                    <option>CANADA</option>
+                    {countries.map(({ name }) => (
+                      <option>{name}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="form-control">

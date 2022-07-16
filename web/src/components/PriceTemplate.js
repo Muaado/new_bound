@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../styles/deviceSizes";
 
 const PriceWrapper = styled.div`
   font-size: 1.6rem;
@@ -8,6 +9,11 @@ const PriceWrapper = styled.div`
   -ms-letter-spacing: 0.3rem;
   letter-spacing: 0.3rem;
   color: #7d7d7d;
+
+  @media ${device.onlyMobileSm} {
+    font-size: 1.4rem;
+  }
+
   .price-from {
     text-transform: uppercase;
     font-weight: 400 !important;

@@ -187,9 +187,10 @@ const Highlights = ({ highlights }) => {
                 <div className="card-text-wrapper">{name}</div>
                 {imageThumb && imageThumb.asset && (
                   <Image
-                    {...imageThumb}
+                    asset={imageThumb?.asset}
                     width={400}
                     height={400}
+                    config={{ fit: "clip" }}
                     alt={imageThumb.alt}
                   />
                 )}
@@ -206,9 +207,10 @@ const Highlights = ({ highlights }) => {
                     <p>{description}</p>
                     {imageThumb && imageThumb.asset && (
                       <Image
-                        {...imageThumb}
+                        asset={imageThumb?.asset}
                         width={400}
                         height={400}
+                        config={{ fit: "clip" }}
                         alt={imageThumb.alt}
                       />
                     )}

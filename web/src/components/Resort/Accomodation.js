@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
-// import Carousel from "nuka-carousel";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 import useWindowSize from "../../lib/useWindowSize";
@@ -10,7 +9,7 @@ import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
 import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
-import { useIsMobile, useIsTablet } from "../../hooks";
+import { useIsMobile, useIsTablet, useIsDesktop } from "../../hooks";
 import { PriceTemplate } from "../PriceTemplate";
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -20,20 +19,26 @@ const formatter = new Intl.NumberFormat("en-US", {
 });
 
 const AccomodationStyles = styled.div`
+  width: 100%;
+  height: 100%;
+
   @media ${device.tablet} {
     padding: 0;
   }
 
   .slider-control-bottomcenter {
-    top: 65% !important;
+    top: 58% !important;
+    @media ${device.mobileSmall} {
+      top: 56% !important;
+    }
     @media ${device.mobileS} {
-      top: 60% !important;
+      top: 58% !important;
     }
   }
 
   .slider-control-centerright,
   .slider-control-centerleft {
-    top: 40% !important;
+    top: 30% !important;
   }
 
   h2 {
@@ -56,20 +61,26 @@ const AccomodationStyles = styled.div`
       width: 100% !important;
     }
   }
+
   .image-container {
-    /* min-width: 40rem; */
     width: 100%;
     display: flex;
     flex-direction: column;
-
-    /* min-height: 614px; */
     img {
-      /* min-height: 570px; */
-      @media ${device.mobileXL} {
+      height: 500px;
+
+      @media ${device.onlyMobileS} {
+        max-height: 400px;
+        min-height: 400px;
+        width: 100%;
+      }
+
+      @media ${device.onlyMobileSm} {
         max-height: 350px;
         min-height: 350px;
         width: 100%;
       }
+
       max-height: 570px;
       width: 100%;
       background-size: cover;
@@ -77,6 +88,9 @@ const AccomodationStyles = styled.div`
 
     .roomFooter {
       padding: 2rem;
+      @media ${device.onlyMobileSm} {
+        padding: 2rem 1.5rem;
+      }
     }
     .roomname {
       font-size: 25px;
@@ -84,13 +98,16 @@ const AccomodationStyles = styled.div`
       line-height: 4rem;
       color: #505050;
       padding-bottom: 10px;
-      // min-height: 90px;
       font-family: "rivera_light_regular", sans-serif;
 
       @media ${device.tablet} {
-        /* text-align: left; */
         font-size: 1.8rem;
         margin-right: 1rem;
+      }
+      @media ${device.onlyMobileSm} {
+        text-align: left;
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
       }
     }
     .pricelbl {
@@ -117,22 +134,13 @@ const Accomodation = ({
   );
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
   const size = useWindowSize();
-  useEffect(() => {
-    const { width } = size;
-    const isMobileOnly = width <= 576;
-    const isSreenSM = width > 992 && width < 1200;
-    const isSreenLG = width > 1200 && width < 1440;
-    const screenXL = width > 1440 && width < 1600;
-    const screenXXL = width > 1600;
-
+  useLayoutEffect(() => {
     const slides = () => {
-      if (isMobileOnly) return 1;
-      if (isTablet) return 1;
-      if (isSreenSM) return 1;
-      if (isSreenLG) return 2;
-      if (screenXL) return 3;
-      if (screenXXL) return 3;
+      if (isDesktop) return 3;
+      if (isTablet) return 2;
+      if (isMobile) return 1;
       return 2.9;
     };
 
@@ -143,21 +151,22 @@ const Accomodation = ({
     setNumberOfSlides(slides);
     setCellSpacing(spacing);
   }, [size]);
+
   return (
     <AccomodationStyles
       id={id}
       className="resort__accomodation"
-      data-aos="fade-in"
-      data-aos-delay="50"
-      data-aos-duration="1000"
-      data-aos-easing="ease-in-out"
+      // data-aos="fade-in"
+      // data-aos-delay="50"
+      // data-aos-duration="1000"
+      // data-aos-easing="ease-in-out"
       ref={elementRef}
     >
       <div className="content">
         <h2>Accommodation</h2>
 
         <Carousel
-          speed={1000}
+          speed={isTablet ? 1500 : 1000}
           wrapAround
           className="carousel"
           slidesToShow={numberOfSlides}
@@ -168,35 +177,48 @@ const Accomodation = ({
           cellSpacing={cellSpacing}
           {...(!isMobile ? { renderBottomCenterControls: false } : {})}
         >
-          {villas.map(({ name, imageThumb, resort, price, priceOnRequest }) => (
-            <Link
-              to={getVillaUrl({ name, resortName: resort.name })}
-              key={name}
-              state={{ pageFrom: ACCOMODATIONS_SECTION, currentSlideIndex }}
-              className="image-container"
-            >
-              {imageThumb && imageThumb.asset ? (
-                <Image
-                  className="image"
-                  {...imageThumb}
-                  width={500}
-                  height={500}
-                  alt={imageThumb.alt}
-                />
-              ) : (
-                <Placeholder />
-              )}
-              <div className="roomFooter">
-                <h3 className="roomname">{name}</h3>
-                {priceOnRequest ? (
-                  <p>Price On Request</p>
-                ) : (
-                  <PriceTemplate price={formatter.format(price)} />
-                )}
-                <Button>View Room</Button>
-              </div>
-            </Link>
-          ))}
+          {villas.length &&
+            villas.map(
+              ({ name, imageThumb, resort, price, priceOnRequest }) => (
+                <div className="image-container">
+                  {imageThumb && imageThumb.asset ? (
+                    <Image
+                      className="image"
+                      asset={imageThumb?.asset}
+                      width={500}
+                      height={500}
+                      config={{ fit: "clip" }}
+                      alt={imageThumb.alt}
+                    />
+                  ) : (
+                    <Placeholder />
+                  )}
+                  <div className="roomFooter">
+                    <h3 className="roomname">{name}</h3>
+                    {priceOnRequest ? (
+                      <p>Price On Request</p>
+                    ) : (
+                      <PriceTemplate price={formatter.format(price)} />
+                    )}
+                    <Button
+                      onClick={() => {
+                        navigate(
+                          getVillaUrl({ name, resortName: resort.name }),
+                          {
+                            state: {
+                              pageFrom: ACCOMODATIONS_SECTION,
+                              currentSlideIndex,
+                            },
+                          }
+                        );
+                      }}
+                    >
+                      View Room
+                    </Button>
+                  </div>
+                </div>
+              )
+            )}
         </Carousel>
       </div>
     </AccomodationStyles>

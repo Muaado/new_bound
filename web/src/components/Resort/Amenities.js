@@ -14,23 +14,25 @@ const AmenitiesStyles = styled.div`
   flex-direction: column;
   .description {
     max-width: 50%;
-    text-align: justify !important;
-    /* font-size: 2.4rem; */
     font-weight: 100;
     text-align: center;
     align-self: center;
     padding: 0rem 0 5rem 0;
-
     line-height: 3.6rem;
+    p {
+      text-align: center;
+    }
 
     @media ${device.tablet} {
       width: 90vw;
-      max-width: unset;
+      max-width: 80%;
       width: 100vw;
       padding: 3rem 1.5rem;
     }
+
     @media ${device.mobileXL} {
       padding: 3rem 2rem;
+      max-width: 100%;
     }
   }
   .content {

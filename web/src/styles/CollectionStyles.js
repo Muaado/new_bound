@@ -149,6 +149,11 @@ export const CollectionStyles = styled.div`
         font-size: 1.8rem;
         margin-right: 1rem;
       }
+      @media ${device.onlyMobileSm} {
+        text-align: left;
+        font-size: 1.6rem !important;
+        font-weight: 600 !important;
+      }
     }
     .slider-control-bottomcenter {
       top: 58% !important;

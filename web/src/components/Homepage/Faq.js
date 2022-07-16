@@ -72,7 +72,10 @@ const FaqStyles = styled.div`
       }
 
       &:not(:last-of-type) {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
+        @media ${device.onlyMobileSm} {
+          margin-bottom: 1rem;
+        }
       }
 
       .question {

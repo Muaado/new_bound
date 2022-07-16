@@ -294,12 +294,6 @@ const VillaStyles = styled.div`
           text-align: center;
         }
         @media ${device.laptop} {
-          /* display: flex;
-          flex-direction: column;
-          margin: 0;
-          height: fit-content;
-          width: 100%;
-          align-items: center; */
           display: flex;
           align-items: center;
           flex-direction: column;
@@ -312,18 +306,16 @@ const VillaStyles = styled.div`
           justify-content: flex-start;
         }
         @media ${device.mobileXL} {
-          /* padding: 0; */
-          min-width: unset;
+          padding: 0 1.5rem;
+          margin: unset;
         }
 
         p {
-          /* max-width: 40rem; */
-          /* font-size: 2.2rem; */
           text-align: center;
           color: var(--grey1);
           width: 100%;
           @media ${device.mobileXL} {
-            text-align: left;
+            text-align: center;
             width: 100%;
           }
           padding-top: 10px;
@@ -393,8 +385,6 @@ const VillaStyles = styled.div`
         display: flex;
         justify-content: center;
         width: 100%;
-        /* align-items: center; */
-
         @media ${device.tablet} {
           justify-content: flex-start;
         }
@@ -436,12 +426,14 @@ const VillaStyles = styled.div`
       }
 
       .enquire-btn {
-        margin-top: 10px;
         width: 100%;
         align-self: center;
         background: transparent;
         display: flex;
         justify-content: center;
+        @media ${device.onlyMobileSm} {
+          margin-bottom: 5rem;
+        }
       }
     }
 

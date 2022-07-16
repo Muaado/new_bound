@@ -163,11 +163,13 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 2.8rem;
     color: #505050;
     @media ${device.tablet} {
+      -webkit-text-size-adjust:none;
       font-size: 1.4rem !important;
       line-height: 2.2rem;
     }
     @media ${device.onlyMobileSm} {
-      font-size: 1.2rem !important;
+      -webkit-text-size-adjust:none;
+      font-size: 12px !important;
       line-height: 2.2rem;
     }
   }
@@ -385,7 +387,7 @@ export const GlobalStyle = createGlobalStyle`
   .card-text-wrapper {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
       0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: 1.5px solid var(--primary);
+    border: 1.8px solid var(--primary);
     background: rgb(0, 0, 0, 0.4);
     z-index: 2;
     color: #fff;
