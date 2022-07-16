@@ -107,7 +107,6 @@ const RestaurantsStyles = styled.div`
   }
 
   .restaurant-description {
-    font-size: 14px;
     color: #676767;
   }
 
