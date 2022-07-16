@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { device } from "../../styles/deviceSizes";
 export const FixedBackgroundImage = styled.div`
   ${({ isMainWrapper }) =>
     isMainWrapper
@@ -12,6 +13,11 @@ export const FixedBackgroundImage = styled.div`
             -moz-background-size: cover;
             background-attachment: ${({ isIos }) =>
               isIos ? "scroll" : "fixed"} !important;
+            @supports (-webkit-touch-callout: none) {
+              @media ${device.onlyMobileS} {
+                background-attachment: scroll !important;
+              }
+            }
             z-index: 0;
           }
         `
@@ -20,7 +26,13 @@ export const FixedBackgroundImage = styled.div`
           background-repeat: no-repeat;
           background-position: center;
           background-size: cover;
-          background-attachment: ${({ isIos }) => (isIos ? "local" : "fixed")};
+          background-attachment: ${({ isIos }) =>
+            isIos ? "scroll" : "fixed"} !important;
+          @supports (-webkit-touch-callout: none) {
+            @media ${device.onlyMobileS} {
+              background-attachment: scroll !important;
+            }
+          }
           z-index: 0;
           height: 100%;
           width: 100%;
