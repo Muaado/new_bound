@@ -10,11 +10,6 @@ import Image from "gatsby-plugin-sanity-image";
 import countries from "../lib/countries";
 import { Button, Carousel } from "../components";
 import { getQueryStringParams, getVillaUrl } from "../lib";
-import Measure from "../assets/icons/villaSpecifications/measure.svg";
-import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
-import Bed from "../assets/icons/villaSpecifications/bed.svg";
-import Shower from "../assets/icons/villaSpecifications/shower.svg";
-import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -281,9 +276,9 @@ const Enquire = (props) => {
                 <div className="form-control">
                   <label>Country of Residence</label>
                   <select {...register("countryOfResidence")}>
-                    <option>PAKISTAN</option>
-                    <option>UK</option>
-                    <option>CANADA</option>
+                    {countries.map(({ name }) => (
+                      <option>{name}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="form-control">

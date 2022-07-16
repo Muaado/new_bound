@@ -8,9 +8,11 @@ export const FixedBackgroundImage = styled.div`
             background-repeat: no-repeat !important;
             background-position: center;
             background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
             background-attachment: ${({ isIos }) =>
-              isIos ? "local" : "fixed"};
-            z-index: -1;
+              isIos ? "scroll" : "fixed"} !important;
+            z-index: 0;
           }
         `
       : css`
@@ -19,7 +21,7 @@ export const FixedBackgroundImage = styled.div`
           background-position: center;
           background-size: cover;
           background-attachment: ${({ isIos }) => (isIos ? "local" : "fixed")};
-          z-index: -1;
+          z-index: 0;
           height: 100%;
           width: 100%;
         `}
