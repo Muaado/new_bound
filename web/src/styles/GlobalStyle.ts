@@ -163,10 +163,12 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 2.8rem;
     color: #505050;
     @media ${device.tablet} {
+      -webkit-text-size-adjust:none;
       font-size: 1.4rem !important;
       line-height: 2.2rem;
     }
     @media ${device.onlyMobileSm} {
+      -webkit-text-size-adjust:none;
       font-size: 1.2rem !important;
       line-height: 2.2rem;
     }

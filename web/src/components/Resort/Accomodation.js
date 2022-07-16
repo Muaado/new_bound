@@ -138,9 +138,9 @@ const Accomodation = ({
   const size = useWindowSize();
   useLayoutEffect(() => {
     const slides = () => {
-      if (isMobile) return 1;
-      if (isTablet) return 2;
       if (isDesktop) return 3;
+      if (isTablet) return 2;
+      if (isMobile) return 1;
       return 2.9;
     };
 
