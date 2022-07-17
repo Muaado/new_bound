@@ -109,8 +109,7 @@ const Wrapper = styled.div`
     letter-spacing: 4px;
     overflow: hidden;
     clip: rect(0, auto, auto, 0);
-    .fixed::before {
-      content: "";
+    .fixed {
       overflow: hidden;
       position: fixed;
       top: 0;
@@ -120,7 +119,7 @@ const Wrapper = styled.div`
       background-position: center;
       background-size: cover;
       width: 100%;
-      height: 100vh;
+      height: 100%;
       z-index: 0;
       -webkit-transform: translate3d(0, 0, 0) !important;
     }
