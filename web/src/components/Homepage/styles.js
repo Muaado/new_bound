@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
 
-// .parallax-wrapper {
-//   height: 100vh;
-//   overflow-x: hidden;
-//   overflow-y: scroll;
-//   perspective: 10px;
-// }
-
-// .parallax-content {
-//
-
 export const HeroStyles = styled.div`
   text-align: center;
   overflow: hidden;
@@ -137,8 +127,6 @@ export const HandCraftedJourneysStyles = styled.div`
 
   ul {
     margin-bottom: 7rem;
-    /* display: flex;
-    justify-content: space-between; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
@@ -150,6 +138,7 @@ export const HandCraftedJourneysStyles = styled.div`
     .image-container {
       width: 100%;
     }
+
     text-align: center;
 
     li {
@@ -265,8 +254,6 @@ export const MagazineStyles = styled.div`
   }
   ul {
     margin-bottom: 7rem;
-    /* display: flex;
-    justify-content: space-between; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;

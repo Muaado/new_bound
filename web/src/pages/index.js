@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 import SanityMuxPlayer from "sanity-mux-player";
-
+import styled from "styled-components";
 import Container from "../components/container";
 import SEO from "../components/seo";
 import Layout from "../containers/layout";
@@ -184,6 +184,33 @@ export const query = graphql`
   }
 `;
 
+// const Wrapper = styled.div`
+//   height: 100vh;
+//   .section {
+//     text-align: center;
+//     position: absolute;
+//     width: 100%;
+//     height: 100vh;
+//     letter-spacing: 4px;
+//     overflow: hidden;
+//     clip: rect(0, auto, auto, 0);
+//     .fixed {
+//       overflow: hidden;
+//       position: fixed;
+//       top: 0;
+//       left: 0;
+//       background-image: url("https://cdn.sanity.io/images/y7yu20xn/master/652d727dd811337e05e3fdfc1252a1e26216dc84-1440x598.png");
+//       background-repeat: no-repeat;
+//       background-position: center;
+//       background-size: cover;
+//       width: 100%;
+//       height: 100%;
+//     }
+//     .white {
+//       color: #fff;
+//     }
+//   }
+// `;
 const IndexPage = (props) => {
   const { data } = props;
   const { collections } = data;
@@ -295,6 +322,13 @@ const IndexPage = (props) => {
             </div>
           </HandCraftedJourneysStyles>
           <PromoSection image={site.promoImageWeb} />
+          {/* <Wrapper>
+            <div className="section">
+              <h1 className="large">Parallax Background</h1>
+              <p>No JavaScript, Start scrolling</p>
+              <div className="fixed"></div>
+            </div>
+          </Wrapper> */}
           <AboutUs aboutUs={site.aboutUs} />
           <WhyBoundlessSection whyBoundlessImage={site.whyBoundlessImage} />
           <MagazineStyles>
