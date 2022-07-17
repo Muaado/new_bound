@@ -109,7 +109,8 @@ const Wrapper = styled.div`
     letter-spacing: 4px;
     overflow: hidden;
     clip: rect(0, auto, auto, 0);
-    .fixed {
+    .fixed::before {
+      content: "";
       overflow: hidden;
       position: fixed;
       top: 0;
