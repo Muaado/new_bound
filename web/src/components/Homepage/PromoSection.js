@@ -112,6 +112,9 @@ const Wrapper = styled.div`
     .fixed {
       position: relative;
       height: 600px;
+      @supports (-webkit-touch-callout: none) {
+        -webkit-transform: translate3d(0, 0, 0) !important;
+      }
     }
     .fixed:before {
       content: "";
@@ -126,9 +129,6 @@ const Wrapper = styled.div`
       background-size: cover;
       overflow: hidden;
       z-index: 0;
-      @supports (-webkit-touch-callout: none) {
-        -webkit-transform: translate3d(0, 0, 0) !important;
-      }
     }
   }
 `;
