@@ -114,6 +114,7 @@ const Wrapper = styled.div`
       position: fixed;
       top: 0;
       left: 0;
+      bottom: 0;
       background-image: url("https://cdn.sanity.io/images/y7yu20xn/master/652d727dd811337e05e3fdfc1252a1e26216dc84-1440x598.png");
       background-repeat: no-repeat;
       background-position: center;
@@ -121,7 +122,9 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100%;
       z-index: 0;
-      -webkit-transform: translate3d(0, 0, 0) !important;
+      @supports (-webkit-touch-callout: none) {
+        -webkit-transform: translate3d(0, 0, 0) !important;
+      }
     }
   }
 `;
