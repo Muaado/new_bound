@@ -36,3 +36,7 @@ export const useIsMobileLarge = () =>
   useMediaQuery(`(max-width: ${mobileLargeWidthPixels + 1}px)`);
 export const useIsDesktop = () =>
   useMediaQuery(`(min-width: ${desktopWidthPixels + 1}px)`);
+export const useOnlyIsTablet = () =>
+  useMediaQuery(`(min-width: ${tabletWidthPixels}px)`);
+export const useOnlyIsLaptop = () =>
+  useMediaQuery(`(min-width: ${tabletLandscapeWidth})`);

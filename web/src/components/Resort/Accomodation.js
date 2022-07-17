@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
 import { Link, navigate } from "gatsby";
 import styled from "styled-components";
@@ -9,7 +9,12 @@ import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
 import { Carousel } from "../Carousel";
 import { ACCOMODATIONS_SECTION } from "../../constants";
-import { useIsMobile, useIsTablet, useIsDesktop } from "../../hooks";
+import {
+  useIsMobile,
+  useOnlyIsTablet,
+  useIsDesktop,
+  useOnlyIsLaptop,
+} from "../../hooks";
 import { PriceTemplate } from "../PriceTemplate";
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -127,30 +132,30 @@ const Accomodation = ({
   elementRef,
   currentSlideIndex: currentSlideIndex_,
 }) => {
-  const [numberOfSlides, setNumberOfSlides] = useState(3);
+  const [numberOfSlides, setNumberOfSlides] = useState(1);
   const [cellSpacing, setCellSpacing] = useState(10);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(
     currentSlideIndex_ || 0
   );
-  const isTablet = useIsTablet();
+  const isTablet = useOnlyIsTablet();
   const isMobile = useIsMobile();
   const isDesktop = useIsDesktop();
-  const size = useWindowSize();
-  useLayoutEffect(() => {
+  const isLaptop = useOnlyIsLaptop();
+  useEffect(() => {
     const slides = () => {
-      if (isDesktop) return 3;
+      if (isDesktop || isLaptop) return 3;
       if (isTablet) return 2;
       if (isMobile) return 1;
-      return 2.9;
+      return 1;
     };
-
+    console.log("slides", slides());
     const spacing = () => {
       return 20;
     };
 
-    setNumberOfSlides(slides);
-    setCellSpacing(spacing);
-  }, [size]);
+    setNumberOfSlides(slides());
+    setCellSpacing(spacing());
+  }, [isDesktop, isLaptop, isTablet]);
 
   return (
     <AccomodationStyles
