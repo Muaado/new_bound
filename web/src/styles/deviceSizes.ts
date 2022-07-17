@@ -34,4 +34,5 @@ export const device = {
   mobileAndTablet: `(min-width: 320px) and (max-wdith:1024px)`,
   iphonePortLandscape: `(min-width: 320px) and (max-width: 837px)  and (-webkit-min-device-pixel-ratio: 2)`,
   mobileSmall: `(max-width: 390px)`,
+  iPadPro: `(min-width: 1024px) and (max-height: 1366px) and (-webkit-min-device-pixel-ratio: 1.5)`,
 };

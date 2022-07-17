@@ -379,16 +379,14 @@ export const GlobalStyle = createGlobalStyle`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-attachment: fixed;
-    @supports (-webkit-touch-callout: none) {
-      @media ${device.onlyMobileSm} {
-        background-attachment: scroll !important;
-    
-      }
-    }
+    position: fixed;
     z-index: 0;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .main-content{
+    position: absolute;
   }
 
   .button-wrapper {
