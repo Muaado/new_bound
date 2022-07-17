@@ -12,6 +12,7 @@ import { device } from "../../styles/deviceSizes";
 //
 
 export const HeroStyles = styled.div`
+  position: relative;
   text-align: center;
   overflow: hidden;
   color: #fff;
