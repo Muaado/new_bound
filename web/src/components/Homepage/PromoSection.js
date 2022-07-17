@@ -110,17 +110,21 @@ const Wrapper = styled.div`
     overflow: hidden;
     clip: rect(0, auto, auto, 0);
     .fixed {
-      overflow: hidden;
-      position: fixed;
+      position: relative;
+      height: 600px;
+    }
+    .fixed:before {
+      content: "";
       top: 0;
       left: 0;
-      bottom: 0;
-      background-image: url("https://cdn.sanity.io/images/y7yu20xn/master/652d727dd811337e05e3fdfc1252a1e26216dc84-1440x598.png");
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      background: url("https://cdn.sanity.io/images/y7yu20xn/master/652d727dd811337e05e3fdfc1252a1e26216dc84-1440x598.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      width: 100%;
-      height: 100%;
+      overflow: hidden;
       z-index: 0;
       @supports (-webkit-touch-callout: none) {
         -webkit-transform: translate3d(0, 0, 0) !important;
@@ -149,7 +153,7 @@ const PromoSection = ({ image }) => {
               Villas in the most stunning locations.
             </p>
           </div>
-          <div className="fixed"></div>
+          <div className="fixed" />
         </div>
       </Wrapper>
       {/* <FixedBackgroundImage bgImage={image?.asset?.url} isIos={isIOSDevice()}>
