@@ -67,7 +67,7 @@ export const PromoSectionStyles = styled.div`
   p {
     width: 45rem;
     position: absolute;
-    top: 75%;
+    top: 60%;
     left: 75%;
     transform: translate(-50%, -50%);
     color: #fff;
@@ -176,7 +176,7 @@ const Wrapper = styled.div`
     text-align: center;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     letter-spacing: 4px;
     overflow: hidden;
     clip: rect(0, auto, auto, 0);
