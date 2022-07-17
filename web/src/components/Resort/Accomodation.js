@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "gatsby-plugin-sanity-image";
-import { Link, navigate } from "gatsby";
+import { navigate } from "gatsby";
 import styled from "styled-components";
 import { device } from "../../styles/deviceSizes";
-import useWindowSize from "../../lib/useWindowSize";
 import { getVillaUrl } from "../../lib/helpers";
 import Placeholder from "../../assets/placeholder.svg";
 import { Button } from "../Button";
@@ -148,7 +147,6 @@ const Accomodation = ({
       if (isMobile) return 1;
       return 1;
     };
-    console.log("slides", slides());
     const spacing = () => {
       return 20;
     };
