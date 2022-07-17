@@ -91,77 +91,6 @@ export const PromoSectionStyles = styled.div`
     z-index: -1;
   }
 
-  header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    background: url(https://picsum.photos/g/1921/1081?random) top center;
-    background-size: cover;
-    transform: translateZ(-1px) scale(2.1);
-    min-height: 100%;
-    z-index: -2;
-  }
-
-  /*************************************************************
-  SECTIONS
-**************************************************************/
-  section {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    position: relative;
-    transform-style: inherit;
-  }
-
-  .section1 {
-    background: #fafafa;
-    box-shadow: 0 0 20px #333;
-    z-index: 1;
-  }
-
-  .section2::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    background: url(https://picsum.photos/g/1920/1080?random) top center;
-    background-size: cover;
-    transform: translateZ(-0.5px) scale(1.6);
-    z-index: -1;
-  }
-
-  /*************************************************************
-  HEADINGS
-**************************************************************/
-  h1 {
-    font-size: 4rem;
-    text-align: center;
-    position: absolute;
-    padding: 1rem;
-    background: #fafafa;
-    box-shadow: 0 0 20px #333;
-    top: 50%;
-    left: 50%;
-    transform: translateZ(-1px) scale(2) translate(-25%, -25%);
-  }
-
-  .section1 h1 {
-    z-index: 3;
-    transform: translate(-50%, -50%);
-    box-shadow: none;
-  }
-
-  .section2 h1 {
-    transform: translateZ(-0.3px) scale(1.3) translate(-39%, -39%);
-    z-index: 3;
-  }
   .promo-text {
     z-index: 2;
     p {
@@ -176,7 +105,7 @@ const Wrapper = styled.div`
     text-align: center;
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     letter-spacing: 4px;
     overflow: hidden;
     clip: rect(0, auto, auto, 0);
@@ -190,7 +119,7 @@ const Wrapper = styled.div`
       background-position: center;
       background-size: cover;
       width: 100%;
-      height: 100%;
+      height: 100vh;
     }
   }
 `;
