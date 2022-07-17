@@ -375,8 +375,18 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .root-parallax {
-   height: 100vh !important;
-   width: 100vw;
+    background-image: url('https://cdn.sanity.io/images/y7yu20xn/master/5779a34c7b24c85ccfc7af2f57860afb4fa5b4ce-3508x2480.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: fixed;
+    z-index: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .main-content{
+    position: absolute;
   }
 
   .button-wrapper {
