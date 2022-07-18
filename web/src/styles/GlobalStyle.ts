@@ -387,6 +387,7 @@ export const GlobalStyle = createGlobalStyle`
   
   .main-content{
     position: absolute;
+    width: 100%;
   }
 
   .button-wrapper {
