@@ -132,10 +132,10 @@ const RestaurantsStyles = styled.div`
     }
   }
 `;
-const Restaurants = ({ restaurants }) => {
+const Restaurants = ({ restaurants, innerRef }) => {
   const [restaurantSlice, setRestaurantSLice] = useState(4);
   return (
-    <RestaurantsStyles id="dine">
+    <RestaurantsStyles id="dine" ref={innerRef}>
       <Overlay className="parallax-overlay" bgColor="#fff" />
       <div
         id="dine-content"

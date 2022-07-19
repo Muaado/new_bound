@@ -28,6 +28,7 @@ import Search from "../components/Search";
 import { Button } from "../components/Button";
 import { FixedBackgroundImage, Overlay } from "../components";
 import { isIOSDevice } from "../lib/helpers";
+
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
     crop {
@@ -207,7 +208,6 @@ const IndexPage = (props) => {
         keywords={site.keywords}
       />
       <Container>
-        <LeftSidebar />
         <HeroStyles>
           {windowGlobal && window.innerWidth >= 805 ? (
             <SanityMuxPlayer

@@ -112,10 +112,10 @@ const ActivitiesStyles = styled.div`
 
 const activitiesPlaceHolders = [1, 2, 3, 4, 5, 6];
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, innerRef }) => {
   const isTablet = useIsTablet();
   return (
-    <ActivitiesStyles id="activities">
+    <ActivitiesStyles id="activities" ref={innerRef}>
       <Overlay opacity={1} bgColor="white" />
       <div
         id="activities-content"

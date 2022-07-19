@@ -1,5 +1,5 @@
 import { graphql } from "gatsby";
-import React, { useState, Suspense } from "react";
+import React, { createRef, useRef } from "react";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -14,7 +14,7 @@ import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
 import { LIGHT_COLOR } from "../constants";
-import { useScrollToRef } from "../hooks";
+import { useScrollToRef, useNavLink, usePageSectionsRef } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
 
@@ -195,9 +195,61 @@ const ResortTemplate = (props) => {
   const spas = data && data.spas;
   const villas = data && data.villas;
   const restaurants = data && data.resort.restaurants;
-
   const site = data && data.site;
   const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
+
+  // create ref for each section so we can target using the nav links
+  const { setPageName, setNavLinks, resetValues } = useNavLink();
+  // const sectionRefs_ = useRef(
+  //   [
+  //     "Island Overview",
+  //     "Accomodation",
+  //     "Highlights",
+  //     "Dine",
+  //     "Spa",
+  //     "Activities",
+  //   ].map((_) => React.createRef())
+  // );
+  // console.log("sectionRefs_", sectionRefs_);
+  // const accomodationRef = null;
+  // const islandRef = null;
+  // const highlightsRef = null;
+  // const dineRef = null;
+  // const spaRef = null;
+  const {
+    accomodationRef,
+    islandRef,
+    highlightsRef,
+    spaRef,
+    activitiesRef,
+    dineRef,
+  } = usePageSectionsRef([
+    "Island Overview",
+    "Accomodation",
+    "Highlights",
+    "Dine",
+    "Spa",
+    "Activities",
+  ]);
+
+  console.log("sectionsRef", accomodationRef, islandRef, activitiesRef, spaRef);
+
+  React.useEffect(() => {
+    const navLinks = [
+      { name: "Island Overview", innerRef: islandRef },
+      { name: "Accomodation", innerRef: accomodationRef },
+      { name: "Highlights", innerRef: highlightsRef },
+      { name: "Dine", innerRef: dineRef },
+      { name: "Spa", innerRef: spaRef },
+      { name: "Activities", innerRef: activitiesRef },
+    ];
+
+    setPageName("resort");
+    setNavLinks(navLinks);
+    return () => {
+      resetValues();
+    };
+  }, [islandRef?.current]);
 
   const { elementRef, executeScroll } = useScrollToRef();
 
@@ -271,7 +323,7 @@ const ResortTemplate = (props) => {
             list={["overview", "accomodation", "highlights", "dine", "gallery"]}
           />
 
-          <div id="overview">
+          <div id="overview" ref={islandRef}>
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
@@ -283,7 +335,7 @@ const ResortTemplate = (props) => {
               title="ISLAND OVERVIEW"
             />
           </div>
-          <AccommodationHighlightsWrapper>
+          <AccommodationHighlightsWrapper ref={accomodationRef}>
             <Overlay opacity={1} bgColor="white" />
             <Accomodation
               elementRef={elementRef}
@@ -291,11 +343,14 @@ const ResortTemplate = (props) => {
               villas={villas.nodes}
               currentSlideIndex={currentSlideIndex_}
             />
-            <Highlights highlights={highlights} />
+            <Highlights highlights={highlights} innerRef={highlightsRef} />
           </AccommodationHighlightsWrapper>
-          {restaurants.length && <Restaurants restaurants={restaurants} />}
+          {restaurants.length && (
+            <Restaurants innerRef={dineRef} restaurants={restaurants} />
+          )}
           {spas.nodes && (
             <div
+              ref={spaRef}
               speed={1000}
               className="resort__spas"
               slidesToShow={1}
@@ -310,6 +365,7 @@ const ResortTemplate = (props) => {
 
           {activities && (
             <Activities
+              innerRef={activitiesRef}
               activities={activities}
               data-aos="fade-up"
               data-aos-delay="50"

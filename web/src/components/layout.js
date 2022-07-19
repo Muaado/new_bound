@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header";
+import Header from "./header_new";
 
 import AOS from "aos";
 
@@ -26,32 +26,34 @@ const Layout = ({
   location,
   contactUs,
   headerDropdownImage,
-}) => (
-  <>
-    <Helmet>
-      <script
-        type="text/javascript"
-        id="hs-script-loader"
-        async
-        defer
-        src="//js-na1.hs-scripts.com/21013560.js"
-      ></script>
-    </Helmet>
-    <Header
-      logo={logo}
-      location={location}
-      navData={navData}
-      siteTitle={siteTitle}
-      onHideNav={onHideNav}
-      onShowNav={onShowNav}
-      showNav={showNav}
-      headerDropdownImage={headerDropdownImage}
-    />
+}) => {
+  return (
+    <>
+      <Helmet>
+        <script
+          type="text/javascript"
+          id="hs-script-loader"
+          async
+          defer
+          src="//js-na1.hs-scripts.com/21013560.js"
+        ></script>
+      </Helmet>
+      <Header
+        logo={logo}
+        location={location}
+        navData={navData}
+        siteTitle={siteTitle}
+        onHideNav={onHideNav}
+        onShowNav={onShowNav}
+        showNav={showNav}
+        headerDropdownImage={headerDropdownImage}
+      />
 
-    {children}
-    <Footer logo={logo} contactUs={contactUs} />
-    <GlobalStyle />
-  </>
-);
+      {children}
+      <Footer logo={logo} contactUs={contactUs} />
+      <GlobalStyle />
+    </>
+  );
+};
 
 export default Layout;

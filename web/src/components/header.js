@@ -716,23 +716,10 @@ const Header = ({
   }, [showDropdown, showNav]);
   return (
     <HeaderStyles
-      // ref={headerRef}
       className={showNav ? "show-header" : ""}
       pathname={location?.pathname}
     >
-      {/* <div className="contact-us">
-        <a href="#contact-us">
-          <CustomerService />
-          Contact Us
-        </a>
-      </div> */}
       <Logo logo={logo} />
-      {/* <button
-        onClick={() => {
-          onShowNav();
-          console.log("cliked");
-        }}
-      > */}
       <HamburgerIcon
         className="icon hamburger-icon"
         onClick={() => {
@@ -745,14 +732,8 @@ const Header = ({
           }
         }}
       />
-      {/* </button> */}
-
       <nav
-        className={
-          // `${showNav ? "show" : "hide"} ${
-          windowGlobal && window.innerWidth > 805 ? "show" : "hide"
-          // }`
-        }
+        className={windowGlobal && window.innerWidth > 805 ? "show" : "hide"}
       >
         <CloseIcon
           className="close-icon"
@@ -795,8 +776,6 @@ const Header = ({
             ) : (
               <ChevronDown />
             )}
-            {/* {showDropdown === 1 && ( */}
-            {/* )} */}
           </li>
 
           <li
@@ -804,10 +783,6 @@ const Header = ({
               selectedList === "collections" ? "selected" : ""
             } clickable`}
             onClick={() => {
-              // handleOpenDropDown({
-              //   resorts: navData.resorts,
-              //   collections: navData.collections,
-              // });
               setSelectedList("collections");
               if (!showDropdown || selectedList !== "collections") {
                 setShowDropdown(true);
@@ -817,27 +792,15 @@ const Header = ({
               }
             }}
           >
-            {/* <p
-              
-            > */}
             Holiday stays
             {showDropdown && selectedList === "collections" ? (
               <ChevronUp />
             ) : (
               <ChevronDown />
             )}
-            {/* {showDropdown === 3 && <DropDown marginTop={12} list={list} />} */}
-            {/* </p> */}
           </li>
           <li>
-            <Link
-              to="/magazine"
-              className="clickable"
-              // onClick={() => {
-              //   setShowDropdown(!showDropdown);
-              //   setList(navData.resorts);
-              // }}
-            >
+            <Link to="/magazine" className="clickable">
               Magazine
             </Link>
           </li>
@@ -845,7 +808,6 @@ const Header = ({
       </nav>
 
       <div
-        // className="mobile-nav"
         className={`mobile-nav ${showNav ? "show" : "hide"} ${
           windowGlobal && window.innerWidth > 805 ? "show" : ""
         }`}
@@ -868,7 +830,6 @@ const Header = ({
             <li
               className="clickable"
               onClick={() => {
-                // handleOpenDropDown([], false);
                 document.body.style.overflow = "unset";
                 setSelectedList("");
                 setShowDropdown(false);
@@ -901,17 +862,13 @@ const Header = ({
             }}
           >
             Resorts {showMobileDropDown === 1 ? <MinusIcon /> : <PlusIcon />}
-            {/* {showMobileDropDown === 1 && ( */}
             <DropDown
               className={showMobileDropDown === 1 ? "show resorts" : ""}
               lists={lists.resorts}
-              // headerDropdownImage={headerDropdownImage}
               setShowDropdown={setShowDropdown}
-              // handleOpenDropDown={handleOpenDropDown}
               selectedList={selectedList}
               setSelectedList={setSelectedList}
             />
-            {/* )} */}
           </li>
 
           <li
@@ -924,18 +881,8 @@ const Header = ({
               } else {
                 setShowMobileDropDown(0);
               }
-              // setSelectedList("collections");
-              // if (!showDropdown || selectedList !== "collections") {
-              //   setShowDropdown(true);
-              // } else {
-              //   setShowDropdown(false);
-              //   setSelectedList("");
-              // }
             }}
           >
-            {/* <p
-              
-            > */}
             Holiday stays
             {showMobileDropDown == 2 ? <MinusIcon /> : <PlusIcon />}
             <DropDown
@@ -943,24 +890,13 @@ const Header = ({
                 showMobileDropDown === 2 ? "show collections" : ""
               }`}
               lists={lists.collections}
-              // headerDropdownImage={headerDropdownImage}
               setShowDropdown={setShowDropdown}
-              // handleOpenDropDown={handleOpenDropDown}
               selectedList={selectedList}
               setSelectedList={setSelectedList}
             />
-            {/* {showDropdown === 3 && <DropDown marginTop={12} list={list} />} */}
-            {/* </p> */}
           </li>
           <li>
-            <Link
-              to="/magazine"
-              className="clickable"
-              // onClick={() => {
-              //   setShowDropdown(!showDropdown);
-              //   setList(navData.resorts);
-              // }}
-            >
+            <Link to="/magazine" className="clickable">
               Magazine
               {showDropdown === 4 && <DropDown list={list} />}
             </Link>
@@ -974,7 +910,6 @@ const Header = ({
         lists={dropdownLists}
         headerDropdownImage={headerDropdownImage}
         setShowDropdown={setShowDropdown}
-        // handleOpenDropDown={handleOpenDropDown}
         selectedList={selectedList}
         setSelectedList={setSelectedList}
       />

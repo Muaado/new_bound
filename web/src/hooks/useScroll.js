@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export const useScoll = ({
   scrollHeightToHide = 80,
   scrollHeightToShow = 0,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
-  useEffect(() => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  useLayoutEffect(() => {
     const scrollEvent = window.addEventListener("scroll", listenToScroll);
     return () => {
       window.removeEventListener("scroll", scrollEvent);
@@ -21,6 +22,7 @@ export const useScoll = ({
     if (winScroll <= scrollHeightToShow) {
       setIsVisible(true);
     }
+    setScrollPosition(winScroll);
   };
-  return [isVisible];
+  return [isVisible, scrollPosition];
 };
