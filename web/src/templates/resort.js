@@ -14,7 +14,7 @@ import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
 import { LIGHT_COLOR } from "../constants";
-import { useScrollToRef, useNavLink, usePageSectionsRef } from "../hooks";
+import { useScrollToRef, useNavBar, usePageSectionsRef } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
 
@@ -187,6 +187,15 @@ export const query = graphql`
   }
 `;
 
+const pageSections = [
+  "Overview",
+  "Accomodation",
+  "Highlights",
+  "Dine",
+  "Spa",
+  "Activities",
+];
+
 const ResortTemplate = (props) => {
   const redirectedFrom = props?.location?.state?.redirectedFrom;
   const currentSlideIndex_ = props?.location?.state?.currentSlideIndex;
@@ -195,61 +204,26 @@ const ResortTemplate = (props) => {
   const spas = data && data.spas;
   const villas = data && data.villas;
   const restaurants = data && data.resort.restaurants;
-  const site = data && data.site;
-  const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
-
-  // create ref for each section so we can target using the nav links
-  const { setPageName, setNavLinks, resetValues } = useNavLink();
-  // const sectionRefs_ = useRef(
-  //   [
-  //     "Island Overview",
-  //     "Accomodation",
-  //     "Highlights",
-  //     "Dine",
-  //     "Spa",
-  //     "Activities",
-  //   ].map((_) => React.createRef())
-  // );
-  // console.log("sectionRefs_", sectionRefs_);
-  // const accomodationRef = null;
-  // const islandRef = null;
-  // const highlightsRef = null;
-  // const dineRef = null;
-  // const spaRef = null;
+  const heroRef = useRef();
+  const { setPageName, setNavLinks, resetValues, setHeroRef } = useNavBar();
   const {
     accomodationRef,
-    islandRef,
+    overviewRef,
     highlightsRef,
     spaRef,
     activitiesRef,
     dineRef,
-  } = usePageSectionsRef([
-    "Island Overview",
-    "Accomodation",
-    "Highlights",
-    "Dine",
-    "Spa",
-    "Activities",
-  ]);
-
-  console.log("sectionsRef", accomodationRef, islandRef, activitiesRef, spaRef);
+    navLinks,
+  } = usePageSectionsRef(pageSections);
 
   React.useEffect(() => {
-    const navLinks = [
-      { name: "Island Overview", innerRef: islandRef },
-      { name: "Accomodation", innerRef: accomodationRef },
-      { name: "Highlights", innerRef: highlightsRef },
-      { name: "Dine", innerRef: dineRef },
-      { name: "Spa", innerRef: spaRef },
-      { name: "Activities", innerRef: activitiesRef },
-    ];
-
     setPageName("resort");
     setNavLinks(navLinks);
+    setHeroRef(heroRef);
     return () => {
       resetValues();
     };
-  }, [islandRef?.current]);
+  }, [overviewRef?.current]);
 
   const { elementRef, executeScroll } = useScrollToRef();
 
@@ -296,7 +270,7 @@ const ResortTemplate = (props) => {
       <Container>
         <ResortStyles>
           {image && (
-            <div className={`resort__image ${heroTextClass}`}>
+            <div className={`resort__image ${heroTextClass}`} ref={heroRef}>
               <Overlay className="hero-overlay" />
               {image && image.asset && (
                 <Image
@@ -323,7 +297,7 @@ const ResortTemplate = (props) => {
             list={["overview", "accomodation", "highlights", "dine", "gallery"]}
           />
 
-          <div id="overview" ref={islandRef}>
+          <div id="overview" ref={overviewRef}>
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
@@ -371,7 +345,6 @@ const ResortTemplate = (props) => {
               data-aos-delay="50"
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
-              parallaxImage={parallaxImage}
             />
           )}
           {/* 

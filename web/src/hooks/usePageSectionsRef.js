@@ -14,7 +14,5 @@ export const usePageSectionsRef = (sections) => {
     });
     setNavLinks(navLinks_);
   }, []);
-
-  console.log("navLinks", navLinks);
   return { ...sectionRefs?.current, navLinks };
 };

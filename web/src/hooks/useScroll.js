@@ -6,6 +6,9 @@ export const useScoll = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollX, setScrollX] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
   useLayoutEffect(() => {
     const scrollEvent = window.addEventListener("scroll", listenToScroll);
     return () => {
@@ -23,6 +26,8 @@ export const useScoll = ({
       setIsVisible(true);
     }
     setScrollPosition(winScroll);
+    setScrollX(window.screenX);
+    setScrollY(window.scrollY);
   };
-  return [isVisible, scrollPosition];
+  return [isVisible, scrollPosition, scrollX, scrollY];
 };

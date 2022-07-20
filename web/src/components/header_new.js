@@ -62,16 +62,14 @@ const HeaderStyles = styled.header`
   .container {
     height: 100%;
     position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 5rem;
-    padding-right: 5rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
     display: grid;
     justify-content: center;
     align-items: center;
   }
   .black-bg {
-    background: rgba(0, 0, 0, 0.6);
+    background-color: rgba(21, 21, 21, 0.5);
   }
 
   .icon {

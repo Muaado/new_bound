@@ -5,13 +5,13 @@
  */
 
 // You can delete this file if you're not using it
-import { NavLinkProvider } from "./src/components";
+import { NavBarProvider } from "./src/components";
 import React from "react";
 export const wrapRootElement = ({ element }) => (
   <div>
     <div className="root-parallax" />
     <div className="main-content">
-      <NavLinkProvider>{element}</NavLinkProvider>
+      <NavBarProvider>{element}</NavBarProvider>
     </div>
   </div>
 );

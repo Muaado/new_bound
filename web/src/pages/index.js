@@ -28,6 +28,9 @@ import Search from "../components/Search";
 import { Button } from "../components/Button";
 import { FixedBackgroundImage, Overlay } from "../components";
 import { isIOSDevice } from "../lib/helpers";
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useScoll, useNavBar } from "../hooks";
 
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
@@ -192,6 +195,13 @@ const IndexPage = (props) => {
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
   const magazinePosts = (data || {}).magazinePosts;
+  const { setHeroRef } = useNavBar();
+  const heroRef = useRef();
+  useEffect(() => {
+    console.log("heroRef", heroRef);
+    setHeroRef(heroRef);
+    // console.log("scrollTop", heroRef?.current?.clientHeight * 0.65);
+  }, []);
 
   if (!site) {
     throw new Error(
@@ -208,7 +218,7 @@ const IndexPage = (props) => {
         keywords={site.keywords}
       />
       <Container>
-        <HeroStyles>
+        <HeroStyles ref={heroRef}>
           {windowGlobal && window.innerWidth >= 805 ? (
             <SanityMuxPlayer
               assetDocument={site.video.asset}
