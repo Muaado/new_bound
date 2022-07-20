@@ -11,7 +11,10 @@ const setUser = (user) =>
   });
 
 export const handleLogin = ({ email, password }) => {
-  if (email === "test@test.com" && password === "test123") {
+  if (
+    (email === "test@test.com" && password === "test123") ||
+    (email === "hello@creator.com" && password === "creator123")
+  ) {
     return setUser({
       username: "test-user",
       name: "Test User",

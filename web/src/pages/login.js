@@ -116,7 +116,7 @@ const Login = () => {
           </div>
           <div className="form-control">
             <label>Password</label>
-            <input type="text" {...register("password")} />
+            <input type="password" {...register("password")} />
             <ErrorField error={passwordError} />
             <Button
               style={{ width: "100%", background: "#91715c", color: "white" }}
