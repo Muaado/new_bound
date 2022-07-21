@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import { LogoWrapper, NavWrapper, SecondaryNavBarWrapper } from "./elements";
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import HamburgerIcon from "../../assets/icons/menu-solid.svg";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
 import Image from "gatsby-plugin-sanity-image";
 import { useScoll, useScrollToRef, useNavBar } from "../../hooks";
-import { HOLIDAY_STAYS, HOME, RESORTS, MAGAZINE } from "../../constants";
+import {
+  HOLIDAY_STAYS,
+  HOME,
+  RESORTS,
+  NAVBAR_WITH_BOTTOM_LINK,
+} from "../../constants";
 
-export const NavBar = ({ logo, onMenuClick }) => {
+export const NavBar = ({ logo, onMenuClick, mainNavContent }) => {
   const { navLinks, pageName, heroRef } = useNavBar();
   const maxScroll = heroRef?.current?.clientHeight || 400;
 
   const renderNavBar = () => {
     switch (pageName) {
-      case "homepage":
-        return (
-          <DefaultNavBar
-            logo={logo}
-            onMenuClick={onMenuClick}
-            pageName={pageName}
-            maxScroll={maxScroll}
-          />
-        );
-      case "resort":
+      case NAVBAR_WITH_BOTTOM_LINK:
         return (
           <NavBarWithBottonLinks
             logo={logo}
@@ -30,6 +26,7 @@ export const NavBar = ({ logo, onMenuClick }) => {
             onMenuClick={onMenuClick}
             navLinks={navLinks}
             maxScroll={maxScroll}
+            siteWideNavContent={mainNavContent}
           />
         );
       default:
@@ -91,6 +88,7 @@ export const NavBarWithBottonLinks = ({
   onMenuClick,
   navLinks,
   maxScroll,
+  siteWideNavContent,
 }) => {
   const [_, scrollPosition] = useScoll({
     scrollHeightToHide: undefined,
@@ -99,13 +97,38 @@ export const NavBarWithBottonLinks = ({
 
   const [activeLink, setActiveLink] = useState(null);
   const { __, executeScroll } = useScrollToRef();
+  const [showSiteWideNav, setShowSiteWideNav] = useState(false);
+  const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
+  const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
   const [showMainNav, setShowMainNav] = useState(false);
-  const [showMainNavContent, setShowMainNavContent] = useState(false);
-  const [activeMainNavLink, setActiveMainNavLink] = useState(null);
+  const [mainNavContent, setMainNavContent] = useState([]);
 
-  const onMainNavLinkClick = (linkName) => {
-    setShowMainNavContent(!showMainNavContent);
-    setActiveMainNavLink(linkName);
+  const siteWideNavContent_ = (
+    activeSiteWideNavLink
+      ? activeSiteWideNavLink === HOLIDAY_STAYS
+        ? siteWideNavContent.collections
+        : siteWideNavContent.resorts.slice(0, 5)
+      : []
+  ).map(({ name, url }, index) => {
+    return {
+      className: index === 0 ? "page-title" : "",
+      content: name,
+      onClick: () => onSiteWideNavContentClick(url),
+    };
+  });
+
+  const onSiteWideNavContentClick = (url) => {
+    navigate(url);
+  };
+
+  const onSiteWideNavLinkClick = (linkName) => {
+    if (activeSiteWideNavLink === linkName) {
+      setShowSiteWideContent(false);
+      setActiveSiteWideNavLink(null);
+    } else {
+      setActiveSiteWideNavLink(linkName);
+      setShowSiteWideContent(true);
+    }
   };
 
   const isMaxScroll = scrollPosition < maxScroll - 100;
@@ -128,76 +151,94 @@ export const NavBarWithBottonLinks = ({
         <NavBarList
           items={[
             {
-              className: `${showMainNav ? "rotate" : ""} page-title`,
+              className: `${showSiteWideNav ? "rotate" : ""} page-title`,
               icon: <ChevronDown />,
               content: <div className="text">Boundless</div>,
               onClick: () => {
-                setShowMainNav(!showMainNav);
+                setShowSiteWideNav(!showSiteWideNav);
+                setShowMainNav(false);
               },
             },
           ]}
           className="container"
         >
           <NavBarList
-            items={[...navLinks].map(({ name, innerRef }, index) => ({
-              sibling: index > 0 ? <>|</> : null,
-              siblingClassName: "vertical-divider",
-              className: activeLink == name ? "active" : "",
-              onClick: () => {
-                setActiveLink(name);
-                executeScroll(innerRef);
-              },
-              content: name,
-            }))}
+            items={
+              navLinks?.length
+                ? navLinks?.map(
+                    ({ name, innerRef, isDropDown, content }, index) => ({
+                      sibling: index > 0 ? <>|</> : null,
+                      siblingClassName: "vertical-divider",
+                      className: isDropDown
+                        ? `page-title ${showMainNav ? "rotate" : ""} `
+                        : activeLink == name
+                        ? "active"
+                        : "",
+                      icon: isDropDown ? <ChevronDown /> : undefined,
+                      onClick: () => {
+                        setActiveLink(name);
+                        if (isDropDown) {
+                          setShowMainNav(!showMainNav);
+                          setMainNavContent(content);
+                          setShowSiteWideNav(false);
+                        }
+                        executeScroll(innerRef);
+                      },
+                      content: <div className="text">{name}</div>,
+                    })
+                  )
+                : []
+            }
             className="bottom-links"
           />
         </NavBarList>
         <SecondaryNavBar
-          open={showMainNav}
+          open={showSiteWideNav}
           listWrapperClass={
-            showMainNavContent ? "second-nav-border-bottom" : ""
+            showSiteWideNavContent ? "second-nav-border-bottom" : ""
           }
           listItems={[
             {
               className: `${
-                activeMainNavLink === HOME ? "active" : ""
+                activeSiteWideNavLink === HOME ? "active" : ""
               } page-title`,
               content: "Home",
-              onClick: () => onMainNavLinkClick(HOME),
+              onClick: () => {
+                navigate("/");
+              },
             },
             {
               className:
-                activeMainNavLink === RESORTS && showMainNavContent
+                activeSiteWideNavLink === RESORTS && showSiteWideNavContent
                   ? "rotate"
                   : "",
               icon: <ChevronDown />,
               content: <div className="text">Resorts</div>,
-              onClick: () => onMainNavLinkClick(RESORTS),
+              onClick: () => onSiteWideNavLinkClick(RESORTS),
             },
             {
               className:
-                activeMainNavLink === HOLIDAY_STAYS && showMainNavContent
+                activeSiteWideNavLink === HOLIDAY_STAYS &&
+                showSiteWideNavContent
                   ? "rotate"
                   : "",
               icon: <ChevronDown />,
               content: <div className="text">Holiday stays</div>,
-              onClick: () => onMainNavLinkClick(HOLIDAY_STAYS),
+              onClick: () => onSiteWideNavLinkClick(HOLIDAY_STAYS),
             },
             {
-              className:
-                activeMainNavLink === MAGAZINE && showMainNavContent
-                  ? "rotate"
-                  : "",
-              icon: <ChevronDown />,
               content: <div className="text">Magazine</div>,
-              onClick: () => onMainNavLinkClick(MAGAZINE),
+              onClick: () => {
+                navigate("/magazine");
+              },
             },
           ]}
         />
         <SecondaryNavBar
-          open={showMainNav && showMainNavContent}
-          listItems={[]}
+          open={showSiteWideNav && showSiteWideNavContent}
+          listItems={siteWideNavContent_}
         />
+        <SecondaryNavBar open={showMainNav} listItems={mainNavContent} />
       </NavWrapper>
     </DefaultNavBar>
   );
@@ -236,7 +277,7 @@ const NavBarList = ({ items, className, children }) => {
             <>
               {sibling ? <li className={siblingClassName}>{sibling}</li> : null}
               <li className={className_} onClick={onClick}>
-                <div className="list-icon">{icon}</div>
+                {icon ? <div className="list-icon">{icon}</div> : null}
                 {content}
               </li>
             </>

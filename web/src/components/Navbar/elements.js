@@ -30,7 +30,7 @@ export const NavWrapper = styled.nav`
     background-color: rgba(21, 21, 21, 0.3);
     -webkit-backdrop-filter: blur(20px);
     transform: matrix(1, 0, 0, 1, 0, 0);
-    height: 8rem;
+    height: 6rem;
     opacity: 1;
   }
 
@@ -39,7 +39,7 @@ export const NavWrapper = styled.nav`
       grid-template-columns: 1fr 1fr;
       li {
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         color: #fff;
         letter-spacing: 0.16667em;
         text-decoration: none;
@@ -47,7 +47,6 @@ export const NavWrapper = styled.nav`
         font-family: "Riviera Nights", "Gill Alt One MT", Helvetica, Arial,
           -apple-system, sans-serif;
         :not(.page-title) {
-          text-align: right;
           align-self: center;
           margin-left: 25px;
         }
@@ -60,6 +59,7 @@ export const NavWrapper = styled.nav`
           }
 
           svg {
+            margin-top: -4px;
             filter: brightness(0.5) invert(1);
             transform: rotate(0);
             transition: all 0.4s ease-in-out;
@@ -67,7 +67,6 @@ export const NavWrapper = styled.nav`
         }
         &.rotate {
           svg {
-            margin-top: -1px;
             transform: rotate(180deg);
             height: 15px;
             width: 15px;
@@ -170,12 +169,13 @@ export const SecondaryNavBarWrapper = styled.div`
       color: #222 !important;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-left: unset;
+      justify-content: flex-start !important;
+      margin-left: unset !important;
       margin-right: 50px;
       .list-icon {
         margin-right: 5px;
         svg {
+          top: -2px;
           height: 15px;
           width: 15px;
           transform: rotate(0);

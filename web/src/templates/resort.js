@@ -13,7 +13,7 @@ import { toPlainText } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
-import { LIGHT_COLOR } from "../constants";
+import { LIGHT_COLOR, NAVBAR_WITH_BOTTOM_LINK } from "../constants";
 import { useScrollToRef, useNavBar, usePageSectionsRef } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
@@ -188,12 +188,12 @@ export const query = graphql`
 `;
 
 const pageSections = [
-  "Overview",
-  "Accomodation",
-  "Highlights",
-  "Dine",
-  "Spa",
-  "Activities",
+  { name: "Overview", isDropDown: false },
+  { name: "Accomodation", isDropDown: false },
+  { name: "Highlights", isDropDown: false },
+  { name: "Dine", isDropDown: false },
+  { name: "Spa", isDropDown: false },
+  { name: "Activities", isDropDown: false },
 ];
 
 const ResortTemplate = (props) => {
@@ -217,7 +217,7 @@ const ResortTemplate = (props) => {
   } = usePageSectionsRef(pageSections);
 
   React.useEffect(() => {
-    setPageName("resort");
+    setPageName(NAVBAR_WITH_BOTTOM_LINK);
     setNavLinks(navLinks);
     setHeroRef(heroRef);
     return () => {

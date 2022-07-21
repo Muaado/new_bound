@@ -198,9 +198,7 @@ const IndexPage = (props) => {
   const { setHeroRef } = useNavBar();
   const heroRef = useRef();
   useEffect(() => {
-    console.log("heroRef", heroRef);
     setHeroRef(heroRef);
-    // console.log("scrollTop", heroRef?.current?.clientHeight * 0.65);
   }, []);
 
   if (!site) {

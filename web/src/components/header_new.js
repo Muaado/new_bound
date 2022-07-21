@@ -290,7 +290,10 @@ const Header = ({
   const [selectedList, setSelectedList] = useState("");
 
   const [showMobileDropDown, setShowMobileDropDown] = useState(Number);
-  let lists = { resorts: navData?.resorts, collections: navData?.collections };
+  const lists = {
+    resorts: navData?.resorts,
+    collections: navData?.collections,
+  };
   const dropdownLists =
     selectedList === "resorts" ? lists.resorts : lists.collections;
 
@@ -313,6 +316,7 @@ const Header = ({
           onMenuClick={() => {
             setShowLeftSideBar(true);
           }}
+          mainNavContent={lists}
           logo={logo}
         />
       )}

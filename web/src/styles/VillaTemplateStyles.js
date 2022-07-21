@@ -6,7 +6,6 @@ const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  z-index: 1;
   width: 100%;
   h1 {
     @media ${device.tablet} {
@@ -58,6 +57,7 @@ const VillaStyles = styled.div`
     padding-top: 10px;
     padding-left: 30px;
     padding-bottom: 10px;
+    background-color: white;
   }
 
   .backtoresort {
@@ -618,7 +618,6 @@ const VillaStyles = styled.div`
         height: 700px;
         width: 100%;
         position: absolute;
-        z-index: -1;
         object-fit: cover;
       }
     }
