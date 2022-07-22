@@ -356,7 +356,7 @@ const VilaTemplate = (props) => {
           list={["overview", "room-features", "gallery", "highlights", "dine"]}
         />
         <VillaStyles>
-          <div className="villa__image" ref={heroRef}>
+          {/* <div className="villa__image" ref={heroRef}>
             <div className="image-container">
               {heroImage && heroImage.asset ? (
                 <Image
@@ -379,7 +379,7 @@ const VilaTemplate = (props) => {
                 {resortName}{" "}
               </Link>
             </h1>
-          </div>
+          </div> */}
           <div className="breadcrumb-wrapper">
             <Overlay bgColor="white" opacity={1} />
             <div className="breadcrumb">

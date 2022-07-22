@@ -1,5 +1,5 @@
-import { graphql, Link } from "gatsby";
-import React, { useState } from "react";
+import { graphql, navigate, Link } from "gatsby";
+import React, { useEffect, useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
@@ -11,17 +11,21 @@ import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
-import { navigate } from "gatsby";
 import {
   truncate,
   computeVillaFields,
   priceFormatter,
   getCollectionUrl,
 } from "../lib/helpers";
-import { useIsMobileLarge } from "../hooks";
+import { useIsMobileLarge, usePageSectionsRef, useNavBar } from "../hooks";
 import { PriceTemplate } from "../components";
-import { VillaDescriptionWrapper } from "./elements";
-import Accomodation from "../components/Resort/Accomodation";
+import {
+  LARGE_COLLECTION,
+  WATER_VILLA_COLLECTION,
+  BEACH_VILLA_COLLECTION,
+  RESORT_COLLECTION,
+  COUPLES_COLLECTION,
+} from "../constants";
 
 export const query = graphql`
   fragment Fragment_Villa on SanityVilla {
@@ -147,6 +151,28 @@ export const query = graphql`
     }
   }
 `;
+const pageSections = [
+  {
+    name: WATER_VILLA_COLLECTION,
+    onClick: () => navigate("../top-water-villas/"),
+  },
+  {
+    name: BEACH_VILLA_COLLECTION,
+    onClick: () => navigate("../beach-villas/"),
+  },
+  {
+    name: LARGE_COLLECTION,
+    onClick: () => navigate("../large-villas/"),
+  },
+  {
+    name: RESORT_COLLECTION,
+    onClick: () => navigate("../resort-collection/"),
+  },
+  {
+    name: COUPLES_COLLECTION,
+    onClick: () => navigate("../couples-collection"),
+  },
+];
 
 const CollectionTemplate = (props) => {
   const { data } = props;
@@ -162,6 +188,19 @@ const CollectionTemplate = (props) => {
   const pathName = getCollectionUrl({ slug: slug });
   const site = data && data.site;
   const isMobile = useIsMobileLarge();
+  const { setNavLinks } = useNavBar();
+  const heroRef = useRef(null);
+  const pageSections_ = useMemo(() => {
+    return pageSections.filter(
+      ({ name }) => name !== collections?.CollectionPageName
+    );
+  });
+  console.log("pageSections_", collections?.CollectionPageName);
+  const { navLinks } = usePageSectionsRef(pageSections_);
+  useEffect(() => {
+    setNavLinks(navLinks);
+  }, [heroRef?.current]);
+
   return (
     <Layout>
       <LeftSidebar />
@@ -170,7 +209,7 @@ const CollectionTemplate = (props) => {
           {collections.CollectionPageName}
         </h1>
         {collections.image && (
-          <div className="collection__image_hero">
+          <div className="collection__image_hero" ref={heroRef}>
             {collections.image && collections.image.asset && (
               <Image
                 {...collections.image}
@@ -209,9 +248,6 @@ const CollectionTemplate = (props) => {
                                 key={villa._id}
                                 className="card-image-wrapper"
                               >
-                                {/* <div className="card-text-wrapper">
-                                  {truncate(villa.name, 40)}
-                                </div> */}
                                 {villa.imageThumb && villa.imageThumb.asset && (
                                   <Image
                                     {...villa.imageThumb}

@@ -5,91 +5,12 @@ import HamburgerIcon from "../../assets/icons/menu-solid.svg";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
 import Image from "gatsby-plugin-sanity-image";
 import { useScoll, useScrollToRef, useNavBar } from "../../hooks";
-import {
-  HOLIDAY_STAYS,
-  HOME,
-  RESORTS,
-  NAVBAR_WITH_BOTTOM_LINK,
-} from "../../constants";
+import { COLLECTIONS, HOME, RESORTS, MAGAZINE } from "../../constants";
 
-export const NavBar = ({ logo, onMenuClick, mainNavContent }) => {
-  const { navLinks, pageName, heroRef } = useNavBar();
+export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
+  const { navLinks, heroRef } = useNavBar();
   const maxScroll = heroRef?.current?.clientHeight || 400;
 
-  const renderNavBar = () => {
-    switch (pageName) {
-      case NAVBAR_WITH_BOTTOM_LINK:
-        return (
-          <NavBarWithBottonLinks
-            logo={logo}
-            pageName={pageName}
-            onMenuClick={onMenuClick}
-            navLinks={navLinks}
-            maxScroll={maxScroll}
-            siteWideNavContent={mainNavContent}
-          />
-        );
-      default:
-        return (
-          <DefaultNavBar
-            logo={logo}
-            onMenuClick={onMenuClick}
-            pageName={pageName}
-            maxScroll={maxScroll}
-          />
-        );
-    }
-  };
-  return renderNavBar();
-};
-
-const DefaultNavBar = ({
-  onMenuClick,
-  logo,
-  maxScroll,
-  navBarStyle,
-  navBarClassName,
-  hideDefaultContent = false,
-  children,
-}) => {
-  const [_, scrollPosition] = useScoll({
-    scrollHeightToHide: undefined,
-    scrollHeightToShow: undefined,
-  });
-
-  const hideDivider = scrollPosition > maxScroll;
-  const defaultClassName = scrollPosition > maxScroll ? "blur-bg" : "";
-  return (
-    <NavWrapper
-      className={navBarClassName || defaultClassName}
-      style={navBarStyle}
-    >
-      {!hideDefaultContent ? (
-        <ul className="container">
-          <li className="hamburger-wrapper">
-            <HamburgerIcon onClick={onMenuClick} />
-          </li>
-          <li>
-            <LogoWrapper>
-              <Logo logo={logo} />
-            </LogoWrapper>
-          </li>
-          {!hideDivider ? <li className="divider"></li> : null}
-        </ul>
-      ) : null}
-      {children}
-    </NavWrapper>
-  );
-};
-
-export const NavBarWithBottonLinks = ({
-  pageName,
-  logo,
-  onMenuClick,
-  navLinks,
-  maxScroll,
-  siteWideNavContent,
-}) => {
   const [_, scrollPosition] = useScoll({
     scrollHeightToHide: undefined,
     scrollHeightToShow: undefined,
@@ -105,9 +26,9 @@ export const NavBarWithBottonLinks = ({
 
   const siteWideNavContent_ = (
     activeSiteWideNavLink
-      ? activeSiteWideNavLink === HOLIDAY_STAYS
-        ? siteWideNavContent.collections
-        : siteWideNavContent.resorts.slice(0, 5)
+      ? activeSiteWideNavLink === COLLECTIONS
+        ? sideWideNavContent.collections
+        : sideWideNavContent.resorts.slice(0, 5)
       : []
   ).map(({ name, url }, index) => {
     return {
@@ -135,14 +56,28 @@ export const NavBarWithBottonLinks = ({
   const navBarStyle = { height: "5.8rem" };
 
   return (
-    <DefaultNavBar
-      navBarClassName={`${isMaxScroll ? "black-bg" : "blur-bg"}`}
-      logo={logo}
-      onMenuClick={onMenuClick}
-      maxScroll={maxScroll}
-      hideDefaultContent={!isMaxScroll}
-      navBarStyle={navBarStyle}
+    <NavWrapper
+      className={`${isMaxScroll ? "black-bg" : "blur-bg"}`}
+      style={navBarStyle}
     >
+      {!!isMaxScroll ? (
+        <NavBarList
+          className="container"
+          items={[
+            {
+              className: "hamburger-wrapper",
+              content: <HamburgerIcon />,
+              onClick: onMenuClick,
+            },
+            {
+              content: <LogoWrapper>BOUNDLESS MALDIVES</LogoWrapper>,
+              onClick: () => navigate("/"),
+            },
+            { className: "divider", content: <></> },
+          ]}
+        />
+      ) : null}
+
       <NavWrapper
         className={`${isMaxScroll ? "black-bg" : ""} secondary-nav`}
         style={navBarStyle}
@@ -162,36 +97,38 @@ export const NavBarWithBottonLinks = ({
           ]}
           className="container"
         >
-          <NavBarList
-            items={
-              navLinks?.length
-                ? navLinks?.map(
-                    ({ name, innerRef, isDropDown, content }, index) => ({
-                      sibling: index > 0 ? <>|</> : null,
-                      siblingClassName: "vertical-divider",
-                      className: isDropDown
-                        ? `page-title ${showMainNav ? "rotate" : ""} `
-                        : activeLink == name
-                        ? "active"
-                        : "",
-                      icon: isDropDown ? <ChevronDown /> : undefined,
-                      onClick: () => {
-                        setActiveLink(name);
-                        if (isDropDown) {
-                          setShowMainNav(!showMainNav);
-                          setMainNavContent(content);
-                          setShowSiteWideNav(false);
-                        }
-                        executeScroll(innerRef);
-                      },
-                      content: <div className="text">{name}</div>,
-                    })
-                  )
-                : []
-            }
-            className="bottom-links"
-          />
+          {navLinks?.length ? (
+            <NavBarList
+              items={navLinks?.map(
+                ({ name, innerRef, isDropDown, content, onClick }, index) => ({
+                  sibling: index > 0 ? <>|</> : null,
+                  siblingClassName: "vertical-divider",
+                  className: !onClick
+                    ? isDropDown
+                      ? `page-title ${showMainNav ? "rotate" : ""} `
+                      : activeLink == name
+                      ? "active"
+                      : undefined
+                    : undefined,
+                  icon: isDropDown ? <ChevronDown /> : undefined,
+                  onClick: () => {
+                    setActiveLink(name);
+                    onClick?.();
+                    if (isDropDown) {
+                      setShowMainNav(!showMainNav);
+                      setMainNavContent(content);
+                      setShowSiteWideNav(false);
+                    }
+                    executeScroll(innerRef);
+                  },
+                  content: <div className="text">{name}</div>,
+                })
+              )}
+              className="bottom-links"
+            />
+          ) : null}
         </NavBarList>
+
         <SecondaryNavBar
           open={showSiteWideNav}
           listWrapperClass={
@@ -202,7 +139,7 @@ export const NavBarWithBottonLinks = ({
               className: `${
                 activeSiteWideNavLink === HOME ? "active" : ""
               } page-title`,
-              content: "Home",
+              content: HOME,
               onClick: () => {
                 navigate("/");
               },
@@ -212,24 +149,23 @@ export const NavBarWithBottonLinks = ({
                 activeSiteWideNavLink === RESORTS && showSiteWideNavContent
                   ? "rotate"
                   : "",
-              icon: <ChevronDown />,
-              content: <div className="text">Resorts</div>,
-              onClick: () => onSiteWideNavLinkClick(RESORTS),
+              icon: <HamburgerIcon />,
+              content: <div className="text">{RESORTS}</div>,
+              onClick: () => onMenuClick(RESORTS),
             },
             {
               className:
-                activeSiteWideNavLink === HOLIDAY_STAYS &&
-                showSiteWideNavContent
+                activeSiteWideNavLink === COLLECTIONS && showSiteWideNavContent
                   ? "rotate"
                   : "",
               icon: <ChevronDown />,
-              content: <div className="text">Holiday stays</div>,
-              onClick: () => onSiteWideNavLinkClick(HOLIDAY_STAYS),
+              content: <div className="text">{COLLECTIONS}</div>,
+              onClick: () => onSiteWideNavLinkClick(COLLECTIONS),
             },
             {
-              content: <div className="text">Magazine</div>,
+              content: <div className="text">{MAGAZINE}</div>,
               onClick: () => {
-                navigate("/magazine");
+                navigate(`/${MAGAZINE.toLowerCase()}`);
               },
             },
           ]}
@@ -240,7 +176,7 @@ export const NavBarWithBottonLinks = ({
         />
         <SecondaryNavBar open={showMainNav} listItems={mainNavContent} />
       </NavWrapper>
-    </DefaultNavBar>
+    </NavWrapper>
   );
 };
 

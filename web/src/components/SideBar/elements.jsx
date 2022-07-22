@@ -7,6 +7,7 @@ export const LeftSideBarWrapper = styled.div`
   width: 100vw;
   background: #fff;
   color: #000;
+  text-transform: capitalize;
   transition: all 0.4s;
   transition-timing-function: ease-in-out;
   overflow-x: hidden !important;

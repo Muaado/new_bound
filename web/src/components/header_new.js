@@ -5,9 +5,10 @@ import styled from "styled-components";
 import { device } from "../styles/deviceSizes";
 import PlusIcon from "../assets/icons/plus-icon.svg";
 import MinusIcon from "../assets/icons/minus-icon.svg";
-import { useScoll, useIsMobile } from "../hooks";
+import { useIsMobile } from "../hooks";
 import { NavBar } from "./Navbar";
 import { LeftSideBar } from "./SideBar/LeftSideBar";
+import { MAGAZINE, HOME, RESORTS, COLLECTIONS } from "../constants";
 
 const HeaderStyles = styled.header`
   width: 100vw;
@@ -295,13 +296,13 @@ const Header = ({
     collections: navData?.collections,
   };
   const dropdownLists =
-    selectedList === "resorts" ? lists.resorts : lists.collections;
+    selectedList === RESORTS ? lists.resorts : lists.collections;
 
   useEffect(() => {
     if (showLeftSideBar) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "s";
+      document.body.style.overflow = "scroll";
     }
   }, [showLeftSideBar, showNav]);
 
@@ -313,10 +314,11 @@ const Header = ({
     >
       {!showLeftSideBar && (
         <NavBar
-          onMenuClick={() => {
+          onMenuClick={(selectedItem) => {
             setShowLeftSideBar(true);
+            if (selectedItem) setSelectedList(selectedItem);
           }}
-          mainNavContent={lists}
+          sideWideNavContent={lists}
           logo={logo}
         />
       )}
@@ -345,12 +347,12 @@ const Header = ({
                   setShowLeftSideBar(false);
                 }}
               >
-                Home
+                {HOME}
               </li>
             </a>
             <li
               className={` ${
-                selectedList === "resorts" ? "selected" : ""
+                selectedList === RESORTS ? "selected" : ""
               } clickable`}
               onClick={() => {
                 if (showMobileDropDown === 2) {
@@ -371,7 +373,8 @@ const Header = ({
                 }
               }}
             >
-              Resorts {showMobileDropDown === 1 ? <MinusIcon /> : <PlusIcon />}
+              {RESORTS}
+              {showMobileDropDown === 1 ? <MinusIcon /> : <PlusIcon />}
               <LeftSideBar
                 className={showMobileDropDown === 1 ? "show resorts" : ""}
                 lists={lists.resorts}
@@ -383,7 +386,7 @@ const Header = ({
 
             <li
               className={` ${
-                selectedList === "collections" ? "selected" : ""
+                selectedList === COLLECTIONS ? "selected" : ""
               } clickable`}
               onClick={() => {
                 if (showMobileDropDown !== 2) {
@@ -393,7 +396,7 @@ const Header = ({
                 }
               }}
             >
-              Holiday stays
+              {COLLECTIONS}
               {showMobileDropDown == 2 ? <MinusIcon /> : <PlusIcon />}
               <LeftSideBar
                 className={`collections ${
@@ -407,7 +410,7 @@ const Header = ({
             </li>
             <li>
               <Link to="/magazine" className="clickable">
-                Magazine
+                {MAGAZINE}
                 {showLeftSideBar === 4 && <LeftSideBar list={list} />}
               </Link>
             </li>

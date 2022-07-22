@@ -48,7 +48,7 @@ export const NavWrapper = styled.nav`
           -apple-system, sans-serif;
         :not(.page-title) {
           align-self: center;
-          margin-left: 25px;
+          margin-left: 24px;
         }
 
         &.page-title {
@@ -81,7 +81,7 @@ export const NavWrapper = styled.nav`
           align-items: center;
           top: -1px;
           position: relative;
-          margin-left: 25px;
+          margin-left: 24px;
         }
         &.active {
           top: 1px;
@@ -100,6 +100,12 @@ export const NavWrapper = styled.nav`
       .bottom-links {
         display: flex;
         justify-content: flex-end;
+        li:not(.vertical-divider) {
+          width: 100% !important;
+          .text {
+            width: 100%;
+          }
+        }
       }
     }
   }
@@ -116,6 +122,7 @@ export const LogoWrapper = styled.div`
   width: 100%;
   transition: all 1s ease-in 0s;
   z-index: 2;
+  cursor: pointer;
   .logo {
     display: flex;
     justify-content: center;
@@ -162,6 +169,7 @@ export const SecondaryNavBarWrapper = styled.div`
   background: white;
   height: 0rem;
   transition: all 0.4s, height 0.4s;
+  box-shadow: 0 5px 4px -5px #222;
   .container {
     display: flex !important;
     justify-content: flex-start !important;
@@ -175,7 +183,7 @@ export const SecondaryNavBarWrapper = styled.div`
       .list-icon {
         margin-right: 5px;
         svg {
-          top: -2px;
+          margin-top: -2px;
           height: 15px;
           width: 15px;
           transform: rotate(0);

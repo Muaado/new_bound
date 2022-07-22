@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import Image from "gatsby-plugin-sanity-image";
 import CloseIcon from "../../assets/icons/close.svg";
 import { LeftSideBarWrapper } from "./elements";
+import { RESORTS, COLLECTIONS, HOME, MAGAZINE } from "../../constants";
 
 export const LeftSideBar = ({
   lists,
@@ -17,7 +18,7 @@ export const LeftSideBar = ({
     <LeftSideBarWrapper
       marginTop={marginTop}
       className={`dropdown ${className} ${
-        selectedList === "collections" ? "collections" : ""
+        selectedList === RESORTS ? RESORTS : ""
       }`}
     >
       <ul className="first-column">
@@ -32,27 +33,27 @@ export const LeftSideBar = ({
               setShowLeftSideBar(false);
             }}
           >
-            Home
+            {HOME}
           </Link>
         </li>
         <li
-          className={`${selectedList === "resorts" ? "selected" : ""} clickable
+          className={`${selectedList === RESORTS ? "selected" : ""} clickable
           ${className}
           route 
           `}
-          onClick={() => setSelectedList("resorts")}
+          onClick={() => setSelectedList(RESORTS)}
         >
-          Resorts
+          {RESORTS}
         </li>
         <li
           className={`${
-            selectedList === "collections" ? "selected" : ""
+            selectedList === COLLECTIONS ? "selected" : ""
           } clickable
           route
             ${className}`}
-          onClick={() => setSelectedList("collections")}
+          onClick={() => setSelectedList(COLLECTIONS)}
         >
-          Holiday stays
+          {COLLECTIONS}
         </li>
         <li>
           <Link
@@ -65,7 +66,7 @@ export const LeftSideBar = ({
               setShowLeftSideBar(false);
             }}
           >
-            Magazine
+            {MAGAZINE}
           </Link>
         </li>
       </ul>
@@ -81,7 +82,6 @@ export const LeftSideBar = ({
                 onClick={() => {
                   document.body.style.overflow = "unset";
                   setShowLeftSideBar(false);
-                  // handleOpenDropDown([], false);
                 }}
               >
                 {item.name}
