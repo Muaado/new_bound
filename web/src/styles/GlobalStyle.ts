@@ -434,6 +434,9 @@ export const GlobalStyle = createGlobalStyle`
     }
     
   }
-
+  
+.slider-control-bottomcenter{
+  max-height: 20px;
+}
 
 `;
