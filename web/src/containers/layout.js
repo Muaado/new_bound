@@ -62,15 +62,6 @@ const query = graphql`
 `;
 
 function LayoutContainer(props) {
-  const [showNav, setShowNav] = useState(false);
-  function handleShowNav() {
-    setShowNav(true);
-  }
-
-  function handleHideNav() {
-    setShowNav(false);
-  }
-
   const navData = useStaticQuery(query);
   if (!navData.site) {
     throw new Error(
@@ -124,6 +115,7 @@ function LayoutContainer(props) {
       }
     });
   }
+
   useEffect(() => {
     if (!isLoggedIn()) {
       navigate("/login");
@@ -134,10 +126,7 @@ function LayoutContainer(props) {
     <Layout
       navData={{ resorts, collections }}
       {...props}
-      showNav={showNav}
       siteTitle={navData.site.title}
-      onHideNav={handleHideNav}
-      onShowNav={handleShowNav}
       logo={navData.site.logo}
       contactUs={navData.site.contactUs}
       headerDropdownImage={navData.site.headerDropdownImage}

@@ -16,10 +16,10 @@ export const LeftSideBarWrapper = styled.div`
   height: 0px;
 
   @media ${device.tablet} {
-    top: 10rem;
+    top: 16rem;
 
     &.collections {
-      top: 16rem;
+      top: 21rem;
     }
   }
 

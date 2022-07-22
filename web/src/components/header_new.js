@@ -86,7 +86,7 @@ const HeaderStyles = styled.header`
     background: #fff;
     top: 0;
     right: 0;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -147,111 +147,6 @@ const HeaderStyles = styled.header`
     }
   }
 
-  /* nav {
-    position: relative;
-    z-index: 100000;
-
-    transition: all 1s;
-
-    .close-icon {
-      display: none;
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      width: 2rem;
-      height: 2rem;
-
-      @media ${device.tablet} {
-        display: unset;
-        padding: 0;
-      }
-    }
-
-    svg {
-      path {
-        stroke: #000;
-      }
-    }
-
-    @media ${device.tablet} {
-      display: none;
-      padding: 0 1.5rem;
-      background: #fff;
-      top: 0;
-      right: 0;
-      position: absolute;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      justify-content: flex-start;
-      text-align: center;
-      padding-top: 5rem;
-      &.show {
-        transform: translateX(0);
-     
-      }
-      &.hide {
-        transform: translateX(-100vw);
-       
-      }
-     
-    }
-
-    opacity: 1;
-    font-size: 1.6rem;
-    .nav-top-list {
-      display: flex;
-      gap: 6rem;
-      letter-spacing: 1px;
-
-      @media ${device.tablet} {
-       
-        gap: 1rem;
-      
-        align-items: flex-start;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        height: max-content;
-      }
-
-      li {
-        font-size: 1.6rem;
-
-        display: flex;
-        align-items: center;
-
-        svg {
-          path {
-            stroke: #fff;
-            @media ${device.tablet} {
-              stroke: #000;
-            }
-          }
-          margin-left: 1rem;
-        }
-        @media ${device.tablet} {
-          color: #000;
-          padding: 0.5rem 0;
-          text-align: center;
-
-          &.selected {
-            font-weight: bold;
-          }
-        }
-        &.selected {
-          font-weight: bold;
-        }
-        p {
-          color: #fff;
-        }
-        a {
-          position: relative;
-        }
-      }
-    }
-  } */
-
   .contact-us {
     display: none;
 
@@ -275,9 +170,6 @@ const HeaderStyles = styled.header`
 `;
 
 const Header = ({
-  onHideNav,
-  onShowNav,
-  showNav,
   siteTitle,
   navData,
   logo,
@@ -286,11 +178,10 @@ const Header = ({
 }) => {
   const [showLeftSideBar, setShowLeftSideBar] = useState(false);
 
-  const [list, setList] = useState([]);
+  const [list] = useState([]);
 
   const [selectedList, setSelectedList] = useState("");
 
-  const [showMobileDropDown, setShowMobileDropDown] = useState(Number);
   const lists = {
     resorts: navData?.resorts,
     collections: navData?.collections,
@@ -304,12 +195,12 @@ const Header = ({
     } else {
       document.body.style.overflow = "scroll";
     }
-  }, [showLeftSideBar, showNav]);
+  }, [showLeftSideBar]);
 
   const isMobile = useIsMobile();
   return (
     <HeaderStyles
-      className={showNav ? "show-header" : ""}
+      className={showLeftSideBar ? "show-header" : ""}
       pathname={location?.pathname}
     >
       {!showLeftSideBar && (
@@ -323,17 +214,10 @@ const Header = ({
         />
       )}
       {isMobile ? (
-        <div className={`mobile-nav ${showNav ? "show" : "hide"}`}>
+        <div className={`mobile-nav ${showLeftSideBar ? "show" : "hide"}`}>
           <CloseIcon
             className="close-icon"
             onClick={() => {
-              if (!showNav) {
-                onShowNav();
-              } else {
-                setTimeout(() => {
-                  onHideNav();
-                }, 200);
-              }
               setShowLeftSideBar(false);
             }}
           />
@@ -351,32 +235,19 @@ const Header = ({
               </li>
             </a>
             <li
-              className={` ${
-                selectedList === RESORTS ? "selected" : ""
-              } clickable`}
+              className={`clickable`}
               onClick={() => {
-                if (showMobileDropDown === 2) {
-                  setShowMobileDropDown(0);
-                  setTimeout(() => {
-                    if (showMobileDropDown !== 1) {
-                      setShowMobileDropDown(1);
-                    } else {
-                      setShowMobileDropDown(0);
-                    }
-                  }, 700);
+                if (selectedList == RESORTS) {
+                  setSelectedList("");
                 } else {
-                  if (showMobileDropDown !== 1) {
-                    setShowMobileDropDown(1);
-                  } else {
-                    setShowMobileDropDown(0);
-                  }
+                  setSelectedList(RESORTS);
                 }
               }}
             >
               {RESORTS}
-              {showMobileDropDown === 1 ? <MinusIcon /> : <PlusIcon />}
+              {selectedList === RESORTS ? <MinusIcon /> : <PlusIcon />}
               <LeftSideBar
-                className={showMobileDropDown === 1 ? "show resorts" : ""}
+                className={selectedList === RESORTS ? "show resorts" : ""}
                 lists={lists.resorts}
                 setShowLeftSideBar={setShowLeftSideBar}
                 selectedList={selectedList}
@@ -385,22 +256,20 @@ const Header = ({
             </li>
 
             <li
-              className={` ${
-                selectedList === COLLECTIONS ? "selected" : ""
-              } clickable`}
+              className="clickable"
               onClick={() => {
-                if (showMobileDropDown !== 2) {
-                  setShowMobileDropDown(2);
+                if (selectedList == COLLECTIONS) {
+                  setSelectedList("");
                 } else {
-                  setShowMobileDropDown(0);
+                  setSelectedList(COLLECTIONS);
                 }
               }}
             >
               {COLLECTIONS}
-              {showMobileDropDown == 2 ? <MinusIcon /> : <PlusIcon />}
+              {selectedList === COLLECTIONS ? <MinusIcon /> : <PlusIcon />}
               <LeftSideBar
                 className={`collections ${
-                  showMobileDropDown === 2 ? "show collections" : ""
+                  selectedList === COLLECTIONS ? "show collections" : ""
                 }`}
                 lists={lists.collections}
                 setShowLeftSideBar={setShowLeftSideBar}

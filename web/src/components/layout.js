@@ -17,9 +17,6 @@ if (windowGlobal) AOS.init();
 
 const Layout = ({
   children,
-  onHideNav,
-  onShowNav,
-  showNav,
   siteTitle,
   navData,
   logo,
@@ -43,9 +40,6 @@ const Layout = ({
         location={location}
         navData={navData}
         siteTitle={siteTitle}
-        onHideNav={onHideNav}
-        onShowNav={onShowNav}
-        showNav={showNav}
         headerDropdownImage={headerDropdownImage}
       />
 
