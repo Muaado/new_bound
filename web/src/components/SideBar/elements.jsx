@@ -97,8 +97,15 @@ export const LeftSideBarWrapper = styled.div`
       width: 100%;
       overflow-x: hidden;
     }
-    li {
+
+    li.route {
+      font-family: "rivera_ultra_light_regular", sans-serif;
+      font-size: 1.6rem;
+      padding-top: 20px;
       border-bottom: 1px solid rgba(179, 154, 106, 0.2) !important;
+      @media ${device.tablet} {
+        border-bottom: 1px solid var(--lightGrey3);
+      }
       padding-bottom: 10px;
       :hover {
         font-weight: 600 !important;
@@ -106,7 +113,7 @@ export const LeftSideBarWrapper = styled.div`
     }
   }
 
-  li {
+  a {
     font-family: "rivera_ultra_light_regular", sans-serif;
     font-size: 1.6rem;
     padding-top: 20px;

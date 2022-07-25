@@ -9,14 +9,14 @@ import { LeftSideBarWrapper, MobileDivWrapper, SvgWrapper } from "./elements";
 import { RESORTS, COLLECTIONS, HOME, MAGAZINE } from "../../constants";
 import { useIsMobile } from "../../hooks";
 
-const renderListContent = (lists) => (
+const renderListContent = ({ lists: lists, linkClassName }) => (
   <DropDownList
     className="second-column"
     items={
       lists?.length
         ? lists?.map((item) => {
             return {
-              className: "route",
+              className: linkClassName,
               content: item?.url && (
                 <Link key={item.url} to={item.url}>
                   {item.name}
@@ -106,7 +106,7 @@ export const LeftSideBar = ({
               </Link>
             </li>
           </ul>
-          {renderListContent?.(lists)}
+          {renderListContent?.({ lists, linkClassName: "route" })}
           <div className={`${className} image-container`}>
             {headerDropdownImage && headerDropdownImage.asset && (
               <Image {...headerDropdownImage} />
@@ -154,7 +154,7 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
                   {RESORTS}
                   {showResorts ? <MinusIcon /> : <PlusIcon />}
                 </div>
-                {showResorts ? renderListContent(lists) : null}
+                {showResorts ? renderListContent({ lists }) : null}
               </>
             ),
           },
@@ -172,7 +172,7 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
                   {COLLECTIONS}
                   {selectedList === COLLECTIONS ? <MinusIcon /> : <PlusIcon />}
                 </div>
-                {showCollections ? renderListContent(lists) : null}
+                {showCollections ? renderListContent({ lists }) : null}
               </>
             ),
           },
