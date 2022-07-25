@@ -151,7 +151,7 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
                   : "",
               icon: <HamburgerIcon />,
               content: <div className="text">{RESORTS}</div>,
-              onClick: () => onMenuClick(RESORTS),
+              onClick: () => onMenuClick(_, RESORTS),
             },
             {
               className:
