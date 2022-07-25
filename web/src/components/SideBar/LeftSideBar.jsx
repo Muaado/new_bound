@@ -9,6 +9,26 @@ import { LeftSideBarWrapper, MobileDivWrapper, SvgWrapper } from "./elements";
 import { RESORTS, COLLECTIONS, HOME, MAGAZINE } from "../../constants";
 import { useIsMobile } from "../../hooks";
 
+const renderListContent = (lists) => (
+  <DropDownList
+    className="second-column"
+    items={
+      lists?.length
+        ? lists?.map((item) => {
+            return {
+              className: "route",
+              content: item?.url && (
+                <Link key={item.url} to={item.url}>
+                  {item.name}
+                </Link>
+              ),
+            };
+          })
+        : []
+    }
+  />
+);
+
 export const LeftSideBar = ({
   lists,
   marginTop,
@@ -22,6 +42,7 @@ export const LeftSideBar = ({
   const isMobile = useIsMobile();
   const showResorts = selectedList === RESORTS;
   const showCollections = selectedList === COLLECTIONS;
+
   return (
     <LeftSideBarWrapper
       marginTop={marginTop}
@@ -85,7 +106,7 @@ export const LeftSideBar = ({
               </Link>
             </li>
           </ul>
-          <DropDownList lists={lists} />
+          {renderListContent?.(lists)}
           <div className={`${className} image-container`}>
             {headerDropdownImage && headerDropdownImage.asset && (
               <Image {...headerDropdownImage} />
@@ -110,7 +131,7 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
   const showCollections = selectedList === COLLECTIONS;
   return (
     <MobileDivWrapper>
-      <DropDownList_
+      <DropDownList
         items={[
           {
             onClick: () => {
@@ -133,7 +154,7 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
                   {RESORTS}
                   {showResorts ? <MinusIcon /> : <PlusIcon />}
                 </div>
-                {showResorts ? <DropDownList lists={lists} /> : null}
+                {showResorts ? renderListContent(lists) : null}
               </>
             ),
           },
@@ -151,7 +172,7 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
                   {COLLECTIONS}
                   {selectedList === COLLECTIONS ? <MinusIcon /> : <PlusIcon />}
                 </div>
-                {showCollections ? <DropDownList lists={lists} /> : null}
+                {showCollections ? renderListContent(lists) : null}
               </>
             ),
           },
@@ -167,29 +188,13 @@ export const MobileView = ({ setSelectedList, selectedList, lists }) => {
   );
 };
 
-export const DropDownList = ({ lists }) => {
-  return (
-    <ul className="second-column">
-      {lists?.map(
-        (item) =>
-          item &&
-          item.url && (
-            <Link className={`clickable route`} key={item.url} to={item.url}>
-              {item.name}
-            </Link>
-          )
-      )}
-    </ul>
-  );
-};
-
-export const DropDownList_ = ({ items, className_, contentLink }) => {
+export const DropDownList = ({ items, className: className_ }) => {
   return (
     <ul className={className_ || ""}>
       {items?.length
         ? items.map(({ className, content, onClick }) => (
             <li className={`clickable ${className || ""}`} onClick={onClick}>
-              {!contentLink ? content : <Link to={contentLink}>{content}</Link>}
+              {content}
             </li>
           ))
         : null}

@@ -77,7 +77,7 @@ export const LeftSideBarWrapper = styled.div`
     padding: 4rem 4rem 10rem 4rem;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
     position: relative;
 
     @media ${device.tablet} {
@@ -97,7 +97,7 @@ export const LeftSideBarWrapper = styled.div`
       width: 100%;
       overflow-x: hidden;
     }
-    a {
+    li {
       border-bottom: 1px solid rgba(179, 154, 106, 0.2) !important;
       padding-bottom: 10px;
       :hover {
@@ -106,7 +106,7 @@ export const LeftSideBarWrapper = styled.div`
     }
   }
 
-  a {
+  li {
     font-family: "rivera_ultra_light_regular", sans-serif;
     font-size: 1.6rem;
     padding-top: 20px;
