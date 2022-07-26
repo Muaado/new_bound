@@ -5,56 +5,75 @@ import HamburgerIcon from "../../assets/icons/menu-solid.svg";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
 import Image from "gatsby-plugin-sanity-image";
 import { useScoll, useScrollToRef, useNavBar } from "../../hooks";
-import { COLLECTIONS, HOME, RESORTS, MAGAZINE } from "../../constants";
+import {
+  COLLECTIONS,
+  HOME,
+  RESORTS,
+  MAGAZINE,
+  SIMPLE_MAIN_NAVBAR,
+} from "../../constants";
 
 export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
-  const { navLinks, heroRef } = useNavBar();
-  const maxScroll = heroRef?.current?.clientHeight || 400;
+  const { navLinks, heroRef, pageName } = useNavBar();
+  const maxScroll = heroRef?.current?.clientHeight || 200;
 
   const [_, scrollPosition] = useScoll({
     scrollHeightToHide: undefined,
     scrollHeightToShow: undefined,
   });
 
+  const isMaxScroll = scrollPosition < maxScroll / 2;
+  const renderNavBar = () => {
+    switch (pageName) {
+      case SIMPLE_MAIN_NAVBAR:
+        return (
+          <NavWrapper
+            className={`${isMaxScroll ? "black-bg" : ""}`}
+            style={{ height: "6rem" }}
+          >
+            <SideWideNavBar
+              showSiteWideNav
+              onMenuClick={onMenuClick}
+              sideWideNavContent={sideWideNavContent}
+              isMaxScroll={!isMaxScroll}
+              showTopNav
+            />
+          </NavWrapper>
+        );
+      default:
+        return (
+          <DefaultNavBar
+            maxScroll={maxScroll}
+            navLinks={navLinks}
+            onMenuClick={onMenuClick}
+            sideWideNavContent={sideWideNavContent}
+            isMaxScroll={isMaxScroll}
+          />
+        );
+    }
+  };
+  return renderNavBar();
+};
+
+const DefaultNavBar = ({
+  navLinks,
+  onMenuClick,
+  sideWideNavContent,
+  isMaxScroll,
+}) => {
+  // const [_, scrollPosition] = useScoll({
+  //   scrollHeightToHide: undefined,
+  //   scrollHeightToShow: undefined,
+  // });
+
   const [activeLink, setActiveLink] = useState(null);
   const { __, executeScroll } = useScrollToRef();
   const [showSiteWideNav, setShowSiteWideNav] = useState(false);
-  const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
-  const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
 
-  const siteWideNavContent_ = (
-    activeSiteWideNavLink
-      ? activeSiteWideNavLink === COLLECTIONS
-        ? sideWideNavContent.collections
-        : sideWideNavContent.resorts.slice(0, 5)
-      : []
-  ).map(({ name, url }, index) => {
-    return {
-      className: index === 0 ? "page-title" : "",
-      content: name,
-      onClick: () => onSiteWideNavContentClick(url),
-    };
-  });
-
-  const onSiteWideNavContentClick = (url) => {
-    navigate(url);
-  };
-
-  const onSiteWideNavLinkClick = (linkName) => {
-    if (activeSiteWideNavLink === linkName) {
-      setShowSiteWideContent(false);
-      setActiveSiteWideNavLink(null);
-    } else {
-      setActiveSiteWideNavLink(linkName);
-      setShowSiteWideContent(true);
-    }
-  };
-
-  const isMaxScroll = scrollPosition < maxScroll - 100;
+  // const isMaxScroll = scrollPosition < maxScroll - 100;
   const navBarStyle = { height: "5.8rem" };
-
   return (
     <NavWrapper
       className={`${isMaxScroll ? "black-bg" : "blur-bg"}`}
@@ -128,51 +147,10 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
             />
           ) : null}
         </NavBarList>
-
-        <SecondaryNavBar
-          open={showSiteWideNav}
-          listWrapperClass={
-            showSiteWideNavContent ? "second-nav-border-bottom" : ""
-          }
-          listItems={[
-            {
-              className: `${
-                activeSiteWideNavLink === HOME ? "active" : ""
-              } page-title`,
-              content: HOME,
-              onClick: () => {
-                navigate("/");
-              },
-            },
-            {
-              className:
-                activeSiteWideNavLink === RESORTS && showSiteWideNavContent
-                  ? "rotate"
-                  : "",
-              icon: <HamburgerIcon />,
-              content: <div className="text">{RESORTS}</div>,
-              onClick: () => onMenuClick(_, RESORTS),
-            },
-            {
-              className:
-                activeSiteWideNavLink === COLLECTIONS && showSiteWideNavContent
-                  ? "rotate"
-                  : "",
-              icon: <ChevronDown />,
-              content: <div className="text">{COLLECTIONS}</div>,
-              onClick: () => onSiteWideNavLinkClick(COLLECTIONS),
-            },
-            {
-              content: <div className="text">{MAGAZINE}</div>,
-              onClick: () => {
-                navigate(`/${MAGAZINE.toLowerCase()}`);
-              },
-            },
-          ]}
-        />
-        <SecondaryNavBar
-          open={showSiteWideNav && showSiteWideNavContent}
-          listItems={siteWideNavContent_}
+        <SideWideNavBar
+          showSiteWideNav={showSiteWideNav}
+          sideWideNavContent={sideWideNavContent}
+          onMenuClick={onMenuClick}
         />
         <SecondaryNavBar open={showMainNav} listItems={mainNavContent} />
       </NavWrapper>
@@ -180,12 +158,122 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
   );
 };
 
-export const SecondaryNavBar = ({ open, listItems, listWrapperClass }) => {
+const SideWideNavBar = ({
+  showSiteWideNav,
+  sideWideNavContent,
+  onMenuClick,
+  showTopNav,
+  isMaxScroll,
+}) => {
+  const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
+  const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
+
+  const siteWideNavContent_ = (
+    activeSiteWideNavLink
+      ? activeSiteWideNavLink === COLLECTIONS
+        ? sideWideNavContent.collections
+        : sideWideNavContent.resorts.slice(0, 5)
+      : []
+  ).map(({ name, url }, index) => {
+    return {
+      className: index === 0 ? "page-title" : "",
+      content: name,
+      onClick: () => onSiteWideNavContentClick(url),
+    };
+  });
+  const onSiteWideNavContentClick = (url) => {
+    navigate(url);
+  };
+
+  const onSiteWideNavLinkClick = (linkName) => {
+    if (activeSiteWideNavLink === linkName) {
+      setShowSiteWideContent(false);
+      setActiveSiteWideNavLink(null);
+    } else {
+      setActiveSiteWideNavLink(linkName);
+      setShowSiteWideContent(true);
+    }
+  };
+
+  const isActiveHome = activeSiteWideNavLink === HOME;
+  const isActiveCollections = activeSiteWideNavLink === COLLECTIONS;
+  const isActiveResort = activeSiteWideNavLink === RESORTS;
+
+  const listItems = [
+    {
+      className: `${isActiveHome ? "active" : ""} page-title`,
+      content: HOME,
+      onClick: () => {
+        navigate("/");
+      },
+    },
+    {
+      className: isActiveResort ? "rotate" : "",
+      icon: <HamburgerIcon />,
+      content: <div className="text">{RESORTS}</div>,
+      onClick: (e) => onMenuClick(e, RESORTS),
+    },
+    {
+      className: isActiveCollections ? "rotate" : "",
+      icon: <ChevronDown />,
+      content: <div className="text">{COLLECTIONS}</div>,
+      onClick: () => onSiteWideNavLinkClick(COLLECTIONS),
+    },
+    {
+      content: <div className="text">{MAGAZINE}</div>,
+      onClick: () => {
+        navigate(`/${MAGAZINE.toLowerCase()}`);
+      },
+    },
+  ];
+  console.log("isMaxScroll >>", isMaxScroll);
+  return (
+    <>
+      {showTopNav && !isMaxScroll ? (
+        <NavBarList
+          className="container"
+          items={[
+            {
+              className: "hamburger-wrapper",
+              content: <></>,
+              onClick: onMenuClick,
+            },
+            {
+              content: <LogoWrapper>BOUNDLESS MALDIVES</LogoWrapper>,
+              onClick: () => navigate("/"),
+            },
+            { className: "divider", content: <></> },
+          ]}
+        />
+      ) : null}
+      <SecondaryNavBar
+        open={showSiteWideNav}
+        listWrapperClass={
+          showSiteWideNavContent ? "second-nav-border-bottom" : ""
+        }
+        className={`${!isMaxScroll ? "black-bg" : ""}`}
+        listItems={listItems}
+      />
+      <SecondaryNavBar
+        open={showSiteWideNavContent}
+        listItems={siteWideNavContent_}
+      />
+    </>
+  );
+};
+
+export const SecondaryNavBar = ({
+  open,
+  listItems,
+  listWrapperClass,
+  className,
+}) => {
   return (
     <SecondaryNavBarWrapper
       style={{
         height: open ? "6rem" : "0rem",
       }}
+      className={className}
     >
       {open && (
         <NavBarList

@@ -1,5 +1,5 @@
-import { graphql } from "gatsby";
-import React, { createRef, useRef } from "react";
+import { graphql, navigate } from "gatsby";
+import React, { useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -9,11 +9,15 @@ import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import Accomodation from "../components/Resort/Accomodation";
 import LeftSidebar from "../components/LeftSidebar";
-import { toPlainText } from "../lib/helpers";
+import { toPlainText, getVillaUrl } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
-import { LIGHT_COLOR, NAVBAR_WITH_BOTTOM_LINK } from "../constants";
+import {
+  LIGHT_COLOR,
+  NAVBAR_WITH_BOTTOM_LINK,
+  ACCOMODATION,
+} from "../constants";
 import { useScrollToRef, useNavBar, usePageSectionsRef } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
@@ -188,8 +192,8 @@ export const query = graphql`
 `;
 
 const pageSections = [
+  { name: ACCOMODATION, isDropDown: true },
   { name: "Overview", isDropDown: false },
-  { name: "Accomodation", isDropDown: false },
   { name: "Highlights", isDropDown: false },
   { name: "Dine", isDropDown: false },
   { name: "Spa", isDropDown: false },
@@ -204,6 +208,39 @@ const ResortTemplate = (props) => {
   const spas = data && data.spas;
   const villas = data && data.villas;
   const restaurants = data && data.resort.restaurants;
+
+  const resortVillas = useMemo(() => {
+    const resortVillas_ = villas.nodes;
+    return (
+      resortVillas_.length &&
+      resortVillas_?.slice(0, 6).map(({ name }, index) => {
+        return {
+          className: index === 0 ? "page-title" : "",
+          content: name,
+          onClick: () => {
+            const villaUrl = getVillaUrl({
+              name,
+              resortName: resort?.name,
+            });
+            navigate(villaUrl);
+          },
+        };
+      })
+    );
+  }, [resort?.name]);
+
+  const pageSections_ = useMemo(() => {
+    return pageSections.map((section) => {
+      if (section.name === ACCOMODATION) {
+        return {
+          ...section,
+          content: resortVillas,
+        };
+      }
+      return section;
+    });
+  }, []);
+
   const heroRef = useRef();
   const { setPageName, setNavLinks, resetValues, setHeroRef } = useNavBar();
   const {
@@ -214,7 +251,7 @@ const ResortTemplate = (props) => {
     activitiesRef,
     dineRef,
     navLinks,
-  } = usePageSectionsRef(pageSections);
+  } = usePageSectionsRef(pageSections_);
 
   React.useEffect(() => {
     setPageName(NAVBAR_WITH_BOTTOM_LINK);

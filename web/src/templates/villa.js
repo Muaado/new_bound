@@ -237,9 +237,8 @@ const VilaTemplate = (props) => {
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
-  const pageFrom = props?.location?.state?.pageFrom;
+  // const pageFrom = props?.location?.state?.pageFrom;
   const collectionPage = props?.location?.state?.collectionPage;
-  const { executeScroll } = useScrollToRef();
   const { setPageName, setNavLinks, setHeroRef, resetValues } = useNavBar();
   const heroRef = useRef();
 
@@ -290,12 +289,6 @@ const VilaTemplate = (props) => {
   } = usePageSectionsRef(pageSections_);
 
   useEffect(() => {
-    if (pageFrom) {
-      executeScroll(overviewRef);
-    }
-  }, [pageFrom, overviewRef]);
-
-  useEffect(() => {
     setPageName(NAVBAR_WITH_BOTTOM_LINK);
     setNavLinks(navLinks);
     setHeroRef(heroRef);
@@ -340,7 +333,6 @@ const VilaTemplate = (props) => {
       setActiveFeature(-1);
     }
   };
-
   return (
     <Layout>
       {villa && (
@@ -380,6 +372,7 @@ const VilaTemplate = (props) => {
               </Link>
             </h1>
           </div> */}
+          <div />
           <div className="breadcrumb-wrapper">
             <Overlay bgColor="white" opacity={1} />
             <div className="breadcrumb">

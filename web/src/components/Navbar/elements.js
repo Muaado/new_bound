@@ -169,12 +169,31 @@ export const SecondaryNavBarWrapper = styled.div`
   background: white;
   height: 0rem;
   transition: all 0.4s, height 0.4s;
+  &.black-bg {
+    .text,
+    .page-title {
+      color: white !important;
+    }
+    svg {
+      filter: brightness(0.5) invert(1);
+    }
+  }
+
   box-shadow: 0 5px 4px -5px #222;
   .container {
     display: flex !important;
     justify-content: flex-start !important;
-    > li {
+    li {
       color: #222 !important;
+      cursor: pointer;
+      color: #fff;
+      transition: opacity 0.4s;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: "Riviera Nights", "Gill Alt One MT", Helvetica, Arial,
+        -apple-system, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16667em;
       display: flex;
       align-items: center;
       justify-content: flex-start !important;

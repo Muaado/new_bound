@@ -23,15 +23,15 @@ import PortableText from "../components/Ui/portableText";
 import { getBlogUrl, getResortUrl, getVillaUrl } from "../lib/helpers";
 import WhyBoundlessSection from "../components/Homepage/WhyBoundlessSection";
 import NewsletterSection from "../components/Homepage/NewsletterSection";
-import LeftSidebar from "../components/LeftSidebar";
+// import LeftSidebar from "../components/LeftSidebar";
 import Search from "../components/Search";
 import { Button } from "../components/Button";
 import { FixedBackgroundImage, Overlay } from "../components";
 import { isIOSDevice } from "../lib/helpers";
 import { useRef } from "react";
 import { useEffect } from "react";
-import { useScoll, useNavBar } from "../hooks";
-
+import { useNavBar } from "../hooks";
+import { SIMPLE_MAIN_NAVBAR } from "../constants";
 export const query = graphql`
   fragment SanityImage on SanityMainImage {
     crop {
@@ -195,10 +195,17 @@ const IndexPage = (props) => {
   let resorts = (data || {}).resorts;
   const villas = (data || {}).villas;
   const magazinePosts = (data || {}).magazinePosts;
-  const { setHeroRef } = useNavBar();
+  const { setHeroRef, setPageName, resetValues } = useNavBar();
   const heroRef = useRef();
   useEffect(() => {
     setHeroRef(heroRef);
+    setPageName(SIMPLE_MAIN_NAVBAR);
+  }, [heroRef?.current]);
+
+  useEffect(() => {
+    return () => {
+      resetValues();
+    };
   }, []);
 
   if (!site) {
