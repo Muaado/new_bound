@@ -50,6 +50,10 @@ export const query = graphql`
           alt
         }
       }
+      imageThumb {
+        ...SanityImage
+        alt
+      }
       short_desc
       _rawDescription
 
@@ -100,6 +104,10 @@ export const query = graphql`
         }
         villa1 {
           name
+          imageThumb {
+            ...SanityImage
+            alt
+          }
         }
 
         gallery {
@@ -249,10 +257,11 @@ const VilaTemplate = (props) => {
     );
     return (
       resortVillas_.length &&
-      resortVillas_?.slice(0, 6).map(({ name }, index) => {
+      resortVillas_?.slice(0, 6).map(({ name, imageThumb }, index) => {
         return {
           className: index === 0 ? "page-title" : "",
           content: name,
+          thumbImage: imageThumb,
           onClick: () => {
             const villaUrl = getVillaUrl({
               name,
@@ -305,7 +314,6 @@ const VilaTemplate = (props) => {
     short_desc,
     roomFeatures,
     heroImage,
-    headerImages,
   } = villa;
 
   const {
@@ -320,11 +328,6 @@ const VilaTemplate = (props) => {
     activities,
     highlights,
   } = villa.resort;
-
-  const randomHeaderImage =
-    headerImages?.images[
-      Math.floor(Math.random() * headerImages?.images.length)
-    ];
 
   const handleActiveFeature = (index) => {
     if (activeFeature !== index) {

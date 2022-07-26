@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery, navigate } from "gatsby";
 import Layout from "../components/layout";
-import { getCollectionUrl, getResortUrl } from "../lib/helpers";
+import { getBlogUrl, getCollectionUrl, getResortUrl } from "../lib/helpers";
 import { isLoggedIn } from "../services/auth";
 
 const query = graphql`
   query SiteTitleQuery {
+    posts: allSanityPost(
+      sort: { fields: [publishedAt], order: DESC }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+    ) {
+      edges {
+        node {
+          id
+          publishedAt
+          title
+          slug {
+            current
+          }
+        }
+      }
+    }
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       logo {
@@ -79,6 +94,15 @@ function LayoutContainer(props) {
     })
     .filter((item) => item !== undefined);
 
+  const posts = navData?.posts?.edges?.map(
+    ({ node: { title, publishedAt, slug } }) => {
+      return {
+        name: title.split(":")[0],
+        url: getBlogUrl(publishedAt, slug?.current),
+      };
+    }
+  );
+
   const collections = navData.collectionsone.nodes.map(
     ({ CollectionPageName, slug }) => {
       if (typeof CollectionPageName === "string")
@@ -124,7 +148,7 @@ function LayoutContainer(props) {
 
   return (
     <Layout
-      navData={{ resorts, collections }}
+      navData={{ resorts, collections, posts }}
       {...props}
       siteTitle={navData.site.title}
       logo={navData.site.logo}

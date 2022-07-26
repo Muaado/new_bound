@@ -36,7 +36,7 @@ export const NavWrapper = styled.nav`
 
   &.secondary-nav {
     .container {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.5fr;
       li {
         font-size: 12px;
         font-weight: 600;
@@ -48,7 +48,7 @@ export const NavWrapper = styled.nav`
           -apple-system, sans-serif;
         :not(.page-title) {
           align-self: center;
-          margin-left: 24px;
+          margin-left: 20px;
         }
 
         &.page-title {
@@ -81,7 +81,7 @@ export const NavWrapper = styled.nav`
           align-items: center;
           top: -1px;
           position: relative;
-          margin-left: 24px;
+          margin-left: 20px;
         }
         &.active {
           top: 1px;
@@ -101,9 +101,9 @@ export const NavWrapper = styled.nav`
         display: flex;
         justify-content: flex-end;
         li:not(.vertical-divider) {
-          width: 100% !important;
           .text {
             width: 100%;
+            text-align: center;
           }
         }
       }
@@ -198,7 +198,7 @@ export const SecondaryNavBarWrapper = styled.div`
       align-items: center;
       justify-content: flex-start !important;
       margin-left: unset !important;
-      margin-right: 50px;
+      margin-right: 25px;
       .list-icon {
         margin-right: 5px;
         svg {
@@ -213,6 +213,12 @@ export const SecondaryNavBarWrapper = styled.div`
         ::after {
           background-color: #222 !important;
         }
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 1rem;
       }
     }
   }

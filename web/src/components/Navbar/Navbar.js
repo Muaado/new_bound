@@ -35,6 +35,7 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
               showSiteWideNav
               onMenuClick={onMenuClick}
               sideWideNavContent={sideWideNavContent}
+              className={isMaxScroll ? "black-bg" : ""}
               isMaxScroll={!isMaxScroll}
               showTopNav
             />
@@ -61,18 +62,12 @@ const DefaultNavBar = ({
   sideWideNavContent,
   isMaxScroll,
 }) => {
-  // const [_, scrollPosition] = useScoll({
-  //   scrollHeightToHide: undefined,
-  //   scrollHeightToShow: undefined,
-  // });
-
   const [activeLink, setActiveLink] = useState(null);
   const { __, executeScroll } = useScrollToRef();
   const [showSiteWideNav, setShowSiteWideNav] = useState(false);
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
 
-  // const isMaxScroll = scrollPosition < maxScroll - 100;
   const navBarStyle = { height: "5.8rem" };
   return (
     <NavWrapper
@@ -152,7 +147,11 @@ const DefaultNavBar = ({
           sideWideNavContent={sideWideNavContent}
           onMenuClick={onMenuClick}
         />
-        <SecondaryNavBar open={showMainNav} listItems={mainNavContent} />
+        <SecondaryNavBar
+          height="8rem"
+          open={showMainNav}
+          listItems={mainNavContent}
+        />
       </NavWrapper>
     </NavWrapper>
   );
@@ -164,6 +163,7 @@ const SideWideNavBar = ({
   onMenuClick,
   showTopNav,
   isMaxScroll,
+  className,
 }) => {
   const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
   const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
@@ -172,7 +172,11 @@ const SideWideNavBar = ({
     activeSiteWideNavLink
       ? activeSiteWideNavLink === COLLECTIONS
         ? sideWideNavContent.collections
-        : sideWideNavContent.resorts.slice(0, 5)
+        : activeSiteWideNavLink === RESORTS
+        ? sideWideNavContent.resorts.slice(0, 5)
+        : activeSiteWideNavLink === MAGAZINE
+        ? sideWideNavContent.posts
+        : []
       : []
   ).map(({ name, url }, index) => {
     return {
@@ -221,12 +225,14 @@ const SideWideNavBar = ({
     },
     {
       content: <div className="text">{MAGAZINE}</div>,
+      icon: <ChevronDown />,
       onClick: () => {
-        navigate(`/${MAGAZINE.toLowerCase()}`);
+        onSiteWideNavLinkClick(MAGAZINE);
+        // navigate(`/${MAGAZINE.toLowerCase()}`);
       },
     },
   ];
-  console.log("isMaxScroll >>", isMaxScroll);
+
   return (
     <>
       {showTopNav && !isMaxScroll ? (
@@ -251,11 +257,11 @@ const SideWideNavBar = ({
         listWrapperClass={
           showSiteWideNavContent ? "second-nav-border-bottom" : ""
         }
-        className={`${!isMaxScroll ? "black-bg" : ""}`}
+        className={className}
         listItems={listItems}
       />
       <SecondaryNavBar
-        open={showSiteWideNavContent}
+        open={showSiteWideNavContent && showSiteWideNav}
         listItems={siteWideNavContent_}
       />
     </>
@@ -267,11 +273,12 @@ export const SecondaryNavBar = ({
   listItems,
   listWrapperClass,
   className,
+  height,
 }) => {
   return (
     <SecondaryNavBarWrapper
       style={{
-        height: open ? "6rem" : "0rem",
+        height: open ? height || "6rem" : "0rem",
       }}
       className={className}
     >
@@ -295,12 +302,17 @@ const NavBarList = ({ items, className, children }) => {
           content,
           sibling,
           siblingClassName,
+          thumbImage,
           onClick,
         }) => {
+          console.log("thumbImage<<", thumbImage);
           return (
             <>
               {sibling ? <li className={siblingClassName}>{sibling}</li> : null}
               <li className={className_} onClick={onClick}>
+                {thumbImage?.asset ? (
+                  <Image {...thumbImage} width={50} height={50} />
+                ) : null}
                 {icon ? <div className="list-icon">{icon}</div> : null}
                 {content}
               </li>

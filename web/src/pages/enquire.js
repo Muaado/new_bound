@@ -4,7 +4,7 @@ import Layout from "../containers/layout";
 import SEO from "../components/seo";
 import Placeholder from "../assets/placeholder.svg";
 import { graphql, Link } from "gatsby";
-import { HeroStyles } from "../components/Homepage/styles";
+// import { HeroStyles } from "../components/Homepage/styles";
 import { EnquirePageStyles } from "../styles/EnquirePageStyles";
 import Image from "gatsby-plugin-sanity-image";
 import countries from "../lib/countries";
@@ -20,12 +20,15 @@ import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
 import PhoneInput from "../components/PhoneInput/PhoneInput";
 import { VillaIcons } from "../components/Villa/VillaIcons";
+import DatePicker from "react-datepicker";
+import { differenceInCalendarDays } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
 const validationSchema = yup
   .object({
     firstName: yup.string().required("Required*"),
     lastName: yup.string().required("Required*"),
-    dateOfTravel: yup.string().required("Required*"),
+    dateOfTravel: yup.array().required("Required*"),
     duration: yup.string().required("Required*"),
     countryofResidence: "",
     title: yup.string().required("Required*"),
@@ -104,9 +107,9 @@ const Enquire = (props) => {
   ];
 
   const defaultValues = {
-    dateOfTravel: "",
-    duration: "",
-    budget: budgetRanges[0],
+    dateOfTravel: [new Date(), new Date()],
+    duration: 0,
+    budget: "",
     comments: "",
     countryofResidence: "",
     title: "",
@@ -126,6 +129,7 @@ const Enquire = (props) => {
     reset,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -192,7 +196,7 @@ const Enquire = (props) => {
       />
 
       <Container>
-        <HeroStyles>
+        {/* <HeroStyles>
           <h1> {site.description}</h1>
           {data.site.magazinePageImage && data.site.magazinePageImage.asset && (
             <Image
@@ -200,7 +204,7 @@ const Enquire = (props) => {
               alt={data.site.magazinePageImage.alt}
             />
           )}
-        </HeroStyles>
+        </HeroStyles> */}
         <EnquirePageStyles>
           <div className="content">
             <div className="main-div" style={{ paddingTop: 0 }}>
@@ -248,14 +252,16 @@ const Enquire = (props) => {
               <div className="holidays-details-section main-div">
                 <h2>Holiday details</h2>
                 <div className="two-column form-content">
-                  <div className="form-control">
+                  <div className="form-control form-group">
                     <label>
                       Date of travel<span className="required">*</span>
                     </label>
-                    <input
-                      {...register("dateOfTravel")}
-                      type="date"
-                      placeholder=""
+                    <DateRangePicker
+                      control={control}
+                      setValue={(duration) => {
+                        setValue("duration", duration);
+                      }}
+                      fieldName="dateOfTravel"
                     />
                     <ErrorField error={dateOfTravel} />
                   </div>
@@ -263,20 +269,14 @@ const Enquire = (props) => {
                     <label>
                       Duration<span className="required">*</span>
                     </label>
-                    <select {...register("duration")}>
-                      {[...Array(30).keys()].map((number) => (
-                        <option key={number + 1} value={number + 1}>
-                          {number + 1}
-                        </option>
-                      ))}
-                    </select>
+                    <input {...register("duration")} />
                     <ErrorField error={dateOfTravel} />
                   </div>
                 </div>
                 <div className="form-control">
                   <label>Country of Residence</label>
                   <select {...register("countryOfResidence")}>
-                    {countries.map(({ name }) => (
+                    {[{ name: "" }, ...countries].map(({ name }) => (
                       <option>{name}</option>
                     ))}
                   </select>
@@ -431,3 +431,30 @@ const ErrorField = ({ error }) => {
 };
 
 export default Enquire;
+
+const DateRangePicker = ({ control, fieldName, setValue }) => {
+  return (
+    <Controller
+      control={control}
+      name={fieldName}
+      render={({ field: { onChange, value } }) => {
+        return (
+          <DatePicker
+            selected={value[0]}
+            onChange={(selected) => {
+              const totalDays = differenceInCalendarDays(
+                selected[1],
+                selected[0]
+              );
+              if (!isNaN(totalDays)) setValue(totalDays);
+              onChange(selected);
+            }}
+            startDate={value[0]}
+            endDate={value[1]}
+            selectsRange
+          />
+        );
+      }}
+    />
+  );
+};

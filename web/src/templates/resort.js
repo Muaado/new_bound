@@ -213,10 +213,11 @@ const ResortTemplate = (props) => {
     const resortVillas_ = villas.nodes;
     return (
       resortVillas_.length &&
-      resortVillas_?.slice(0, 6).map(({ name }, index) => {
+      resortVillas_?.slice(0, 6).map(({ name, imageThumb }, index) => {
         return {
           className: index === 0 ? "page-title" : "",
           content: name,
+          thumbImage: imageThumb,
           onClick: () => {
             const villaUrl = getVillaUrl({
               name,

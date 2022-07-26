@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { device } from "./deviceSizes";
 export const EnquirePageStyles = styled.div`
-  /* margin: 5rem 0; */
+  padding-top: 7rem;
   background: white;
   width: 100%;
   height: 100%;
