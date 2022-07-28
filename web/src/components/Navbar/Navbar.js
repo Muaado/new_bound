@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LogoWrapper,
   NavWrapper,
@@ -55,6 +55,7 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
             navLinks={navLinks}
             onMenuClick={onMenuClick}
             sideWideNavContent={sideWideNavContent}
+            scrollPosition={scrollPosition}
             isMaxScroll={isMaxScroll}
           />
         );
@@ -68,12 +69,21 @@ const DefaultNavBar = ({
   onMenuClick,
   sideWideNavContent,
   isMaxScroll,
+  scrollPosition,
 }) => {
   const [activeLink, setActiveLink] = useState(null);
   const { __, executeScroll } = useScrollToRef();
   const [showSiteWideNav, setShowSiteWideNav] = useState(false);
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
+
+  useEffect(() => {
+    if (showSiteWideNav || setShowMainNav) {
+      setShowSiteWideNav(false);
+      setShowMainNav(false);
+    }
+  }, [scrollPosition]);
+
   let navLinkContainerClass = "";
   const navLinks_ =
     navLinks?.length &&

@@ -422,6 +422,10 @@ const VilaTemplate = (props) => {
             className="villa__room-features"
             id="room-features"
             ref={featuresRef}
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
           >
             <Overlay zIndex={1} opacity={0.7} />
             {roomFeatures?.backgroundImage &&
@@ -462,7 +466,14 @@ const VilaTemplate = (props) => {
               </ul>
             </div>
           </div>
-          <div className="villa__property-overview" ref={islandRef}>
+          <div
+            className="villa__property-overview"
+            ref={islandRef}
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+          >
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}

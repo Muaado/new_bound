@@ -20,7 +20,7 @@ import { useScrollToRef } from "../hooks";
 import LeftSidebar from "../components/LeftSidebar";
 import PhoneInput from "../components/PhoneInput/PhoneInput";
 import { VillaIcons } from "../components/Villa/VillaIcons";
-import DatePicker from "react-datepicker";
+import DatePicker, { CalendarContainer } from "react-datepicker";
 import { differenceInCalendarDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -441,6 +441,7 @@ const DateRangePicker = ({ control, fieldName, setValue }) => {
         return (
           <DatePicker
             dateFormat={"dd/MM/yy"}
+            popperClassName="react-datepicker-calendar"
             selected={value[0]}
             onChange={(selected) => {
               const totalDays = differenceInCalendarDays(
@@ -452,6 +453,7 @@ const DateRangePicker = ({ control, fieldName, setValue }) => {
             }}
             startDate={value[0]}
             endDate={value[1]}
+            // calendarContainer={MyContainer}
             selectsRange
           />
         );
