@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { LogoWrapper, NavWrapper, SecondaryNavBarWrapper } from "./elements";
+import {
+  LogoWrapper,
+  NavWrapper,
+  SecondaryNavBarWrapper,
+  DropDownWrapper,
+  ImageWrapper,
+} from "./elements";
 import { Link, navigate } from "gatsby";
 import HamburgerIcon from "../../assets/icons/menu-solid.svg";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
@@ -12,6 +18,7 @@ import {
   MAGAZINE,
   SIMPLE_MAIN_NAVBAR,
 } from "../../constants";
+import { Overlay } from "../Overlay";
 
 export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
   const { navLinks, heroRef, pageName } = useNavBar();
@@ -67,6 +74,62 @@ const DefaultNavBar = ({
   const [showSiteWideNav, setShowSiteWideNav] = useState(false);
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
+  let navLinkContainerClass = "";
+  const navLinks_ =
+    navLinks?.length &&
+    navLinks?.map(
+      ({ name, innerRef, hasSubNav, content, isDropDown, onClick }, index) => {
+        navLinkContainerClass = "full-column";
+        const isActive = activeLink === name;
+        return {
+          sibling: index > 0 ? <>|</> : null,
+          siblingClassName: "vertical-divider",
+          className: !onClick
+            ? hasSubNav
+              ? `page-title ${showMainNav ? "rotate" : ""} `
+              : activeLink == name
+              ? "active"
+              : undefined
+            : isDropDown
+            ? `page-title hasDropDown ${isActive ? "rotate" : ""}`
+            : undefined,
+          icon: hasSubNav || isDropDown ? <ChevronDown /> : undefined,
+          onIconClick: () => {
+            if (hasSubNav) {
+              setShowMainNav(!showMainNav);
+              setMainNavContent(content);
+              setShowSiteWideNav(false);
+            }
+            if (isDropDown) {
+              setActiveLink(!isActive ? name : "");
+            }
+          },
+          onClick: () => {
+            setActiveLink(name);
+            onClick?.();
+            if (innerRef?.current && !isDropDown) {
+              executeScroll(innerRef);
+            }
+          },
+          content: (
+            <div className="text">
+              {name}
+              {isDropDown ? (
+                <DropDown
+                  listItems={content}
+                  isActive={isActive}
+                  onListClick={(e, ref) => {
+                    e.stopPropagation();
+                    setActiveLink("");
+                    executeScroll(ref);
+                  }}
+                />
+              ) : null}
+            </div>
+          ),
+        };
+      }
+    );
 
   const navBarStyle = { height: "5.8rem" };
   return (
@@ -109,37 +172,10 @@ const DefaultNavBar = ({
               },
             },
           ]}
-          className="container"
+          className={`container ${navLinkContainerClass}`}
         >
           {navLinks?.length ? (
-            <NavBarList
-              items={navLinks?.map(
-                ({ name, innerRef, isDropDown, content, onClick }, index) => ({
-                  sibling: index > 0 ? <>|</> : null,
-                  siblingClassName: "vertical-divider",
-                  className: !onClick
-                    ? isDropDown
-                      ? `page-title ${showMainNav ? "rotate" : ""} `
-                      : activeLink == name
-                      ? "active"
-                      : undefined
-                    : undefined,
-                  icon: isDropDown ? <ChevronDown /> : undefined,
-                  onClick: () => {
-                    setActiveLink(name);
-                    onClick?.();
-                    if (isDropDown) {
-                      setShowMainNav(!showMainNav);
-                      setMainNavContent(content);
-                      setShowSiteWideNav(false);
-                    }
-                    executeScroll(innerRef);
-                  },
-                  content: <div className="text">{name}</div>,
-                })
-              )}
-              className="bottom-links"
-            />
+            <NavBarList items={navLinks_} className="bottom-links" />
           ) : null}
         </NavBarList>
         <SideWideNavBar
@@ -148,7 +184,7 @@ const DefaultNavBar = ({
           onMenuClick={onMenuClick}
         />
         <SecondaryNavBar
-          height="8rem"
+          height="10rem"
           open={showMainNav}
           listItems={mainNavContent}
         />
@@ -202,6 +238,7 @@ const SideWideNavBar = ({
   const isActiveHome = activeSiteWideNavLink === HOME;
   const isActiveCollections = activeSiteWideNavLink === COLLECTIONS;
   const isActiveResort = activeSiteWideNavLink === RESORTS;
+  const isActiveMagazine = activeSiteWideNavLink === MAGAZINE;
 
   const listItems = [
     {
@@ -224,12 +261,11 @@ const SideWideNavBar = ({
       onClick: () => onSiteWideNavLinkClick(COLLECTIONS),
     },
     {
+      className: isActiveMagazine ? "rotate" : "",
       content: <div className="text">{MAGAZINE}</div>,
       icon: <ChevronDown />,
-      onClick: () => {
-        onSiteWideNavLinkClick(MAGAZINE);
-        // navigate(`/${MAGAZINE.toLowerCase()}`);
-      },
+      onIconClick: () => onSiteWideNavLinkClick(MAGAZINE),
+      onClick: () => navigate(`/${MAGAZINE.toLowerCase()}`),
     },
   ];
 
@@ -296,27 +332,46 @@ const NavBarList = ({ items, className, children }) => {
   return (
     <ul className={className}>
       {items.map(
-        ({
-          className: className_,
-          icon,
-          content,
-          sibling,
-          siblingClassName,
-          thumbImage,
-          onClick,
-        }) => {
-          console.log("thumbImage<<", thumbImage);
+        (
+          {
+            className: className_,
+            icon,
+            content,
+            sibling,
+            siblingClassName,
+            thumbImage,
+            onClick,
+            onIconClick,
+          },
+          index
+        ) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {sibling ? <li className={siblingClassName}>{sibling}</li> : null}
-              <li className={className_} onClick={onClick}>
-                {thumbImage?.asset ? (
-                  <Image {...thumbImage} width={50} height={50} />
+              <li
+                className={`${className_} ${thumbImage ? "image-wrapper" : ""}`}
+                onClick={onClick}
+              >
+                {icon ? (
+                  <div
+                    className="list-icon"
+                    onClick={(e) => {
+                      if (onIconClick) {
+                        e.stopPropagation();
+                        onIconClick?.();
+                      }
+                    }}
+                  >
+                    {icon}
+                  </div>
                 ) : null}
-                {icon ? <div className="list-icon">{icon}</div> : null}
-                {content}
+                {thumbImage?.asset ? (
+                  <RoomImage image={thumbImage} content={content} />
+                ) : (
+                  content
+                )}
               </li>
-            </>
+            </React.Fragment>
           );
         }
       )}
@@ -340,3 +395,34 @@ export const Logo = ({ logo }) => (
     </Link>
   </div>
 );
+
+const DropDown = ({ listItems, onListClick, isActive }) => {
+  return (
+    <DropDownWrapper style={{ height: isActive ? "400px" : "0px" }}>
+      {listItems?.length &&
+        listItems?.map(({ name, innerRef }) => {
+          return (
+            <div
+              key={name}
+              className="item"
+              onClick={(e) => onListClick(e, innerRef)}
+            >
+              {name}
+            </div>
+          );
+        })}
+    </DropDownWrapper>
+  );
+};
+
+export const RoomImage = ({ image, content }) => {
+  return (
+    <ImageWrapper>
+      <div className="inner-wrapper">
+        <Image {...image} height={70} />
+        <Overlay opacity={0.3} zIndex={1} />
+        <div className="content">{content}</div>
+      </div>
+    </ImageWrapper>
+  );
+};

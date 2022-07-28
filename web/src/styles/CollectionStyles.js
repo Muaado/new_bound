@@ -540,4 +540,7 @@ export const CollectionStyles = styled.div`
       }
     }
   }
+  .secondary-nav .container {
+    grid-template-columns: 1fr 2fr !important;
+  }
 `;
