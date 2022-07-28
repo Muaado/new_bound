@@ -440,6 +440,7 @@ const DateRangePicker = ({ control, fieldName, setValue }) => {
       render={({ field: { onChange, value } }) => {
         return (
           <DatePicker
+            dateFormat={"dd/MM/yy"}
             selected={value[0]}
             onChange={(selected) => {
               const totalDays = differenceInCalendarDays(

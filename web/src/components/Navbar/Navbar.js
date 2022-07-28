@@ -421,8 +421,8 @@ export const RoomImage = ({ image, content }) => {
       <div className="inner-wrapper">
         <Image {...image} height={70} />
         <Overlay opacity={0.3} zIndex={1} />
-        <div className="content">{content}</div>
       </div>
+      <div className="content">{content}</div>
     </ImageWrapper>
   );
 };

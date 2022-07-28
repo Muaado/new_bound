@@ -295,6 +295,6 @@ export const ImageWrapper = styled.div`
     position: absolute;
     z-index: 2;
     color: white;
-    text-align: left;
+    text-align: center;
   }
 `;
