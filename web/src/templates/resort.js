@@ -192,12 +192,12 @@ export const query = graphql`
 `;
 
 const pageSections = [
-  { name: ACCOMODATION, isDropDown: true },
-  { name: "Overview", isDropDown: false },
-  { name: "Highlights", isDropDown: false },
-  { name: "Dine", isDropDown: false },
-  { name: "Spa", isDropDown: false },
-  { name: "Activities", isDropDown: false },
+  { name: ACCOMODATION, hasSubNav: true },
+  { name: "Overview", hasSubNav: false },
+  { name: "Highlights", hasSubNav: false },
+  { name: "Dine", hasSubNav: false },
+  { name: "Spa", hasSubNav: false },
+  { name: "Activities", hasSubNav: false },
 ];
 
 const ResortTemplate = (props) => {
@@ -254,6 +254,7 @@ const ResortTemplate = (props) => {
     navLinks,
   } = usePageSectionsRef(pageSections_);
 
+  console.log("navLinks >>>", navLinks);
   React.useEffect(() => {
     setPageName(NAVBAR_WITH_BOTTOM_LINK);
     setNavLinks(navLinks);

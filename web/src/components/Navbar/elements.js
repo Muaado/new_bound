@@ -37,6 +37,21 @@ export const NavWrapper = styled.nav`
   &.secondary-nav {
     .container {
       grid-template-columns: 1fr 1.5fr;
+      &.full-column {
+        grid-template-columns: 1fr 3fr;
+        .hasDropDown {
+          position: relative;
+          display: flex;
+          align-items: center;
+          svg {
+            margin-left: 4px;
+            margin-top: -1px !important;
+            height: 14px !important;
+            width: 14px !important;
+          }
+        }
+      }
+
       li {
         font-size: 12px;
         font-weight: 600;
@@ -68,8 +83,6 @@ export const NavWrapper = styled.nav`
         &.rotate {
           svg {
             transform: rotate(180deg);
-            height: 15px;
-            width: 15px;
           }
         }
         text-transform: uppercase;
@@ -104,6 +117,9 @@ export const NavWrapper = styled.nav`
           .text {
             width: 100%;
             text-align: center;
+            &.hasDropDown {
+              position: relative;
+            }
           }
         }
       }
@@ -184,6 +200,10 @@ export const SecondaryNavBarWrapper = styled.div`
     display: flex !important;
     justify-content: flex-start !important;
     li {
+      &.image-wrapper {
+        width: 100%;
+        height: 100%;
+      }
       color: #222 !important;
       cursor: pointer;
       color: #fff;
@@ -203,8 +223,8 @@ export const SecondaryNavBarWrapper = styled.div`
         margin-right: 5px;
         svg {
           margin-top: -2px;
-          height: 15px;
-          width: 15px;
+          height: 12px !important;
+          width: 12px !important;
           transform: rotate(0);
           transition: all 0.4s ease-in-out;
         }
@@ -215,10 +235,10 @@ export const SecondaryNavBarWrapper = styled.div`
         }
       }
       img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 1rem;
+        /* width: 50px;
+        height: 50px; */
+        /* border-radius: 50%; */
+        /* margin-right: 1rem; */
       }
     }
   }
@@ -229,5 +249,52 @@ export const SecondaryNavBarWrapper = styled.div`
   }
   .second-nav-border-bottom {
     border-bottom: 1px solid #222;
+  }
+`;
+
+export const DropDownWrapper = styled.div`
+  position: absolute;
+  top: 3.5rem;
+  background-color: #f1f1f1;
+  transition: height 0.4s ease-in-out;
+  width: 100%;
+  min-width: 300px;
+  /* right: 50%; */
+  left: 0;
+  max-height: 400px;
+  overflow-y: scroll;
+
+  .item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+`;
+
+export const ImageWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .inner-wrapper {
+    position: relative;
+    height: 90%;
+    width: 100%;
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  }
+  .content {
+    position: absolute;
+    z-index: 2;
+    color: white;
+    text-align: left;
   }
 `;

@@ -2,18 +2,31 @@ import { useRef, useCallback, createRef, useState, useEffect } from "react";
 
 export const usePageSectionsRef = (sections) => {
   const sectionRefs = useRef({});
+  const contentRefs = useRef({});
   const [navLinks, setNavLinks] = useState([]);
   useEffect(() => {
-    const navLinks_ = sections.map(({ name, ...restContent }) => {
-      const refName = `${name.split(" ")[0].toLowerCase()}Ref`;
-      sectionRefs.current[refName] = createRef();
-      return {
-        name: name,
-        innerRef: sectionRefs.current[refName],
-        ...restContent,
-      };
-    });
+    const navLinks_ = sections.map(
+      ({ name, isDropDown, content, ...restContent }) => {
+        const refName = `${name.split(" ")[0].toLowerCase()}Ref`;
+        sectionRefs.current[refName] = createRef();
+        const content_ =
+          content?.length &&
+          content?.map(({ name }) => {
+            return {
+              name,
+              innerRef: (contentRefs.current[name] = createRef()),
+            };
+          });
+        return {
+          name: name,
+          innerRef: sectionRefs.current[refName],
+          content: isDropDown ? content_ : content,
+          isDropDown,
+          ...restContent,
+        };
+      }
+    );
     setNavLinks(navLinks_);
   }, []);
-  return { ...sectionRefs?.current, navLinks };
+  return { ...sectionRefs?.current, contentRefs: contentRefs, navLinks };
 };

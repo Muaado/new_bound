@@ -1,5 +1,5 @@
 import { graphql, navigate, Link } from "gatsby";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { createRef, useEffect, useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
@@ -17,7 +17,12 @@ import {
   priceFormatter,
   getCollectionUrl,
 } from "../lib/helpers";
-import { useIsMobileLarge, usePageSectionsRef, useNavBar } from "../hooks";
+import {
+  useIsMobileLarge,
+  usePageSectionsRef,
+  useNavBar,
+  useScrollToRef,
+} from "../hooks";
 import { PriceTemplate } from "../components";
 import {
   LARGE_COLLECTION,
@@ -155,22 +160,27 @@ const pageSections = [
   {
     name: WATER_VILLA_COLLECTION,
     onClick: () => navigate("../top-water-villas/"),
+    isDropDown: false,
   },
   {
     name: BEACH_VILLA_COLLECTION,
     onClick: () => navigate("../beach-villas/"),
+    isDropDown: false,
   },
   {
     name: LARGE_COLLECTION,
     onClick: () => navigate("../large-villas/"),
+    isDropDown: false,
   },
   {
     name: RESORT_COLLECTION,
     onClick: () => navigate("../resort-collection/"),
+    isDropDown: false,
   },
   {
     name: COUPLES_COLLECTION,
     onClick: () => navigate("../couples-collection"),
+    isDropDown: false,
   },
 ];
 
@@ -183,23 +193,45 @@ const CollectionTemplate = (props) => {
     ? collections?.waterVillaCollection
     : [];
 
+  const firstcollectionName_ = villas[0]?.CollectionName;
+
   const banners = collections?.banner;
   const slug = collections?.slug;
   const pathName = getCollectionUrl({ slug: slug });
   const site = data && data.site;
+
   const isMobile = useIsMobileLarge();
   const { setNavLinks } = useNavBar();
+  const resortSectionRefs = useRef([]);
   const heroRef = useRef(null);
+
+  const collections__ = useMemo(() => {
+    const collections_ = villas?.map(({ CollectionName }) => {
+      return {
+        name: CollectionName,
+      };
+    });
+    return collections_;
+  }, [resortSectionRefs?.current?.length]);
+
   const pageSections_ = useMemo(() => {
-    return pageSections.filter(
-      ({ name }) => name !== collections?.CollectionPageName
-    );
-  });
-  console.log("pageSections_", collections?.CollectionPageName);
-  const { navLinks } = usePageSectionsRef(pageSections_);
+    return pageSections.map((section) => {
+      if (section?.name == collections?.CollectionPageName) {
+        return {
+          ...section,
+          isDropDown: true,
+          content: collections__,
+        };
+      }
+      return section;
+    });
+  }, [collections__.length]);
+
+  const { navLinks, contentRefs } = usePageSectionsRef(pageSections_);
+
   useEffect(() => {
     setNavLinks(navLinks);
-  }, [heroRef?.current]);
+  }, [contentRefs?.current[firstcollectionName_]]);
 
   return (
     <Layout>
@@ -228,7 +260,12 @@ const CollectionTemplate = (props) => {
               collectionNumber
             ) => {
               return (
-                <div key={_id} className="mastercol">
+                <div
+                  key={CollectionName}
+                  id={CollectionName}
+                  className="mastercol"
+                  ref={contentRefs?.current[CollectionName]}
+                >
                   <h3 className="col_name">{CollectionName}</h3>
                   {isMobile ? (
                     villas?.length && (
@@ -237,7 +274,7 @@ const CollectionTemplate = (props) => {
                         totalItems={villas.length}
                         cellSpacing={10}
                       >
-                        {villas?.map((villa) => {
+                        {villas?.map((villa, index) => {
                           const { villaPrice, villaUrl } = computeVillaFields({
                             villa,
                           });
@@ -245,7 +282,7 @@ const CollectionTemplate = (props) => {
                           return (
                             <>
                               <li
-                                key={villa._id}
+                                key={`${villa._id} + ${index}`}
                                 className="card-image-wrapper"
                               >
                                 {villa.imageThumb && villa.imageThumb.asset && (
@@ -291,13 +328,13 @@ const CollectionTemplate = (props) => {
                   ) : (
                     <ul className="collection_wrap">
                       {villas?.length &&
-                        villas?.map((villa) => {
+                        villas?.map((villa, index) => {
                           const { villaPrice, villaUrl } = computeVillaFields({
                             villa,
                           });
                           return (
                             <li
-                              key={villa._id}
+                              key={`${villa._id} ${index}`}
                               className="collection_wrap_item"
                               onClick={() => {
                                 navigate(villaUrl, {

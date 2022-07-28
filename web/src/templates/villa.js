@@ -228,14 +228,14 @@ export const query = graphql`
 `;
 
 const pageSections = [
-  { name: ACCOMODATION, isDropDown: true },
-  { name: "Overview", isDropDown: false },
-  { name: "Features", isDropDown: false },
-  { name: "Island", isDropDown: false },
-  { name: "Highlights", isDropDown: false },
-  { name: "Dine", isDropDown: false },
-  { name: "Spa", isDropDown: false },
-  { name: "Activities", isDropDown: false },
+  { name: ACCOMODATION, hasSubNav: true },
+  { name: "Overview", hasSubNav: false },
+  { name: "Features", hasSubNav: false },
+  { name: "Island", hasSubNav: false },
+  { name: "Highlights", hasSubNav: false },
+  { name: "Dine", hasSubNav: false },
+  { name: "Spa", hasSubNav: false },
+  { name: "Activities", hasSubNav: false },
 ];
 
 const VilaTemplate = (props) => {
