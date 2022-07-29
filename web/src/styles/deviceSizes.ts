@@ -31,6 +31,7 @@ export const device = {
   onlyMobile: `(max-width: 1024px)`,
   onlyMobileS: `(max-width: 800px)`,
   onlyMobileSm: `(max-width: 640px)`,
+  onlyTablet: `(min-width: ${size.tablet})`,
   mobileAndTablet: `(min-width: 320px) and (max-wdith:1024px)`,
   iphonePortLandscape: `(min-width: 320px) and (max-width: 837px)  and (-webkit-min-device-pixel-ratio: 2)`,
   mobileSmall: `(max-width: 390px)`,

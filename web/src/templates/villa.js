@@ -17,7 +17,11 @@ import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
-import { ROOM_PAGE, ACCOMODATION, NAVBAR_WITH_BOTTOM_LINK } from "../constants";
+import {
+  ROOM_PAGE,
+  ACCOMODATION,
+  DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
+} from "../constants";
 import {
   useScrollToRef,
   useIsMobile,
@@ -298,7 +302,7 @@ const VilaTemplate = (props) => {
   } = usePageSectionsRef(pageSections_);
 
   useEffect(() => {
-    setPageName(NAVBAR_WITH_BOTTOM_LINK);
+    setPageName(DEFAULT_NAVBAR_WITH_BOTTOM_LINK);
     setNavLinks(navLinks);
     setHeroRef(heroRef);
     return () => {

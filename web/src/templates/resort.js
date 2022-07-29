@@ -15,7 +15,7 @@ import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
 import {
   LIGHT_COLOR,
-  NAVBAR_WITH_BOTTOM_LINK,
+  DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
   ACCOMODATION,
 } from "../constants";
 import { useScrollToRef, useNavBar, usePageSectionsRef } from "../hooks";
@@ -254,9 +254,8 @@ const ResortTemplate = (props) => {
     navLinks,
   } = usePageSectionsRef(pageSections_);
 
-  console.log("navLinks >>>", navLinks);
   React.useEffect(() => {
-    setPageName(NAVBAR_WITH_BOTTOM_LINK);
+    setPageName(DEFAULT_NAVBAR_WITH_BOTTOM_LINK);
     setNavLinks(navLinks);
     setHeroRef(heroRef);
     return () => {

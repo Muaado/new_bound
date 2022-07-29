@@ -10,7 +10,7 @@ import { Link, navigate } from "gatsby";
 import HamburgerIcon from "../../assets/icons/menu-solid.svg";
 import ChevronDown from "../../assets/icons/chevron-down.svg";
 import Image from "gatsby-plugin-sanity-image";
-import { useScoll, useScrollToRef, useNavBar } from "../../hooks";
+import { useScoll, useScrollToRef, useNavBar, useIsMobile } from "../../hooks";
 import {
   COLLECTIONS,
   HOME,
@@ -44,6 +44,7 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
               sideWideNavContent={sideWideNavContent}
               className={isMaxScroll ? "black-bg" : ""}
               isMaxScroll={!isMaxScroll}
+              scrollPosition={scrollPosition}
               showTopNav
             />
           </NavWrapper>
@@ -77,6 +78,7 @@ const DefaultNavBar = ({
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
 
+  const isMobile = useIsMobile();
   useEffect(() => {
     if (showSiteWideNav || setShowMainNav) {
       setShowSiteWideNav(false);
@@ -92,7 +94,7 @@ const DefaultNavBar = ({
         navLinkContainerClass = "full-column";
         const isActive = activeLink === name;
         return {
-          sibling: index > 0 ? <>|</> : null,
+          sibling: !isMobile ? index > 0 ? <>|</> : null : null,
           siblingClassName: "vertical-divider",
           className: !onClick
             ? hasSubNav
@@ -103,7 +105,11 @@ const DefaultNavBar = ({
             : isDropDown
             ? `page-title hasDropDown ${isActive ? "rotate" : ""}`
             : undefined,
-          icon: hasSubNav || isDropDown ? <ChevronDown /> : undefined,
+          icon: !isMobile ? (
+            hasSubNav || isDropDown ? (
+              <ChevronDown />
+            ) : undefined
+          ) : undefined,
           onIconClick: () => {
             if (hasSubNav) {
               setShowMainNav(!showMainNav);
@@ -166,7 +172,9 @@ const DefaultNavBar = ({
       ) : null}
 
       <NavWrapper
-        className={`${isMaxScroll ? "black-bg" : ""} secondary-nav`}
+        className={`${
+          isMaxScroll ? "black-bg" : isMobile ? "blur-bg" : ""
+        } secondary-nav`}
         style={navBarStyle}
         bottomNav
       >
@@ -184,10 +192,13 @@ const DefaultNavBar = ({
           ]}
           className={`container ${navLinkContainerClass}`}
         >
-          {navLinks?.length ? (
-            <NavBarList items={navLinks_} className="bottom-links" />
+          {!isMobile ? (
+            navLinks?.length ? (
+              <NavBarList items={navLinks_} className="bottom-links" />
+            ) : null
           ) : null}
         </NavBarList>
+
         <SideWideNavBar
           showSiteWideNav={showSiteWideNav}
           sideWideNavContent={sideWideNavContent}
@@ -209,11 +220,12 @@ const SideWideNavBar = ({
   onMenuClick,
   showTopNav,
   isMaxScroll,
+  scrollPosition,
   className,
 }) => {
   const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
   const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
-
+  const isMobile = useIsMobile();
   const siteWideNavContent_ = (
     activeSiteWideNavLink
       ? activeSiteWideNavLink === COLLECTIONS
@@ -260,24 +272,30 @@ const SideWideNavBar = ({
     },
     {
       className: isActiveResort ? "rotate" : "",
-      icon: <HamburgerIcon />,
+      icon: !isMobile ? <HamburgerIcon /> : null,
       content: <div className="text">{RESORTS}</div>,
       onClick: (e) => onMenuClick(e, RESORTS),
     },
     {
       className: isActiveCollections ? "rotate" : "",
-      icon: <ChevronDown />,
+      icon: !isMobile ? <ChevronDown /> : null,
       content: <div className="text">{COLLECTIONS}</div>,
       onClick: () => onSiteWideNavLinkClick(COLLECTIONS),
     },
     {
       className: isActiveMagazine ? "rotate" : "",
       content: <div className="text">{MAGAZINE}</div>,
-      icon: <ChevronDown />,
+      icon: !isMobile ? <ChevronDown /> : null,
       onIconClick: () => onSiteWideNavLinkClick(MAGAZINE),
       onClick: () => navigate(`/${MAGAZINE.toLowerCase()}`),
     },
   ];
+
+  useEffect(() => {
+    if (showSiteWideNavContent) {
+      setShowSiteWideContent(false);
+    }
+  }, [scrollPosition]);
 
   return (
     <>
@@ -287,7 +305,7 @@ const SideWideNavBar = ({
           items={[
             {
               className: "hamburger-wrapper",
-              content: <></>,
+              content: isMobile ? <HamburgerIcon /> : null,
               onClick: onMenuClick,
             },
             {
@@ -305,10 +323,12 @@ const SideWideNavBar = ({
         }
         className={className}
         listItems={listItems}
+        height={isMobile ? "20rem" : undefined}
       />
       <SecondaryNavBar
         open={showSiteWideNavContent && showSiteWideNav}
         listItems={siteWideNavContent_}
+        height={isMobile ? "25rem" : undefined}
       />
     </>
   );
@@ -321,6 +341,7 @@ export const SecondaryNavBar = ({
   className,
   height,
 }) => {
+  const isMobile = useIsMobile();
   return (
     <SecondaryNavBarWrapper
       style={{
