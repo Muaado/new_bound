@@ -10,7 +10,6 @@ import VillaStyles from "../styles/VillaTemplateStyles";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
-import LeftSidebar from "../components/LeftSidebar";
 import PopUpGallery from "../components/PopUpGallery";
 import { VillaIcons } from "../components/Villa/VillaIcons";
 import Highlights from "../components/Resort/Highlights";
@@ -351,9 +350,6 @@ const VilaTemplate = (props) => {
       )}
 
       <Container>
-        <LeftSidebar
-          list={["overview", "room-features", "gallery", "highlights", "dine"]}
-        />
         <VillaStyles>
           {/* <div className="villa__image" ref={heroRef}>
             <div className="image-container">

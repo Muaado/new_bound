@@ -17,7 +17,6 @@ import { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { Query_Villa } from "../gql";
 import { useScrollToRef } from "../hooks";
-import LeftSidebar from "../components/LeftSidebar";
 import PhoneInput from "../components/PhoneInput/PhoneInput";
 import { VillaIcons } from "../components/Villa/VillaIcons";
 import DatePicker, { CalendarContainer } from "react-datepicker";
@@ -188,7 +187,6 @@ const Enquire = (props) => {
     errors;
   return (
     <Layout {...props}>
-      <LeftSidebar />
       <SEO
         title={site.title}
         description={site.description}
@@ -196,15 +194,6 @@ const Enquire = (props) => {
       />
 
       <Container>
-        {/* <HeroStyles>
-          <h1> {site.description}</h1>
-          {data.site.magazinePageImage && data.site.magazinePageImage.asset && (
-            <Image
-              {...data.site.magazinePageImage}
-              alt={data.site.magazinePageImage.alt}
-            />
-          )}
-        </HeroStyles> */}
         <EnquirePageStyles>
           <div className="content">
             <div className="main-div" style={{ paddingTop: 0 }}>

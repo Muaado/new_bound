@@ -1,10 +1,9 @@
 import { graphql, navigate, Link } from "gatsby";
-import React, { createRef, useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
-import LeftSidebar from "../components/LeftSidebar";
 import { Overlay, Carousel, Button } from "../components";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
@@ -235,7 +234,6 @@ const CollectionTemplate = (props) => {
 
   return (
     <Layout>
-      <LeftSidebar />
       <CollectionStyles>
         <h1 className="collectionpage_title">
           {collections.CollectionPageName}

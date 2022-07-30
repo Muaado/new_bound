@@ -8,7 +8,6 @@ import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import Accomodation from "../components/Resort/Accomodation";
-import LeftSidebar from "../components/LeftSidebar";
 import { toPlainText, getVillaUrl } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
@@ -331,10 +330,6 @@ const ResortTemplate = (props) => {
               </div>
             </div>
           )}
-          <LeftSidebar
-            list={["overview", "accomodation", "highlights", "dine", "gallery"]}
-          />
-
           <div id="overview" ref={overviewRef}>
             <Amenities
               locationAtoll={locationAtoll}

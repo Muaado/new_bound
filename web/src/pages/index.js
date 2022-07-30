@@ -23,7 +23,6 @@ import PortableText from "../components/Ui/portableText";
 import { getBlogUrl, getResortUrl, getVillaUrl } from "../lib/helpers";
 import WhyBoundlessSection from "../components/Homepage/WhyBoundlessSection";
 import NewsletterSection from "../components/Homepage/NewsletterSection";
-// import LeftSidebar from "../components/LeftSidebar";
 import Search from "../components/Search";
 import { Button } from "../components/Button";
 import { FixedBackgroundImage, Overlay } from "../components";

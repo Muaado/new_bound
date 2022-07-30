@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import "../styles/layout.css";
 
 import { Helmet } from "react-helmet";
+import { BottomToTopScroll } from "./Scroll";
 
 const windowGlobal = typeof window !== "undefined";
 if (windowGlobal) AOS.init();
@@ -26,6 +27,7 @@ const Layout = ({
 }) => {
   return (
     <>
+      <BottomToTopScroll />
       <Helmet>
         <script
           type="text/javascript"
