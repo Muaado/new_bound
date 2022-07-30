@@ -118,10 +118,6 @@ export const LeftSideBarWrapper = styled.div`
     font-size: 1.6rem;
     padding-top: 20px;
     font-weight: bolder;
-
-    @media ${device.tablet} {
-      border-bottom: 1px solid var(--lightGrey3);
-    }
   }
 
   .dropdown-close-icon {

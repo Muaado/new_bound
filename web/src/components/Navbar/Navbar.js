@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   LogoWrapper,
   NavWrapper,
   SecondaryNavBarWrapper,
   DropDownWrapper,
   ImageWrapper,
+  StyledList,
 } from "./elements";
 import { Link, navigate } from "gatsby";
 import HamburgerIcon from "../../assets/icons/menu-solid.svg";
@@ -77,14 +78,42 @@ const DefaultNavBar = ({
   const [showSiteWideNav, setShowSiteWideNav] = useState(false);
   const [showMainNav, setShowMainNav] = useState(false);
   const [mainNavContent, setMainNavContent] = useState([]);
-
+  const [showMainNavDropDown, setShowMainNavDropDown] = useState(false);
   const isMobile = useIsMobile();
   useEffect(() => {
-    if (showSiteWideNav || setShowMainNav) {
+    if (showSiteWideNav || setShowMainNav || showMainNavDropDown) {
       setShowSiteWideNav(false);
       setShowMainNav(false);
+      setShowMainNavDropDown(false);
     }
   }, [scrollPosition]);
+
+  const onIconClick = useCallback(
+    ({ hasSubNav, isDropDown, name, content }) => {
+      const isActive = activeLink === name;
+      if (hasSubNav) {
+        setShowMainNav(!showMainNav);
+        setMainNavContent(content);
+        setShowSiteWideNav(false);
+      }
+      if (isDropDown) {
+        setShowMainNavDropDown(!showMainNavDropDown);
+        setActiveLink(!isActive ? name : "");
+      }
+    },
+    [showMainNavDropDown, showMainNav]
+  );
+
+  const onItemClick = useCallback(
+    ({ name, onClick, innerRef, isDropDown }) => {
+      setActiveLink(name);
+      onClick?.();
+      if (innerRef?.current && !isDropDown) {
+        executeScroll(innerRef);
+      }
+    },
+    [activeLink]
+  );
 
   let navLinkContainerClass = "";
   const navLinks_ =
@@ -99,48 +128,32 @@ const DefaultNavBar = ({
           className: !onClick
             ? hasSubNav
               ? `page-title ${showMainNav ? "rotate" : ""} `
-              : activeLink == name
+              : isActive
               ? "active"
               : undefined
             : isDropDown
-            ? `page-title hasDropDown ${isActive ? "rotate" : ""}`
+            ? `page-title hasDropDown ${showMainNavDropDown ? "rotate" : ""}`
             : undefined,
           icon: !isMobile ? (
             hasSubNav || isDropDown ? (
               <ChevronDown />
             ) : undefined
           ) : undefined,
-          onIconClick: () => {
-            if (hasSubNav) {
-              setShowMainNav(!showMainNav);
-              setMainNavContent(content);
-              setShowSiteWideNav(false);
-            }
-            if (isDropDown) {
-              setActiveLink(!isActive ? name : "");
-            }
-          },
-          onClick: () => {
-            setActiveLink(name);
-            onClick?.();
-            if (innerRef?.current && !isDropDown) {
-              executeScroll(innerRef);
-            }
-          },
+          onIconClick: () =>
+            onIconClick({ hasSubNav, isDropDown, name, content }),
+          onClick: () => onItemClick({ name, innerRef, onClick, isDropDown }),
           content: (
             <div className="text">
               {name}
-              {isDropDown ? (
-                <DropDown
-                  listItems={content}
-                  isActive={isActive}
-                  onListClick={(e, ref) => {
-                    e.stopPropagation();
-                    setActiveLink("");
-                    executeScroll(ref);
-                  }}
-                />
-              ) : null}
+              <DropDown
+                listItems={content}
+                isActive={isDropDown && showMainNavDropDown}
+                onListClick={(e, ref) => {
+                  setActiveLink("");
+                  e.stopPropagation();
+                  executeScroll(ref);
+                }}
+              />
             </div>
           ),
         };
@@ -378,8 +391,10 @@ const NavBarList = ({ items, className, children }) => {
         ) => {
           return (
             <React.Fragment key={index}>
-              {sibling ? <li className={siblingClassName}>{sibling}</li> : null}
-              <li
+              {sibling ? (
+                <StyledList className={siblingClassName}>{sibling}</StyledList>
+              ) : null}
+              <StyledList
                 className={`${className_} ${thumbImage ? "image-wrapper" : ""}`}
                 onClick={onClick}
               >
@@ -401,7 +416,7 @@ const NavBarList = ({ items, className, children }) => {
                 ) : (
                   content
                 )}
-              </li>
+              </StyledList>
             </React.Fragment>
           );
         }
