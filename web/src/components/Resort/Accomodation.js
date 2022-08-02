@@ -97,7 +97,7 @@ const AccomodationStyles = styled.div`
       }
     }
     .roomname {
-      font-size: 25px;
+      font-size: 2rem;
       text-align: left;
       line-height: 4rem;
       color: #505050;
@@ -154,7 +154,6 @@ const Accomodation = ({
     setNumberOfSlides(slides());
     setCellSpacing(spacing());
   }, [isDesktop, isLaptop, isTablet]);
-
   return (
     <AccomodationStyles
       id={id}
@@ -178,7 +177,7 @@ const Accomodation = ({
             setCurrentSlideIndex(slideIndex)
           }
           cellSpacing={cellSpacing}
-          {...(!isMobile ? { renderBottomCenterControls: false } : {})}
+          {...(isMobile ? { renderBottomCenterControls: false } : {})}
         >
           {villas.length &&
             villas.map(

@@ -15,10 +15,9 @@ const GalleryComponent = ({ images, styles }) => {
   const [numberOfSlides, setNumberOfSlides] = useState(3);
   const [cellSpacing, setCellSpacing] = useState(10);
   const size = useWindowSize();
-
+  const { width } = size;
+  const isMobileOnly = width <= 576;
   useEffect(() => {
-    const { width } = size;
-    const isMobileOnly = width <= 576;
     const isTablet = width > 576 && width < 780;
     const isTabletL = width > 780 && width < 992;
     const isSreenSM = width > 992 && width < 1024;
@@ -40,7 +39,7 @@ const GalleryComponent = ({ images, styles }) => {
     };
     const spacing = () => {
       // if (isMobileOnly) return 50;
-      if (isMobileOnly) return 0;
+      if (isMobileOnly) return 10;
       if (isTablet) return 0;
       if (isTabletL) return 20;
       if (isSreenSM) return 20;
@@ -88,7 +87,7 @@ const GalleryComponent = ({ images, styles }) => {
           : [1, 2, 3].map((item) => <Placeholder />)}
       </Carousel>
 
-      {showLightbox && selectedImage !== null ? (
+      {!isMobileOnly && showLightbox && selectedImage !== null ? (
         <LightBox
           showLightbox={showLightbox}
           images={images?.images}

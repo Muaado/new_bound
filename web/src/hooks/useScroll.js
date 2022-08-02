@@ -8,6 +8,8 @@ export const useScoll = ({
   const [scrollPosition, setScrollPosition] = useState(0);
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [pageYOffset, setPageYOffset] = useState(0);
+  const [innerHeight, setInnerHeight] = useState(0);
 
   useLayoutEffect(() => {
     const scrollEvent = window.addEventListener("scroll", listenToScroll);
@@ -28,6 +30,15 @@ export const useScoll = ({
     setScrollPosition(winScroll);
     setScrollX(window.screenX);
     setScrollY(window.scrollY);
+    setPageYOffset(window.pageYOffset);
+    setInnerHeight(window.innerHeight);
   };
-  return [isVisible, scrollPosition, scrollX, scrollY];
+  return [
+    isVisible,
+    scrollPosition,
+    scrollX,
+    scrollY,
+    pageYOffset,
+    innerHeight,
+  ];
 };

@@ -16,8 +16,18 @@ import {
   LIGHT_COLOR,
   DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
   ACCOMODATION,
+  OVERVIEW,
+  HIGhLIGHTS,
+  DINE,
+  SPA,
+  ACTIVITIES,
 } from "../constants";
-import { useScrollToRef, useNavBar, usePageSectionsRef } from "../hooks";
+import {
+  useScrollToRef,
+  useNavBar,
+  usePageSectionsRef,
+  useIsVisibleInViewPort,
+} from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
 
@@ -192,11 +202,11 @@ export const query = graphql`
 
 const pageSections = [
   { name: ACCOMODATION, hasSubNav: true },
-  { name: "Overview", hasSubNav: false },
-  { name: "Highlights", hasSubNav: false },
-  { name: "Dine", hasSubNav: false },
-  { name: "Spa", hasSubNav: false },
-  { name: "Activities", hasSubNav: false },
+  { name: OVERVIEW, hasSubNav: false },
+  { name: HIGhLIGHTS, hasSubNav: false },
+  { name: DINE, hasSubNav: false },
+  { name: SPA, hasSubNav: false },
+  { name: ACTIVITIES, hasSubNav: false },
 ];
 
 const ResortTemplate = (props) => {
@@ -242,7 +252,13 @@ const ResortTemplate = (props) => {
   }, []);
 
   const heroRef = useRef();
-  const { setPageName, setNavLinks, resetValues, setHeroRef } = useNavBar();
+  const {
+    setPageName,
+    setNavLinks,
+    resetValues,
+    setHeroRef,
+    setActiveNavLink,
+  } = useNavBar();
   const {
     accomodationRef,
     overviewRef,
@@ -262,14 +278,48 @@ const ResortTemplate = (props) => {
     };
   }, [overviewRef?.current]);
 
-  const { elementRef, executeScroll } = useScrollToRef();
+  const { _, executeScroll } = useScrollToRef();
 
   React.useEffect(() => {
     if (redirectedFrom) {
-      executeScroll(elementRef);
+      executeScroll(accomodationRef);
     }
   }, [redirectedFrom]);
 
+  const isDineVisible = useIsVisibleInViewPort(dineRef, "0px");
+  const isAccomodationVisible = useIsVisibleInViewPort(accomodationRef, "0px");
+  const isSpaVisible = useIsVisibleInViewPort(spaRef, "-200px");
+  const isOverviewVisible = useIsVisibleInViewPort(overviewRef, "-200px");
+  const isHiglightsVisible = useIsVisibleInViewPort(highlightsRef, "-200px");
+  const isActivitiesVisible = useIsVisibleInViewPort(activitiesRef, "-200px");
+
+  React.useEffect(() => {
+    if (isOverviewVisible && !isAccomodationVisible) {
+      setActiveNavLink(OVERVIEW);
+    }
+    if (isAccomodationVisible && !isOverviewVisible && isHiglightsVisible) {
+      setActiveNavLink(ACCOMODATION);
+    }
+    if (isHiglightsVisible && !isDineVisible) {
+      setActiveNavLink(HIGhLIGHTS);
+    }
+    if (isDineVisible && !isHiglightsVisible && !isSpaVisible) {
+      setActiveNavLink(DINE);
+    }
+    if (isSpaVisible && !isDineVisible && !isActivitiesVisible) {
+      setActiveNavLink(SPA);
+    }
+    if (isActivitiesVisible && !isSpaVisible) {
+      setActiveNavLink(ACTIVITIES);
+    }
+  }, [
+    isDineVisible,
+    isAccomodationVisible,
+    isSpaVisible,
+    isActivitiesVisible,
+    isHiglightsVisible,
+    isOverviewVisible,
+  ]);
   const windowGlobal = typeof window !== "undefined";
   const {
     name,
@@ -342,10 +392,10 @@ const ResortTemplate = (props) => {
               title="ISLAND OVERVIEW"
             />
           </div>
-          <AccommodationHighlightsWrapper ref={accomodationRef}>
+          <AccommodationHighlightsWrapper>
             <Overlay opacity={1} bgColor="white" />
             <Accomodation
-              elementRef={elementRef}
+              elementRef={accomodationRef}
               id="accomodation"
               villas={villas.nodes}
               currentSlideIndex={currentSlideIndex_}

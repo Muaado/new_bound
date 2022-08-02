@@ -526,7 +526,6 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
     headerImages,
   } = villa;
   const isMobile = useIsMobile();
-
   return (
     <div id="room-overview" className="villa__header" ref={elementRef}>
       <Overlay opacity={1} bgColor="white" />
@@ -546,6 +545,11 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
             </div>
           )}
           <h2 className="villa_name_title">{villa.name}</h2>
+          {isMobile ? (
+            <div className="gallery-carousel">
+              <PopUpGallery images={headerImages} styles={{ height: "100%" }} />
+            </div>
+          ) : null}
           {tagline && <p className="tagline">{tagline}</p>}
           <PortableText blocks={_rawDescriptionVilla} />
           <VillaIcons villa={villa} className="villa__header-icons" />

@@ -271,6 +271,7 @@ const CollectionTemplate = (props) => {
                         slideToShow={1}
                         totalItems={villas.length}
                         cellSpacing={10}
+                        renderBottomCenterControls={false}
                       >
                         {villas?.map((villa, index) => {
                           const { villaPrice, villaUrl } = computeVillaFields({
@@ -281,7 +282,7 @@ const CollectionTemplate = (props) => {
                             <>
                               <li
                                 key={`${villa._id} + ${index}`}
-                                className="card-image-wrapper"
+                                className="collection__image"
                               >
                                 {villa.imageThumb && villa.imageThumb.asset && (
                                   <Image

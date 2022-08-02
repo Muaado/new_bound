@@ -268,7 +268,8 @@ const VillaStyles = styled.div`
             width: 100%;
           }
           @media ${device.onlyMobileSm} {
-            margin-bottom: 5rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
             padding: 0 0 !important;
           }
         }

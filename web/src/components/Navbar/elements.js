@@ -11,7 +11,7 @@ export const NavWrapper = styled.nav`
     grid-template-columns: 2fr 1fr 1fr 1fr;
     @media ${device.onlyMobileS} {
       margin: 0 1.5rem !important;
-      grid-template-columns: 2fr 4fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 
@@ -216,6 +216,17 @@ export const DropDownWrapper = styled.div`
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    padding-top: 20px;
+    text-align: left;
+    font-weight: 400;
+    border-bottom: 1px solid rgba(179, 154, 106, 0.2);
+    @media ${device.tablet} {
+      border-bottom: 1px solid var(--lightGrey3);
+    }
+    padding-bottom: 10px;
+    :hover {
+      font-weight: 600 !important;
+    }
   }
 `;
 

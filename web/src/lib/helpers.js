@@ -91,10 +91,10 @@ export const truncate = (str, limit, extraString) => {
   }
 };
 
-const SSR = typeof window === "undefined";
+const isSSR = typeof window === "undefined";
 
 export const getQueryStringParams = (location_) => {
-  if (SSR && !location_) return {};
+  if (isSSR && !location_) return {};
   const location = location_ || window.location;
   const qs = querystring.parse(location.search.slice(1));
   return Object.entries(qs).reduce((acc, [k, v]) => {
@@ -161,7 +161,7 @@ export const computeVillaFields = ({ villa }) => {
 };
 
 export const isIOSDevice = () => {
-  if (SSR) return;
+  if (isSSR) return;
   if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
     return true;
   } else {

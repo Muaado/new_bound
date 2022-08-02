@@ -22,7 +22,7 @@ import {
 import { Overlay } from "../Overlay";
 
 export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
-  const { navLinks, heroRef, pageName } = useNavBar();
+  const { navLinks, heroRef, pageName, activeNavLink } = useNavBar();
   const maxScroll = heroRef?.current?.clientHeight || 200;
 
   const [_, scrollPosition] = useScoll({
@@ -30,13 +30,18 @@ export const NavBar = ({ logo, onMenuClick, sideWideNavContent }) => {
     scrollHeightToShow: undefined,
   });
 
+  // useEffect(() => {
+
+  //   console.log("activeNavLink>>", activeNavLink);
+  // }, [activeNavLink]);
+
   const isMaxScroll = scrollPosition < maxScroll / 2;
   const renderNavBar = () => {
     switch (pageName) {
       case SIMPLE_MAIN_NAVBAR:
         return (
           <NavWrapper
-            className={`${isMaxScroll ? "black-bg" : ""}`}
+            className={`${isMaxScroll ? "black-bg" : "blur-bg"}`}
             style={{ height: "6rem" }}
           >
             <SideWideNavBar
@@ -87,6 +92,11 @@ const DefaultNavBar = ({
       setShowMainNavDropDown(false);
     }
   }, [scrollPosition]);
+
+  const { activeNavLink } = useNavBar();
+  useEffect(() => {
+    setActiveLink(activeNavLink);
+  }, [activeNavLink]);
 
   const onIconClick = useCallback(
     ({ hasSubNav, isDropDown, name, content }) => {
@@ -166,7 +176,7 @@ const DefaultNavBar = ({
       className={`${isMaxScroll ? "black-bg" : "blur-bg"}`}
       style={navBarStyle}
     >
-      {!!isMaxScroll ? (
+      {isMaxScroll || isMobile ? (
         <NavBarList
           className="container"
           items={[
@@ -179,50 +189,50 @@ const DefaultNavBar = ({
               content: <LogoWrapper>BOUNDLESS MALDIVES</LogoWrapper>,
               onClick: () => navigate("/"),
             },
-            { className: "divider", content: <></> },
+            !isMobile ? { className: "divider", content: <></> } : {},
           ]}
         />
       ) : null}
 
-      <NavWrapper
-        className={`${
-          isMaxScroll ? "black-bg" : isMobile ? "blur-bg" : ""
-        } secondary-nav`}
-        style={navBarStyle}
-        bottomNav
-      >
-        <NavBarList
-          items={[
-            {
-              className: `${showSiteWideNav ? "rotate" : ""} page-title`,
-              icon: <ChevronDown />,
-              content: <div className="text">Boundless</div>,
-              onClick: () => {
-                setShowSiteWideNav(!showSiteWideNav);
-                setShowMainNav(false);
-              },
-            },
-          ]}
-          className={`container ${navLinkContainerClass}`}
+      {!isMobile ? (
+        <NavWrapper
+          className={`${
+            isMaxScroll ? "black-bg" : isMobile ? "blur-bg" : ""
+          } secondary-nav`}
+          style={navBarStyle}
+          bottomNav
         >
-          {!isMobile ? (
-            navLinks?.length ? (
+          <NavBarList
+            items={[
+              {
+                className: `${showSiteWideNav ? "rotate" : ""} page-title`,
+                icon: <ChevronDown />,
+                content: <div className="text">Boundless</div>,
+                onClick: () => {
+                  setShowSiteWideNav(!showSiteWideNav);
+                  setShowMainNav(false);
+                },
+              },
+            ]}
+            className={`container ${navLinkContainerClass}`}
+          >
+            {navLinks?.length ? (
               <NavBarList items={navLinks_} className="bottom-links" />
-            ) : null
-          ) : null}
-        </NavBarList>
+            ) : null}
+          </NavBarList>
 
-        <SideWideNavBar
-          showSiteWideNav={showSiteWideNav}
-          sideWideNavContent={sideWideNavContent}
-          onMenuClick={onMenuClick}
-        />
-        <SecondaryNavBar
-          height="10rem"
-          open={showMainNav}
-          listItems={mainNavContent}
-        />
-      </NavWrapper>
+          <SideWideNavBar
+            showSiteWideNav={showSiteWideNav}
+            sideWideNavContent={sideWideNavContent}
+            onMenuClick={onMenuClick}
+          />
+          <SecondaryNavBar
+            height="10rem"
+            open={showMainNav}
+            listItems={mainNavContent}
+          />
+        </NavWrapper>
+      ) : null}
     </NavWrapper>
   );
 };
@@ -239,6 +249,7 @@ const SideWideNavBar = ({
   const [activeSiteWideNavLink, setActiveSiteWideNavLink] = useState(null);
   const [showSiteWideNavContent, setShowSiteWideContent] = useState(false);
   const isMobile = useIsMobile();
+
   const siteWideNavContent_ = (
     activeSiteWideNavLink
       ? activeSiteWideNavLink === COLLECTIONS
@@ -312,7 +323,7 @@ const SideWideNavBar = ({
 
   return (
     <>
-      {showTopNav && !isMaxScroll ? (
+      {(showTopNav && !isMaxScroll) || isMobile ? (
         <NavBarList
           className="container"
           items={[
@@ -325,24 +336,28 @@ const SideWideNavBar = ({
               content: <LogoWrapper>BOUNDLESS MALDIVES</LogoWrapper>,
               onClick: () => navigate("/"),
             },
-            { className: "divider", content: <></> },
+            !isMobile ? { className: "divider", content: <></> } : {},
           ]}
         />
       ) : null}
-      <SecondaryNavBar
-        open={showSiteWideNav}
-        listWrapperClass={
-          showSiteWideNavContent ? "second-nav-border-bottom" : ""
-        }
-        className={className}
-        listItems={listItems}
-        height={isMobile ? "20rem" : undefined}
-      />
-      <SecondaryNavBar
-        open={showSiteWideNavContent && showSiteWideNav}
-        listItems={siteWideNavContent_}
-        height={isMobile ? "25rem" : undefined}
-      />
+      {!isMobile ? (
+        <React.Fragment>
+          <SecondaryNavBar
+            open={showSiteWideNav}
+            listWrapperClass={
+              showSiteWideNavContent ? "second-nav-border-bottom" : ""
+            }
+            className={className}
+            listItems={listItems}
+            height={isMobile ? "20rem" : undefined}
+          />
+          <SecondaryNavBar
+            open={showSiteWideNavContent && showSiteWideNav}
+            listItems={siteWideNavContent_}
+            height={isMobile ? "25rem" : undefined}
+          />
+        </React.Fragment>
+      ) : null}
     </>
   );
 };
