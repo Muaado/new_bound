@@ -161,10 +161,14 @@ const HighlightsStyles = styled.div`
   }
 `;
 
-const Highlights = ({ highlights }) => {
+const Highlights = ({ highlights, innerRef }) => {
   const isMobile = useIsMobileLarge();
   return (
-    <HighlightsStyles id="highlights" className="resort__highlights">
+    <HighlightsStyles
+      id="highlights"
+      className="resort__highlights"
+      ref={innerRef}
+    >
       <div
         id="higlights-content"
         className="content"

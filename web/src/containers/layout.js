@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { graphql, useStaticQuery, navigate } from "gatsby";
 import Layout from "../components/layout";
-import { getCollectionUrl, getResortUrl } from "../lib/helpers";
+import { getBlogUrl, getCollectionUrl, getResortUrl } from "../lib/helpers";
 import { isLoggedIn } from "../services/auth";
 
 const query = graphql`
   query SiteTitleQuery {
+    posts: allSanityPost(
+      sort: { fields: [publishedAt], order: DESC }
+      filter: { slug: { current: { ne: null } }, publishedAt: { ne: null } }
+    ) {
+      edges {
+        node {
+          id
+          publishedAt
+          title
+          slug {
+            current
+          }
+        }
+      }
+    }
     site: sanitySiteSettings(_id: { regex: "/(drafts.|)siteSettings/" }) {
       title
       logo {
@@ -62,16 +77,6 @@ const query = graphql`
 `;
 
 function LayoutContainer(props) {
-  const [showNav, setShowNav] = useState(false);
-
-  function handleShowNav() {
-    setShowNav(true);
-  }
-
-  function handleHideNav() {
-    setShowNav(false);
-  }
-
   const navData = useStaticQuery(query);
   if (!navData.site) {
     throw new Error(
@@ -88,6 +93,15 @@ function LayoutContainer(props) {
         };
     })
     .filter((item) => item !== undefined);
+
+  const posts = navData?.posts?.edges?.map(
+    ({ node: { title, publishedAt, slug } }) => {
+      return {
+        name: title.split(":")[0],
+        url: getBlogUrl(publishedAt, slug?.current),
+      };
+    }
+  );
 
   const collections = navData.collectionsone.nodes.map(
     ({ CollectionPageName, slug }) => {
@@ -125,6 +139,7 @@ function LayoutContainer(props) {
       }
     });
   }
+
   useEffect(() => {
     if (!isLoggedIn()) {
       navigate("/login");
@@ -133,12 +148,9 @@ function LayoutContainer(props) {
 
   return (
     <Layout
-      navData={{ resorts, collections }}
+      navData={{ resorts, collections, posts }}
       {...props}
-      showNav={showNav}
       siteTitle={navData.site.title}
-      onHideNav={handleHideNav}
-      onShowNav={handleShowNav}
       logo={navData.site.logo}
       contactUs={navData.site.contactUs}
       headerDropdownImage={navData.site.headerDropdownImage}

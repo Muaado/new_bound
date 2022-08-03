@@ -15,7 +15,7 @@ const ContainerStyles = styled.main`
     position: relative;
     display: flex;
     flex-direction: column;
-
+    z-index: 1;
     width: 100vw;
 
     @media ${device.desktop} {

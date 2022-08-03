@@ -1,4 +1,4 @@
-import { differenceInDays, formatDistance, format } from "date-fns";
+import { format } from "date-fns";
 import { graphql } from "gatsby";
 import BlogPost from "../components/Post/blog-post";
 import React from "react";
@@ -65,6 +65,7 @@ export const query = graphql`
   }
 `;
 const MagazineArticlePageStyles = styled.div`
+   background: white;
   .herodiv {
     text-align: center;
     overflow: hidden;
@@ -263,9 +264,7 @@ const BlogPostTemplate = (props) => {
             <h3 className="articletitle">{post.title}</h3>
           </div>
 
-          <div className="articlecontent">
-          {post && <BlogPost {...post} />}
-          </div>
+          <div className="articlecontent">{post && <BlogPost {...post} />}</div>
         </Container>
       </MagazineArticlePageStyles>
     </Layout>

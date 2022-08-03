@@ -5,8 +5,8 @@ import "../styles/typography.css";
 const VillaStyles = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  z-index: 1;
+  overflow-x: hidden;
+  background: white;
   width: 100%;
   h1 {
     @media ${device.tablet} {
@@ -37,7 +37,6 @@ const VillaStyles = styled.div`
 
   .breadcrumb {
     padding: 8px 15px;
-    margin-bottom: 20px;
     list-style: none;
     border-radius: 4px;
     ul {
@@ -58,6 +57,8 @@ const VillaStyles = styled.div`
     padding-top: 10px;
     padding-left: 30px;
     padding-bottom: 10px;
+    background-color: white;
+    margin-top: 12rem;
   }
 
   .backtoresort {
@@ -222,13 +223,11 @@ const VillaStyles = styled.div`
       }
     }
     &__header {
-      margin: 10rem 0 0 0;
       background: white;
       color: #76622e;
-      padding: 5% 0%;
       width: 100%;
       height: 100%;
-
+      padding-bottom: 5%;
       @media ${device.laptop} {
         margin-top: 0;
         flex-direction: column;
@@ -269,7 +268,8 @@ const VillaStyles = styled.div`
             width: 100%;
           }
           @media ${device.onlyMobileSm} {
-            margin-bottom: 5rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
             padding: 0 0 !important;
           }
         }
@@ -428,7 +428,7 @@ const VillaStyles = styled.div`
       .enquire-btn {
         width: 100%;
         align-self: center;
-        background: transparent;
+        background: none;
         display: flex;
         justify-content: center;
         @media ${device.onlyMobileSm} {
@@ -618,7 +618,6 @@ const VillaStyles = styled.div`
         height: 700px;
         width: 100%;
         position: absolute;
-        z-index: -1;
         object-fit: cover;
       }
     }

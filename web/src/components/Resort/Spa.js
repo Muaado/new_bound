@@ -184,7 +184,7 @@ const SpaStyles = styled.div`
   //
 `;
 
-const Spa = ({ spa, className }) => {
+const Spa = ({ spa, className, innerRef }) => {
   const size = useWindowSize();
   const isTablet = useIsTablet();
   useEffect(() => {
@@ -192,7 +192,7 @@ const Spa = ({ spa, className }) => {
   }, [size]);
 
   return (
-    <SpaStyles className={className}>
+    <SpaStyles className={className} ref={innerRef}>
       <div
         className="container"
         id="spa-container"

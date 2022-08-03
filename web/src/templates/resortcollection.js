@@ -1,21 +1,9 @@
 import { graphql, Link } from "gatsby";
-import BlogPost from "../components/Post/blog-post";
 import React from "react";
-import GraphQLErrorList from "../components/graphql-error-list";
 import Layout from "../containers/layout";
-import Container from "../components/container";
-import SEO from "../components/seo";
-import { getResortUrl, getVillaUrl, toPlainText } from "../lib/helpers";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
-import LeftSidebar from "../components/LeftSidebar";
-
-import Measure from "../assets/icons/villaSpecifications/measure.svg";
-import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
-import Bed from "../assets/icons/villaSpecifications/bed.svg";
-import Shower from "../assets/icons/villaSpecifications/shower.svg";
-import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
 
 export const query = graphql`
   query ResortCollectionTemplateQuery($name: String!) {
@@ -111,7 +99,6 @@ const ResortCollectionTemplate = (props) => {
 
   return (
     <Layout>
-      <LeftSidebar />
       <CollectionStyles>
         <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (

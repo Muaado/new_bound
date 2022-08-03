@@ -1,5 +1,5 @@
-import { graphql, Link } from "gatsby";
-import React, { useEffect, useState } from "react";
+import { graphql, Link, navigate } from "gatsby";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { getVillaUrl } from "../lib/helpers";
 import Layout from "../containers/layout";
 import Container from "../components/container";
@@ -10,15 +10,31 @@ import VillaStyles from "../styles/VillaTemplateStyles";
 import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
-import LeftSidebar from "../components/LeftSidebar";
 import PopUpGallery from "../components/PopUpGallery";
 import { VillaIcons } from "../components/Villa/VillaIcons";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Button } from "../components/Button";
 import { PricingDropDown, Overlay } from "../components";
-import { ROOM_PAGE } from "../constants";
-import { useScrollToRef, useIsMobile } from "../hooks";
+import {
+  ROOM_PAGE,
+  ACCOMODATION,
+  DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
+  SPA,
+  HIGhLIGHTS,
+  OVERVIEW,
+  DINE,
+  FEATURES,
+  ISLAND,
+  ACTIVITIES,
+} from "../constants";
+import {
+  useScrollToRef,
+  useIsMobile,
+  useNavBar,
+  usePageSectionsRef,
+  useSetNavActiveLinks,
+} from "../hooks";
 
 export const query = graphql`
   fragment SanityMonthFields on SanityMonth {
@@ -44,6 +60,10 @@ export const query = graphql`
           ...SanityImage
           alt
         }
+      }
+      imageThumb {
+        ...SanityImage
+        alt
       }
       short_desc
       _rawDescription
@@ -92,6 +112,13 @@ export const query = graphql`
         _rawDescription
         resortTransferType {
           transferType
+        }
+        villa1 {
+          name
+          imageThumb {
+            ...SanityImage
+            alt
+          }
         }
 
         gallery {
@@ -211,6 +238,17 @@ export const query = graphql`
   }
 `;
 
+const pageSections = [
+  { name: ACCOMODATION, hasSubNav: true },
+  { name: OVERVIEW, hasSubNav: false },
+  { name: FEATURES, hasSubNav: false },
+  { name: ISLAND, hasSubNav: false },
+  { name: HIGhLIGHTS, hasSubNav: false },
+  { name: DINE, hasSubNav: false },
+  { name: SPA, hasSubNav: false },
+  { name: ACTIVITIES, hasSubNav: false },
+];
+
 const VilaTemplate = (props) => {
   const { data } = props;
   const villa = data && data.villa;
@@ -218,15 +256,76 @@ const VilaTemplate = (props) => {
   const rateModel = data && data.rateModel;
   const spas = data && data.spas;
   const restaurants = data && data.restaurants;
-  const pageFrom = props?.location?.state?.pageFrom;
+  // const pageFrom = props?.location?.state?.pageFrom;
   const collectionPage = props?.location?.state?.collectionPage;
-  const { elementRef, executeScroll } = useScrollToRef();
+  const { setPageName, setNavLinks, setHeroRef, resetValues } = useNavBar();
+  const heroRef = useRef();
+
+  // preparing this data to pass into navbar content for the accomodation section
+  const resortVillas = useMemo(() => {
+    const resortVillas_ = villa.resort?.villa1.filter(
+      ({ name }) => name !== villa.name
+    );
+    return (
+      resortVillas_.length &&
+      resortVillas_?.slice(0, 6).map(({ name, imageThumb }, index) => {
+        return {
+          className: index === 0 ? "page-title" : "",
+          content: name,
+          thumbImage: imageThumb,
+          onClick: () => {
+            const villaUrl = getVillaUrl({
+              name,
+              resortName: villa?.resort?.name,
+            });
+            navigate(villaUrl);
+          },
+        };
+      })
+    );
+  }, [villa.resort.name]);
+
+  const pageSections_ = useMemo(() => {
+    return pageSections.map((section) => {
+      if (section.name === ACCOMODATION) {
+        return {
+          ...section,
+          content: resortVillas,
+        };
+      }
+      return section;
+    });
+  }, []);
+
+  const {
+    featuresRef,
+    islandRef,
+    overviewRef,
+    highlightsRef,
+    spaRef,
+    activitiesRef,
+    dineRef,
+    navLinks,
+  } = usePageSectionsRef(pageSections_);
 
   useEffect(() => {
-    if (pageFrom) {
-      executeScroll(elementRef);
-    }
-  }, [pageFrom]);
+    setPageName(DEFAULT_NAVBAR_WITH_BOTTOM_LINK);
+    setNavLinks(navLinks);
+    setHeroRef(heroRef);
+    return () => {
+      resetValues();
+    };
+  }, [featuresRef?.current]);
+
+  const activeNavLink = useSetNavActiveLinks({
+    overviewRef,
+    spaRef,
+    islandRef,
+    highlightsRef,
+    dineRef,
+    activitiesRef,
+    featuresRef,
+  });
 
   const [activeFeature, setActiveFeature] = useState(-1);
 
@@ -236,7 +335,6 @@ const VilaTemplate = (props) => {
     short_desc,
     roomFeatures,
     heroImage,
-    headerImages,
   } = villa;
 
   const {
@@ -252,11 +350,6 @@ const VilaTemplate = (props) => {
     highlights,
   } = villa.resort;
 
-  const randomHeaderImage =
-    headerImages?.images[
-      Math.floor(Math.random() * headerImages?.images.length)
-    ];
-
   const handleActiveFeature = (index) => {
     if (activeFeature !== index) {
       setActiveFeature(index);
@@ -264,7 +357,6 @@ const VilaTemplate = (props) => {
       setActiveFeature(-1);
     }
   };
-
   return (
     <Layout>
       {villa && (
@@ -276,11 +368,8 @@ const VilaTemplate = (props) => {
       )}
 
       <Container>
-        <LeftSidebar
-          list={["overview", "room-features", "gallery", "highlights", "dine"]}
-        />
         <VillaStyles>
-          <div className="villa__image">
+          {/* <div className="villa__image" ref={heroRef}>
             <div className="image-container">
               {heroImage && heroImage.asset ? (
                 <Image
@@ -303,7 +392,8 @@ const VilaTemplate = (props) => {
                 {resortName}{" "}
               </Link>
             </h1>
-          </div>
+          </div> */}
+          <div />
           <div className="breadcrumb-wrapper">
             <Overlay bgColor="white" opacity={1} />
             <div className="breadcrumb">
@@ -343,10 +433,18 @@ const VilaTemplate = (props) => {
           <VillaHeader
             villa={villa}
             rateModel={rateModel}
-            elementRef={elementRef}
+            elementRef={overviewRef}
           />
 
-          <div className="villa__room-features" id="room-features">
+          <div
+            className="villa__room-features"
+            id="room-features"
+            ref={featuresRef}
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+          >
             <Overlay zIndex={1} opacity={0.7} />
             {roomFeatures?.backgroundImage &&
             roomFeatures?.backgroundImage.asset ? (
@@ -386,8 +484,15 @@ const VilaTemplate = (props) => {
               </ul>
             </div>
           </div>
-          <div className="villa__property-overview">
+          <div
+            className="villa__property-overview"
+            data-aos="fade-up"
+            data-aos-delay="50"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+          >
             <Amenities
+              innerRef={islandRef}
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
               numberOfRestaurants={numberOfRestaurants}
@@ -399,16 +504,16 @@ const VilaTemplate = (props) => {
             />
           </div>
 
-          <Highlights highlights={highlights} />
+          <Highlights innerRef={highlightsRef} highlights={highlights} />
 
           {restaurants?.nodes && (
-            <Restaurants restaurants={restaurants.nodes} />
+            <Restaurants innerRef={dineRef} restaurants={restaurants.nodes} />
           )}
 
           {spas.nodes && (
             <div className="villa__spa-overview">
               {spas.nodes.map((spa) => (
-                <Spa spa={spa} key={spa.name} />
+                <Spa innerRef={spaRef} spa={spa} key={spa.name} />
               ))}
             </div>
           )}
@@ -420,6 +525,7 @@ const VilaTemplate = (props) => {
               data-aos-delay="50"
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
+              innerRef={activitiesRef}
             />
           )}
         </VillaStyles>
@@ -438,7 +544,6 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
     headerImages,
   } = villa;
   const isMobile = useIsMobile();
-
   return (
     <div id="room-overview" className="villa__header" ref={elementRef}>
       <Overlay opacity={1} bgColor="white" />
@@ -458,6 +563,11 @@ export const VillaHeader = ({ villa, elementRef, rateModel }) => {
             </div>
           )}
           <h2 className="villa_name_title">{villa.name}</h2>
+          {isMobile ? (
+            <div className="gallery-carousel">
+              <PopUpGallery images={headerImages} styles={{ height: "100%" }} />
+            </div>
+          ) : null}
           {tagline && <p className="tagline">{tagline}</p>}
           <PortableText blocks={_rawDescriptionVilla} />
           <VillaIcons villa={villa} className="villa__header-icons" />

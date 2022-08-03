@@ -40,7 +40,7 @@ export const CollectionStyles = styled.div`
     margin-bottom: 25px;
 
     @media ${device.onlyMobile} {
-      font-size: 3rem;
+      font-size: 1.8rem !important;
       letetr-spacing: 0.2rem;
       text-align: left;
     }
@@ -77,38 +77,6 @@ export const CollectionStyles = styled.div`
       :hover {
         cursor: pointer;
       }
-      .collection__image {
-        display: inline-block;
-        overflow: hidden;
-        height: 300px;
-        @media ${device.onlyDesktopS} {
-          height: 400px;
-        }
-
-        img {
-          height: 100%;
-          width: 100%;
-          max-height: 100%;
-          min-height: 100%;
-          transition: all 0.5s ease;
-          vertical-align: middle;
-          object-fit: cover;
-          object-position: 100% 100%;
-        }
-
-        :hover {
-          img {
-            transform: scale(1.1);
-          }
-        }
-
-        width: 100%;
-        max-width: 100%;
-        @media ${device.mobileS} {
-          height: unset !important;
-          /* max-width: 90%; */
-        }
-      }
     }
   }
 
@@ -131,6 +99,9 @@ export const CollectionStyles = styled.div`
       top: 30vh;
       padding: 0 2%;
       letter-spacing: 0.5rem;
+      h3 {
+        font-size: 18px !important;
+      }
     }
   }
 
@@ -151,7 +122,7 @@ export const CollectionStyles = styled.div`
       }
       @media ${device.onlyMobileSm} {
         text-align: left;
-        font-size: 1.6rem !important;
+        font-size: 1.4rem !important;
         font-weight: 600 !important;
       }
     }
@@ -167,7 +138,7 @@ export const CollectionStyles = styled.div`
 
     .slider-control-centerright,
     .slider-control-centerleft {
-      top: 30% !important;
+      top: 26% !important;
     }
   }
 
@@ -216,7 +187,7 @@ export const CollectionStyles = styled.div`
         letter-spacing: 42px;
         margin-left: 25px;
         color: #fff;
-        z-index: 20 Im !important;
+        z-index: 20 !important;
         @media ${device.onlyMobileS} {
           font-size: 20px;
           letter-spacing: 10px;
@@ -450,13 +421,16 @@ export const CollectionStyles = styled.div`
       color: #e9e9e9;
     }
 
-    .collection_brand_logo img {
-      height: 80px;
-      width: 130px;
+    .collection_brand_logo {
+      z-index: 2;
+      img {
+        height: 80px;
+        width: 130px;
 
-      @media ${device.iphonePortLandscape} {
-        height: 100px;
-        width: 100px;
+        @media ${device.iphonePortLandscape} {
+          height: 100px;
+          width: 100px;
+        }
       }
     }
 
@@ -536,5 +510,40 @@ export const CollectionStyles = styled.div`
         top: 80% !important;
       }
     }
+  }
+  .secondary-nav .container {
+    grid-template-columns: 1fr 2fr !important;
+  }
+
+  .collection__image {
+    display: inline-block;
+    overflow: hidden;
+    height: 300px;
+    @media ${device.onlyDesktopS} {
+      height: 400px;
+    }
+    @media ${device.onlyMobileSm} {
+      height: 250px !important;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      max-height: 100%;
+      min-height: 100%;
+      transition: all 0.5s ease;
+      vertical-align: middle;
+      object-fit: cover;
+      object-position: 100% 100%;
+    }
+
+    :hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+
+    width: 100%;
+    max-width: 100%;
   }
 `;

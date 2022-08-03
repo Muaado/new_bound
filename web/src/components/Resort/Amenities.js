@@ -94,9 +94,10 @@ const Amenities = ({
   timeToAirport,
   _rawDescription,
   title,
+  innerRef,
 }) => {
   return (
-    <AmenitiesStyles>
+    <AmenitiesStyles ref={innerRef}>
       <Overlay className="parallax-overlay" bgColor="#fdf7ed" />
       <div
         className="amenities-content"

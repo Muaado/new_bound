@@ -5,7 +5,6 @@ import Layout from "../containers/layout";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
-import LeftSidebar from "../components/LeftSidebar";
 
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
@@ -214,7 +213,6 @@ const BeachVillaTemplate = (props) => {
 
   return (
     <Layout>
-      <LeftSidebar />
       <CollectionStyles>
         <h1 className="collectionpage_title">{collectiontype.name}</h1>
         {collectiontype.imageThumb && (

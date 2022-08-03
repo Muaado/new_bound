@@ -1,27 +1,35 @@
-import { graphql, Link } from "gatsby";
-import React, { useState } from "react";
+import { graphql, navigate, Link } from "gatsby";
+import React, { useEffect, useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import { CollectionStyles } from "../styles/CollectionStyles";
 import Image from "gatsby-plugin-sanity-image";
 import { ContactUs } from "../components/Homepage/ContactUs";
-import LeftSidebar from "../components/LeftSidebar";
 import { Overlay, Carousel, Button } from "../components";
 import Measure from "../assets/icons/villaSpecifications/measure.svg";
 import TwoPeople from "../assets/icons/villaSpecifications/two-people.svg";
 import Bed from "../assets/icons/villaSpecifications/bed.svg";
 import Shower from "../assets/icons/villaSpecifications/shower.svg";
 import SwimmingPool from "../assets/icons/villaSpecifications/swimming-pool.svg";
-import { navigate } from "gatsby";
 import {
   truncate,
   computeVillaFields,
   priceFormatter,
   getCollectionUrl,
 } from "../lib/helpers";
-import { useIsMobileLarge } from "../hooks";
+import {
+  useIsMobileLarge,
+  usePageSectionsRef,
+  useNavBar,
+  useScrollToRef,
+} from "../hooks";
 import { PriceTemplate } from "../components";
-import { VillaDescriptionWrapper } from "./elements";
-import Accomodation from "../components/Resort/Accomodation";
+import {
+  LARGE_COLLECTION,
+  WATER_VILLA_COLLECTION,
+  BEACH_VILLA_COLLECTION,
+  RESORT_COLLECTION,
+  COUPLES_COLLECTION,
+} from "../constants";
 
 export const query = graphql`
   fragment Fragment_Villa on SanityVilla {
@@ -147,6 +155,33 @@ export const query = graphql`
     }
   }
 `;
+const pageSections = [
+  {
+    name: WATER_VILLA_COLLECTION,
+    onClick: () => navigate("../top-water-villas/"),
+    isDropDown: false,
+  },
+  {
+    name: BEACH_VILLA_COLLECTION,
+    onClick: () => navigate("../beach-villas/"),
+    isDropDown: false,
+  },
+  {
+    name: LARGE_COLLECTION,
+    onClick: () => navigate("../large-villas/"),
+    isDropDown: false,
+  },
+  {
+    name: RESORT_COLLECTION,
+    onClick: () => navigate("../resort-collection/"),
+    isDropDown: false,
+  },
+  {
+    name: COUPLES_COLLECTION,
+    onClick: () => navigate("../couples-collection"),
+    isDropDown: false,
+  },
+];
 
 const CollectionTemplate = (props) => {
   const { data } = props;
@@ -157,20 +192,59 @@ const CollectionTemplate = (props) => {
     ? collections?.waterVillaCollection
     : [];
 
+  const firstcollectionName_ = villas[0]?.CollectionName;
+
   const banners = collections?.banner;
   const slug = collections?.slug;
   const pathName = getCollectionUrl({ slug: slug });
   const site = data && data.site;
+
   const isMobile = useIsMobileLarge();
+  const { setNavLinks } = useNavBar();
+  const resortSectionRefs = useRef([]);
+  const heroRef = useRef(null);
+
+  const { executeScroll } = useScrollToRef(true, 80);
+
+  const collections__ = useMemo(() => {
+    const collections_ = villas?.map(({ CollectionName }) => {
+      return {
+        name: CollectionName,
+        onClick: (innerRef) => {
+          if (innerRef) executeScroll(innerRef);
+        },
+      };
+    });
+    return collections_;
+  }, [resortSectionRefs?.current?.length]);
+
+  const pageSections_ = useMemo(() => {
+    return pageSections.map((section) => {
+      if (section?.name == collections?.CollectionPageName) {
+        return {
+          ...section,
+          isDropDown: true,
+          content: collections__,
+        };
+      }
+      return section;
+    });
+  }, [collections__.length]);
+
+  const { navLinks, contentRefs } = usePageSectionsRef(pageSections_);
+
+  useEffect(() => {
+    setNavLinks(navLinks);
+  }, [contentRefs?.current[firstcollectionName_]]);
+
   return (
     <Layout>
-      <LeftSidebar />
       <CollectionStyles>
         <h1 className="collectionpage_title">
           {collections.CollectionPageName}
         </h1>
         {collections.image && (
-          <div className="collection__image_hero">
+          <div className="collection__image_hero" ref={heroRef}>
             {collections.image && collections.image.asset && (
               <Image
                 {...collections.image}
@@ -189,7 +263,12 @@ const CollectionTemplate = (props) => {
               collectionNumber
             ) => {
               return (
-                <div key={_id} className="mastercol">
+                <div
+                  key={CollectionName}
+                  id={CollectionName}
+                  className="mastercol"
+                  ref={contentRefs?.current[CollectionName]}
+                >
                   <h3 className="col_name">{CollectionName}</h3>
                   {isMobile ? (
                     villas?.length && (
@@ -197,8 +276,9 @@ const CollectionTemplate = (props) => {
                         slideToShow={1}
                         totalItems={villas.length}
                         cellSpacing={10}
+                        renderBottomCenterControls={false}
                       >
-                        {villas?.map((villa) => {
+                        {villas?.map((villa, index) => {
                           const { villaPrice, villaUrl } = computeVillaFields({
                             villa,
                           });
@@ -206,12 +286,9 @@ const CollectionTemplate = (props) => {
                           return (
                             <>
                               <li
-                                key={villa._id}
-                                className="card-image-wrapper"
+                                key={`${villa._id} + ${index}`}
+                                className="collection__image"
                               >
-                                {/* <div className="card-text-wrapper">
-                                  {truncate(villa.name, 40)}
-                                </div> */}
                                 {villa.imageThumb && villa.imageThumb.asset && (
                                   <Image
                                     {...villa.imageThumb}
@@ -255,13 +332,13 @@ const CollectionTemplate = (props) => {
                   ) : (
                     <ul className="collection_wrap">
                       {villas?.length &&
-                        villas?.map((villa) => {
+                        villas?.map((villa, index) => {
                           const { villaPrice, villaUrl } = computeVillaFields({
                             villa,
                           });
                           return (
                             <li
-                              key={villa._id}
+                              key={`${villa._id} ${index}`}
                               className="collection_wrap_item"
                               onClick={() => {
                                 navigate(villaUrl, {

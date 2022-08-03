@@ -5,7 +5,7 @@ export const DropDownWrapper = styled.div`
   color: var(--primary) !important;
   align-self: center;
   border: 1.5px solid var(--primary);
-  background: transparent;
+  background: none;
   cursor: pointer;
   padding: 12px 0px;
   vertical-align: middle;

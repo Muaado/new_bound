@@ -52,13 +52,7 @@ export const query = graphql`
 
 const MagazinePageStyles = styled.div`
   padding: 0 15%;
-
-  /* .magazine {
-    &__hero {
-      height: 80vh;
-    }
-  } */
-
+  background: white;
   @media ${device.laptopM} {
     padding: 0 10%;
   }

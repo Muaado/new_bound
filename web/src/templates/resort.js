@@ -1,5 +1,5 @@
-import { graphql } from "gatsby";
-import React, { useState, Suspense } from "react";
+import { graphql, navigate } from "gatsby";
+import React, { useMemo, useRef } from "react";
 import Layout from "../containers/layout";
 import Container from "../components/container";
 import SEO from "../components/seo";
@@ -8,13 +8,26 @@ import Amenities from "../components/Resort/Amenities";
 import Activities from "../components/Resort/Activities";
 import Spa from "../components/Resort/Spa";
 import Accomodation from "../components/Resort/Accomodation";
-import LeftSidebar from "../components/LeftSidebar";
-import { toPlainText } from "../lib/helpers";
+import { toPlainText, getVillaUrl } from "../lib/helpers";
 import Highlights from "../components/Resort/Highlights";
 import Restaurants from "../components/Villa/Restaurants";
 import { Overlay } from "../components";
-import { LIGHT_COLOR } from "../constants";
-import { useScrollToRef } from "../hooks";
+import {
+  LIGHT_COLOR,
+  DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
+  ACCOMODATION,
+  OVERVIEW,
+  HIGhLIGHTS,
+  DINE,
+  SPA,
+  ACTIVITIES,
+} from "../constants";
+import {
+  useScrollToRef,
+  useNavBar,
+  usePageSectionsRef,
+  useSetNavActiveLinks,
+} from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
 
@@ -187,6 +200,15 @@ export const query = graphql`
   }
 `;
 
+const pageSections = [
+  { name: ACCOMODATION, hasSubNav: true },
+  { name: OVERVIEW, hasSubNav: false },
+  { name: HIGhLIGHTS, hasSubNav: false },
+  { name: DINE, hasSubNav: false },
+  { name: SPA, hasSubNav: false },
+  { name: ACTIVITIES, hasSubNav: false },
+];
+
 const ResortTemplate = (props) => {
   const redirectedFrom = props?.location?.state?.redirectedFrom;
   const currentSlideIndex_ = props?.location?.state?.currentSlideIndex;
@@ -196,8 +218,65 @@ const ResortTemplate = (props) => {
   const villas = data && data.villas;
   const restaurants = data && data.resort.restaurants;
 
-  const site = data && data.site;
-  const parallaxImage = site?.parallaxBackground[0]?.asset?.url;
+  const resortVillas = useMemo(() => {
+    const resortVillas_ = villas.nodes;
+    return (
+      resortVillas_.length &&
+      resortVillas_?.slice(0, 6).map(({ name, imageThumb }, index) => {
+        return {
+          className: index === 0 ? "page-title" : "",
+          content: name,
+          thumbImage: imageThumb,
+          onClick: () => {
+            const villaUrl = getVillaUrl({
+              name,
+              resortName: resort?.name,
+            });
+            navigate(villaUrl);
+          },
+        };
+      })
+    );
+  }, [resort?.name]);
+
+  const pageSections_ = useMemo(() => {
+    return pageSections.map((section) => {
+      if (section.name === ACCOMODATION) {
+        return {
+          ...section,
+          content: resortVillas,
+        };
+      }
+      return section;
+    });
+  }, []);
+
+  const heroRef = useRef();
+  const {
+    setPageName,
+    setNavLinks,
+    resetValues,
+    setHeroRef,
+    setActiveNavLink,
+  } = useNavBar();
+  const {
+    accomodationRef,
+    overviewRef,
+    highlightsRef,
+    spaRef,
+    activitiesRef,
+    dineRef,
+    navLinks,
+  } = usePageSectionsRef(pageSections_);
+
+  React.useEffect(() => {
+    setPageName(DEFAULT_NAVBAR_WITH_BOTTOM_LINK);
+    setNavLinks(navLinks);
+    setHeroRef(heroRef);
+    return () => {
+      resetValues();
+    };
+  }, [overviewRef?.current]);
 
   const { elementRef, executeScroll } = useScrollToRef();
 
@@ -206,6 +285,15 @@ const ResortTemplate = (props) => {
       executeScroll(elementRef);
     }
   }, [redirectedFrom]);
+
+  const isVisible = useSetNavActiveLinks({
+    dineRef,
+    spaRef,
+    accomodationRef,
+    activitiesRef,
+    highlightsRef,
+    overviewRef,
+  });
 
   const windowGlobal = typeof window !== "undefined";
   const {
@@ -244,7 +332,7 @@ const ResortTemplate = (props) => {
       <Container>
         <ResortStyles>
           {image && (
-            <div className={`resort__image ${heroTextClass}`}>
+            <div className={`resort__image ${heroTextClass}`} ref={heroRef}>
               <Overlay className="hero-overlay" />
               {image && image.asset && (
                 <Image
@@ -267,11 +355,7 @@ const ResortTemplate = (props) => {
               </div>
             </div>
           )}
-          <LeftSidebar
-            list={["overview", "accomodation", "highlights", "dine", "gallery"]}
-          />
-
-          <div id="overview">
+          <div id="overview" ref={overviewRef}>
             <Amenities
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
@@ -286,16 +370,21 @@ const ResortTemplate = (props) => {
           <AccommodationHighlightsWrapper>
             <Overlay opacity={1} bgColor="white" />
             <Accomodation
-              elementRef={elementRef}
+              elementRef={
+                accomodationRef?.current ? accomodationRef : elementRef
+              }
               id="accomodation"
               villas={villas.nodes}
               currentSlideIndex={currentSlideIndex_}
             />
-            <Highlights highlights={highlights} />
+            <Highlights highlights={highlights} innerRef={highlightsRef} />
           </AccommodationHighlightsWrapper>
-          {restaurants.length && <Restaurants restaurants={restaurants} />}
+          {restaurants.length && (
+            <Restaurants innerRef={dineRef} restaurants={restaurants} />
+          )}
           {spas.nodes && (
             <div
+              ref={spaRef}
               speed={1000}
               className="resort__spas"
               slidesToShow={1}
@@ -310,12 +399,12 @@ const ResortTemplate = (props) => {
 
           {activities && (
             <Activities
+              innerRef={activitiesRef}
               activities={activities}
               data-aos="fade-up"
               data-aos-delay="50"
               data-aos-duration="1000"
               data-aos-easing="ease-in-out"
-              parallaxImage={parallaxImage}
             />
           )}
           {/* 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { device } from "./deviceSizes";
 export const EnquirePageStyles = styled.div`
-  /* margin: 5rem 0; */
+  padding-top: 7rem;
   background: white;
   width: 100%;
   height: 100%;
@@ -214,12 +214,17 @@ export const EnquirePageStyles = styled.div`
 
     input,
     select {
-      -webkit-appearance: none;
+      @supports (-webkit-touch-callout: none) {
+        -webkit-appearance: none;
+      }
+
       width: 100%;
       padding: 1rem 1.5rem;
     }
     textarea {
-      -webkit-appearance: none;
+      @supports (-webkit-touch-callout: none) {
+        -webkit-appearance: none;
+      }
       height: 15rem;
     }
 
@@ -239,5 +244,33 @@ export const EnquirePageStyles = styled.div`
         border: 1px solid rgb(118, 118, 118);
       }
     }
+  }
+  .react-datepicker,
+  .react-datepicker__month-container,
+  .react-datepicker__month {
+    width: 100%;
+    height: 100%;
+  }
+  .react-datepicker__day-names,
+  .react-datepicker__week {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 12px;
+    margin-right: 0.4;
+  }
+
+  .react-datepicker__day-names {
+    margin: 0.4rem;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+
+  .react-datepicker-calendar {
+    width: 300px;
+    height: 300px;
   }
 `;

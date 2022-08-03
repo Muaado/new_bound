@@ -12,6 +12,7 @@ export const StyledButton = styled.button`
   color: var(--primary);
   font-size: 12px;
   justify-content: center;
+  font-family: "rivera_light_regular", sans-serif;
   background: none;
   :hover {
     cursor: pointer;
