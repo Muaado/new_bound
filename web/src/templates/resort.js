@@ -26,7 +26,7 @@ import {
   useScrollToRef,
   useNavBar,
   usePageSectionsRef,
-  useIsVisibleInViewPort,
+  useSetNavActiveLinks,
 } from "../hooks";
 import { AccommodationHighlightsWrapper } from "./elements";
 import Image from "gatsby-plugin-sanity-image";
@@ -278,48 +278,23 @@ const ResortTemplate = (props) => {
     };
   }, [overviewRef?.current]);
 
-  const { _, executeScroll } = useScrollToRef();
+  const { elementRef, executeScroll } = useScrollToRef();
 
   React.useEffect(() => {
     if (redirectedFrom) {
-      executeScroll(accomodationRef);
+      executeScroll(elementRef);
     }
   }, [redirectedFrom]);
 
-  const isDineVisible = useIsVisibleInViewPort(dineRef, "0px");
-  const isAccomodationVisible = useIsVisibleInViewPort(accomodationRef, "0px");
-  const isSpaVisible = useIsVisibleInViewPort(spaRef, "-200px");
-  const isOverviewVisible = useIsVisibleInViewPort(overviewRef, "-200px");
-  const isHiglightsVisible = useIsVisibleInViewPort(highlightsRef, "-200px");
-  const isActivitiesVisible = useIsVisibleInViewPort(activitiesRef, "-200px");
+  const isVisible = useSetNavActiveLinks({
+    dineRef,
+    spaRef,
+    accomodationRef,
+    activitiesRef,
+    highlightsRef,
+    overviewRef,
+  });
 
-  React.useEffect(() => {
-    if (isOverviewVisible && !isAccomodationVisible) {
-      setActiveNavLink(OVERVIEW);
-    }
-    if (isAccomodationVisible && !isOverviewVisible && isHiglightsVisible) {
-      setActiveNavLink(ACCOMODATION);
-    }
-    if (isHiglightsVisible && !isDineVisible) {
-      setActiveNavLink(HIGhLIGHTS);
-    }
-    if (isDineVisible && !isHiglightsVisible && !isSpaVisible) {
-      setActiveNavLink(DINE);
-    }
-    if (isSpaVisible && !isDineVisible && !isActivitiesVisible) {
-      setActiveNavLink(SPA);
-    }
-    if (isActivitiesVisible && !isSpaVisible) {
-      setActiveNavLink(ACTIVITIES);
-    }
-  }, [
-    isDineVisible,
-    isAccomodationVisible,
-    isSpaVisible,
-    isActivitiesVisible,
-    isHiglightsVisible,
-    isOverviewVisible,
-  ]);
   const windowGlobal = typeof window !== "undefined";
   const {
     name,
@@ -395,7 +370,9 @@ const ResortTemplate = (props) => {
           <AccommodationHighlightsWrapper>
             <Overlay opacity={1} bgColor="white" />
             <Accomodation
-              elementRef={accomodationRef}
+              elementRef={
+                accomodationRef?.current ? accomodationRef : elementRef
+              }
               id="accomodation"
               villas={villas.nodes}
               currentSlideIndex={currentSlideIndex_}

@@ -4,18 +4,21 @@ export const useIsVisibleInViewPort = (element, rootMargin) => {
   const [isVisible, setState] = useState(false);
 
   useEffect(() => {
-    if (element) {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          setState(entry.isIntersecting);
-        },
-        { rootMargin }
-      );
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setState(entry.isIntersecting);
+      },
+      {
+        // root: document.querySelector(".main-content"),
+        rootMargin,
+        // threshold: 0.5,
+      }
+    );
 
-      element?.current && observer.observe(element.current);
-
-      return () => observer.unobserve(element.current);
-    }
+    element?.current && observer.observe(element.current);
+    return () => {
+      observer.disconnect();
+    };
   }, [element?.current]);
 
   return isVisible;

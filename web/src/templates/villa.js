@@ -20,12 +20,20 @@ import {
   ROOM_PAGE,
   ACCOMODATION,
   DEFAULT_NAVBAR_WITH_BOTTOM_LINK,
+  SPA,
+  HIGhLIGHTS,
+  OVERVIEW,
+  DINE,
+  FEATURES,
+  ISLAND,
+  ACTIVITIES,
 } from "../constants";
 import {
   useScrollToRef,
   useIsMobile,
   useNavBar,
   usePageSectionsRef,
+  useSetNavActiveLinks,
 } from "../hooks";
 
 export const query = graphql`
@@ -232,13 +240,13 @@ export const query = graphql`
 
 const pageSections = [
   { name: ACCOMODATION, hasSubNav: true },
-  { name: "Overview", hasSubNav: false },
-  { name: "Features", hasSubNav: false },
-  { name: "Island", hasSubNav: false },
-  { name: "Highlights", hasSubNav: false },
-  { name: "Dine", hasSubNav: false },
-  { name: "Spa", hasSubNav: false },
-  { name: "Activities", hasSubNav: false },
+  { name: OVERVIEW, hasSubNav: false },
+  { name: FEATURES, hasSubNav: false },
+  { name: ISLAND, hasSubNav: false },
+  { name: HIGhLIGHTS, hasSubNav: false },
+  { name: DINE, hasSubNav: false },
+  { name: SPA, hasSubNav: false },
+  { name: ACTIVITIES, hasSubNav: false },
 ];
 
 const VilaTemplate = (props) => {
@@ -308,6 +316,16 @@ const VilaTemplate = (props) => {
       resetValues();
     };
   }, [featuresRef?.current]);
+
+  const activeNavLink = useSetNavActiveLinks({
+    overviewRef,
+    spaRef,
+    islandRef,
+    highlightsRef,
+    dineRef,
+    activitiesRef,
+    featuresRef,
+  });
 
   const [activeFeature, setActiveFeature] = useState(-1);
 
@@ -468,13 +486,13 @@ const VilaTemplate = (props) => {
           </div>
           <div
             className="villa__property-overview"
-            ref={islandRef}
             data-aos="fade-up"
             data-aos-delay="50"
             data-aos-duration="1000"
             data-aos-easing="ease-in-out"
           >
             <Amenities
+              innerRef={islandRef}
               locationAtoll={locationAtoll}
               numberOfBars={numberOfBars}
               numberOfRestaurants={numberOfRestaurants}

@@ -2,9 +2,7 @@ import { useEffect, useRef } from "react";
 
 const scrollToRef = (ref) => {
   if (ref) {
-    ref?.current
-      ? ref?.current?.scrollIntoView(true)
-      : ref?.scrollIntoView(true);
+    ref?.current?.scrollIntoView(true);
   }
 };
 
