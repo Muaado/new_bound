@@ -11,10 +11,11 @@ export const usePageSectionsRef = (sections) => {
         sectionRefs.current[refName] = createRef();
         const content_ =
           content?.length &&
-          content?.map(({ name }) => {
+          content?.map(({ name, onClick }) => {
             return {
               name,
               innerRef: (contentRefs.current[name] = createRef()),
+              onClick,
             };
           });
         return {

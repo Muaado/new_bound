@@ -204,10 +204,15 @@ const CollectionTemplate = (props) => {
   const resortSectionRefs = useRef([]);
   const heroRef = useRef(null);
 
+  const { executeScroll } = useScrollToRef(true, 80);
+
   const collections__ = useMemo(() => {
     const collections_ = villas?.map(({ CollectionName }) => {
       return {
         name: CollectionName,
+        onClick: (innerRef) => {
+          if (innerRef) executeScroll(innerRef);
+        },
       };
     });
     return collections_;

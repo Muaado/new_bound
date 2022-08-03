@@ -158,10 +158,10 @@ const DefaultNavBar = ({
               <DropDown
                 listItems={content}
                 isActive={isDropDown && showMainNavDropDown}
-                onListClick={(e, ref) => {
-                  setActiveLink("");
+                onListClick={(e, innerRef, onItemClick_) => {
                   e.stopPropagation();
-                  executeScroll(ref);
+                  onItemClick_?.(innerRef);
+                  setActiveLink("");
                 }}
               />
             </div>
@@ -461,12 +461,12 @@ const DropDown = ({ listItems, onListClick, isActive }) => {
   return (
     <DropDownWrapper style={{ height: isActive ? "400px" : "0px" }}>
       {listItems?.length &&
-        listItems?.map(({ name, innerRef }) => {
+        listItems?.map(({ name, innerRef, onClick }) => {
           return (
             <div
               key={name}
               className="item"
-              onClick={(e) => onListClick(e, innerRef)}
+              onClick={(e) => onListClick(e, innerRef, onClick)}
             >
               {name}
             </div>
